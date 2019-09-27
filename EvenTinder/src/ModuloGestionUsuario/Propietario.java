@@ -47,7 +47,4 @@ public class Propietario extends Usuario {
         this.listaDePropiedades.remove(propiedad);
     }
         
-    @Override
-    public void ModificarUsuario() {        
-    }
 }

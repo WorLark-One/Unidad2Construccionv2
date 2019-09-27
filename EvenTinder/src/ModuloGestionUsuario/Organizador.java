@@ -26,7 +26,6 @@ public class Organizador extends Usuario {
         super(nombreCompleto, rut, contraseña, correoElectronico);
         this.tarjetaDeCredito = tarjetaDeCredito;
         this.listaDeEventos = new ArrayList();
-
     }
 
     public String getTarjetaDeCredito() {
@@ -48,9 +47,5 @@ public class Organizador extends Usuario {
     public void removeEvento(Evento evento) {
         this.listaDeEventos.remove(evento);
     }
-
-    @Override
-    public void ModificarUsuario() {        
-    }
-
+    
 }

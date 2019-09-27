@@ -30,7 +30,4 @@ public class Cliente extends Usuario {
         this.tarjetaDeCredito = tarjetaDeCredito;
     }
         
-    @Override
-    public void ModificarUsuario() {        
-    }
 }

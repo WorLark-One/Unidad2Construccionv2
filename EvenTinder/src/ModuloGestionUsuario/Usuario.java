@@ -68,5 +68,4 @@ public abstract class Usuario {
         this.correoElectronico = correoElectronico;
     }        
     
-    public abstract void ModificarUsuario();
 }
