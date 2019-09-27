@@ -24,11 +24,11 @@ public class ControladorBDDeUsario {
      * @param clave
      * @return
      */
-    public boolean preguntarPorUsuario(String usuario, String clave) {
+    public boolean preguntarPorUsuario(String tipoUsuario,String rut, String clave) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
         boolean aceptado;
         Connection conexionAux = this.conexion.getConexion();
-        return this.conexion.ValidarInicioSecion(conexionAux, clave, clave);
+        return this.conexion.ValidarInicioSecion(conexionAux,tipoUsuario, rut, clave);
     }
 
     /**
@@ -44,17 +44,8 @@ public class ControladorBDDeUsario {
 
         this.conexion.crearConexion("EventTinder", "1");
         Connection conexionAux = this.conexion.getConexion();
+        return this.conexion.mostrarInformacionUsuario(conexionAux, tipoUsuario, rut);
 
-        if (tipoUsuario.equalsIgnoreCase("Cliente") == true) {
-            informacion = this.conexion.mostrarIndormacionCliente(conexionAux, rut);
-            return informacion;
-        } else if (tipoUsuario.equalsIgnoreCase("Organizadir") == true) {
-            informacion = this.conexion.mostrarInformacionOrganizador(conexionAux, rut);
-            return informacion;
-        } else {
-            informacion = this.conexion.mostrarInformacionPropietario(conexionAux, rut);
-            return informacion;
-        }
 
     }
 
@@ -70,21 +61,12 @@ public class ControladorBDDeUsario {
      * @param tarjetaDeCredito
      * @param cuentaCorriente
      */
-    public void añadirUsuario(String tipoUsuario, String nombre, String rut, String clave, String correo, String telefono, String tarjetaDeCredito, String cuentaCorriente) throws SQLException {
+    public void añadirUsuario(String tipoUsuario, String nombre, String rut, String correo,String clave, String telefono, String tarjeta) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
         boolean aceptado;
         Connection conexionAux = this.conexion.getConexion();
-        if (tipoUsuario.equalsIgnoreCase("Cliente") == true) {
-            aceptado=this.conexion.añadirCliente(conexionAux, nombre, rut, correo, correo, telefono, tarjetaDeCredito);
-            System.out.println("se añadio el cliente: "+aceptado);
-        } else if (tipoUsuario.equalsIgnoreCase("Organizador") == true) {
-            aceptado=this.conexion.añadirOrganizador(conexionAux, nombre, rut, correo, correo, telefono, tarjetaDeCredito);
-            System.out.println("se añadio el organizador: "+aceptado);
-        } else {
-            aceptado=this.conexion.añadirPropietario(conexionAux, nombre, rut, correo, correo, telefono, cuentaCorriente);
-            System.out.println("se añadio el propietario: "+aceptado);
-            
-        }
+        aceptado=this.conexion.añadirUsuario(conexionAux, tipoUsuario, nombre, rut, correo, clave, telefono, tarjeta);
+        System.out.println("se añadio el usuario correctamente? :"+aceptado);
 
     }
   
@@ -92,22 +74,21 @@ public class ControladorBDDeUsario {
     /**
      * modifica un tipo de usuario.
      * @param tipoUsuario
+     * @param rutUsuarioModificar
      * @param nombre
      * @param rut
      * @param clave
      * @param correo
      * @param telefono
-     * @param tarjetaDeCredito
-     * @param cuentaCorriente
+     * @param tarjeta
      * @return true si el usuario fue modificado, false de lo contrario.
      * @throws java.sql.SQLException 
      */
-    public boolean modificarUsuario(String tipoUsuario,String nombre, String rut, String clave, String correo, String telefono, String tarjetaDeCredito, String cuentaCorriente) throws SQLException {
+    public boolean modificarUsuario(String tipoUsuario,String rutUsuarioModificar,String nombre, String rut, String clave, String correo, String telefono, String tarjeta) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
         boolean aceptado;
         Connection conexionAux = this.conexion.getConexion();
-        aceptado = this.conexion.modificarTiposDeUsuarios(conexionAux, tipoUsuario, nombre, rut, correo, correo, telefono, tarjetaDeCredito, cuentaCorriente);
-        return aceptado;
+        return this.conexion.modificarDatosUsuario(conexionAux, tipoUsuario, rutUsuarioModificar, nombre, rut, correo, correo, telefono, tarjeta);
     }
 
     /**
@@ -115,23 +96,14 @@ public class ControladorBDDeUsario {
      * datos.
      * @param tipoUsuario:cliente,organizador u propietario
      * @param rut: rut del usuario.
+     * @return 
      * @throws java.sql.SQLException
      */
-    public void eliminarUsuario(String tipoUsuario,String rut) throws SQLException {
+    public boolean eliminarUsuario(String tipoUsuario,String rut) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
         boolean aceptado;
         Connection conexionAux = this.conexion.getConexion();
-        if (tipoUsuario.equalsIgnoreCase("Cliente") == true) {
-            aceptado=this.conexion.eliminarCliente(conexionAux, rut);
-            System.out.println("se elimino el cliente: "+aceptado);
-        } else if (tipoUsuario.equalsIgnoreCase("Organizadir") == true) {
-            aceptado=this.conexion.eliminarOrganizador(conexionAux, rut);
-            System.out.println("se elimino el organizador: "+aceptado);
-        } else {
-            aceptado=this.conexion.eliminarPropietario(conexionAux, rut);
-            System.out.println("se elimino el propietario: "+aceptado);
-            
-        }
+        return this.conexion.eliminarUsuario(conexionAux, tipoUsuario, rut);
     }
 
 }
