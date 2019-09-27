@@ -5,12 +5,12 @@ import java.util.*;
 /**
  * 
  */
-public class ControladorBDDeUsuario {
+public class ControladorBDDeUsario {
 
     /**
      * Default constructor
      */
-    public ControladorBDDeUsuario() {
+    public ControladorBDDeUsario() {
     }
 
     /**
