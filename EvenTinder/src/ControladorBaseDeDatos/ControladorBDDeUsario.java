@@ -19,13 +19,16 @@ public class ControladorBDDeUsario {
     }
 
     /**
+     * metodo para login.
      * @param usuario
      * @param clave
      * @return
      */
     public boolean preguntarPorUsuario(String usuario, String clave) {
-        // TODO implement here
-        return false;
+        this.conexion.crearConexion("EventTinder", "1");
+        boolean aceptado;
+        Connection conexionAux = this.conexion.getConexion();
+        return this.conexion.ValidarInicioSecion(conexionAux, clave, clave);
     }
 
     /**
@@ -36,7 +39,7 @@ public class ControladorBDDeUsario {
      * @return
      * @throws java.sql.SQLException
      */
-    public ArrayList<String> obtenerInformacioDelCliente(String tipoUsuario, String rut) throws SQLException {
+    public ArrayList<String> obtenerInformacioDeUsurio(String tipoUsuario, String rut) throws SQLException {
         ArrayList<String> informacion = null;
 
         this.conexion.crearConexion("EventTinder", "1");
@@ -69,13 +72,17 @@ public class ControladorBDDeUsario {
      */
     public void añadirUsuario(String tipoUsuario, String nombre, String rut, String clave, String correo, String telefono, String tarjetaDeCredito, String cuentaCorriente) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
+        boolean aceptado;
         Connection conexionAux = this.conexion.getConexion();
         if (tipoUsuario.equalsIgnoreCase("Cliente") == true) {
-            boolean aceptado=this.conexion.añadirCliente(conexionAux, nombre, rut, correo, correo, telefono, tarjetaDeCredito);
+            aceptado=this.conexion.añadirCliente(conexionAux, nombre, rut, correo, correo, telefono, tarjetaDeCredito);
             System.out.println("se añadio el cliente: "+aceptado);
-        } else if (tipoUsuario.equalsIgnoreCase("Organizadir") == true) {
-            
+        } else if (tipoUsuario.equalsIgnoreCase("Organizador") == true) {
+            aceptado=this.conexion.añadirOrganizador(conexionAux, nombre, rut, correo, correo, telefono, tarjetaDeCredito);
+            System.out.println("se añadio el organizador: "+aceptado);
         } else {
+            aceptado=this.conexion.añadirPropietario(conexionAux, nombre, rut, correo, correo, telefono, cuentaCorriente);
+            System.out.println("se añadio el propietario: "+aceptado);
             
         }
 
@@ -83,22 +90,48 @@ public class ControladorBDDeUsario {
   
 
     /**
+     * modifica un tipo de usuario.
+     * @param tipoUsuario
      * @param nombre
      * @param rut
      * @param clave
      * @param correo
+     * @param telefono
      * @param tarjetaDeCredito
+     * @param cuentaCorriente
+     * @return true si el usuario fue modificado, false de lo contrario.
+     * @throws java.sql.SQLException 
      */
-    public void modificarUsuario(String nombre, String rut, String clave, String correo, String tarjetaDeCredito) {
-        // TODO implement here
-
+    public boolean modificarUsuario(String tipoUsuario,String nombre, String rut, String clave, String correo, String telefono, String tarjetaDeCredito, String cuentaCorriente) throws SQLException {
+        this.conexion.crearConexion("EventTinder", "1");
+        boolean aceptado;
+        Connection conexionAux = this.conexion.getConexion();
+        aceptado = this.conexion.modificarTiposDeUsuarios(conexionAux, tipoUsuario, nombre, rut, correo, correo, telefono, tarjetaDeCredito, cuentaCorriente);
+        return aceptado;
     }
 
     /**
-     * @param rut
+     * elimina un usuario de tipo cliente, organizador o propietario de la base de 
+     * datos.
+     * @param tipoUsuario:cliente,organizador u propietario
+     * @param rut: rut del usuario.
+     * @throws java.sql.SQLException
      */
-    public void eliminarUsuario(String rut) {
-        // TODO implement here
+    public void eliminarUsuario(String tipoUsuario,String rut) throws SQLException {
+        this.conexion.crearConexion("EventTinder", "1");
+        boolean aceptado;
+        Connection conexionAux = this.conexion.getConexion();
+        if (tipoUsuario.equalsIgnoreCase("Cliente") == true) {
+            aceptado=this.conexion.eliminarCliente(conexionAux, rut);
+            System.out.println("se elimino el cliente: "+aceptado);
+        } else if (tipoUsuario.equalsIgnoreCase("Organizadir") == true) {
+            aceptado=this.conexion.eliminarOrganizador(conexionAux, rut);
+            System.out.println("se elimino el organizador: "+aceptado);
+        } else {
+            aceptado=this.conexion.eliminarPropietario(conexionAux, rut);
+            System.out.println("se elimino el propietario: "+aceptado);
+            
+        }
     }
 
 }

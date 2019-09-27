@@ -55,6 +55,7 @@ public class ConexionBD {
      *
      * @param conexionAux
      * @param rut
+     * @return
      * @throws SQLException
      */
     public ArrayList<String> mostrarIndormacionCliente(Connection conexionAux, String rut) throws SQLException {
@@ -143,12 +144,14 @@ public class ConexionBD {
         }
         return null;
     }
+
     /**
      * devuelve la informacion de un propietario a travez de un arrayList
+     *
      * @param conexionAux
      * @param rut
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public ArrayList<String> mostrarInformacionPropietario(Connection conexionAux, String rut) throws SQLException {
         ArrayList<String> informacion = new ArrayList<>();
@@ -190,16 +193,24 @@ public class ConexionBD {
     }
 
     /**
-     * añade a un cliente a la base de datos, retorna true si lo añadio correctamente, false de lo contrario.
+     * añade a un cliente a la base de datos, retorna true si lo añadio
+     * correctamente, false de lo contrario.
      *
      * @param conexionAux
+     * @param nombreCompleto
+     * @param rut
+     * @param correo
+     * @param contraseña
+     * @param telefono
+     * @param tarjetaCredito
+     * @return 
      * @throws SQLException
      */
-    public boolean añadirCliente(Connection conexionAux, String nombreCompleto, String rut, String correo,String contraseña, String telefono, String tarjetaCredito) throws SQLException {
+    public boolean añadirCliente(Connection conexionAux, String nombreCompleto, String rut, String correo, String contraseña, String telefono, String tarjetaCredito) throws SQLException {
         Connection miConexion = conexionAux;
         if (miConexion != null) {
             // verificamos si el usuario existe
-            int numero = contarUsuario(conexionAux, rut);
+            int numero = contarTiposDeUsuario(conexionAux, "usuario", rut);
             //significa que esta creado el usuario, y solo debemos añadir la referencia y la tarjeta de credito
             // a la tabla cliente.
             if (numero == 1) {
@@ -211,13 +222,15 @@ public class ConexionBD {
                     st.close();
 
                 } catch (SQLException e) {
-                    System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                    //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                    return false;
                 } finally {
                     cerrarBaseDeDatos(miConexion);
-                    return true;
+                    
                 }
+                return true;
             } else if (numero == -1) {
-                boolean añadirUsuario = añadirUsuario(miConexion, nombreCompleto, rut, contraseña, correo,telefono);
+                boolean añadirUsuario = añadirUsuario(miConexion, nombreCompleto, rut, contraseña, correo, telefono);
                 if (añadirUsuario == true) {
                     try {
                         java.sql.Statement st = conexion.createStatement();
@@ -227,7 +240,8 @@ public class ConexionBD {
                         st.close();
 
                     } catch (SQLException e) {
-                        System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                        //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                        return false;
                     } finally {
                         cerrarBaseDeDatos(miConexion);
                         return true;
@@ -239,8 +253,11 @@ public class ConexionBD {
         return false;
 
     }
+
     /**
-     * añade a un usuario a la base de datos, retorna true si lo añadio correctamente, false de lo contrario
+     * añade a un usuario a la base de datos, retorna true si lo añadio
+     * correctamente, false de lo contrario. Metodo de uso interno
+     *
      * @param conexionAux
      * @param nombreCompleto
      * @param rut
@@ -248,49 +265,333 @@ public class ConexionBD {
      * @param correo
      * @param telefono
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public boolean añadirUsuario(Connection conexionAux, String nombreCompleto, String rut, String contraseña, String correo,String telefono) throws SQLException {
+    private boolean añadirUsuario(Connection conexionAux, String nombreCompleto, String rut, String contraseña, String correo, String telefono) throws SQLException {
         Connection miConexion = conexionAux;
         if (miConexion != null) {
             // verificamos si el usuario existe
-            int numero = contarUsuario(conexionAux, rut);
+            int numero = contarTiposDeUsuario(conexionAux, "usuario", rut);
             //significa que esta creado el usuario, y solo debemos añadir la referencia y la tarjeta de credito
             // a la tabla cliente.
 
             try {
                 java.sql.Statement st = conexion.createStatement();
-                String sql = "insert into usuario values('" + nombreCompleto + "','" + rut + "','" + contraseña + "','" + correo + "','" + telefono + "')";
+                String sql = "insert into usuario values('" + nombreCompleto + "','" + rut + "','" + correo + "','" + contraseña + "','" + telefono + "')";
                 st.executeUpdate(sql);
 
                 st.close();
                 return true;
 
             } catch (SQLException e) {
-                System.out.println("ERROR DE CONEXION" + e);
+                //System.out.println("ERROR DE CONEXION: añadir usuario" + e);
+                return false;
             }
 
         }
         return false;
     }
-/**
- * cuenta si un rut esta en la tabla usuario, como rut es una primary key 
- * solo puede estar una vez en la tabla por ende, si esta en la tabla retorna 1,
- * 
- * @param conexionAux
- * @param rut
- * @return
- * @throws SQLException 
- */
-    public int contarUsuario(Connection conexionAux, String rut) throws SQLException {
+
+    /**
+     * agrega un organizador a la base de datos, retornado true si lo realiza
+     * con exito, false de caso contrario
+     *
+     * @param conexionAux
+     * @param nombreCompleto
+     * @param rut
+     * @param correo
+     * @param contraseña
+     * @param telefono
+     * @param tarjetaCredito
+     * @return
+     * @throws SQLException
+     */
+    public boolean añadirOrganizador(Connection conexionAux, String nombreCompleto, String rut, String correo, String contraseña, String telefono, String tarjetaCredito) throws SQLException {
+        Connection miConexion = conexionAux;
+        if (miConexion != null) {
+            // verificamos si el usuario existe
+            int numero = contarTiposDeUsuario(conexionAux, "usuario", rut);
+            //significa que esta creado el usuario, y solo debemos añadir la referencia y la tarjeta de credito
+            // a la tabla organizador.
+            if (numero == 1) {
+                try {
+                    java.sql.Statement st = conexion.createStatement();
+                    String sql = "insert into organizador values('" + tarjetaCredito + "','" + rut + "')";
+                    st.executeUpdate(sql);
+
+                    st.close();
+
+                } catch (SQLException e) {
+                    System.out.println("ERROR DE CONEXION: añadirOrganizador" + e);
+                } finally {
+                    cerrarBaseDeDatos(miConexion);
+                    return true;
+                }
+            } else if (numero == -1) {
+                boolean añadirUsuario = añadirUsuario(miConexion, nombreCompleto, rut, contraseña, correo, telefono);
+                if (añadirUsuario == true) {
+                    try {
+                        java.sql.Statement st = conexion.createStatement();
+                        String sql = "insert into organizador values('" + tarjetaCredito + "','" + rut + "')";
+                        st.executeUpdate(sql);
+
+                        st.close();
+
+                    } catch (SQLException e) {
+                        System.out.println("ERROR DE CONEXION: añadirOrganizador" + e);
+                    } finally {
+                        cerrarBaseDeDatos(miConexion);
+                        return true;
+                    }
+                }
+            }
+
+        }
+        return false;
+
+    }
+
+    /**
+     * se añade a la base de datos el usuario propietario, retorna true si se
+     * añade exitosamente, false de manera contraria
+     *
+     * @param conexionAux
+     * @param nombreCompleto
+     * @param rut
+     * @param correo
+     * @param contraseña
+     * @param telefono
+     * @param cuentaCorriente
+     * @return
+     * @throws SQLException
+     */
+    public boolean añadirPropietario(Connection conexionAux, String nombreCompleto, String rut, String correo, String contraseña, String telefono, String cuentaCorriente) throws SQLException {
+        Connection miConexion = conexionAux;
+        if (miConexion != null) {
+            // verificamos si el usuario existe
+            int numero = contarTiposDeUsuario(conexionAux, "usuario", rut);
+            //significa que esta creado el usuario, y solo debemos añadir la referencia y la tarjeta de credito
+            // a la tabla cliente.
+            if (numero == 1) {
+                try {
+                    java.sql.Statement st = conexion.createStatement();
+                    String sql = "insert into organizador values('" + cuentaCorriente + "','" + rut + "')";
+                    st.executeUpdate(sql);
+
+                    st.close();
+
+                } catch (SQLException e) {
+                    System.out.println("ERROR DE CONEXION: añadirPropietario" + e);
+                } finally {
+                    cerrarBaseDeDatos(miConexion);
+
+                }
+                return true;
+            } else if (numero == -1) {
+                boolean añadirUsuario = añadirUsuario(miConexion, nombreCompleto, rut, contraseña, correo, telefono);
+                if (añadirUsuario == true) {
+                    try {
+                        java.sql.Statement st = conexion.createStatement();
+                        String sql = "insert into organizador values('" + cuentaCorriente + "','" + rut + "')";
+                        st.executeUpdate(sql);
+
+                        st.close();
+
+                    } catch (SQLException e) {
+                        System.out.println("ERROR DE CONEXION: añadirPropietario" + e);
+                    } finally {
+                        cerrarBaseDeDatos(miConexion);
+
+                    }
+                }
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    /**
+     * elimina un cliente de la base de dato, atraves del rut.
+     *
+     * @param conexionAux
+     * @param rut
+     * @return
+     * @throws SQLException
+     */
+    public boolean eliminarCliente(Connection conexionAux, String rut) throws SQLException {
+        Connection miConexion = conexionAux;
+        if (miConexion != null) {
+            // verificamos si el usuario existe
+            int numeroCliente = contarTiposDeUsuario(conexionAux, "cliente", rut);
+            int numeroOrganizador = contarTiposDeUsuario(conexionAux, "organizador", rut);
+            int numeroPropietario = contarTiposDeUsuario(conexionAux, "propietario", rut);
+            // si el rut del usuario esta en la tabla cliente, y el rut no esta en las
+            // tablas de organizador y propietario, esto implica que puedo borrar 
+            // desde la tabla usuario, lo que permite la eliminacion en cascada.
+            if (numeroCliente == 1 && numeroOrganizador == -1 && numeroPropietario == -1) {
+                try {
+                    java.sql.Statement st = conexion.createStatement();
+                    String sql = "delete from usuario where usuario.rut='" + rut + "'";
+                    st.executeUpdate(sql);
+
+                    st.close();
+
+                } catch (SQLException e) {
+                    System.out.println("ERROR DE CONEXION: eliminar cliente (desde la tabla de usuario)" + e);
+                } finally {
+                    cerrarBaseDeDatos(miConexion);
+                }
+                return true;
+            } else {
+                // si el tipo de usuario esta en las tablas de organizador o propietario, solo podemos eliminar al
+                //tipo de usuario desde la tabla cliente.
+                try {
+                    java.sql.Statement st = conexion.createStatement();
+                    String sql = "delete from cliente where cliente.rut='" + rut + "'";
+                    st.executeUpdate(sql);
+
+                    st.close();
+
+                } catch (SQLException e) {
+                    System.out.println("ERROR DE CONEXION: eliminar cliente(desde la tabla cliente.)" + e);
+                } finally {
+                    cerrarBaseDeDatos(miConexion);
+
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * se elimina a un organizador de la base de datos.
+     *
+     * @param conexionAux
+     * @param rut
+     * @return
+     * @throws SQLException
+     */
+    public boolean eliminarOrganizador(Connection conexionAux, String rut) throws SQLException {
+        Connection miConexion = conexionAux;
+        if (miConexion != null) {
+            // verificamos si el usuario existe
+            int numeroCliente = contarTiposDeUsuario(conexionAux, "cliente", rut);
+            int numeroOrganizador = contarTiposDeUsuario(conexionAux, "organizador", rut);
+            int numeroPropietario = contarTiposDeUsuario(conexionAux, "propietario", rut);
+            // si el rut del usuario esta en la tabla organizador, y el rut no esta en las
+            // tablas de cliente y propietario, esto implica que puedo borrar 
+            // desde la tabla usuario, lo que permite la eliminacion en cascada.
+            if (numeroOrganizador == 1 && numeroCliente == -1 && numeroPropietario == -1) {
+                try {
+                    java.sql.Statement st = conexion.createStatement();
+                    String sql = "delete from usuario where usuario.rut='" + rut + "'";
+                    st.executeUpdate(sql);
+
+                    st.close();
+
+                } catch (SQLException e) {
+                    System.out.println("ERROR DE CONEXION: eliminar organizador (desde la tabla de usuario)" + e);
+                } finally {
+                    cerrarBaseDeDatos(miConexion);
+                }
+                return true;
+            } else {
+                // si el tipo de usuario esta en las tablas de cliente o propietario, solo podemos eliminar al
+                //tipo de usuario desde la tabla organizador.
+                try {
+                    java.sql.Statement st = conexion.createStatement();
+                    String sql = "delete from organizador where organizador.rut='" + rut + "'";
+                    st.executeUpdate(sql);
+
+                    st.close();
+
+                } catch (SQLException e) {
+                    System.out.println("ERROR DE CONEXION: eliminar organizador(desde la tabla organizador.)" + e);
+                } finally {
+                    cerrarBaseDeDatos(miConexion);
+
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * elimina a un propietario de la base de datos.
+     *
+     * @param conexionAux
+     * @param rut
+     * @return
+     * @throws SQLException
+     */
+    public boolean eliminarPropietario(Connection conexionAux, String rut) throws SQLException {
+        Connection miConexion = conexionAux;
+        if (miConexion != null) {
+            // verificamos si el usuario existe
+            int numeroCliente = contarTiposDeUsuario(conexionAux, "cliente", rut);
+            int numeroOrganizador = contarTiposDeUsuario(conexionAux, "organizador", rut);
+            int numeroPropietario = contarTiposDeUsuario(conexionAux, "propietario", rut);
+            // si el rut del usuario esta en la tabla propietario, y el rut no esta en las
+            // tablas de cliente y organizador, esto implica que puedo borrar 
+            // desde la tabla usuario, lo que permite la eliminacion en cascada.
+            if (numeroPropietario == 1 && numeroCliente == -1 && numeroOrganizador == -1) {
+                try {
+                    java.sql.Statement st = conexion.createStatement();
+                    String sql = "delete from usuario where usuario.rut='" + rut + "'";
+                    st.executeUpdate(sql);
+
+                    st.close();
+
+                } catch (SQLException e) {
+                    System.out.println("ERROR DE CONEXION: eliminar propietario (desde la tabla de propietario)" + e);
+                } finally {
+                    cerrarBaseDeDatos(miConexion);
+                }
+                return true;
+            } else {
+                // si el tipo de usuario esta en las tablas de cliente o organizador, solo podemos eliminar al
+                //tipo de usuario desde la tabla propietario.
+                try {
+                    java.sql.Statement st = conexion.createStatement();
+                    String sql = "delete from propietario where propietario.rut='" + rut + "'";
+                    st.executeUpdate(sql);
+
+                    st.close();
+
+                } catch (SQLException e) {
+                    System.out.println("ERROR DE CONEXION: eliminar propietario(desde la tabla propietario.)" + e);
+                } finally {
+                    cerrarBaseDeDatos(miConexion);
+
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * verifica a traves del rut de un tipo de usuario " cliente, organizador o
+     * propietario", si este ya esta registrado en la base de datos, si esta
+     * registrado retorna 1, -1 de lo contrario. metodo de uso interno
+     *
+     * @param conexionAux
+     * @param tipoUsuario
+     * @param rut
+     * @return
+     */
+    private int contarTiposDeUsuario(Connection conexionAux, String tipoUsuario, String rut) {
         Connection miConexion = conexionAux;
         if (miConexion != null) {
             try {
                 java.sql.Statement st = conexion.createStatement();
-                String sql = "select  count(usuario.rut) as repetido "
-                        + "from usuario where usuario.rut='" + rut + "' "
-                        + "group by usuario.rut\n"
-                        + "having count(usuario.rut)>=0";
+                String sql = "select  count("+tipoUsuario +".refusuario) as repetido "
+                        + "from " + tipoUsuario + " where " + tipoUsuario+".refusuario='" + rut + "'"
+                        + "group by " + tipoUsuario +".refusuario"
+                        + "having count(" + tipoUsuario +".refusuario)>=0";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     String cadena = resultado.getString("repetido");
@@ -301,26 +602,11 @@ public class ConexionBD {
                 st.close();
 
             } catch (SQLException e) {
-                System.out.println("ERROR DE CONEXION" + e);
+                //System.out.println("ERROR DE CONEXION: contar usuario :" + e);
+                return-1;
             }
         }
         return -1;
-    }
-
-    public void añadirOrganizador() {
-    }
-
-    public void añadirPropietario() {
-
-    }
-
-    public void eliminarCliente() {
-    }
-
-    public void eliminarOrganizador() {
-    }
-
-    public void eliminarPropietario() {
     }
 
     public void cerrarBaseDeDatos(Connection conexionAux) throws SQLException {
@@ -331,5 +617,146 @@ public class ConexionBD {
         }
     }
 
+    // modificar usuarios.
+    /**
+     * modifica la informacion de un usuario, siempre y cuando este previamente
+     * creado.
+     * metodo privado.
+     *
+     * @param conexionAux
+     * @param nombreCompleto
+     * @param rut
+     * @param correo
+     * @param contraseña
+     * @param telefono
+     * @return
+     */
+    private boolean modificarUsuario(Connection conexionAux, String nombreCompleto, String rut, String correo, String contraseña, String telefono) throws SQLException {
+        Connection miConexion = conexionAux;
+        if (miConexion != null) {
+            // verificamos si el usuario existe
+            int numero = contarTiposDeUsuario(conexionAux, "usuario", rut);
+            //significa que esta creado el usuario, y debemos de actualizar sus registros.
+            if (numero == 1) {
+                try {
+                    java.sql.Statement st = conexion.createStatement();
+                    String sql = "update usuario set nombrecompleto='" + nombreCompleto + "', rut='" + rut + "', correo='" + correo + "', contraseña='" + contraseña + "', telefono= '" + telefono + "')";
+                    st.executeUpdate(sql);
 
+                    st.close();
+                    return true;
+
+                } catch (SQLException e) {
+                    System.out.println("ERROR DE CONEXION: modificar usuario" + e);
+                }
+
+            }
+            // significa que al usuario al que se le quiere actualizar los datos no existe
+            return false;
+        }
+        //no hay conexion con la base de datos
+        return false;
+    }
+    /**
+     * se hace generico el metodo modificar usuario, retorna true si se modifico
+     * correctamente el usuario, false de lo contrario
+     * @param conexionAux
+     * @param tipoUsuario
+     * @param nombreCompleto
+     * @param rut
+     * @param correo
+     * @param contraseña
+     * @param telefono
+     * @param tarjetaCredito
+     * @param cuentaCorriente
+     * @return
+     * @throws SQLException 
+     */
+    public boolean modificarTiposDeUsuarios(Connection conexionAux,String tipoUsuario, String nombreCompleto, String rut, String correo, String contraseña, String telefono, String tarjetaCredito,String cuentaCorriente) throws SQLException{
+         Connection miConexion = conexionAux;
+        if (miConexion != null) {
+            // verificamos si el usuario existe
+            int numero = contarTiposDeUsuario(conexionAux, "usuario", rut);
+            int numeroTipoUsuario = contarTiposDeUsuario(conexionAux, tipoUsuario, rut);
+            //significa que esta creado el usuario y el cliente, y  debemos modificar primero la informacion del usuario,
+            // para luego modificar la informacion que se encuentra en la tabla cliente
+            if (numero == 1 && numeroTipoUsuario==1) {
+                try {
+                    //primero modificamos los datos en la tabla de usuario.
+                    modificarUsuario(conexionAux, nombreCompleto, rut, correo, contraseña, telefono);
+                    //2. modificamos los datos en la tabla cliente.
+                    java.sql.Statement st = conexion.createStatement();
+                    if(tipoUsuario.equalsIgnoreCase("cliente")== true)
+                    {
+                        String sql = "update cliente set tarjetacredito='"+tarjetaCredito+"',refusuario='"+rut+"' where cliente.refusuario='"+rut+"'";
+                        st.executeUpdate(sql);
+                    }
+                    else if(tipoUsuario.equalsIgnoreCase("organizador")== true)
+                    {
+                        String sql = "update organizador set tarjetacredito='"+tarjetaCredito+"',refusuario='"+rut+"' where cliente.refusuario='"+rut+"'";
+                        st.executeUpdate(sql);
+                    }
+                    else if(tipoUsuario.equalsIgnoreCase("propietario") == true)
+                    {
+                        String sql = "update propietario set cuentacorriente='"+cuentaCorriente+"',refusuario='"+rut+"' where cliente.refusuario='"+rut+"'";
+                        st.executeUpdate(sql);
+                    }
+
+                    st.close();
+
+                } catch (SQLException e) {
+                    System.out.println("ERROR DE CONEXION: modificar Usuario" + e);
+                } finally {
+                    cerrarBaseDeDatos(miConexion);
+                }
+                return true;
+            } else  {
+                //el cliente no esta creado previamente.
+                return false;
+                }
+            
+
+        }
+        // no hay conexion
+        return false;
+    }
+
+
+
+    /**
+     *  busca si un usuario esta en la base de datos.
+     * @param conexionAux
+     * @param rut
+     * @return true si el usuario se encuentra, false de lo contrario.
+     */
+    public boolean ValidarInicioSecion(Connection conexionAux, String rut,String clave)
+    {
+        Connection miConexion = conexionAux;
+        if (miConexion != null) {
+            try {
+                java.sql.Statement st = conexion.createStatement();
+                String sql = "select  count(usuario.rut) as repetido " +
+                "from usuario where usuario.rut='"+rut+"' and usuario.contraseña='"+clave+"' " +
+                "group by usuario.rut " +
+                "having count(usuario.rut)>=0";
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    String cadena = resultado.getString("repetido");
+                    int valor = Integer.parseInt(cadena);
+                    if( valor == 1)
+                    {
+                        return true;
+                    }
+                }
+
+                st.close();
+
+            } catch (SQLException e) {
+                System.out.println("ERROR DE CONEXION: ValidarInicioSecion" + e);
+            }
+        }
+        return false;
+    }
 }
+
+
