@@ -1,16 +1,20 @@
 package ControladorUsuarios;
 
+import ModuloGestionUsuario.GestionDeUsuario;
 import java.util.Date;
 
 /**
  * 
  */
 public class ControladorPrincipal {
-
+    
+    private GestionDeUsuario gestorUsuarios;
+    
     /**
-     * Default constructor
+     * 
      */
     public ControladorPrincipal() {
+        this.gestorUsuarios = new GestionDeUsuario();
     }
 
 
@@ -47,7 +51,7 @@ public class ControladorPrincipal {
     }
 
     /**
-     * @param Date fecha
+     * @param  fecha
      */
     public void mostrarListaDeEventos(Date fecha) {
         // TODO implement here
