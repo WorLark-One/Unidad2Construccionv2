@@ -6,9 +6,7 @@ package ModuloGestionUsuario;
 public abstract class Usuario {
 
     private String nombreCompleto;
-    private String rut;
-    
-    //Modificable   
+    private String rut;    
     private String contraseña;
     private String correoElectronico;
     
@@ -26,15 +24,7 @@ public abstract class Usuario {
         this.contraseña = contraseña;
         this.correoElectronico = correoElectronico;
         
-    }
-        
-    ///Esta de mas, yo lo borraria.
-    /**
-     * 
-     */
-    public void crearUsuario() {
-        // TODO implement here
-    }
+    }        
         
     public String getNombreCompleto() {
         return nombreCompleto;
