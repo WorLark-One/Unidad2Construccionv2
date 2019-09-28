@@ -5,14 +5,29 @@ package ModuloGestionUsuario;
  */
 public class Cliente extends Usuario {
     
-    
+    //Modificable
     private String tarjetaDeCredito;
     
     /**
-     * Default constructor
+     * 
+     * @param nombreCompleto
+     * @param rut
+     * @param contraseña
+     * @param correoElectronico
+     * @param tarjeta 
      */
-    public Cliente() {
+    public Cliente(String nombreCompleto, String rut, String contraseña, 
+            String correoElectronico, String tarjeta) {
+        super(nombreCompleto,rut,contraseña,correoElectronico);
+        this.tarjetaDeCredito = tarjeta;
     }
 
+    public String getTarjetaDeCredito() {
+        return tarjetaDeCredito;
+    }
 
+    public void setTarjetaDeCredito(String tarjetaDeCredito) {
+        this.tarjetaDeCredito = tarjetaDeCredito;
+    }
+        
 }
