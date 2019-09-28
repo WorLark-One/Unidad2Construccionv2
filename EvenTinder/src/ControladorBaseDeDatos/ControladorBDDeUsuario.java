@@ -5,24 +5,27 @@ import java.sql.SQLException;
 import java.util.*;
 
 /**
- *
+ *clase que se encarga de interactuar con la base de datos.
+ * 1.
  */
-public class ControladorBDDeUsario {
+public class ControladorBDDeUsuario {
 
     ConexionBD conexion;
 
     /**
      * Default constructor
      */
-    public ControladorBDDeUsario() {
+    public ControladorBDDeUsuario() {
         this.conexion = new ConexionBD();
     }
 
     /**
-     * metodo para login.
-     * @param usuario
-     * @param clave
-     * @return
+     * Sirve para saber si un usuario esta logeado.
+     * @param tipoUsuario: cliente, organizador u propietario
+     * @param rut rut del usuario a validar
+     * @param clave: contraseña del usuario a logear.
+     * @return true si el usuario esta logeado, false de lo contrario.
+     * @throws java.sql.SQLException
      */
     public boolean preguntarPorUsuario(String tipoUsuario,String rut, String clave) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
@@ -32,11 +35,17 @@ public class ControladorBDDeUsario {
     }
 
     /**
-     * devuelve una lista con la informacion de un Usuarios
+     * devuelve una lista con la informacion de un Usuarios, en este orden.
+     * 1.nombre completo.
+     * 2.rut.
+     * 3.correo.
+     * 4.contraseña.
+     * 5.telefono.
+     * 6.cuenta corriente/ tarjeta de credito.
      *
-     * @param tipoUsuario
-     * @param rut
-     * @return
+     * @param tipoUsuario:cliente, organizador u propietario
+     * @param rut: rut del usuario al cual se le quiere obtener la informacion.
+     * @return una lista con la informacion de un usuario.
      * @throws java.sql.SQLException
      */
     public ArrayList<String> obtenerInformacioDeUsurio(String tipoUsuario, String rut) throws SQLException {
@@ -52,14 +61,14 @@ public class ControladorBDDeUsario {
     /**
      * añade a un usuario a la base de datos
      *
-     * @param tipoUsuario
-     * @param nombre
-     * @param rut
-     * @param clave
-     * @param correo
-     * @param telefono
-     * @param tarjetaDeCredito
-     * @param cuentaCorriente
+     * @param tipoUsuario:cliente, organizador u propietario
+     * @param nombre:nombre del usuario
+     * @param rut: rut del usuario
+     * @param clave: clave del usuario
+     * @param correo: correo electronico del usuario
+     * @param telefono: telefono del usuario
+     * @param tarjeta: esta puede ser cuenta corriente o tarjeta de credito.
+     * @throws java.sql.SQLException
      */
     public void añadirUsuario(String tipoUsuario, String nombre, String rut, String correo,String clave, String telefono, String tarjeta) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
@@ -72,15 +81,15 @@ public class ControladorBDDeUsario {
   
 
     /**
-     * modifica un tipo de usuario.
-     * @param tipoUsuario
-     * @param rutUsuarioModificar
-     * @param nombre
-     * @param rut
-     * @param clave
-     * @param correo
-     * @param telefono
-     * @param tarjeta
+     * modifica la informacion de un usuario.
+     * @param tipoUsuario: cliente, organizador u propietario
+     * @param rutUsuarioModificar: rut del usuario al que se le modificara la informacion.
+     * @param nombre: nombre del usuario que se que se desea modificar.
+     * @param rut: rut del usuario que se que se desea modificar.
+     * @param clave: clave del usuario que se que se desea modificar.
+     * @param correo: correo del usuario que se que se desea modificar.
+     * @param telefono: telefono del usuario que se que se desea modificar.
+     * @param tarjeta: tarjeta de credito o cuenta corriete del usuario que se que se desea modificar.
      * @return true si el usuario fue modificado, false de lo contrario.
      * @throws java.sql.SQLException 
      */
@@ -95,8 +104,8 @@ public class ControladorBDDeUsario {
      * elimina un usuario de tipo cliente, organizador o propietario de la base de 
      * datos.
      * @param tipoUsuario:cliente,organizador u propietario
-     * @param rut: rut del usuario.
-     * @return 
+     * @param rut: rut del usuario que se desea eliminar.
+     * @return  true si se elimino el usuario, false de lo contrario.
      * @throws java.sql.SQLException
      */
     public boolean eliminarUsuario(String tipoUsuario,String rut) throws SQLException {

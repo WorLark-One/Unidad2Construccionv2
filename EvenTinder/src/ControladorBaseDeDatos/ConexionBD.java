@@ -4,13 +4,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Clase para conectar la base de datos y java. modo de uso. 1.se crea una nueva
- * instancia, solo una vez. 2.se crea la conexion atravez del metodo
- * crearConexion. 3.
+ * Clase para conectar la base de datos y java. modo de uso. 
+ * 1.se crea una nueva instancia, solo una vez. 
+ * 2.se crea la conexion con la base de datos.
+ * 3.se obtienen la clase de datos.
+ * 4.cada metodo que esta en esta clase, nececita una instaciona de conexion "activa"
+ * por lo cual es necesario que se le pase como parametro.
  */
 public class ConexionBD {
 
@@ -24,8 +26,8 @@ public class ConexionBD {
      * Crea la conexion con la base de datos, recibe como parametro el nombre de
      * la base de datos y contraseña que tienes como usuario de postgres.
      *
-     * @param nombreBD
-     * @param contraseña
+     * @param nombreBD: nombre de la base de datos.
+     * @param contraseña: contraseña de la base de datos que tiene en postgres.
      * @return true si se realiza la conexion, false de lo contrario
      */
     public boolean crearConexion(String nombreBD, String contraseña) {
@@ -50,14 +52,18 @@ public class ConexionBD {
     }
 
     /**
-     * muestra la informacion de un cliente resive como parametro la conexion
-     * con la base de datos, para luego despues de hacer la consulta cerrar la
-     * connexion.
+     * devuelve la informacion de un usuario, en este orden.
+     * 1.nombre completo.
+     * 2.rut del cliente.
+     * 3.correo del cliente,
+     * 4.contraseña del cliente.
+     * 5.telefono del cliete.
+     * 6.tarjeta de credito / cuenta corriente.
      *
-     * @param conexionAux
-     * @param tipoUsuario
-     * @param rut
-     * @return
+     * @param conexionAux: conexion activa de la base de datos.
+     * @param tipoUsuario: cliente, organizador u propietario.
+     * @param rut: rut del usuario del cual se quiere obtener informacion.
+     * @return ArrayList con la informacion del usuario.
      * @throws SQLException
      */
     public ArrayList<String> mostrarInformacionUsuario(Connection conexionAux, String tipoUsuario, String rut) throws SQLException {
@@ -155,7 +161,6 @@ public class ConexionBD {
      * @param contraseña
      * @param telefono
      * @param tarjeta
-     * @param tarjetaCredito
      * @return
      * @throws SQLException
      */
@@ -196,7 +201,7 @@ public class ConexionBD {
     /**
      * elimina un cliente de la base de dato, atraves del rut.
      *
-     * @param conexionAux
+     * @param conexionAux:
      * @param rut
      * @return
      * @throws SQLException
