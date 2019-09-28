@@ -3,18 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistasSistema.VistaPrincipal;
+package VistasSistema.VistaUsuario;
 
 /**
  *
  * @author xebae
  */
-public class PanelCreacionOrganizador extends javax.swing.JPanel {
+public class PanelHome extends javax.swing.JPanel {
 
     /**
-     * Creates new form PanelCreacionOrganizador
+     * Creates new form PanelHome
      */
-    public PanelCreacionOrganizador() {
+    
+    
+    
+    public PanelHome() {
         initComponents();
     }
 
@@ -29,23 +32,23 @@ public class PanelCreacionOrganizador extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
-        jLabel1.setText("Llegaste creacion de organizador");
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
+                .addGap(104, 104, 104)
                 .addComponent(jLabel1)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addGap(109, 109, 109)
                 .addComponent(jLabel1)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

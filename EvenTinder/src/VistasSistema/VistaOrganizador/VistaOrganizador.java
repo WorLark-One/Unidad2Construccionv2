@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistasSistema.VistaUsuario;
+package VistasSistema.VistaOrganizador;
 
 /**
  *
  * @author xebae
  */
-public class VistaUsuario extends javax.swing.JPanel {
+public class VistaOrganizador extends javax.swing.JPanel {
 
     /**
-     * Creates new form VistaUsuario
+     * Creates new form VistaPropietario
      */
-    public VistaUsuario() {
+    public VistaOrganizador() {
         initComponents();
     }
 

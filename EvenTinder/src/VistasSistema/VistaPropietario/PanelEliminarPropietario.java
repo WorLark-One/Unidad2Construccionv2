@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistasSistema.VistaUsuario;
+package VistasSistema.VistaPropietario;
 
 import javax.swing.JOptionPane;
 
@@ -11,15 +11,15 @@ import javax.swing.JOptionPane;
  *
  * @author xebae
  */
-public class PanelEliminarUsuario extends javax.swing.JPanel {
+public class PanelEliminarPropietario extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelEliminarUsuario
      */
     
-    private VentanaPrincipalUsuario papa;
+    private VentanaPrincipalPropietario papa;
     
-    public PanelEliminarUsuario(VentanaPrincipalUsuario papa) {
+    public PanelEliminarPropietario(VentanaPrincipalPropietario papa) {
         this.papa=papa;
         initComponents();
     }
@@ -62,7 +62,7 @@ public class PanelEliminarUsuario extends javax.swing.JPanel {
         });
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menú Eliminar cuenta de usuario");
+        jLabel18.setText("Menú Eliminar cuenta de propietario");
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel19.setText("1. Para eliminar cuenta ingrese su rut con su clave");

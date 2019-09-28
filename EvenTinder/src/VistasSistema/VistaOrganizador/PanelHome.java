@@ -3,18 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistasSistema.VistaPrincipal;
+package VistasSistema.VistaOrganizador;
+
 
 /**
  *
  * @author xebae
  */
-public class PanelCreacionPropietario extends javax.swing.JPanel {
+public class PanelHome extends javax.swing.JPanel {
 
     /**
-     * Creates new form PanelCreacionPropietario
+     * Creates new form PanelHome
      */
-    public PanelCreacionPropietario() {
+    
+    
+    
+    public PanelHome() {
         initComponents();
     }
 
@@ -29,23 +33,23 @@ public class PanelCreacionPropietario extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
-        jLabel1.setText("Llegaster creacion propietario");
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(123, 123, 123)
+                .addGap(104, 104, 104)
                 .addComponent(jLabel1)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
+                .addGap(109, 109, 109)
                 .addComponent(jLabel1)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
