@@ -9,20 +9,35 @@ import java.sql.SQLException;
  */
 public class ControlDeAcceso {
     ControladorBaseDeDatos.ControladorBDDeUsuario controladorUsuario;
+    private static ControlDeAcceso controDeAcceso;
+    
 
     /**
      * Default constructor
      */
-    public ControlDeAcceso() {
+    private ControlDeAcceso() {
         this.controladorUsuario=new ControladorBDDeUsuario();
         
     }
-
-
     /**
-     * 
+     * retorna una instancia de control de acceso.
+     * @return si la instancia no a sido creada, crea una nueva, 
+     * si ya fue creada anteriormente, retorna la misma.
      */
-    public ControlDeAcceso Singleton;
+    public static ControlDeAcceso getIntancia()
+    {
+        if(controDeAcceso == null)
+        {
+            controDeAcceso = new ControlDeAcceso();
+            return controDeAcceso;
+        }
+        else{
+            return controDeAcceso;
+        }
+    }
+
+
+   
 
     /**
      * verifica si un usuario esta registrado en la base de datos.
