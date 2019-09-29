@@ -1,5 +1,6 @@
 package ControladorBaseDeDatos;
 
+import ModuloGestionUsuario.Usuario;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
@@ -48,14 +49,14 @@ public class ControladorBDDeUsuario {
      * @return una lista con la informacion de un usuario.
      * @throws java.sql.SQLException
      */
-    public ArrayList<String> obtenerInformacioDeUsurio(String tipoUsuario, String rut) throws SQLException {
+    public Usuario obtenerInformacioDeUsurio(String tipoUsuario, String rut) throws SQLException {
         ArrayList<String> informacion = null;
 
         this.conexion.crearConexion("EventTinder", "1");
         Connection conexionAux = this.conexion.getConexion();
-        return this.conexion.mostrarInformacionUsuario(conexionAux, tipoUsuario, rut);
-
-
+        this.conexion.mostrarInformacionUsuario(conexionAux, tipoUsuario, rut);
+        return null;
+        
     }
 
     /**
@@ -70,13 +71,13 @@ public class ControladorBDDeUsuario {
      * @param tarjeta: esta puede ser cuenta corriente o tarjeta de credito.
      * @throws java.sql.SQLException
      */
-    public void añadirUsuario(String tipoUsuario, String nombre, String rut, String correo,String clave, String telefono, String tarjeta) throws SQLException {
+    public boolean añadirUsuario(String tipoUsuario, String nombre, String rut, String correo,String clave, String telefono, String tarjeta) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
         boolean aceptado;
         Connection conexionAux = this.conexion.getConexion();
         aceptado=this.conexion.añadirUsuario(conexionAux, tipoUsuario, nombre, rut, correo, clave, telefono, tarjeta);
         System.out.println("se añadio el usuario correctamente? :"+aceptado);
-
+        return true;
     }
   
 

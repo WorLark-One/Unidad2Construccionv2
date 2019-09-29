@@ -1,6 +1,6 @@
 package ModuloGestionUsuario;
 
-import ControladorBaseDeDatos.ControladorBDDeUsario;
+import ControladorBaseDeDatos.ControladorBDDeUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -9,15 +9,14 @@ import java.util.ArrayList;
  */
 public class GestionDeUsuario {
 
-    //
     private ArrayList<Usuario> ListaUsuarios;
-    private ControladorBDDeUsario controlador;
+    private ControladorBDDeUsuario controlador;
 
     /**
      * Constructor del Gestor de Usuarios.
      */
     public GestionDeUsuario() {
-        this.controlador = new ControladorBDDeUsario();
+        this.controlador = new ControladorBDDeUsuario();
     }
 
     /**
@@ -40,6 +39,7 @@ public class GestionDeUsuario {
 
         this.controlador.añadirUsuario(tipoUsuario, nombreUsuario, rutUsuario,
                 correoElectronico,contraseña,  telefono, tarjeta);
+        
     }
 
     
@@ -76,10 +76,10 @@ public class GestionDeUsuario {
      * @param rutUsuario El RUT del Usuario a eliminar.
      * @throws java.sql.SQLException
      */
-    public void eliminarUsuario(String tipoUsuario, 
-            String rutUsuario) throws SQLException {
+    public void eliminarUsuario(String rutUsuario, 
+            String clave) throws SQLException {
         
-        this.controlador.eliminarUsuario(tipoUsuario,rutUsuario);
+        this.controlador.eliminarUsuario(rutUsuario,clave);
     }
 
 }

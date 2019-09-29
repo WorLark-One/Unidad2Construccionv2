@@ -5,6 +5,10 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import VistasSistema.VistaPropietario.PanelEliminarPropietario;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -133,7 +137,12 @@ public class PanelEliminarOrganizador extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        boolean respuesta=this.papa.getControladorPrincipal().eliminarUsuario();
+       boolean respuesta = false;
+        try {
+            respuesta = this.papa.getControladorPrincipal().eliminarUsuario(this.rut.getText(),this.clave.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelEliminarPropietario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(respuesta){
             JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
         }else{

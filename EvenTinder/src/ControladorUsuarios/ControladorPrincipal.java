@@ -23,9 +23,9 @@ public class ControladorPrincipal {
      * @param clave 
      * @return
      */
-    public boolean solicitudDeAcceso(String usuario, String clave) {
+    public boolean solicitudDeAcceso(String tipoUsuario,String usuario, String clave) {
         // TODO implement here
-        return false;
+        return true;
     }
 
     /**
@@ -42,7 +42,7 @@ public class ControladorPrincipal {
      *  crear.
      * @throws java.sql.SQLException 
      */
-    public void crearUsuario(String tipoUsuario, String nombreUsuario, 
+    public boolean crearUsuario(String tipoUsuario, String nombreUsuario, 
             String rutUsuario,String contraseña, String correoElectronico,
             String telefono,String tarjeta)
             throws SQLException {
@@ -50,6 +50,7 @@ public class ControladorPrincipal {
         this.gestorUsuarios.crearUsuario(tipoUsuario,nombreUsuario,rutUsuario,
                 contraseña,correoElectronico,telefono,
                 tarjeta);
+        return true;
     }
 
     /**
@@ -67,14 +68,15 @@ public class ControladorPrincipal {
      *  a modificar.
      * @throws SQLException 
      */
-    public void modificarUsuario(String tipoUsuario,String rutUsuarioModificar, String nombreUsuario, 
-            String rutUsuario,String contraseña, String correoElectronico,
+    public boolean modificarUsuario(String nombreUsuario
+             ,String contraseña, String correoElectronico,
             String telefono, String tarjeta) 
             throws SQLException {
-        
-        this.gestorUsuarios.modificarUsuario(tipoUsuario,rutUsuarioModificar, 
-                nombreUsuario, rutUsuario,contraseña, correoElectronico, 
+        //obtener tipo, rut (no cambia). jiji
+        this.gestorUsuarios.modificarUsuario(nombreUsuario,nombreUsuario, 
+                nombreUsuario, nombreUsuario,nombreUsuario, correoElectronico, 
                 telefono, tarjeta);
+        return true;
     }
 
     /**
@@ -83,9 +85,11 @@ public class ControladorPrincipal {
      * @param rutUsuario EL RUT del Usuario a eliminar.
      * @throws java.sql.SQLException
      */
-    public void eliminarUsuario(String tipoUsuario, String rutUsuario) 
+    public boolean eliminarUsuario(String rutUsuario, String clave) 
             throws SQLException {
-        this.gestorUsuarios.eliminarUsuario(tipoUsuario,rutUsuario);
+        //obtener tipo del usuario para poder cambiarlo, y agregar la clave para confirmar que es el usuario a borrar
+        this.gestorUsuarios.eliminarUsuario(rutUsuario,rutUsuario);
+        return true;
     }
 
     
