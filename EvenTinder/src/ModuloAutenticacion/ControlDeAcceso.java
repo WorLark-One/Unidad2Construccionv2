@@ -1,31 +1,54 @@
 package ModuloAutenticacion;
 
+import ControladorBaseDeDatos.ControladorBDDeUsuario;
+import java.sql.SQLException;
+
 
 /**
  * 
  */
 public class ControlDeAcceso {
+    ControladorBaseDeDatos.ControladorBDDeUsuario controladorUsuario;
+    private static ControlDeAcceso controDeAcceso;
+    
 
     /**
      * Default constructor
      */
-    public ControlDeAcceso() {
+    private ControlDeAcceso() {
+        this.controladorUsuario=new ControladorBDDeUsuario();
+        
+    }
+    /**
+     * retorna una instancia de control de acceso.
+     * @return si la instancia no a sido creada, crea una nueva, 
+     * si ya fue creada anteriormente, retorna la misma.
+     */
+    public static ControlDeAcceso getIntancia()
+    {
+        if(controDeAcceso == null)
+        {
+            controDeAcceso = new ControlDeAcceso();
+            return controDeAcceso;
+        }
+        else{
+            return controDeAcceso;
+        }
     }
 
 
-    /**
-     * 
-     */
-    public ControlDeAcceso Singleton;
+   
 
     /**
-     * @param  usuario 
-     * @param  clave 
-     * @return
+     * verifica si un usuario esta registrado en la base de datos.
+     * @param tipoUsuario: puede ser cliete, organizador u propietario
+     * @param rut : rut del cliente del cual se quiere verificar su credencial
+     * @param  clave : clave del cliente del cuela se quiere verificar su credencial
+     * @return true o false, dependiendo de si esta registrado el usuario o no.
+     * @throws java.sql.SQLException
      */
-    public boolean obtencioDeCredencial( String usuario,  String clave) {
-        // TODO implement here
-        return false;
+    public boolean obtencioDeCredencial(String tipoUsuario, String rut,  String clave) throws SQLException {
+        return this.controladorUsuario.preguntarPorUsuario(tipoUsuario, rut, clave);
     }
 
 }
