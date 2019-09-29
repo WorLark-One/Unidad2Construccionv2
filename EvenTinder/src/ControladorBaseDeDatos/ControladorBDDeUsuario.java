@@ -46,17 +46,32 @@ public class ControladorBDDeUsuario {
      *
      * @param tipoUsuario:cliente, organizador u propietario
      * @param rut: rut del usuario al cual se le quiere obtener la informacion.
-     * @return una lista con la informacion de un usuario.
+     * @return un usuario.
      * @throws java.sql.SQLException
      */
     public Usuario obtenerInformacioDeUsurio(String tipoUsuario, String rut) throws SQLException {
         ArrayList<String> informacion = null;
-
+        Usuario usuario= null;
         this.conexion.crearConexion("EventTinder", "1");
         Connection conexionAux = this.conexion.getConexion();
-        this.conexion.mostrarInformacionUsuario(conexionAux, tipoUsuario, rut);
-        return null;
-        
+        informacion=this.conexion.mostrarInformacionUsuario(conexionAux, tipoUsuario, rut);
+        if(informacion!=null)
+        {
+            String nombreCompleto=informacion.get(0);
+            String rutAux = informacion.get(1);
+            String correo=informacion.get(2);
+            String contraseña=informacion.get(3);
+            String telefono = informacion.get(4);
+            String tarjeta=informacion.get(5);
+            
+            usuario = new Usuario(rutAux,correo,contraseña,telefono,tarjeta);
+            
+            return usuario;
+        }
+  
+        return usuario;
+
+
     }
 
     /**
@@ -94,11 +109,11 @@ public class ControladorBDDeUsuario {
      * @return true si el usuario fue modificado, false de lo contrario.
      * @throws java.sql.SQLException 
      */
-    public boolean modificarUsuario(String tipoUsuario,String rutUsuarioModificar,String nombre, String rut, String clave, String correo, String telefono, String tarjeta) throws SQLException {
+    public boolean modificarUsuario(String tipoUsuario,String rutUsuarioModificar,String nombre, String clave, String correo, String telefono, String tarjeta) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
         boolean aceptado;
         Connection conexionAux = this.conexion.getConexion();
-        return this.conexion.modificarDatosUsuario(conexionAux, tipoUsuario, rutUsuarioModificar, nombre, rut, correo, correo, telefono, tarjeta);
+        return this.conexion.modificarDatosUsuario(conexionAux, tipoUsuario, rutUsuarioModificar, nombre, correo, correo, telefono, tarjeta);
     }
 
     /**

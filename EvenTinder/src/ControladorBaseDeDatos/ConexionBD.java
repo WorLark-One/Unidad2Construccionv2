@@ -336,7 +336,7 @@ public class ConexionBD {
      * @return
      * @throws SQLException 
      */
-    public boolean modificarDatosUsuario(Connection conexionAux, String tipoUsuario,String rutUsuario, String nombreCompleto, String rut, String correo, String contraseña, String telefono, String tarjeta) throws SQLException
+    public boolean modificarDatosUsuario(Connection conexionAux, String tipoUsuario,String rutUsuario, String nombreCompleto, String correo, String contraseña, String telefono, String tarjeta) throws SQLException
     {
         Connection miConexion = conexionAux;
         if (miConexion != null) {
@@ -345,7 +345,7 @@ public class ConexionBD {
                 
                 try {
                 java.sql.Statement st = conexion.createStatement();
-                String sql = " update "+tipoUsuario+" set nombrecompleto='"+nombreCompleto+"',rut='"+rut+"',correo='"+correo+"',contraseña='"+contraseña+"',telefono='"+telefono+"',tarjetacredito='"+tarjeta+"' where "+tipoUsuario+".rut='"+rutUsuario+"' ";
+                String sql = " update "+tipoUsuario+" set nombrecompleto='"+nombreCompleto+"',correo='"+correo+"',contraseña='"+contraseña+"',telefono='"+telefono+"',tarjetacredito='"+tarjeta+"' where "+tipoUsuario+".rut='"+rutUsuario+"' ";
                  st.executeUpdate(sql);
 
                 st.close();
@@ -362,7 +362,7 @@ public class ConexionBD {
             
             try {
                 java.sql.Statement st = conexion.createStatement();
-                String sql = " update "+tipoUsuario+" set nombrecompleto='"+nombreCompleto+"',rut='"+rut+"',correo='"+correo+"',contraseña='"+contraseña+"',telefono='"+telefono+"',cuentacorriente='"+tarjeta+"' where "+tipoUsuario+".rut='"+rutUsuario+"' ";
+                String sql = " update "+tipoUsuario+" set nombrecompleto='"+nombreCompleto+"',correo='"+correo+"',contraseña='"+contraseña+"',telefono='"+telefono+"',cuentacorriente='"+tarjeta+"' where "+tipoUsuario+".rut='"+rutUsuario+"' ";
                 System.out.println(sql);
                  st.executeUpdate(sql);
 
@@ -381,5 +381,5 @@ public class ConexionBD {
     
     }
 
-   
+   // metodos de propiedades.
 }
