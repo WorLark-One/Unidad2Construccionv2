@@ -5,6 +5,9 @@
  */
 package VistasSistema.VistaPropietario;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -189,7 +192,12 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        boolean respuesta=this.papa.getControladorPrincipal().modificarUsuario();
+        boolean respuesta = false;
+        try {
+            respuesta = this.papa.getControladorPrincipal().modificarUsuario(this.nombre.getText(),this.clave.getText(),this.correoElectronico.getText(),this.numeroTelefonico.getText(),this.cuentaBancaria.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelModificarPropietario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(respuesta){
             JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
         }else{

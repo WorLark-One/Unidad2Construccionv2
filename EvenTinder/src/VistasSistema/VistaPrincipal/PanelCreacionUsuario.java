@@ -5,6 +5,9 @@
  */
 package VistasSistema.VistaPrincipal;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -369,7 +372,12 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Tarjeta De Credito", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            boolean respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.tarjetaDeCredito.getText(), null);
+            boolean respuesta = false;
+            try {
+                respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.tarjetaDeCredito.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelCreacionUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
                 this.papa.derivarAVentanaPrincipalUsuario();
@@ -382,7 +390,12 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Cuenta Bancaria", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            boolean respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), null, this.CuentaBancaria.getText());
+            boolean respuesta = false;
+            try {
+                respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(),this.CuentaBancaria.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelCreacionUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
                 this.papa.derivarAVentanaPrincipalUsuario();

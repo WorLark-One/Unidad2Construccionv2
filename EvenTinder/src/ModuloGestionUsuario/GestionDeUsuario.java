@@ -1,6 +1,6 @@
 package ModuloGestionUsuario;
 
-import ControladorBaseDeDatos.ControladorBDDeUsario;
+import ControladorBaseDeDatos.ControladorBDDeUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -9,15 +9,14 @@ import java.util.ArrayList;
  */
 public class GestionDeUsuario {
 
-    //
     private ArrayList<Usuario> ListaUsuarios;
-    private ControladorBDDeUsario controlador;
+    private ControladorBDDeUsuario controlador;
 
     /**
      * Constructor del Gestor de Usuarios.
      */
     public GestionDeUsuario() {
-        this.controlador = new ControladorBDDeUsario();
+        this.controlador = new ControladorBDDeUsuario();
     }
 
     /**
@@ -32,14 +31,17 @@ public class GestionDeUsuario {
      * @param correoElectronico El correo electronico del nuevo Usuario
      * @param telefono El telefono asociado al nuevo Usuario.
      * @param tarjeta La tarjeta o cuenta bancaria del Usuario a crear.
+     * @return True si el Usuario se creo con exito.
+     *          False si el Usuario ya existe o los datos son erroneos.
      * @throws java.sql.SQLException
      */
-    public void crearUsuario(String tipoUsuario, String nombreUsuario, 
+    public boolean crearUsuario(String tipoUsuario, String nombreUsuario, 
             String rutUsuario,String contraseña, String correoElectronico,
             String telefono,String tarjeta) throws SQLException {
 
-        this.controlador.añadirUsuario(tipoUsuario, nombreUsuario, rutUsuario,
+        return this.controlador.añadirUsuario(tipoUsuario, nombreUsuario, rutUsuario,
                 correoElectronico,contraseña,  telefono, tarjeta);
+        
     }
 
     
@@ -50,22 +52,23 @@ public class GestionDeUsuario {
      * @param rutUsuarioAModificar El RUT actual del Usuario que se desea 
      *  modificar.
      * @param nombreUsuario El nombre del Usuario a modificar.
-     * @param rut El RUT del usuario a modificar.
      * @param contraseña La contraseña del Usuario a modificar.
      * @param correoElectronico El correo electronico asociado al Usuario a 
      *  modificar.
      * @param telefono El telefono asociado al Usuario a modificar.
      * @param tarjeta El numero de tarjeta o cuenta bancaria del Usuario a 
      *  modificar.
+     * @return True si el Usuario se modifico con exito.
+     *          False si el usuario no se modifico o los datos son erroneos.
      * @throws SQLException 
      */
-    public void modificarUsuario(String tipoUsuario,String rutUsuarioAModificar, 
-            String nombreUsuario,String rut, String contraseña, 
+    public boolean modificarUsuario(String tipoUsuario,String rutUsuarioAModificar, 
+            String nombreUsuario, String contraseña, 
             String correoElectronico,String telefono, String tarjeta) 
             throws SQLException {
         
-        this.controlador.modificarUsuario(tipoUsuario, rutUsuarioAModificar,
-                nombreUsuario,rut,contraseña, correoElectronico, telefono,
+        return this.controlador.modificarUsuario(tipoUsuario, rutUsuarioAModificar,
+                nombreUsuario,contraseña, correoElectronico, telefono,
                 tarjeta);
     }
 
@@ -73,13 +76,16 @@ public class GestionDeUsuario {
      * Metodo que elimina a un Usuario del sistema en base a su RUT.
      *
      * @param tipoUsuario El tipo de Usuario que se busca eliminar.
+     * @param clave
      * @param rutUsuario El RUT del Usuario a eliminar.
+     * @return True si el Usuario se elimino con exito.
+     *          False si el Usuario no existe o los datos son erroneos.
      * @throws java.sql.SQLException
      */
-    public void eliminarUsuario(String tipoUsuario, 
-            String rutUsuario) throws SQLException {
+    public boolean eliminarUsuario(String rutUsuario, 
+            String clave) throws SQLException {
         
-        this.controlador.eliminarUsuario(tipoUsuario,rutUsuario);
+        return this.controlador.eliminarUsuario(rutUsuario,clave);
     }
 
 }
