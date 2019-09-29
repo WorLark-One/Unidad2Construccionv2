@@ -93,8 +93,8 @@ public class ControladorBDDeUsuario {
                     String contraseña = resultado.getString("contraseña");
                     String telefono = resultado.getString("telefono");
                     String tarjetaCredito = resultado.getString("tarjetacredito");
-                    //Cliente cliente = new Cliente(nombreCompleto, rutCliente, correo, contraseña, telefono,tarjetaCredito);
-                    //return cliente;
+                    cliente = new Cliente(nombreCompleto, rutCliente,contraseña,telefono, correo, tarjetaCredito);
+                    return cliente;
 
                 }
                 resultado.close();
@@ -139,8 +139,8 @@ public class ControladorBDDeUsuario {
                     String contraseña = resultado.getString("contraseña");
                     String telefono = resultado.getString("telefono");
                     String tarjetaCredito = resultado.getString("tarjetacredito");
-                    //Organizador cliente = new Organizador(nombreCompleto, rutCliente, correo, contraseña, telefono,tarjetaCredito);
-                    //return organizador;
+                    organizador = new Organizador(nombreCompleto, rutCliente,contraseña,telefono,  correo,  tarjetaCredito);
+                    return organizador;
 
                 }
                 resultado.close();
@@ -185,8 +185,8 @@ public class ControladorBDDeUsuario {
                     String contraseña = resultado.getString("contraseña");
                     String telefono = resultado.getString("telefono");
                     String cuentaCorriente = resultado.getString("cuentacorriente");
-                    //Propietario propietario = new Propietario(nombreCompleto, rutCliente, correo, contraseña, telefono,cuentaCorriente);
-                    //return propietario;
+                    propietario = new Propietario(nombreCompleto, rutCliente,contraseña,telefono,  correo,  cuentaCorriente);
+                    return propietario;
 
                 }
                 resultado.close();

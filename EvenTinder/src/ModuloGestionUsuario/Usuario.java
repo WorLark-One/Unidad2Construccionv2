@@ -8,6 +8,7 @@ public abstract class Usuario {
     private String nombreCompleto;
     private String rut;    
     private String contraseña;
+    private String telefono;
     private String correoElectronico;
     
     /**
@@ -15,13 +16,15 @@ public abstract class Usuario {
      * @param nombreCompleto El nombre del Usuario a crear.
      * @param rut El rut del Usuario a crear.
      * @param contraseña La contraseña del Usuario a crear.
+     * @param telefono
      * @param correoElectronico El correo electronico del Usuario a crear.
      */
     public Usuario(String nombreCompleto, String rut, String contraseña, 
-            String correoElectronico) {
+            String telefono, String correoElectronico) {
         this.nombreCompleto = nombreCompleto;
         this.rut = rut;
         this.contraseña = contraseña;
+        this.telefono = telefono;
         this.correoElectronico = correoElectronico;
         
     }        
@@ -57,5 +60,14 @@ public abstract class Usuario {
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }        
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
     
 }
