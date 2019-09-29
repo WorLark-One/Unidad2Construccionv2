@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistasSistema.VistaUsuario;
+package VistasSistema.VistaPropietario;
 
-import VistasSistema.VistaPropietario.PanelModificarPropietario;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,15 +14,15 @@ import javax.swing.JOptionPane;
  *
  * @author xebae
  */
-public class PanelModificarUsuario extends javax.swing.JPanel {
+public class PanelModificarPropietario extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelModificarUsuario
      */
     
-    private VentanaPrincipalUsuario papa;
+    private VentanaPrincipalPropietario papa;
     
-    public PanelModificarUsuario(VentanaPrincipalUsuario papa) {
+    public PanelModificarPropietario(VentanaPrincipalPropietario papa) {
         this.papa=papa;
         initComponents();
     }
@@ -49,7 +48,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         clave = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        tarjetaDeCredito = new javax.swing.JTextField();
+        cuentaBancaria = new javax.swing.JTextField();
         botonRegistrar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -57,7 +56,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menu Modificar cuenta de usuario");
+        jLabel18.setText("Menu Modificar cuenta de propietario");
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel19.setText("1. Ingrese los datos que desee modificar");
@@ -76,7 +75,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
             }
         });
 
-        jLabel16.setText("Tarjeta de crédito");
+        jLabel16.setText("Cuenta bancaria");
 
         botonRegistrar.setText("Modificar");
         botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +112,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
                                         .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addComponent(tarjetaDeCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(cuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(botonRegistrar)
                                 .addGap(140, 140, 140)))
@@ -159,7 +158,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(tarjetaDeCredito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(botonRegistrar)
                 .addContainerGap(212, Short.MAX_VALUE))
@@ -189,13 +188,13 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if("".equals(this.tarjetaDeCredito.getText())){
+        if("".equals(this.cuentaBancaria.getText())){
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         boolean respuesta = false;
         try {
-            respuesta = this.papa.getControladorPrincipal().modificarUsuario(this.nombre.getText(),this.clave.getText(),this.correoElectronico.getText(),this.numeroTelefonico.getText(),this.tarjetaDeCredito.getText());
+            respuesta = this.papa.getControladorPrincipal().modificarUsuario(this.nombre.getText(),this.clave.getText(),this.correoElectronico.getText(),this.numeroTelefonico.getText(),this.cuentaBancaria.getText());
         } catch (SQLException ex) {
             Logger.getLogger(PanelModificarPropietario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -212,6 +211,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
     private javax.swing.JButton botonRegistrar;
     private javax.swing.JTextField clave;
     private javax.swing.JTextField correoElectronico;
+    private javax.swing.JTextField cuentaBancaria;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -222,6 +222,5 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField numeroTelefonico;
-    private javax.swing.JTextField tarjetaDeCredito;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistasSistema.VistaPropietario;
+package VistasSistema.VistaOrganizador;
 
 
 import ControladorUsuarios.ControladorCliente;
@@ -15,7 +15,7 @@ import java.awt.Component;
  *
  * @author xebae
  */
-public class VentanaPrincipalPropietario extends javax.swing.JFrame {
+public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaPrincipalUsuario
@@ -25,9 +25,11 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     private Component componenteAnterior= null;
     private ControladorCliente controladorUsuario;
     private ControladorPrincipal controladorPrincipal;
+    private PanelModificarOrganizador modificar;
+    private PanelEliminarOrganizador eliminar;
     private PanelHome home;
 
-    public VentanaPrincipalPropietario() {
+    public VentanaPrincipalOrganizador() {
         this.controladorUsuario= new ControladorCliente();
         this.controladorPrincipal= new ControladorPrincipal();
         this.panelDeOpciones=new PanelDeOpciones(this);
@@ -71,13 +73,13 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipalPropietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPrincipalOrganizador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipalPropietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPrincipalOrganizador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipalPropietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPrincipalOrganizador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipalPropietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPrincipalOrganizador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -88,7 +90,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new VentanaPrincipalPropietario().setVisible(true);
+                new VentanaPrincipalOrganizador().setVisible(true);
             }
         });
     }
@@ -97,10 +99,10 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     void modificarCuenta() {
-        PanelModificarPropietario modificar = new PanelModificarPropietario(this);
+        this.modificar = new PanelModificarOrganizador(this);
         getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(modificar, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=modificar;
+        getContentPane().add(this.modificar, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=this.modificar;
         this.repaint();
         this.revalidate();
     }
@@ -110,10 +112,10 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     }
 
     void eliminarCuenta() {
-        PanelEliminarPropietario eliminar = new PanelEliminarPropietario(this);
+        this.eliminar = new PanelEliminarOrganizador(this);
         getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(eliminar, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=eliminar;
+        getContentPane().add(this.eliminar, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=this.eliminar;
         this.repaint();
         this.revalidate();
     }
@@ -140,47 +142,5 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();
     }
-
-    void RegistrarPropiedad() {
-        PanelCrearPropiedad crearPropiedad = new PanelCrearPropiedad();
-        getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(crearPropiedad, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=crearPropiedad;
-        this.repaint();
-        this.revalidate();
-    }
-
-    void ModificarPropiedad() {
-        PanelModificarPropiedad modificarPropiedad = new PanelModificarPropiedad();
-        getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(modificarPropiedad, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=modificarPropiedad;
-        this.repaint();
-        this.revalidate();    }
-
-    void EliminarPropiedad() {
-        PanelEliminarPropiedad eliminarPropiedad = new PanelEliminarPropiedad();
-        getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(eliminarPropiedad, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=eliminarPropiedad;
-        this.repaint();
-        this.revalidate();    }
-
-    void ListaDePropiedades() {
-        
-        PanelListaDePropiedades listaPropiedades = new PanelListaDePropiedades();
-        getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(listaPropiedades, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=listaPropiedades;
-        this.repaint();
-        this.revalidate();    }
-
-    void SolicitudDeEventos() {
-        PanelAceptarYRechasarEventos eventos = new PanelAceptarYRechasarEventos();
-        getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=eventos;
-        this.repaint();
-        this.revalidate();    }
      
 }

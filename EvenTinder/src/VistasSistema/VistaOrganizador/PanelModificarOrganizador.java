@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistasSistema.VistaUsuario;
+package VistasSistema.VistaOrganizador;
 
 import VistasSistema.VistaPropietario.PanelModificarPropietario;
 import java.sql.SQLException;
@@ -15,15 +15,15 @@ import javax.swing.JOptionPane;
  *
  * @author xebae
  */
-public class PanelModificarUsuario extends javax.swing.JPanel {
+public class PanelModificarOrganizador extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelModificarUsuario
      */
     
-    private VentanaPrincipalUsuario papa;
+    private VentanaPrincipalOrganizador papa;
     
-    public PanelModificarUsuario(VentanaPrincipalUsuario papa) {
+    public PanelModificarOrganizador(VentanaPrincipalOrganizador papa) {
         this.papa=papa;
         initComponents();
     }
@@ -57,7 +57,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menu Modificar cuenta de usuario");
+        jLabel18.setText("Menu Modificar cuenta de organizador");
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel19.setText("1. Ingrese los datos que desee modificar");

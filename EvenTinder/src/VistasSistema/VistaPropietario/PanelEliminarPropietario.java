@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistasSistema.VistaUsuario;
+package VistasSistema.VistaPropietario;
 
-import VistasSistema.VistaPropietario.PanelEliminarPropietario;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,15 +14,15 @@ import javax.swing.JOptionPane;
  *
  * @author xebae
  */
-public class PanelEliminarUsuario extends javax.swing.JPanel {
+public class PanelEliminarPropietario extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelEliminarUsuario
      */
     
-    private VentanaPrincipalUsuario papa;
+    private VentanaPrincipalPropietario papa;
     
-    public PanelEliminarUsuario(VentanaPrincipalUsuario papa) {
+    public PanelEliminarPropietario(VentanaPrincipalPropietario papa) {
         this.papa=papa;
         initComponents();
     }
@@ -66,7 +65,7 @@ public class PanelEliminarUsuario extends javax.swing.JPanel {
         });
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menú Eliminar cuenta de usuario");
+        jLabel18.setText("Menú Eliminar cuenta de propietario");
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel19.setText("1. Para eliminar cuenta ingrese su rut con su clave");
@@ -137,7 +136,7 @@ public class PanelEliminarUsuario extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-       boolean respuesta = false;
+        boolean respuesta = false;
         try {
             respuesta = this.papa.getControladorPrincipal().eliminarUsuario(this.rut.getText(),this.clave.getText());
         } catch (SQLException ex) {

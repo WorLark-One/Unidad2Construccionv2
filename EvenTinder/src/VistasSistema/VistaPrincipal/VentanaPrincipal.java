@@ -5,7 +5,12 @@
  */
 package VistasSistema.VistaPrincipal;
 
+import ControladorUsuarios.ControladorPrincipal;
+import VistasSistema.VistaOrganizador.VentanaPrincipalOrganizador;
+import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
 import VistasSistema.VistaUsuario.VentanaPrincipalUsuario;
+import java.awt.Component;
+import javax.swing.JPanel;
 
 
 /**
@@ -18,14 +23,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Creates new form Ventana
      */
     
-    private VistaPrincipal principal= new VistaPrincipal();
-    private VistaCrearUsuario crearUsuario;
-    private VistaInicioSesion inisioSesion;
+    private VistaInicioSesion inicioSesion;
+    private PanelDeOpciones panelDeOpciones;
+    private PanelCreacionUsuario usuario;
+    private Component componenteAnterior= null;
+    private ControladorPrincipal controlador;
+    private PanelHome home;
     
     public VentanaPrincipal() {
+        this.home = new PanelHome(this);
+        this.controlador= new ControladorPrincipal();
         initComponents();
-        principal = new VistaPrincipal();
-        this.setContentPane(principal);
+        this.panelDeOpciones=new PanelDeOpciones(this);
+        getContentPane().add(panelDeOpciones, java.awt.BorderLayout.EAST);
+        getContentPane().add(this.home, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=this.home;
+        this.repaint();
+        this.revalidate();
+        
     }
 
     /**
@@ -37,83 +52,74 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menuAtajos = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        botonIniciarSesion = new javax.swing.JMenuItem();
-        botonCrearUsuario = new javax.swing.JMenuItem();
-        listaDeEventos = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jMenu1.setText("Cuenta");
-
-        botonIniciarSesion.setText("Iniciar Sesion");
-        botonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonIniciarSesionActionPerformed(evt);
-            }
-        });
-        jMenu1.add(botonIniciarSesion);
-
-        botonCrearUsuario.setText("Crear Usuario");
-        botonCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCrearUsuarioActionPerformed(evt);
-            }
-        });
-        jMenu1.add(botonCrearUsuario);
-
-        menuAtajos.add(jMenu1);
-
-        listaDeEventos.setText("Eventos");
-
-        jMenuItem3.setText("Lista De Eventos");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        listaDeEventos.add(jMenuItem3);
-
-        menuAtajos.add(listaDeEventos);
-
-        setJMenuBar(menuAtajos);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1058, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 755, Short.MAX_VALUE)
-        );
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(1024, 800));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
-        // TODO add your handling code here:
-        this.inisioSesion=new VistaInicioSesion(this);
-        this.setContentPane(this.inisioSesion);
-        this.repaint();
-        this.revalidate();
-    }//GEN-LAST:event_botonIniciarSesionActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void botonCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearUsuarioActionPerformed
-        // TODO add your handling code here:
-        this.crearUsuario=new VistaCrearUsuario();
-        this.setContentPane(this.crearUsuario);
-        this.repaint();
-        this.revalidate();
-    }//GEN-LAST:event_botonCrearUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,19 +156,110 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    // End of variables declaration//GEN-END:variables
+
+    void ventanaListaEventos() {
+        PanelListaDeEventos eventos=new PanelListaDeEventos();
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=eventos;
+        this.repaint();
+        this.revalidate();
+    }
+
+    void ventanaInicioSesion() {
+        this.inicioSesion=new VistaInicioSesion(this);
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(this.inicioSesion, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=this.inicioSesion;
+        this.repaint();
+        this.revalidate();
+    }
+
+    void ventanaCrearUsuario() {
+        this.usuario= new PanelCreacionUsuario(this);
+        //getContentPane().remove(this.componenteAnterior);
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(this.usuario, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=this.usuario;
+        this.repaint();
+        this.revalidate();
+    }
+
+    void ventanaContactenos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ControladorPrincipal getControlador() {
+        return controlador;
+    }
+
+    void ventanaHome() {
+        this.home=new PanelHome(this);
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(this.home, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=this.home;
+        this.repaint();
+        this.revalidate();
+    }
+
     public void derivarAVentanaPrincipalUsuario(){
         VentanaPrincipalUsuario nuevaVentana = new VentanaPrincipalUsuario();
         nuevaVentana.arranque();
         this.setVisible(false);
     }
+    
+    public void derivarAVentanaPrincipalOrganizador() {
+        VentanaPrincipalOrganizador nuevaVentana = new VentanaPrincipalOrganizador();
+        nuevaVentana.arranque();
+        this.setVisible(false);
+    }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem botonCrearUsuario;
-    private javax.swing.JMenuItem botonIniciarSesion;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenu listaDeEventos;
-    private javax.swing.JMenuBar menuAtajos;
-    // End of variables declaration//GEN-END:variables
+    public void derivarAVentanaPrincipalPropietario() {
+        VentanaPrincipalPropietario nuevaVentana = new VentanaPrincipalPropietario();
+        nuevaVentana.arranque();
+        this.setVisible(false);
+    }
+
+    public void arranque() {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipalUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipalUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipalUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipalUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new VentanaPrincipal().setVisible(true);
+            }
+        });
+    }
+
+    
 }
