@@ -86,13 +86,13 @@ public class ControladorBDDeUsuario {
      * @param tarjeta: esta puede ser cuenta corriente o tarjeta de credito.
      * @throws java.sql.SQLException
      */
-    public void añadirUsuario(String tipoUsuario, String nombre, String rut, String correo,String clave, String telefono, String tarjeta) throws SQLException {
+    public boolean añadirUsuario(String tipoUsuario, String nombre, String rut, String correo,String clave, String telefono, String tarjeta) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
         boolean aceptado;
         Connection conexionAux = this.conexion.getConexion();
         aceptado=this.conexion.añadirUsuario(conexionAux, tipoUsuario, nombre, rut, correo, clave, telefono, tarjeta);
         System.out.println("se añadio el usuario correctamente? :"+aceptado);
-
+        return true;
     }
   
 
