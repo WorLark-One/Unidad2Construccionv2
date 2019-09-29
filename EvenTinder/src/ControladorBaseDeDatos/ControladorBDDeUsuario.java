@@ -109,11 +109,11 @@ public class ControladorBDDeUsuario {
      * @return true si el usuario fue modificado, false de lo contrario.
      * @throws java.sql.SQLException 
      */
-    public boolean modificarUsuario(String tipoUsuario,String rutUsuarioModificar,String nombre, String rut, String clave, String correo, String telefono, String tarjeta) throws SQLException {
+    public boolean modificarUsuario(String tipoUsuario,String rutUsuarioModificar,String nombre, String clave, String correo, String telefono, String tarjeta) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
         boolean aceptado;
         Connection conexionAux = this.conexion.getConexion();
-        return this.conexion.modificarDatosUsuario(conexionAux, tipoUsuario, rutUsuarioModificar, nombre, rut, correo, correo, telefono, tarjeta);
+        return this.conexion.modificarDatosUsuario(conexionAux, tipoUsuario, rutUsuarioModificar, nombre, correo, correo, telefono, tarjeta);
     }
 
     /**
