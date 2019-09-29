@@ -73,7 +73,7 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botonCerrarSesion.setLayout(new java.awt.GridBagLayout());
 
         jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel20.setText("Cerrar sesion");
+        jLabel20.setText("Cerrar sesión");
         botonCerrarSesion.add(jLabel20, new java.awt.GridBagConstraints());
 
         botonModificarCuenta.setBackground(new java.awt.Color(255, 255, 255));

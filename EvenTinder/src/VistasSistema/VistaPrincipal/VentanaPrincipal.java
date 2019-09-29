@@ -27,7 +27,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Creates new form Ventana
      */
     
-    private VistaInicioSesion inicioSesion;
+    private PanelInicioSesion inicioSesion;
     private PanelDeOpciones panelDeOpciones;
     private PanelCreacionUsuario usuario;
     private Component componenteAnterior= null;
@@ -179,7 +179,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     void ventanaInicioSesion() {
-        this.inicioSesion=new VistaInicioSesion(this);
+        this.inicioSesion=new PanelInicioSesion(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(this.inicioSesion, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=this.inicioSesion;
