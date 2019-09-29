@@ -381,5 +381,5 @@ public class ConexionBD {
     
     }
 
-   
+   // metodos de propiedades.
 }

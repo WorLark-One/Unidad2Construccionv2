@@ -1,5 +1,6 @@
 package ControladorBaseDeDatos;
 
+import ModuloGestionUsuario.Usuario;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
@@ -45,15 +46,30 @@ public class ControladorBDDeUsuario {
      *
      * @param tipoUsuario:cliente, organizador u propietario
      * @param rut: rut del usuario al cual se le quiere obtener la informacion.
-     * @return una lista con la informacion de un usuario.
+     * @return un usuario.
      * @throws java.sql.SQLException
      */
-    public ArrayList<String> obtenerInformacioDeUsurio(String tipoUsuario, String rut) throws SQLException {
+    public Usuario obtenerInformacioDeUsurio(String tipoUsuario, String rut) throws SQLException {
         ArrayList<String> informacion = null;
-
+        Usuario usuario= null;
         this.conexion.crearConexion("EventTinder", "1");
         Connection conexionAux = this.conexion.getConexion();
-        return this.conexion.mostrarInformacionUsuario(conexionAux, tipoUsuario, rut);
+        informacion=this.conexion.mostrarInformacionUsuario(conexionAux, tipoUsuario, rut);
+        if(informacion!=null)
+        {
+            String nombreCompleto=informacion.get(0);
+            String rutAux = informacion.get(1);
+            String correo=informacion.get(2);
+            String contraseña=informacion.get(3);
+            String telefono = informacion.get(4);
+            String tarjeta=informacion.get(5);
+            
+            usuario = new Usuario(rutAux,correo,contraseña,telefono,tarjeta);
+            
+            return usuario;
+        }
+  
+        return usuario;
 
 
     }
