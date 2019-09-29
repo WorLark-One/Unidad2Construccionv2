@@ -10,6 +10,7 @@ import java.sql.SQLException;
 public class ControlDeAcceso {
     String rut;
     String contraseña;
+    String tipoUsuario;
     ControladorBaseDeDatos.ControladorBDDeUsuario controladorUsuario;
     private static ControlDeAcceso controDeAcceso;
     
@@ -38,10 +39,7 @@ public class ControlDeAcceso {
         else{
             return controDeAcceso;
         }
-    }
-
-
-   
+    }  
 
     /**
      * verifica si un usuario esta registrado en la base de datos.
@@ -77,7 +75,12 @@ public class ControlDeAcceso {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-    
-    
 
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }                
 }
