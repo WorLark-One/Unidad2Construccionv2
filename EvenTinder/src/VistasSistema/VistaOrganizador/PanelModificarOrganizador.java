@@ -57,7 +57,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menu Modificar cuenta de organizador");
+        jLabel18.setText("Menú Modificar cuenta de organizador");
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel19.setText("1. Ingrese los datos que desee modificar");
@@ -66,7 +66,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
 
         jLabel13.setText("Clave");
 
-        jLabel14.setText("N° Telefonico");
+        jLabel14.setText("N° Telefónico");
 
         jLabel15.setText("Correo Electrónico");
 

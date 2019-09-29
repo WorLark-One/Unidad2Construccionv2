@@ -62,7 +62,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Menu Lista de propiedades"/>
+        <Property name="text" type="java.lang.String" value="Men&#xfa; Lista de propiedades"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
