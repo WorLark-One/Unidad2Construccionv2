@@ -5,11 +5,15 @@
  */
 package VistasSistema.VistaPrincipal;
 
+import ControladorBaseDeDatos.ControladorBDDeUsuario;
 import ControladorUsuarios.ControladorPrincipal;
 import VistasSistema.VistaOrganizador.VentanaPrincipalOrganizador;
 import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
 import VistasSistema.VistaUsuario.VentanaPrincipalUsuario;
 import java.awt.Component;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 

@@ -367,7 +367,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if("Organizador".equals(this.tipoUsuario) || "Usuario".equals(this.tipoUsuario)){  
+        if("organizador".equals(this.tipoUsuario) || "cliente".equals(this.tipoUsuario)){  
             if("".equals(this.tarjetaDeCredito.getText())){
                 JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Tarjeta De Credito", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -380,12 +380,11 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             }
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
-                this.papa.derivarAVentanaPrincipalUsuario();
             }else{
                 JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
             }
         }
-        if("Propietario".equals(this.tipoUsuario)){
+        if("propietario".equals(this.tipoUsuario)){
             if("".equals(this.CuentaBancaria.getText())){
                 JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Cuenta Bancaria", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -398,23 +397,15 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             }
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
-                this.papa.derivarAVentanaPrincipalUsuario();
             }else{
                 JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
             }
-        }
-        boolean respuesta=false;
-        if(respuesta){
-            JOptionPane.showMessageDialog(null, "Se a registrado correctamente");
-            this.papa.derivarAVentanaPrincipalUsuario();
-        }else{
-            JOptionPane.showMessageDialog(null, "No se encuentra registrado en el sistema");
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void botonPropietarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonPropietarioMouseClicked
         // TODO add your handling code here:
-        this.tipoUsuario="Propietario";
+        this.tipoUsuario="propietario";
         this.nombre.setEnabled(true);
         this.rut.setEnabled(true);
         this.clave.setEnabled(true);
@@ -426,7 +417,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
 
     private void botonOrganizadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonOrganizadorMouseClicked
         // TODO add your handling code here:
-        this.tipoUsuario="Organizador";
+        this.tipoUsuario="organizador";
         this.nombre.setEnabled(true);
         this.rut.setEnabled(true);
         this.clave.setEnabled(true);
@@ -438,7 +429,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
 
     private void botonUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonUsuarioMouseClicked
         // TODO add your handling code here:
-        this.tipoUsuario="Usuario";
+        this.tipoUsuario="cliente";
         this.nombre.setEnabled(true);
         this.rut.setEnabled(true);
         this.clave.setEnabled(true);
