@@ -1,6 +1,6 @@
 package ControladorBaseDeDatos;
 
-import ModuloGestionUsuario.Usuario;
+//import ModuloGestionUsuario.Usuario;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
@@ -49,9 +49,9 @@ public class ControladorBDDeUsuario {
      * @return un usuario.
      * @throws java.sql.SQLException
      */
-    public Usuario obtenerInformacioDeUsurio(String tipoUsuario, String rut) throws SQLException {
+    public void obtenerInformacioDeUsurio(String tipoUsuario, String rut) throws SQLException {
         ArrayList<String> informacion = null;
-        Usuario usuario= null;
+        //Usuario usuario= null;
         this.conexion.crearConexion("EventTinder", "1");
         Connection conexionAux = this.conexion.getConexion();
         informacion=this.conexion.mostrarInformacionUsuario(conexionAux, tipoUsuario, rut);
@@ -64,12 +64,12 @@ public class ControladorBDDeUsuario {
             String telefono = informacion.get(4);
             String tarjeta=informacion.get(5);
             
-            usuario = new Usuario(rutAux,correo,contraseña,telefono,tarjeta);
+            //usuario = new Usuario(rutAux,correo,contraseña,telefono,tarjeta);
             
-            return usuario;
+            //return usuario;
         }
   
-        return usuario;
+        //return usuario;
 
 
     }

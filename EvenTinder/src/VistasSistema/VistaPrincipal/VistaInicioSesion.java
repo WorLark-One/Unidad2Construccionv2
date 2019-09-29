@@ -5,6 +5,9 @@
  */
 package VistasSistema.VistaPrincipal;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -249,7 +252,12 @@ public class VistaInicioSesion extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        boolean respuesta = this.papa.getControlador().solicitudDeAcceso(tipoUsuario, this.rut.getText(), this.clave.getText());
+        boolean respuesta = false;
+        try {
+            respuesta = this.papa.getControlador().solicitudDeAcceso(tipoUsuario, this.rut.getText(), this.clave.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(VistaInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(respuesta){
             JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
             if("Usuario".equals(this.tipoUsuario)){
