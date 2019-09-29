@@ -64,7 +64,8 @@ public class ControladorBDDeUsuario {
             String telefono = informacion.get(4);
             String tarjeta=informacion.get(5);
             
-            usuario = new Usuario(rutAux,correo,contraseña,telefono,tarjeta);
+            
+            //usuario = new Usuario(rutAux,correo,contraseña,telefono,tarjeta);
             
             return usuario;
         }
@@ -92,7 +93,7 @@ public class ControladorBDDeUsuario {
         Connection conexionAux = this.conexion.getConexion();
         aceptado=this.conexion.añadirUsuario(conexionAux, tipoUsuario, nombre, rut, correo, clave, telefono, tarjeta);
         System.out.println("se añadio el usuario correctamente? :"+aceptado);
-        return true;
+        return aceptado;
     }
   
 
