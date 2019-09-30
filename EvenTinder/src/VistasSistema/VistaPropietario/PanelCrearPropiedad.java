@@ -70,9 +70,9 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
 
         jLabel5.setText("Nombre");
 
-        jLabel12.setText("Descripcion");
+        jLabel12.setText("Descripción");
 
-        jLabel13.setText("Ubicacion");
+        jLabel13.setText("Ubicación");
 
         jLabel14.setText("N° de sectores");
 

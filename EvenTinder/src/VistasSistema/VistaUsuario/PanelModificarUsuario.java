@@ -57,7 +57,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menu Modificar cuenta de usuario");
+        jLabel18.setText("Menú Modificar cuenta de cliente");
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel19.setText("1. Ingrese los datos que desee modificar");
@@ -66,7 +66,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
 
         jLabel13.setText("Clave");
 
-        jLabel14.setText("N° Telefonico");
+        jLabel14.setText("N° Telefónico");
 
         jLabel15.setText("Correo Electrónico");
 
@@ -92,7 +92,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +126,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
                                 .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel19)
                             .addComponent(jLabel18))
-                        .addContainerGap(155, Short.MAX_VALUE))))
+                        .addContainerGap(123, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -53,8 +53,9 @@ public class ControlDeAcceso {
        boolean conectado=this.controladorUsuario.preguntarPorUsuario(tipoUsuario, rut, clave);
        if(conectado==true)
        {
+           setTipoUsuario(tipoUsuario);
            setRut(rut);
-           setContraseña(contraseña);
+           setContraseña(clave);
        }
         
         return this.controladorUsuario.preguntarPorUsuario(tipoUsuario, rut, clave);
@@ -97,6 +98,11 @@ public class ControlDeAcceso {
     private void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+    
 
     
                
