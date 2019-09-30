@@ -230,10 +230,10 @@ public class PanelInicioSesion extends javax.swing.JPanel {
     }//GEN-LAST:event_botonOrganizadorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonCliente;
-    private javax.swing.JButton botonIniciarSesion;
-    private javax.swing.JButton botonOrganizador;
-    private javax.swing.JButton botonPropietario;
+    public javax.swing.JButton botonCliente;
+    public javax.swing.JButton botonIniciarSesion;
+    public javax.swing.JButton botonOrganizador;
+    public javax.swing.JButton botonPropietario;
     private javax.swing.JTextField clave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
