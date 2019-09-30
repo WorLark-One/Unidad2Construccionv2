@@ -40,8 +40,8 @@ public class ControladorBDDeUsuario {
         if (miConexion != null) {
             try {
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = " select  count(" + tipoUsuario + ".rut) as repetido \n"
-                        + "from " + tipoUsuario + " where " + tipoUsuario + ".rut='" + rut + "' and " + tipoUsuario + ".contraseña='" + clave + "'\n"
+                String sql = " select  count(" + tipoUsuario + ".rut) as repetido "
+                        + "from " + tipoUsuario + " where " + tipoUsuario + ".rut='" + rut + "' and " + tipoUsuario + ".contraseña='" + clave + "'"
                         + "group by " + tipoUsuario + ".rut\n"
                         + "having count(" + tipoUsuario + ".rut)>=0 ";
                 ResultSet resultado = st.executeQuery(sql);
@@ -266,7 +266,7 @@ public class ControladorBDDeUsuario {
      * @return true si el usuario fue modificado, false de lo contrario.
      * @throws java.sql.SQLException
      */
-    public boolean modificarUsuario(String tipoUsuario, String rutUsuarioModificar, String nombre, String clave, String correo, String telefono, String tarjeta) throws SQLException {
+    public boolean modificarUsuario(String tipoUsuario, String rutUsuarioModificar, String nombre, String correo, String clave, String telefono, String tarjeta) throws SQLException {
 
         this.conexion.crearConexion("EventTinder", "1");
         Connection miConexion = this.conexion.getConexion();
@@ -276,8 +276,8 @@ public class ControladorBDDeUsuario {
 
                 try {
                     java.sql.Statement st = miConexion.createStatement();
-                    String sql = " update " + tipoUsuario + " set nombrecompleto='" + nombre + "', correo='" + correo + "', contraseña='" + clave + "',telefono='" + telefono + "',tarjetacredito='" + tarjeta + "' where " + tipoUsuario + ".rut='" + rutUsuarioModificar + "' ";
-                    st.executeUpdate(sql);
+                    String sql = "UPDATE cliente SET nombrecompleto='"+nombre+"', correo='"+correo+"', contraseña='"+clave+"', telefono='"+telefono+"', tarjetacredito='"+tarjeta+"' where rut='"+rutUsuarioModificar+"'";
+                    System.out.println(sql);
 
                     st.close();
                     return true;
@@ -291,7 +291,7 @@ public class ControladorBDDeUsuario {
             } else if (tipoUsuario.equalsIgnoreCase("organizador") == true) {
                 try {
                     java.sql.Statement st = miConexion.createStatement();
-                    String sql = " update " + tipoUsuario + " set nombrecompleto='" + nombre + "', correo='" + correo + "', contraseña='" + clave + "',telefono='" + telefono + "',tarjetacredito='" + tarjeta + "' where " + tipoUsuario + ".rut='" + rutUsuarioModificar + "' ";
+                    String sql = "UPDATE organizador SET nombrecompleto='"+nombre+"', correo='"+correo+"', contraseña='"+clave+"', telefono='"+telefono+"', tarjetacredito='"+tarjeta+"' where rut='"+rutUsuarioModificar+"'";
                     st.executeUpdate(sql);
 
                     st.close();
@@ -303,11 +303,11 @@ public class ControladorBDDeUsuario {
                 } finally {
                     this.conexion.cerrarBaseDeDatos(miConexion);
                 }
-            } else {
+            } else if(tipoUsuario.equalsIgnoreCase("propietario") == true){
 
                 try {
                     java.sql.Statement st = miConexion.createStatement();
-                    String sql = " update " + tipoUsuario + " set nombrecompleto='" + nombre + "',correo='" + correo + "',contraseña='" + clave + "',telefono='" + telefono + "',cuentacorriente='" + tarjeta + "' where " + tipoUsuario + ".rut='" + rutUsuarioModificar + "' ";
+                    String sql = "UPDATE propietario SET nombrecompleto='"+nombre+"', correo='"+correo+"', contraseña='"+clave+"', telefono='"+telefono+"', cuentacorriente='"+tarjeta+"' where rut='"+rutUsuarioModificar+"'";
                     System.out.println(sql);
                     st.executeUpdate(sql);
 
