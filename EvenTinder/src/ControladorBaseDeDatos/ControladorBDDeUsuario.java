@@ -277,7 +277,6 @@ public class ControladorBDDeUsuario {
                 try {
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "UPDATE cliente SET nombrecompleto='"+nombre+"', correo='"+correo+"', contraseña='"+clave+"', telefono='"+telefono+"', tarjetacredito='"+tarjeta+"' where rut='"+rutUsuarioModificar+"'";
-                    System.out.println(sql);
 
                     st.close();
                     return true;
@@ -308,7 +307,6 @@ public class ControladorBDDeUsuario {
                 try {
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "UPDATE propietario SET nombrecompleto='"+nombre+"', correo='"+correo+"', contraseña='"+clave+"', telefono='"+telefono+"', cuentacorriente='"+tarjeta+"' where rut='"+rutUsuarioModificar+"'";
-                    System.out.println(sql);
                     st.executeUpdate(sql);
 
                     st.close();

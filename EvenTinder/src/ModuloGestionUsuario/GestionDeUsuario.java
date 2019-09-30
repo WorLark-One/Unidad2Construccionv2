@@ -16,7 +16,7 @@ public class GestionDeUsuario {
      * Constructor del Gestor de Usuarios.
      */
     public GestionDeUsuario() {
-       this.controlador = new ControladorBDDeUsuario();
+        this.controlador = new ControladorBDDeUsuario();
     }
 
     /**
