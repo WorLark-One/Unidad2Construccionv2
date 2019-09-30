@@ -139,6 +139,9 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
         this.revalidate();
     }
 
+    /**
+     * Metodo que cambia el panel a PanelListaDeEventos
+     */
     void listaDeEventos() {
         PanelListaDeEventos lista = new PanelListaDeEventos();
         getContentPane().remove(this.componenteAnterior);

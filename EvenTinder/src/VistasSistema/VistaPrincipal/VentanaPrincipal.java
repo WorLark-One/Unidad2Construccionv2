@@ -5,16 +5,11 @@
  */
 package VistasSistema.VistaPrincipal;
 
-import ControladorBaseDeDatos.ControladorBDDeUsuario;
 import ControladorUsuarios.ControladorPrincipal;
 import VistasSistema.VistaOrganizador.VentanaPrincipalOrganizador;
 import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
 import VistasSistema.VistaUsuario.VentanaPrincipalUsuario;
 import java.awt.Component;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JPanel;
 
 
 /**
@@ -118,7 +113,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(0, 0, 0));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(1024, 800));
 
