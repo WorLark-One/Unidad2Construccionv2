@@ -5,11 +5,15 @@
  */
 package VistasSistema.VistaPrincipal;
 
+import ControladorBaseDeDatos.ControladorBDDeUsuario;
 import ControladorUsuarios.ControladorPrincipal;
 import VistasSistema.VistaOrganizador.VentanaPrincipalOrganizador;
 import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
 import VistasSistema.VistaUsuario.VentanaPrincipalUsuario;
 import java.awt.Component;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 
@@ -23,7 +27,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Creates new form Ventana
      */
     
-    private VistaInicioSesion inicioSesion;
+    private PanelInicioSesion inicioSesion;
     private PanelDeOpciones panelDeOpciones;
     private PanelCreacionUsuario usuario;
     private Component componenteAnterior= null;
@@ -175,7 +179,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     void ventanaInicioSesion() {
-        this.inicioSesion=new VistaInicioSesion(this);
+        this.inicioSesion=new PanelInicioSesion(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(this.inicioSesion, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=this.inicioSesion;

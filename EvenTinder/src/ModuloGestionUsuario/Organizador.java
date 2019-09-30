@@ -18,12 +18,13 @@ public class Organizador extends Usuario {
      * @param nombreCompleto
      * @param rut
      * @param contraseña
+     * @param telefono
      * @param correoElectronico
      * @param tarjetaDeCredito
      */
     public Organizador(String nombreCompleto, String rut, String contraseña, 
-            String correoElectronico, String tarjetaDeCredito) {
-        super(nombreCompleto, rut, contraseña, correoElectronico);
+            String telefono, String correoElectronico, String tarjetaDeCredito) {
+        super(nombreCompleto, rut, contraseña,telefono, correoElectronico);
         this.tarjetaDeCredito = tarjetaDeCredito;
         this.listaDeEventos = new ArrayList();
     }
