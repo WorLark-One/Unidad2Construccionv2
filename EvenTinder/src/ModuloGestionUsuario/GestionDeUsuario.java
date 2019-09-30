@@ -68,7 +68,7 @@ public class GestionDeUsuario {
             throws SQLException {
         
         return this.controlador.modificarUsuario(tipoUsuario, rutUsuarioAModificar,
-                nombreUsuario,contraseña, correoElectronico, telefono,
+                nombreUsuario, correoElectronico,contraseña, telefono,
                 tarjeta);
     }
 
@@ -76,16 +76,15 @@ public class GestionDeUsuario {
      * Metodo que elimina a un Usuario del sistema en base a su RUT.
      *
      * @param tipoUsuario El tipo de Usuario que se busca eliminar.
-     * @param clave
      * @param rutUsuario El RUT del Usuario a eliminar.
      * @return True si el Usuario se elimino con exito.
      *          False si el Usuario no existe o los datos son erroneos.
      * @throws java.sql.SQLException
      */
-    public boolean eliminarUsuario(String rutUsuario, 
-            String clave) throws SQLException {
+    public boolean eliminarUsuario(String tipoUsuario, 
+            String rutUsuario) throws SQLException {
         
-        return this.controlador.eliminarUsuario(rutUsuario,clave);
+        return this.controlador.eliminarUsuario(tipoUsuario,rutUsuario);
     }
 
 }
