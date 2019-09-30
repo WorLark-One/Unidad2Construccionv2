@@ -13,12 +13,13 @@ public class Cliente extends Usuario {
      * @param nombreCompleto
      * @param rut
      * @param contraseña
+     * @param telefono
      * @param correoElectronico
      * @param tarjeta 
      */
     public Cliente(String nombreCompleto, String rut, String contraseña, 
-            String correoElectronico, String tarjeta) {
-        super(nombreCompleto,rut,contraseña,correoElectronico);
+            String telefono,String correoElectronico, String tarjeta) {
+        super(nombreCompleto,rut,contraseña,telefono,correoElectronico);
         this.tarjetaDeCredito = tarjeta;
     }
 

@@ -59,28 +59,45 @@ public class ControlDeAcceso {
         
         return this.controladorUsuario.preguntarPorUsuario(tipoUsuario, rut, clave);
     }
-
+    /**
+     * retorna el rut del usuario logeado
+     * @return 
+     */
     public String getRut() {
         return rut;
     }
-
-    public void setRut(String rut) {
-        this.rut = rut;
-    }
-
+   
+    /**
+     * retorna la contraseña del usuario logeado
+     * @return 
+     */
     public String getContraseña() {
         return contraseña;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
+ 
+    /**
+     * retorn el tipo de usuario: cliente, organizador u propietario
+     * @return 
+     */
     public String getTipoUsuario() {
         return tipoUsuario;
     }
+    /**
+     * remplaza el rut del usuario logeado
+     * @param rut 
+     */
+    private void setRut(String rut) {
+        this.rut = rut;
+    }
+    /**
+     * remplaza la contrasela del usuario logeado.
+     * @param contraseña 
+     */
+    private void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
 
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }                
+    
+               
 }

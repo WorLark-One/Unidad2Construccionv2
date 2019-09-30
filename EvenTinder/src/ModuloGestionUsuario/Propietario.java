@@ -17,12 +17,13 @@ public class Propietario extends Usuario {
      * @param nombreCompleto
      * @param rut
      * @param contraseña
+     * @param telefono
      * @param correoElectronico
      * @param cuentaCorriente 
      */
     public Propietario(String nombreCompleto, String rut, String contraseña, 
-            String correoElectronico, String cuentaCorriente) {
-        super(nombreCompleto,rut,contraseña,correoElectronico);
+            String telefono ,String correoElectronico, String cuentaCorriente) {
+        super(nombreCompleto,rut,contraseña,telefono,correoElectronico);
         this.cuentaCorriente = cuentaCorriente;
         this.listaDePropiedades = new ArrayList();
     }
