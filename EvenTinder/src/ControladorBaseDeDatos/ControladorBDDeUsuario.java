@@ -217,12 +217,13 @@ public class ControladorBDDeUsuario {
      * @throws java.sql.SQLException
      */
     public boolean añadirUsuario(String tipoUsuario, String nombre, String rut, String correo, String clave, String telefono, String tarjeta) throws SQLException {
+        
         this.conexion.crearConexion("EventTinder", "1");
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
             // verificamos si el usuario existe
-            int numero = contarTiposDeUsuario(miConexion, "cliente", rut);
+            int numero = contarTiposDeUsuario(miConexion, tipoUsuario, rut);
             //significa que esta creado el usuario, y solo debemos añadir la referencia y la tarjeta de credito
             // a la tabla cliente.
             if (numero == -1) {// el cliente no esta registrado, por lo tanto hay que registrarlo.
@@ -230,6 +231,7 @@ public class ControladorBDDeUsuario {
 
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "insert into " + tipoUsuario + " values('" + nombre + "','" + rut + "','" + correo + "','" + clave + "','" + telefono + "','" + tarjeta + "')";
+                    System.out.println(sql);
                     st.executeUpdate(sql);
 
                     st.close();
@@ -248,6 +250,7 @@ public class ControladorBDDeUsuario {
             return false;
 
         }
+        System.out.println("hola");
         return false;
     }
 
@@ -270,6 +273,7 @@ public class ControladorBDDeUsuario {
 
         this.conexion.crearConexion("EventTinder", "1");
         Connection miConexion = this.conexion.getConexion();
+        System.out.println(tipoUsuario);
 
         if (miConexion != null) {
             if (tipoUsuario.equalsIgnoreCase("cliente") == true) {
