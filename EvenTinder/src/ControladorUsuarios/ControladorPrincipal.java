@@ -55,10 +55,10 @@ public class ControladorPrincipal {
             String telefono,String tarjeta)
             throws SQLException {
         
-        this.gestorUsuarios.crearUsuario(tipoUsuario,nombreUsuario,rutUsuario,
+        
+        return this.gestorUsuarios.crearUsuario(tipoUsuario,nombreUsuario,rutUsuario,
                 contraseña,correoElectronico,telefono,
                 tarjeta);
-        return true;
     }
 
     /**
@@ -80,9 +80,9 @@ public class ControladorPrincipal {
             String telefono, String tarjeta) 
             throws SQLException {
         
-        this.gestorUsuarios.modificarUsuario(this.controlAcceso.getTipoUsuario(),this.controlAcceso.getRut(),
+        
+        return this.gestorUsuarios.modificarUsuario(this.controlAcceso.getTipoUsuario(),this.controlAcceso.getRut(),
                 nombreUsuario,contraseña,correoElectronico,telefono,tarjeta);
-        return true;
     }
 
     /**

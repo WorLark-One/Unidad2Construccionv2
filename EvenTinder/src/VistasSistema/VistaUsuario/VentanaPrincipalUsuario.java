@@ -160,5 +160,7 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();
     }
+    
+    
      
 }

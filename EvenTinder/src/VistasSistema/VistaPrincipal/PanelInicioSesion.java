@@ -177,16 +177,17 @@ public class PanelInicioSesion extends javax.swing.JPanel {
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
+        int aux = validarDatos(this.tipoUsuario, this.rut.getText(),this.clave.getText());
         // TODO add your handling code here:
-        if("".equals(this.tipoUsuario)){
+        if(aux == 1){
             JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de usuario", "Error al seleccionar el tipo de usuario", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if("".equals(this.rut.getText())){
+        if(aux == 2){
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if("".equals(this.clave.getText())){
+        if(aux == 3){
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -230,6 +231,26 @@ public class PanelInicioSesion extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Usuario Organizador");
     }//GEN-LAST:event_botonOrganizadorActionPerformed
 
+    // 0 es ok
+// 1 falta tipiUsuario
+// 2 falta rut
+// 3 falta clave
+    public int validarDatos(String tipoUsuario, String rut, String clave){
+        if("".equals(tipoUsuario)){
+           // JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de usuario", "Error al seleccionar el tipo de usuario", JOptionPane.WARNING_MESSAGE);
+            return 1;
+        }
+        if("".equals(rut)){
+            //JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return 2;
+        }
+        if("".equals(clave)){
+            //JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return 3;
+        }
+        return 0;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton botonCliente;
     public javax.swing.JButton botonIniciarSesion;
