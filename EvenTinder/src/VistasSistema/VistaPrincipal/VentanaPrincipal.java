@@ -5,16 +5,11 @@
  */
 package VistasSistema.VistaPrincipal;
 
-import ControladorBaseDeDatos.ControladorBDDeUsuario;
 import ControladorUsuarios.ControladorPrincipal;
 import VistasSistema.VistaOrganizador.VentanaPrincipalOrganizador;
 import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
 import VistasSistema.VistaUsuario.VentanaPrincipalUsuario;
 import java.awt.Component;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JPanel;
 
 
 /**
@@ -27,21 +22,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Creates new form Ventana
      */
     
-    private PanelInicioSesion inicioSesion;
-    private PanelDeOpciones panelDeOpciones;
-    private PanelCreacionUsuario usuario;
+ 
     private Component componenteAnterior= null;
     private ControladorPrincipal controlador;
-    private PanelHome home;
     
     public VentanaPrincipal() {
-        this.home = new PanelHome(this);
+        PanelHome home = new PanelHome(this);
         this.controlador= new ControladorPrincipal();
         initComponents();
-        this.panelDeOpciones=new PanelDeOpciones(this);
+        PanelDeOpciones panelDeOpciones=new PanelDeOpciones(this);
         getContentPane().add(panelDeOpciones, java.awt.BorderLayout.EAST);
-        getContentPane().add(this.home, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=this.home;
+        getContentPane().add(home, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=home;
         this.repaint();
         this.revalidate();
         
@@ -118,7 +110,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(0, 0, 0));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(1024, 800));
 
@@ -179,26 +171,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     void ventanaInicioSesion() {
-        this.inicioSesion=new PanelInicioSesion(this);
+        PanelInicioSesion inicioSesion=new PanelInicioSesion(this);
         getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(this.inicioSesion, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=this.inicioSesion;
+        getContentPane().add(inicioSesion, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=inicioSesion;
         this.repaint();
         this.revalidate();
     }
 
     void ventanaCrearUsuario() {
-        this.usuario= new PanelCreacionUsuario(this);
+        PanelCreacionUsuario usuario= new PanelCreacionUsuario(this);
         //getContentPane().remove(this.componenteAnterior);
         getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(this.usuario, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=this.usuario;
+        getContentPane().add(usuario, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=usuario;
         this.repaint();
         this.revalidate();
     }
 
     void ventanaContactenos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PanelNosotros nosotros= new PanelNosotros();
+        //getContentPane().remove(this.componenteAnterior);
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(nosotros, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=nosotros;
+        this.repaint();
+        this.revalidate();
     }
 
     public ControladorPrincipal getControlador() {
@@ -206,10 +204,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     void ventanaHome() {
-        this.home=new PanelHome(this);
+        PanelHome home=new PanelHome(this);
         getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(this.home, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=this.home;
+        getContentPane().add(home, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=home;
         this.repaint();
         this.revalidate();
     }

@@ -9,6 +9,7 @@ package VistasSistema.VistaUsuario;
 import ControladorUsuarios.ControladorCliente;
 import ControladorUsuarios.ControladorPrincipal;
 import VistasSistema.VistaPrincipal.PanelListaDeEventos;
+import VistasSistema.VistaPrincipal.PanelNosotros;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
 import java.awt.Component;
 
@@ -139,6 +140,9 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
         this.revalidate();
     }
 
+    /**
+     * Metodo que cambia el panel a PanelListaDeEventos
+     */
     void listaDeEventos() {
         PanelListaDeEventos lista = new PanelListaDeEventos();
         getContentPane().remove(this.componenteAnterior);
@@ -147,5 +151,16 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();
     }
+
+    void ventanaContactenos() {
+        PanelNosotros nosotros = new PanelNosotros();
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(nosotros, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=nosotros;
+        this.repaint();
+        this.revalidate();
+    }
+    
+    
      
 }

@@ -47,6 +47,7 @@ public class PanelEliminarUsuario extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel12.setText("Rut");
 
@@ -93,7 +94,7 @@ public class PanelEliminarUsuario extends javax.swing.JPanel {
                             .addComponent(botonEliminarCuenta)))
                     .addComponent(jLabel18)
                     .addComponent(jLabel19))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +118,7 @@ public class PanelEliminarUsuario extends javax.swing.JPanel {
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addComponent(botonEliminarCuenta)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -142,9 +143,10 @@ public class PanelEliminarUsuario extends javax.swing.JPanel {
             Logger.getLogger(PanelEliminarPropietario.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(respuesta){
-            JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
+            JOptionPane.showMessageDialog(null, "Se a eliminado correctamente");
+            this.papa.cerrarSesion();
         }else{
-            JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
+            JOptionPane.showMessageDialog(null, "No se a podido eliminar su cuenta de usuario");
         }
     }//GEN-LAST:event_botonEliminarCuentaActionPerformed
 

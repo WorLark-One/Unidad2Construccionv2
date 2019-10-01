@@ -8,6 +8,7 @@ package VistasSistema.VistaPropietario;
 
 import ControladorUsuarios.ControladorCliente;
 import ControladorUsuarios.ControladorPrincipal;
+import VistasSistema.VistaPrincipal.PanelNosotros;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
 import java.awt.Component;
 
@@ -182,5 +183,14 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.componenteAnterior=eventos;
         this.repaint();
         this.revalidate();    }
+
+    void ventanaContactenos() {
+        PanelNosotros nosotros = new PanelNosotros();
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(nosotros, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=nosotros;
+        this.repaint();
+        this.revalidate();
+    }
      
 }
