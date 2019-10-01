@@ -142,9 +142,10 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
             Logger.getLogger(PanelEliminarPropietario.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(respuesta){
-            JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
+            JOptionPane.showMessageDialog(null, "Se a eliminado correctamente");
+            this.papa.cerrarSesion();
         }else{
-            JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
+            JOptionPane.showMessageDialog(null, "No se a podido eliminar su cuenta de usuario");
         }
     }//GEN-LAST:event_botonEliminarCuentaActionPerformed
 

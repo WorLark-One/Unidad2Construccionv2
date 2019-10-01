@@ -148,5 +148,14 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();
     }
+
+    void listaDeEventos() {
+        PanelListaDeEventos eventos = new PanelListaDeEventos();
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=eventos;
+        this.repaint();
+        this.revalidate();
+    }
      
 }
