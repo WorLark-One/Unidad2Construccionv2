@@ -8,6 +8,7 @@ package VistasSistema.VistaOrganizador;
 
 import ControladorUsuarios.ControladorCliente;
 import ControladorUsuarios.ControladorPrincipal;
+import VistasSistema.VistaPrincipal.PanelNosotros;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
 import java.awt.Component;
 
@@ -21,23 +22,19 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
      * Creates new form VentanaPrincipalUsuario
      */
     
-    private PanelDeOpciones panelDeOpciones;
     private Component componenteAnterior= null;
     private ControladorCliente controladorUsuario;
     private ControladorPrincipal controladorPrincipal;
-    private PanelModificarOrganizador modificar;
-    private PanelEliminarOrganizador eliminar;
-    private PanelHome home;
 
     public VentanaPrincipalOrganizador() {
         this.controladorUsuario= new ControladorCliente();
         this.controladorPrincipal= new ControladorPrincipal();
-        this.panelDeOpciones=new PanelDeOpciones(this);
+        PanelDeOpciones panelDeOpciones=new PanelDeOpciones(this);
         initComponents();
-        this.home= new PanelHome();
+        PanelHome home= new PanelHome();
         getContentPane().add(panelDeOpciones, java.awt.BorderLayout.EAST);
-        getContentPane().add(this.home, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=this.home;
+        getContentPane().add(home, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=home;
         this.repaint();
         this.revalidate();
     }
@@ -99,10 +96,10 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     void modificarCuenta() {
-        this.modificar = new PanelModificarOrganizador(this);
+        PanelModificarOrganizador modificar = new PanelModificarOrganizador(this);
         getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(this.modificar, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=this.modificar;
+        getContentPane().add(modificar, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=modificar;
         this.repaint();
         this.revalidate();
     }
@@ -112,10 +109,10 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
     }
 
     void eliminarCuenta() {
-        this.eliminar = new PanelEliminarOrganizador(this);
+        PanelEliminarOrganizador eliminar = new PanelEliminarOrganizador(this);
         getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(this.eliminar, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=this.eliminar;
+        getContentPane().add(eliminar, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=eliminar;
         this.repaint();
         this.revalidate();
     }
@@ -135,10 +132,19 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
     }
 
     void ventanaHome() {
-        this.home = new PanelHome();
+        PanelHome home = new PanelHome();
         getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(this.home, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=this.home;
+        getContentPane().add(home, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=home;
+        this.repaint();
+        this.revalidate();
+    }
+
+    void ventanaContactenos() {
+        PanelNosotros nosotros = new PanelNosotros();
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(nosotros, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=nosotros;
         this.repaint();
         this.revalidate();
     }

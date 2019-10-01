@@ -321,7 +321,7 @@ public class PanelDeOpciones extends javax.swing.JPanel {
 
     private void botonContactenosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonContactenosMouseClicked
         // TODO add your handling code here:
-        this.papa.contactenos();
+        this.papa.ventanaContactenos();
     }//GEN-LAST:event_botonContactenosMouseClicked
 
     private void botonEliminarCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarCuentaMouseClicked
