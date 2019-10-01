@@ -62,7 +62,7 @@ public class ControladorPrincipal {
     }
 
     /**
-     * Metodo que modifica los datos de un Usuario.
+     * Metodo que modifica los datos del Usuario que esta ingresado en el sistema actualmente.
      * 
      * @param nombreUsuario El nombre del Usuario a modificar.
      * @param contraseña La contraseña del Usuario a modificar.
@@ -79,7 +79,7 @@ public class ControladorPrincipal {
              ,String contraseña, String correoElectronico,
             String telefono, String tarjeta) 
             throws SQLException {
-        //obtener tipo, rut (no cambia). jiji
+        
         this.gestorUsuarios.modificarUsuario(this.controlAcceso.getTipoUsuario(),this.controlAcceso.getRut(),
                 nombreUsuario,contraseña,correoElectronico,telefono,tarjeta);
         return true;
@@ -87,18 +87,24 @@ public class ControladorPrincipal {
 
     /**
      * Metodo que elimina un Usuario en base a su RUT.
-     * @param tipoUsuario El tipo de Usuario, el cual se quiere eliminar.
-     * @param clave La clase del usuario que se desea eliminar.
-     * @param rutUsuario EL RUT del Usuario a eliminar.
+     * @param clave La clase del Usuario, que esta ingresado en el sistema, que desea eliminar su cuenta.
+     * @param rutUsuario EL RUT del Usuario, que esta ingresado en el sistema, que desea eliminar su cuenta.
      * @return True si el usuario se elimino con exito.
      *          False si el usuario no se pudo eliminar o los datos son erroneos.
      * @throws java.sql.SQLException
      */
     public boolean eliminarUsuario(String rutUsuario, String clave) 
             throws SQLException {
-        //obtener tipo del usuario para poder cambiarlo, y agregar la clave para confirmar que es el usuario a borrar
-        this.gestorUsuarios.eliminarUsuario(rutUsuario,rutUsuario);
-        return true;
+        if(this.controlAcceso.getRut().equals(rutUsuario) && 
+                this.controlAcceso.getContraseña().equals(clave)){
+            this.gestorUsuarios.eliminarUsuario(this.controlAcceso.getTipoUsuario(),rutUsuario);
+            return true;
+        }        
+        else{
+            System.out.println("Los datos ingresados no corresponden al Usuario "
+                    + "actualmente ingresado en el sistema ");
+            return false;
+        }
     }
 
     
