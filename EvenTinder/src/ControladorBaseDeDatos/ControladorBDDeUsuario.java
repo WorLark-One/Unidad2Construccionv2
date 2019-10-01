@@ -33,6 +33,7 @@ public class ControladorBDDeUsuario {
      */
     public boolean preguntarPorUsuario(String tipoUsuario, String rut, String clave) throws SQLException {
         // se establece la conexion.
+        System.out.println("preginwensamaermnmrfnm");
         this.conexion.crearConexion("EventTinder", "1");
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
@@ -222,6 +223,7 @@ public class ControladorBDDeUsuario {
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
+            System.out.println("añadir usuario");
             // verificamos si el usuario existe
             int numero = contarTiposDeUsuario(miConexion, tipoUsuario, rut);
             //significa que esta creado el usuario, y solo debemos añadir la referencia y la tarjeta de credito
@@ -231,7 +233,6 @@ public class ControladorBDDeUsuario {
 
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "insert into " + tipoUsuario + " values('" + nombre + "','" + rut + "','" + correo + "','" + clave + "','" + telefono + "','" + tarjeta + "')";
-                    System.out.println(sql);
                     st.executeUpdate(sql);
 
                     st.close();
@@ -250,7 +251,7 @@ public class ControladorBDDeUsuario {
             return false;
 
         }
-        System.out.println("hola");
+        //System.out.println("hola");
         return false;
     }
 
@@ -281,7 +282,7 @@ public class ControladorBDDeUsuario {
                 try {
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "UPDATE cliente SET nombrecompleto='"+nombre+"', correo='"+correo+"', contraseña='"+clave+"', telefono='"+telefono+"', tarjetacredito='"+tarjeta+"' where rut='"+rutUsuarioModificar+"'";
-
+                    st.executeUpdate(sql);
                     st.close();
                     return true;
 
@@ -398,7 +399,6 @@ public class ControladorBDDeUsuario {
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: contar usuario :" + e);
-                System.out.println("sssss");
                 return -1;
             }
         }
