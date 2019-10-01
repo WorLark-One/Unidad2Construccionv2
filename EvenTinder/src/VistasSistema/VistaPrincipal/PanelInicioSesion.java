@@ -57,6 +57,7 @@ public class PanelInicioSesion extends javax.swing.JPanel {
         botonOrganizador = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel13.setText("Clave");
 
@@ -134,7 +135,7 @@ public class PanelInicioSesion extends javax.swing.JPanel {
                         .addComponent(botonPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(botonOrganizador, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +167,7 @@ public class PanelInicioSesion extends javax.swing.JPanel {
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addComponent(botonIniciarSesion)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -230,10 +231,10 @@ public class PanelInicioSesion extends javax.swing.JPanel {
     }//GEN-LAST:event_botonOrganizadorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonCliente;
-    private javax.swing.JButton botonIniciarSesion;
-    private javax.swing.JButton botonOrganizador;
-    private javax.swing.JButton botonPropietario;
+    public javax.swing.JButton botonCliente;
+    public javax.swing.JButton botonIniciarSesion;
+    public javax.swing.JButton botonOrganizador;
+    public javax.swing.JButton botonPropietario;
     private javax.swing.JTextField clave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
