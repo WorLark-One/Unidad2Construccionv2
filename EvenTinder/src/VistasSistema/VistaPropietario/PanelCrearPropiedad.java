@@ -44,6 +44,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         jTextArea1 = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel15.setText("Valor de arriendo");
 
@@ -106,7 +107,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                             .addComponent(numeroTelefonico)
                             .addComponent(correoElectronico)
                             .addComponent(nombre))))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,7 +143,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                     .addComponent(jLabel15))
                 .addGap(18, 18, 18)
                 .addComponent(botonRegistrar)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
