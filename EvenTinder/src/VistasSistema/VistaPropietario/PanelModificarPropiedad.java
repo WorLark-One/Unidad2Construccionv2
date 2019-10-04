@@ -44,6 +44,10 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         valorArriendo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        agregarSector = new javax.swing.JButton();
+        modificarSector = new javax.swing.JButton();
+        eliminarSector = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -70,7 +74,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
 
         jLabel14.setText("N° de sectores");
 
-        botonRegistrar.setText("Registrar");
+        botonRegistrar.setText("Guardar Cambios");
         botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonRegistrarActionPerformed(evt);
@@ -86,6 +90,29 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel2.setText("3. Agregar, modificar y/o eliminar sector");
+
+        agregarSector.setText("Agregar");
+        agregarSector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarSectorActionPerformed(evt);
+            }
+        });
+
+        modificarSector.setText("Modificar");
+        modificarSector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarSectorActionPerformed(evt);
+            }
+        });
+
+        eliminarSector.setText("Eliminar");
+        eliminarSector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarSectorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,24 +121,32 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel12)
+                        .addComponent(jLabel19)
+                        .addComponent(jLabel18)
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel13)
+                                .addComponent(jLabel14)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGap(33, 33, 33)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(ubicacion)
+                                .addComponent(numeroDeSectores)
+                                .addComponent(valorArriendo)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)))
+                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonRegistrar, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(botonRegistrar)
-                            .addComponent(ubicacion)
-                            .addComponent(numeroDeSectores)
-                            .addComponent(valorArriendo)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)))
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(agregarSector)
+                        .addGap(18, 18, 18)
+                        .addComponent(modificarSector)
+                        .addGap(18, 18, 18)
+                        .addComponent(eliminarSector)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -147,8 +182,15 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                     .addComponent(valorArriendo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(agregarSector)
+                    .addComponent(modificarSector)
+                    .addComponent(eliminarSector))
+                .addGap(60, 60, 60)
                 .addComponent(botonRegistrar)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -190,10 +232,30 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
+    private void eliminarSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarSectorActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_eliminarSectorActionPerformed
+
+    private void agregarSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarSectorActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_agregarSectorActionPerformed
+
+    private void modificarSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarSectorActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_modificarSectorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarSector;
     private javax.swing.JButton botonRegistrar;
     private javax.swing.JTextArea descripcion;
+    private javax.swing.JButton eliminarSector;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
@@ -202,8 +264,10 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton modificarSector;
     private javax.swing.JTextField numeroDeSectores;
     private javax.swing.JTextField ubicacion;
     private javax.swing.JTextField valorArriendo;

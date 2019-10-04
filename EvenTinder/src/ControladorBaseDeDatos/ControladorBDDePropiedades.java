@@ -35,7 +35,7 @@ public class ControladorBDDePropiedades {
      * @param String descripcion 
      * @return
      */
-    public boolean registrarPropiedad(String rut, String nombre,  String ubicacion,  String fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
+    public boolean registrarPropiedad(String rut, String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
         // TODO implement here
         return false;
     }
@@ -50,7 +50,7 @@ public class ControladorBDDePropiedades {
      * @param String descripcion 
      * @return
      */
-    public boolean modifcarPropiedad( int id,  String nombre,  String ubicacion,  String fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
+    public boolean modifcarPropiedad( int id,  String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
         // TODO implement here
         return false;
     }

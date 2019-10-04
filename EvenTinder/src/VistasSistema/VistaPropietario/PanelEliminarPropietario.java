@@ -127,25 +127,28 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarCuentaActionPerformed
-        if("".equals(this.rut.getText())){
+        int resp =  validarDatosEliminarUsuario(this.rut.getText(),  this.clave.getText());
+        if(resp==0){
+            boolean respuesta = false;
+            try {
+                respuesta = this.papa.getControladorPrincipal().eliminarUsuario(this.rut.getText(),this.clave.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelEliminarPropietario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(respuesta){
+                JOptionPane.showMessageDialog(null, "Se a eliminado correctamente");
+                this.papa.cerrarSesion();
+            }else{
+                JOptionPane.showMessageDialog(null, "No se a podido eliminar su cuenta de usuario");
+            }
+        }
+        if(resp==1){
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if("".equals(this.clave.getText())){
+        if(resp==2){
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
-        }
-        boolean respuesta = false;
-        try {
-            respuesta = this.papa.getControladorPrincipal().eliminarUsuario(this.rut.getText(),this.clave.getText());
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelEliminarPropietario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(respuesta){
-            JOptionPane.showMessageDialog(null, "Se a eliminado correctamente");
-            this.papa.cerrarSesion();
-        }else{
-            JOptionPane.showMessageDialog(null, "No se a podido eliminar su cuenta de usuario");
         }
     }//GEN-LAST:event_botonEliminarCuentaActionPerformed
 
@@ -168,5 +171,21 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
      * 0 = Correcto
      * numeros mayores que 0 son errores
      */
-    
+
+    /**
+     * 
+     * @param tipoUsuario
+     * @param rut
+     * @param clave
+     * @return 
+     */
+    public int validarDatosEliminarUsuario(String rut, String clave){
+        if("".equals(rut)){
+            return 1;
+        }
+        if("".equals(clave)){
+            return 2;
+        }
+        return 0;
+    }
 }
