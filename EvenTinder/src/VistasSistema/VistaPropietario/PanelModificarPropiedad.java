@@ -5,6 +5,8 @@
  */
 package VistasSistema.VistaPropietario;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author xebae
@@ -30,16 +32,16 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        numeroTelefonico = new javax.swing.JTextField();
+        numeroDeSectores = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        clave = new javax.swing.JTextField();
+        ubicacion = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         botonRegistrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        correoElectronico = new javax.swing.JTextField();
+        descripcion = new javax.swing.JTextArea();
+        valorArriendo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
@@ -60,9 +62,9 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
 
         jLabel13.setText("Ubicación");
 
-        clave.addActionListener(new java.awt.event.ActionListener() {
+        ubicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                claveActionPerformed(evt);
+                ubicacionActionPerformed(evt);
             }
         });
 
@@ -75,9 +77,9 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        descripcion.setColumns(20);
+        descripcion.setRows(5);
+        jScrollPane1.setViewportView(descripcion);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("1. Seleccione la propiedad a modificar");
@@ -105,9 +107,9 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(botonRegistrar)
-                            .addComponent(clave)
-                            .addComponent(numeroTelefonico)
-                            .addComponent(correoElectronico)
+                            .addComponent(ubicacion)
+                            .addComponent(numeroDeSectores)
+                            .addComponent(valorArriendo)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)))
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(61, Short.MAX_VALUE))
@@ -134,15 +136,15 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numeroDeSectores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valorArriendo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addGap(18, 18, 18)
                 .addComponent(botonRegistrar)
@@ -150,19 +152,48 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveActionPerformed
+    private void ubicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubicacionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_claveActionPerformed
+    }//GEN-LAST:event_ubicacionActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         // TODO add your handling code here:
+        int resp = validarEntradaRegistrar();
+        if(resp==0){
+            //realizar operacion
+            
+        }
+        //nombre
+        if(resp==1){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);    
+            return;
+        }
+        //descripcion
+        if(resp==2){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: descripcion", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            return;
+        }
+        //ubicacion
+        if(resp==3){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: ubicacion", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            return;
+        }
+        //numero de sectores
+        if(resp==4){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: numero de sectores", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            return;
+        }
+        //valor de arriendo
+        if(resp==5){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: valor de arriendo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            return;
+        }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonRegistrar;
-    private javax.swing.JTextField clave;
-    private javax.swing.JTextField correoElectronico;
+    private javax.swing.JTextArea descripcion;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
@@ -173,7 +204,22 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField numeroTelefonico;
+    private javax.swing.JTextField numeroDeSectores;
+    private javax.swing.JTextField ubicacion;
+    private javax.swing.JTextField valorArriendo;
     // End of variables declaration//GEN-END:variables
+
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    
+    /**
+     * Este va a ser el formato de las consultas para ser luego testeadas en el junit
+     * 0 = Correcto
+     * numeros mayores que 0 son errores
+     */
+
+    public int validarEntradaRegistrar() {
+        
+        return 0;
+    }
+
 }

@@ -97,7 +97,15 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    void modificarCuenta() {
+    public ControladorCliente getControladorUsuario() {
+        return controladorUsuario;
+    }
+
+    public ControladorPrincipal getControladorPrincipal() {
+        return controladorPrincipal;
+    }
+    
+    public void modificarCuenta() {
         PanelModificarPropietario modificar = new PanelModificarPropietario(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(modificar, java.awt.BorderLayout.CENTER);
@@ -106,11 +114,11 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();
     }
 
-    void contactenos() {
+    public void contactenos() {
         
     }
 
-    void eliminarCuenta() {
+    public void eliminarCuenta() {
         PanelEliminarPropietario eliminar = new PanelEliminarPropietario(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eliminar, java.awt.BorderLayout.CENTER);
@@ -119,21 +127,15 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();
     }
 
-    void cerrarSesion() {
+    public void cerrarSesion() {
         VentanaPrincipal nuevaVentana = new VentanaPrincipal();
         nuevaVentana.arranque();
         this.setVisible(false);
     }
 
-    public ControladorCliente getControladorUsuario() {
-        return controladorUsuario;
-    }
 
-    public ControladorPrincipal getControladorPrincipal() {
-        return controladorPrincipal;
-    }
 
-    void ventanaHome() {
+    public void ventanaHome() {
         this.home = new PanelHome();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(this.home, java.awt.BorderLayout.CENTER);
@@ -142,7 +144,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();
     }
 
-    void RegistrarPropiedad() {
+    public void RegistrarPropiedad() {
         PanelCrearPropiedad crearPropiedad = new PanelCrearPropiedad();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(crearPropiedad, java.awt.BorderLayout.CENTER);
@@ -151,7 +153,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();
     }
 
-    void ModificarPropiedad() {
+    public void ModificarPropiedad() {
         PanelModificarPropiedad modificarPropiedad = new PanelModificarPropiedad();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(modificarPropiedad, java.awt.BorderLayout.CENTER);
@@ -159,7 +161,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();    }
 
-    void EliminarPropiedad() {
+    public void EliminarPropiedad() {
         PanelEliminarPropiedad eliminarPropiedad = new PanelEliminarPropiedad();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eliminarPropiedad, java.awt.BorderLayout.CENTER);
@@ -167,7 +169,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();    }
 
-    void ListaDePropiedades() {
+    public void ListaDePropiedades() {
         
         PanelListaDePropiedades listaPropiedades = new PanelListaDePropiedades();
         getContentPane().remove(this.componenteAnterior);
@@ -176,7 +178,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();    }
 
-    void SolicitudDeEventos() {
+    public void SolicitudDeEventos() {
         PanelAceptarYRechasarEventos eventos = new PanelAceptarYRechasarEventos();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
@@ -184,7 +186,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();    }
 
-    void ventanaContactenos() {
+    public void ventanaContactenos() {
         PanelNosotros nosotros = new PanelNosotros();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(nosotros, java.awt.BorderLayout.CENTER);
@@ -192,5 +194,5 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();
     }
-     
+    
 }
