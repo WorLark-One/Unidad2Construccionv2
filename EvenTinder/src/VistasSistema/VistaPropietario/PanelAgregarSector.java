@@ -179,7 +179,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
         // TODO add your handling code here:
         int resp = validarEntrada(this.nombre.getText(), this.capacidad.getText());
         if(resp==0){
-            boolean bandera = this.papa.getControladorPropietario().añadirSector(id, Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
+            boolean bandera = this.papa.getControladorPropietario().añadirSector(this.propiedades.get(id).getId(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
             if(bandera){
                 //si se pudo
                 JOptionPane.showMessageDialog(null, "Se a añadido el sector correctamente");
@@ -236,6 +236,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
     
     public void actualizarListaDeSectores(){
         this.modeloLista=new DefaultListModel();
+        this.propiedades= this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
         for(int i=0;i<this.propiedades.get(id).getListaSectores().size();i++){
                 this.modeloLista.addElement("Nombre sector: " + this.propiedades.get(id).getListaSectores().get(i).getNombre() + "  Capacidad: " + this.propiedades.get(id).getListaSectores().get(i).getCapacidadDelSector());
             }

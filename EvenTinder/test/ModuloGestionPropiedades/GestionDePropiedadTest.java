@@ -51,9 +51,9 @@ public class GestionDePropiedadTest {
         String descripcion = "descripcion";
         
         GestionDePropiedad instance = new GestionDePropiedad();
-        boolean expResult = true;
+        int expResult = 1;
         
-        boolean result = instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
+        int result = instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");

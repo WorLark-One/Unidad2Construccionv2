@@ -252,7 +252,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             int resultado = this.papa.getControladorPropietario().registrarPropiedad(this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, Integer.parseInt(this.capacidadTotal.getText()), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
             if(resultado!=0){
                 //agregando sectores
-                for(int i=1; i<=this.nombresSectores.size(); i++){
+                for(int i=0; i<this.nombresSectores.size(); i++){
                     this.papa.getControladorPropietario().añadirSector(resultado, this.capacidades.get(i),this.nombresSectores.get(i));
                 }
             }else{

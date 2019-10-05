@@ -156,7 +156,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se a seleccionado el sector a modificar", "Error al seleccioanr sector", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            boolean bandera = this.papa.getControladorPropietario().modificarSector(id, this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
+            boolean bandera = this.papa.getControladorPropietario().modificarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
             if(bandera){
                 //si se pudo
                 JOptionPane.showMessageDialog(null, "Se a añadido el sector correctamente");

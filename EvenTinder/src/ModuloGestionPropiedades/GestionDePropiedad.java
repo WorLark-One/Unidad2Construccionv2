@@ -40,6 +40,7 @@ public class GestionDePropiedad {
         return null;
     }
 
+
     /**
      * @param rut 
      * @return
@@ -48,6 +49,7 @@ public class GestionDePropiedad {
         this.controlador.obtenerInformacionDePropiedades(rut);
         return false;
     }
+    
 
     /**
      * @param rut 
@@ -59,16 +61,16 @@ public class GestionDePropiedad {
      * @param descripcion 
      * @return
      */
-    public boolean registrarPropiedad( String rut,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo) {
+    public int registrarPropiedad( String rut,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo) {
         // TODO implement here
         //int i = this.controlador.registrarPropiedad(rut, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion);
         int i = 1;
         if(i>=0){
             Propiedad p = new Propiedad(i, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
             this.listaPropiedades.add(p);
-            return true;
+            return i;
         }
-        return false;
+        return 0;
     }
 
     /**
