@@ -13,8 +13,6 @@ public class ControladorPropietario {
     public ControladorPropietario() {
     }
 
-
-
     /**
      * 
      */

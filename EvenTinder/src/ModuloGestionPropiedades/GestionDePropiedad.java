@@ -7,6 +7,9 @@ import java.util.Date;
  * 
  */
 public class GestionDePropiedad {
+    
+    private ArrayList<Propiedad> listaPropiedades;
+    
     /**
      * Default constructor
      */
@@ -16,8 +19,6 @@ public class GestionDePropiedad {
     /**
      * 
      */
-    private ArrayList<Propiedad> listaPropiedades;
-
 
 
 
@@ -117,4 +118,12 @@ public class GestionDePropiedad {
         return false;
     }
 
+    public ArrayList<Propiedad> getListaPropiedades() {
+        return listaPropiedades;
+    }
+
+    public void setListaPropiedades(ArrayList<Propiedad> listaPropiedades) {
+        this.listaPropiedades = listaPropiedades;
+    }
+    
 }
