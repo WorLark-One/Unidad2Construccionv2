@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author xebae
@@ -333,6 +334,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
      * numeros mayores que 0 son errores
      */
 
+    //
     // no se puede hacer tdd ya que necesita otro metodo
     public void actualizarMenuOpciones(){
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
