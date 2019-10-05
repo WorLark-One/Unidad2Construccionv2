@@ -29,7 +29,6 @@ public class ControladorBDDePropiedades {
     }
 
     /**
-     * @param String rut 
      * @param String nombre 
      * @param String ubicacion 
      * @param String fechaDePublicacion 
@@ -95,7 +94,7 @@ public class ControladorBDDePropiedades {
      * @param int id 
      * @return
      */
-    public boolean eliminarSector( int id) {
+    public boolean eliminarSector(int id, String nombre) {
         // TODO implement here
         return false;
     }

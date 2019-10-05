@@ -5,6 +5,10 @@
  */
 package VistasSistema.VistaPropietario;
 
+import ModuloGestionPropiedades.Propiedad;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author xebae
@@ -17,11 +21,13 @@ public class PanelEliminarSector extends javax.swing.JPanel {
     
     VentanaPrincipalPropietario papa;
     private int id;
+    private ArrayList<Propiedad> propiedades;
     
     public PanelEliminarSector(VentanaPrincipalPropietario papa, int id) {
         this.papa=papa;
         this.id=id;
         initComponents();
+        this.actualizarMenuSectores();
     }
 
     /**
@@ -33,23 +39,42 @@ public class PanelEliminarSector extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        guardarCambios = new javax.swing.JButton();
-        cancelar = new javax.swing.JButton();
+        eliminarSector = new javax.swing.JButton();
+        volver = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        listaSectores = new javax.swing.JComboBox<>();
 
-        jLabel1.setText("eliminar");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        guardarCambios.setText("Guardar Cambios");
-        guardarCambios.addActionListener(new java.awt.event.ActionListener() {
+        eliminarSector.setText("Eliminar");
+        eliminarSector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarCambiosActionPerformed(evt);
+                eliminarSectorActionPerformed(evt);
             }
         });
 
-        cancelar.setText("Cancelar");
-        cancelar.addActionListener(new java.awt.event.ActionListener() {
+        volver.setText("Volver");
+        volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarActionPerformed(evt);
+                volverActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel18.setText("Menú Eliminar sector");
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setText("1. Selecciones un sector para eliminarlo");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
+
+        listaSectores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaSectores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaSectoresActionPerformed(evt);
             }
         });
 
@@ -58,44 +83,92 @@ public class PanelEliminarSector extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel4)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(listaSectores, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(179, 179, 179)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(guardarCambios)
+                        .addComponent(eliminarSector)
                         .addGap(18, 18, 18)
-                        .addComponent(cancelar)))
-                .addContainerGap(107, Short.MAX_VALUE))
+                        .addComponent(volver)))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(guardarCambios)
-                    .addComponent(cancelar))
-                .addGap(56, 56, 56))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jLabel18)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(listaSectores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(eliminarSector)
+                            .addComponent(volver))))
+                .addGap(56, 298, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
+    private void eliminarSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarSectorActionPerformed
         // TODO add your handling code here:
-        this.papa.volverAModificarPropiedad();
-    }//GEN-LAST:event_guardarCambiosActionPerformed
+        if(listaSectores.getSelectedIndex()!=-1){
+            if(this.propiedades.get(id).getListaSectores().size()==1){
+                JOptionPane.showMessageDialog(null, "No se puede eliminar el sector dado que es el ultimo", "Error al eliminar el sector", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            boolean bandera = this.papa.getControladorPropietario().eliminarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre());
+            if(bandera){
+                JOptionPane.showMessageDialog(null, "Se a eliminado el sector correctamente");
+                this.actualizarMenuSectores();
+            }else{
+                JOptionPane.showMessageDialog(null, "No se a podido eliminar el sector de la base de datos", "Error al eliminar el sector", JOptionPane.WARNING_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "no se puede eliminar el sector dado que no a seleccionado uno", "Error al seleccioanr sector", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+    }//GEN-LAST:event_eliminarSectorActionPerformed
 
-    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         // TODO add your handling code here:
         this.papa.volverAModificarPropiedad();
-    }//GEN-LAST:event_cancelarActionPerformed
+    }//GEN-LAST:event_volverActionPerformed
+
+    private void listaSectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaSectoresActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_listaSectoresActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelar;
-    private javax.swing.JButton guardarCambios;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton eliminarSector;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JComboBox<String> listaSectores;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
+
+
+    public void actualizarMenuSectores(){
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.listaSectores.removeAllItems();
+        if(this.propiedades!=null){
+            for(int i=0; i<this.propiedades.get(id).getListaSectores().size(); i++){
+                this.listaSectores.addItem("Nombre Sector: " + this.propiedades.get(id).getListaSectores().get(i).getNombre());
+            }
+            this.repaint();
+            this.revalidate();
+        }
+    }
 }

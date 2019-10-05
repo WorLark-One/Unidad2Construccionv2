@@ -17,7 +17,7 @@ public class ControladorPropietario {
     public ControladorPropietario() {
         this.controlAcceso = ControlDeAcceso.getIntancia();
         this.gestorPropiedades = new GestionDePropiedad();
-        this.gestorPropiedades.obtenerInformacionDePropiedades(controlAcceso.getRut());
+        //this.gestorPropiedades.obtenerInformacionDePropiedades(controlAcceso.getRut());
     }
 
     /**
@@ -58,7 +58,7 @@ public class ControladorPropietario {
      * @param descripcion 
      * @return
      */
-    public boolean registrarPropiedad( String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
+    public int registrarPropiedad( String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
         return this.gestorPropiedades.registrarPropiedad(nombre, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
     }
 
