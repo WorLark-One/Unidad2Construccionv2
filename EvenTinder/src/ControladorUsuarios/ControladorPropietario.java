@@ -1,5 +1,7 @@
 package ControladorUsuarios;
 
+import ModuloAutenticacion.ControlDeAcceso;
+import ModuloGestionPropiedades.GestionDePropiedad;
 import ModuloGestionPropiedades.Propiedad;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,21 +11,24 @@ import java.util.Date;
  * 
  */
 public class ControladorPropietario {
+    private ControlDeAcceso  controlAcceso;
+    private GestionDePropiedad gestorPropiedades;
 
     public ControladorPropietario() {
+        this.controlAcceso = ControlDeAcceso.getIntancia();
+        this.gestorPropiedades = new GestionDePropiedad();
+        this.gestorPropiedades.obtenerInformacionDePropiedades(controlAcceso.getRut());
     }
 
-
-
     /**
-     * 
+     * Implementacion en proximo incremento
      */
     public void aceptarSolicitud() {
         // TODO implement here
     }
 
     /**
-     * 
+     * Implementacion en proximo incremento
      */
     public void rechazarSolicitud() {
         // TODO implement here
@@ -33,86 +38,80 @@ public class ControladorPropietario {
      * @return
      */
     public ArrayList<Propiedad> mostrarInformacionDePropiedades() {
-        // TODO implement here
-        return null;
+        return this.gestorPropiedades.mostrarListaDePropiedades();
     }
 
     /**
-     * @param int id 
+     * @param id 
      * @return
      */
     public Propiedad mostrarInformaciónPropiedad( int id) {
-        // TODO implement here
-        return null;
+        return this.gestorPropiedades.mostrarPropiedad(id);        
     }
 
     /**
-     * @param String nombre 
-     * @param String ubicacion 
-     * @param String fechaDePublicacion 
-     * @param int capacidadTotal 
-     * @param int valorDeArriendo 
-     * @param String descripcion 
+     * @param nombre 
+     * @param ubicacion 
+     * @param fechaDePublicacion 
+     * @param capacidadTotal 
+     * @param valorDeArriendo 
+     * @param descripcion 
      * @return
      */
-    public int registrarPropiedad( String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
-        // TODO implement here
-        return 0;
+    public boolean registrarPropiedad( String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
+        return this.gestorPropiedades.registrarPropiedad(nombre, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
     }
 
     /**
-     * @param int id 
-     * @param String nombre 
-     * @param String ubicacion 
-     * @param String fechaDePublicacion 
-     * @param int capacidadTotal 
-     * @param int valorDeArriendo 
-     * @param String descripcion 
+     * @param id 
+     * @param nombre 
+     * @param ubicacion 
+     * @param fechaDePublicacion 
+     * @param capacidadTotal 
+     * @param valorDeArriendo 
+     * @param descripcion 
      * @return
      */
     public boolean modifcarPropiedad( int id,  String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
-        // TODO implement here
-        return false;
+        return this.gestorPropiedades.modifcarPropiedad(id, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
     }
 
     /**
-     * @param int id 
+     * @param id 
      * @return
      */
     public boolean eliminarPropiedad( int id) {
-        // TODO implement here
-        return false;
+        return this.gestorPropiedades.eliminarPropiedad(id);
     }
 
     /**
-     * @param int id 
-     * @param int capacidad 
-     * @param String nombre 
+     * @param id 
+     * @param capacidad 
+     * @param nombre 
      * @return
      */
     public boolean añadirSector( int id,  int capacidad,  String nombre) {
-        // TODO implement here
-        return false;
+        return this.gestorPropiedades.añadirSector(id, capacidad, nombre);
     }
 
     /**
-     * @param int id 
-     * @param int capacidad 
-     * @param String nombre 
+     * @param id 
+     * @param nombreActual 
+     * @param capacidad 
+     * @param nombre 
      * @return
      */
-    public boolean modificarSector( int id, String nombreAnterior,  int capacidad,  String nombre) {
-        // TODO implement here
-        return false;
+    public boolean modificarSector( int id,String nombreActual,int capacidad,  String nombre) {
+        return this.gestorPropiedades.modificarSector(id, nombreActual, capacidad, nombre);
     }
 
     /**
-     * @param int id 
+     * @param id 
+     * @param nombreActual 
      * @return
      */
-    public boolean eliminarSector( int id, String nombre) {
-        // TODO implement here
-        return false;
+    public boolean eliminarSector( int id, String nombreActual) {
+        return this.gestorPropiedades.eliminarSector(id, nombreActual);
     }
 
 }

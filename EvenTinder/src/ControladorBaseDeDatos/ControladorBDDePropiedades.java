@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * 
+ *
  */
 public class ControladorBDDePropiedades {
+
+    ConexionBD conexion;
 
     /**
      * Default constructor
      */
     public ControladorBDDePropiedades() {
+        this.conexion = new ConexionBD();
     }
 
 
@@ -34,10 +37,12 @@ public class ControladorBDDePropiedades {
      * @param String descripcion 
      * @return
      */
-    public int registrarPropiedad(String rut, String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
+    public int registrarPropiedad(String rut, String nombre,  String descripcion,  Date fechaDePublicacion,  String ubicacion,  int capacidadTotal,  int valorDeArriendo) {
         // TODO implement here
         return 0;
     }
+
+
 
     /**
      * @param int id 

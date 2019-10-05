@@ -1,5 +1,6 @@
 package ModuloGestionPropiedades;
 
+import ControladorBaseDeDatos.ControladorBDDePropiedades;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -7,114 +8,173 @@ import java.util.Date;
  * 
  */
 public class GestionDePropiedad {
+    
+    private ArrayList<Propiedad> listaPropiedades;
+    private ControladorBDDePropiedades controlador;
+    
     /**
      * Default constructor
      */
     public GestionDePropiedad() {
+        this.listaPropiedades = new ArrayList();
     }
-
-    /**
-     * 
-     */
-    private ArrayList<Propiedad> listaPropiedades;
-
-
-
 
     /**
      * @return
      */
-    public ArrayList<Propiedad> mostrarListaDePropiedades() {
-        // TODO implement here
-        return null;
+    public ArrayList<Propiedad> mostrarListaDePropiedades() {        
+        return this.listaPropiedades;
     }
 
     /**
-     * @param int id 
+     * @param id 
      * @return
      */
     public Propiedad mostrarPropiedad( int id) {
-        // TODO implement here
+        
+        for(int i = 0; i<this.listaPropiedades.size();i++){
+            if(this.listaPropiedades.get(i).getId() == id){
+                return this.listaPropiedades.get(i);
+            }
+        }
         return null;
     }
 
     /**
-     * @param String rut 
+     * @param rut 
      * @return
      */
-    public boolean obtenerInformacionDePropiedades( String rut) {
-        // TODO implement here
+    public boolean obtenerInformacionDePropiedades(String rut) {
+        this.controlador.obtenerInformacionDePropiedades(rut);
         return false;
     }
 
     /**
-     * @param String rut 
-     * @param String nombre 
-     * @param String ubicacion 
-     * @param String fechaDePublicacion 
-     * @param int capacidadTotal 
-     * @param int valorDeArriendo 
-     * @param String descripcion 
+     * @param rut 
+     * @param nombre 
+     * @param ubicacion 
+     * @param fechaDePublicacion 
+     * @param capacidadTotal 
+     * @param valorDeArriendo 
+     * @param descripcion 
      * @return
      */
-    public boolean registrarPropiedad( String rut,  String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
+    public boolean registrarPropiedad( String rut,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo) {
         // TODO implement here
+        //int i = this.controlador.registrarPropiedad(rut, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion);
+        int i = 1;
+        if(i>=0){
+            Propiedad p = new Propiedad(i, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
+            this.listaPropiedades.add(p);
+            return true;
+        }
         return false;
     }
 
     /**
-     * @param int id 
-     * @param String nombre 
-     * @param String ubicacion 
-     * @param String fechaDePublicacion 
-     * @param int capacidadTotal 
-     * @param int valorDeArriendo 
-     * @param String descripcion 
+     * @param id 
+     * @param nombre 
+     * @param ubicacion 
+     * @param fechaDePublicacion 
+     * @param capacidadTotal 
+     * @param valorDeArriendo 
+     * @param descripcion 
      * @return
      */
-    public boolean modifcarPropiedad( int id,  String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
-        // TODO implement here
+    public boolean modifcarPropiedad( int id,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo) {
+        //boolean result = this.controlador.modifcarPropiedad(id, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion);
+        boolean result = true;
+        if(result){
+            for(Propiedad p:this.listaPropiedades){
+                if(p.getId() == id){
+                    p.setNombre(nombre);
+                    p.setDescripcion(descripcion);
+                    p.setFechaDePublicacion(fechaDePublicacion);
+                    p.setUbicacion(ubicacion);
+                    p.setCapacidadTotal(capacidadTotal);                                        
+                    p.setValorArriendo(valorDeArriendo);
+                    return true;
+                }
+            }
+        }        
         return false;
     }
 
     /**
-     * @param int id 
+     * @param id 
      * @return
      */
     public boolean eliminarPropiedad( int id) {
-        // TODO implement here
+        for(Propiedad p:this.listaPropiedades){
+            if(p.getId() == id){
+                this.listaPropiedades.remove(p);
+                return true;
+            }
+        }
         return false;
     }
 
     /**
-     * @param int id 
-     * @param int capacidad 
-     * @param String nombre 
+     * @param id 
+     * @param capacidad 
+     * @param nombre 
      * @return
      */
     public boolean añadirSector( int id,  int capacidad,  String nombre) {
-        // TODO implement here
+        //this.controlador.añadirSector(id, capacidad, nombre);
+        for(Propiedad p : this.listaPropiedades){
+            if(p.getId() == id){
+                p.añadirSector(new Sector(id,nombre,capacidad));
+                return true;
+            }
+        }
         return false;
     }
 
     /**
-     * @param int id 
-     * @param int capacidad 
-     * @param String nombre 
+     * @param id 
+     * @param nombreActual 
+     * @param capacidad 
+     * @param nombre 
      * @return
      */
-    public boolean modificarSector( int id,  int capacidad,  String nombre) {
-        // TODO implement here
+    public boolean modificarSector(int id, String nombreActual,int capacidad,  String nombre) {
+        for(Propiedad p : this.listaPropiedades){
+            if(p.getId() == id){
+                for(Sector s: p.getListaSectores()){
+                    if(s.getId()== id && s.getNombre().equals(nombreActual)){
+                        s.setNombre(nombre);
+                        s.setCapacidadDelSector(capacidad);
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
     /**
-     * @param int id 
+     * @param id 
+     * @param nombreActual 
      * @return
      */
-    public boolean eliminarSector( int id) {
-        // TODO implement here
+    public boolean eliminarSector( int id, String nombreActual) {
+        //this.controlador.eliminarSector(id);
+        for(Propiedad p:this.listaPropiedades){
+            if(p.getId() == id){
+                p.eliminarSector(nombreActual, id);
+                return true;
+            }
+        }
         return false;
     }
 
+    public ArrayList<Propiedad> getListaPropiedades() {
+        return listaPropiedades;
+    }
+
+    public void setListaPropiedades(ArrayList<Propiedad> listaPropiedades) {
+        this.listaPropiedades = listaPropiedades;
+    }
+            
 }
