@@ -255,6 +255,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 for(int i=0; i<this.nombresSectores.size(); i++){
                     this.papa.getControladorPropietario().añadirSector(resultado, this.capacidades.get(i),this.nombresSectores.get(i));
                 }
+                JOptionPane.showMessageDialog(null, "Se a registrado la propiedad correctamente");
             }else{
                 //fallo
                 JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  

@@ -235,7 +235,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             boolean resultado = this.papa.getControladorPropietario().modifcarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getId() ,this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, Integer.parseInt(this.capacidadTotal.getText()), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
             if(resultado){
                 //agregando sectores
-                
+                JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
             }else{
                 //fallo
                 JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  
