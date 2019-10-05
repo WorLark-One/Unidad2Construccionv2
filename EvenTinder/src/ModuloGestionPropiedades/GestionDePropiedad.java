@@ -20,17 +20,10 @@ public class GestionDePropiedad {
     }
 
     /**
-     * 
-     */
-
-
-
-    /**
      * @return
      */
-    public ArrayList<Propiedad> mostrarListaDePropiedades() {
-        // TODO implement here
-        return null;
+    public ArrayList<Propiedad> mostrarListaDePropiedades() {        
+        return this.listaPropiedades;
     }
 
     /**
@@ -48,11 +41,11 @@ public class GestionDePropiedad {
     }
 
     /**
-     * @param String rut 
+     * @param rut 
      * @return
      */
-    public boolean obtenerInformacionDePropiedades( String rut) {
-        // TODO implement here
+    public boolean obtenerInformacionDePropiedades(String rut) {
+        this.controlador.obtenerInformacionDePropiedades(rut);
         return false;
     }
 
@@ -122,33 +115,57 @@ public class GestionDePropiedad {
     }
 
     /**
-     * @param int id 
-     * @param int capacidad 
-     * @param String nombre 
+     * @param id 
+     * @param capacidad 
+     * @param nombre 
      * @return
      */
     public boolean añadirSector( int id,  int capacidad,  String nombre) {
-        // TODO implement here
+        //this.controlador.añadirSector(id, capacidad, nombre);
+        for(Propiedad p : this.listaPropiedades){
+            if(p.getId() == id){
+                p.añadirSector(new Sector(id,nombre,capacidad));
+                return true;
+            }
+        }
         return false;
     }
 
     /**
-     * @param int id 
-     * @param int capacidad 
-     * @param String nombre 
+     * @param id 
+     * @param nombreActual 
+     * @param capacidad 
+     * @param nombre 
      * @return
      */
-    public boolean modificarSector( int id,  int capacidad,  String nombre) {
-        // TODO implement here
+    public boolean modificarSector(int id, String nombreActual,int capacidad,  String nombre) {
+        for(Propiedad p : this.listaPropiedades){
+            if(p.getId() == id){
+                for(Sector s: p.getListaSectores()){
+                    if(s.getId()== id && s.getNombre().equals(nombreActual)){
+                        s.setNombre(nombre);
+                        s.setCapacidadDelSector(capacidad);
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
     /**
-     * @param int id 
+     * @param id 
+     * @param nombreActual 
      * @return
      */
-    public boolean eliminarSector( int id) {
-        // TODO implement here
+    public boolean eliminarSector( int id, String nombreActual) {
+        //this.controlador.eliminarSector(id);
+        for(Propiedad p:this.listaPropiedades){
+            if(p.getId() == id){
+                p.eliminarSector(nombreActual, id);
+                return true;
+            }
+        }
         return false;
     }
 
@@ -159,7 +176,5 @@ public class GestionDePropiedad {
     public void setListaPropiedades(ArrayList<Propiedad> listaPropiedades) {
         this.listaPropiedades = listaPropiedades;
     }
-    
-    
-    
+            
 }

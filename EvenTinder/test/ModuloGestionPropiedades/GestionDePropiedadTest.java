@@ -34,52 +34,6 @@ public class GestionDePropiedadTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of mostrarListaDePropiedades method, of class GestionDePropiedad.
-     */
-    @Test
-    public void testMostrarListaDePropiedades() {
-        System.out.println("mostrarListaDePropiedades");
-        GestionDePropiedad instance = new GestionDePropiedad();
-        ArrayList<Propiedad> expResult = null;
-        ArrayList<Propiedad> result = instance.mostrarListaDePropiedades();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of mostrarPropiedad method, of class GestionDePropiedad.
-     */
-    @Test
-    public void testMostrarPropiedad() {
-        System.out.println("mostrarPropiedad");
-        int id = 1;
-        GestionDePropiedad instance = new GestionDePropiedad();
-        instance.registrarPropiedad("1","nombre","descripcion",new Date(2019,10,05),"ubicacion",10,10000);
-        
-        Propiedad expResult = new Propiedad(1,"nombre","descripcion",new Date(2019,10,05),"ubicacion",10,10000);        
-        Propiedad result = instance.mostrarPropiedad(id);
-        assertEquals(expResult, result);
-                
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of obtenerInformacionDePropiedades method, of class GestionDePropiedad.
-     */
-    @Test
-    public void testObtenerInformacionDePropiedades() {
-        System.out.println("obtenerInformacionDePropiedades");
-        String rut = "";
-        GestionDePropiedad instance = new GestionDePropiedad();
-        boolean expResult = false;
-        boolean result = instance.obtenerInformacionDePropiedades(rut);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of registrarPropiedad method, of class GestionDePropiedad.
@@ -180,7 +134,7 @@ public class GestionDePropiedadTest {
         int id = 1;
         int capacidad = 0;
         String nombreSector = "";
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.añadirSector(id, capacidad, nombreSector);
         assertEquals(expResult, result);
         
@@ -194,15 +148,30 @@ public class GestionDePropiedadTest {
     @Test
     public void testModificarSector() {
         System.out.println("modificarSector");
-        int id = 0;
-        int capacidad = 0;
+        //Se crea una propiedad de prueba
+        String rut = "";
         String nombre = "";
+        String ubicacion = "";
+        Date fechaDePublicacion = null;
+        int capacidadTotal = 0;
+        int valorDeArriendo = 0;
+        String descripcion = "";
         GestionDePropiedad instance = new GestionDePropiedad();
-        boolean expResult = false;
-        boolean result = instance.modificarSector(id, capacidad, nombre);
+        instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
+        
+        
+        int id = 1;
+        int capacidad = 1;
+        String nombreActual = "nombre";        
+        instance.añadirSector(id, capacidad, nombreActual);
+        
+        int capacidad2 = 0;        
+        String nombreSector = "";
+        boolean expResult = true;
+        boolean result = instance.modificarSector(id, nombreActual,capacidad2, nombreSector);       
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -211,40 +180,28 @@ public class GestionDePropiedadTest {
     @Test
     public void testEliminarSector() {
         System.out.println("eliminarSector");
-        int id = 0;
+        //Se crea una propiedad de prueba
+        String rut = "";
+        String nombre = "";
+        String ubicacion = "";
+        Date fechaDePublicacion = null;
+        int capacidadTotal = 0;
+        int valorDeArriendo = 0;
+        String descripcion = "";
         GestionDePropiedad instance = new GestionDePropiedad();
-        boolean expResult = false;
-        boolean result = instance.eliminarSector(id);
+        instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
+        
+        
+        int id = 1;
+        int capacidad = 1;
+        String nombreActual = "nombre";        
+        instance.añadirSector(id, capacidad, nombreActual);
+                
+        boolean expResult = true;
+        boolean result = instance.eliminarSector(id,nombreActual);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getListaPropiedades method, of class GestionDePropiedad.
-     */
-    @Test
-    public void testGetListaPropiedades() {
-        System.out.println("getListaPropiedades");
-        GestionDePropiedad instance = new GestionDePropiedad();
-        ArrayList<Propiedad> expResult = null;
-        ArrayList<Propiedad> result = instance.getListaPropiedades();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setListaPropiedades method, of class GestionDePropiedad.
-     */
-    @Test
-    public void testSetListaPropiedades() {
-        System.out.println("setListaPropiedades");
-        ArrayList<Propiedad> listaPropiedades = null;
-        GestionDePropiedad instance = new GestionDePropiedad();
-        instance.setListaPropiedades(listaPropiedades);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }
