@@ -5,36 +5,14 @@ package ModuloGestionPropiedades;
  * 
  */
 public class Sector {
-    
-    /**
-     * Default constructor
-     */
-    public Sector() {
-    }
-
-    /**
-     * 
-     */
     private int id;
-
-    /**
-     * 
-     */
     private String nombre;
-
-    /**
-     * 
-     */
     private int capacidadDelSector;
 
-
-    /**
-     * @param int id 
-     * @param String nombre 
-     * @param int capSector
-     */
-    public void Sector( int id,  String nombre,  int capSector) {
-        // TODO implement here
+    public Sector(int id, String nombre, int capacidadDelSector) {
+        this.id = id;
+        this.nombre = nombre;
+        this.capacidadDelSector = capacidadDelSector;
     }
 
     public int getId() {
@@ -60,7 +38,7 @@ public class Sector {
     public void setCapacidadDelSector(int capacidadDelSector) {
         this.capacidadDelSector = capacidadDelSector;
     }
-
+ 
   
 
 }
