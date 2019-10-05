@@ -1,5 +1,6 @@
 package ModuloGestionPropiedades;
 
+import ControladorBaseDeDatos.ControladorBDDePropiedades;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,11 +10,13 @@ import java.util.Date;
 public class GestionDePropiedad {
     
     private ArrayList<Propiedad> listaPropiedades;
+    private ControladorBDDePropiedades controlador;
     
     /**
      * Default constructor
      */
     public GestionDePropiedad() {
+        this.listaPropiedades = new ArrayList();
     }
 
     /**
@@ -31,11 +34,16 @@ public class GestionDePropiedad {
     }
 
     /**
-     * @param int id 
+     * @param id 
      * @return
      */
     public Propiedad mostrarPropiedad( int id) {
-        // TODO implement here
+        
+        for(int i = 0; i<this.listaPropiedades.size();i++){
+            if(this.listaPropiedades.get(i).getId() == id){
+                return this.listaPropiedades.get(i);
+            }
+        }
         return null;
     }
 
@@ -49,41 +57,67 @@ public class GestionDePropiedad {
     }
 
     /**
-     * @param String rut 
-     * @param String nombre 
-     * @param String ubicacion 
-     * @param String fechaDePublicacion 
-     * @param int capacidadTotal 
-     * @param int valorDeArriendo 
-     * @param String descripcion 
+     * @param rut 
+     * @param nombre 
+     * @param ubicacion 
+     * @param fechaDePublicacion 
+     * @param capacidadTotal 
+     * @param valorDeArriendo 
+     * @param descripcion 
      * @return
      */
-    public boolean registrarPropiedad( String rut,  String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
+    public boolean registrarPropiedad( String rut,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo) {
         // TODO implement here
+        //int i = this.controlador.registrarPropiedad(rut, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion);
+        int i = 1;
+        if(i>=0){
+            Propiedad p = new Propiedad(i, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
+            this.listaPropiedades.add(p);
+            return true;
+        }
         return false;
     }
 
     /**
-     * @param int id 
-     * @param String nombre 
-     * @param String ubicacion 
-     * @param String fechaDePublicacion 
-     * @param int capacidadTotal 
-     * @param int valorDeArriendo 
-     * @param String descripcion 
+     * @param id 
+     * @param nombre 
+     * @param ubicacion 
+     * @param fechaDePublicacion 
+     * @param capacidadTotal 
+     * @param valorDeArriendo 
+     * @param descripcion 
      * @return
      */
-    public boolean modifcarPropiedad( int id,  String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
-        // TODO implement here
+    public boolean modifcarPropiedad( int id,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo) {
+        //boolean result = this.controlador.modifcarPropiedad(id, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion);
+        boolean result = true;
+        if(result){
+            for(Propiedad p:this.listaPropiedades){
+                if(p.getId() == id){
+                    p.setNombre(nombre);
+                    p.setDescripcion(descripcion);
+                    p.setFechaDePublicacion(fechaDePublicacion);
+                    p.setUbicacion(ubicacion);
+                    p.setCapacidadTotal(capacidadTotal);                                        
+                    p.setValorArriendo(valorDeArriendo);
+                    return true;
+                }
+            }
+        }        
         return false;
     }
 
     /**
-     * @param int id 
+     * @param id 
      * @return
      */
     public boolean eliminarPropiedad( int id) {
-        // TODO implement here
+        for(Propiedad p:this.listaPropiedades){
+            if(p.getId() == id){
+                this.listaPropiedades.remove(p);
+                return true;
+            }
+        }
         return false;
     }
 
@@ -125,5 +159,7 @@ public class GestionDePropiedad {
     public void setListaPropiedades(ArrayList<Propiedad> listaPropiedades) {
         this.listaPropiedades = listaPropiedades;
     }
+    
+    
     
 }

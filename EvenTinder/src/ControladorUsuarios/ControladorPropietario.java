@@ -99,7 +99,7 @@ public class ControladorPropietario {
      * @param String nombre 
      * @return
      */
-    public boolean modificarSector( int id,  int capacidad,  String nombre) {
+    public boolean modificarSector( int id,String nombreActual,int capacidad,  String nombre) {
         // TODO implement here
         return false;
     }
