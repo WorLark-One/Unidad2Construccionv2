@@ -26,7 +26,7 @@ public class ControladorBDDeUsuario {
      * Sirve para saber si un usuario esta logeado.
      *
      * @param tipoUsuario: cliente, organizador u propietario
-     * @param rut rut del usuario a validar
+     * @param rut: rut del usuario a validar
      * @param clave: contraseña del usuario a logear.
      * @return true si el usuario esta logeado, false de lo contrario.
      * @throws java.sql.SQLException
