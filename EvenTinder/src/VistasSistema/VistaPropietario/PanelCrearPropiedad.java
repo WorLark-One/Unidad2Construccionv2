@@ -5,6 +5,9 @@
  */
 package VistasSistema.VistaPropietario;
 
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,8 +19,18 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
     /**
      * Creates new form PanelCrearPropiedad
      */
-    public PanelCrearPropiedad() {
+    
+    private boolean finalizar=false;
+    private ArrayList<String> nombresSectores=new ArrayList<>();
+    private ArrayList<Integer> capacidades=new ArrayList<>();
+    private VentanaPrincipalPropietario papa;
+    private DefaultListModel modeloLista;
+    
+    public PanelCrearPropiedad(VentanaPrincipalPropietario papa) {
+        this.papa=papa;
         initComponents();
+        this.modeloLista=new DefaultListModel();
+        this.listaSectores.setModel(modeloLista);
     }
 
     /**
@@ -35,7 +48,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         valorArriendo = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
-        nSectores = new javax.swing.JTextField();
+        capacidadTotal = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -44,6 +57,16 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descripcion = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        nombreSector = new javax.swing.JTextField();
+        capacidad = new javax.swing.JTextField();
+        botonAñadirSector = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaSectores = new javax.swing.JList<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -56,7 +79,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             }
         });
 
-        botonRegistrar.setText("Registrar");
+        botonRegistrar.setText("Registrar Propiedad");
         botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonRegistrarActionPerformed(evt);
@@ -77,21 +100,62 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
 
         jLabel13.setText("Ubicación");
 
-        jLabel14.setText("N° de sectores");
+        jLabel14.setText("Capacidad total");
 
         descripcion.setColumns(20);
         descripcion.setRows(5);
         jScrollPane1.setViewportView(descripcion);
 
+        jLabel1.setText("2. Añadir un sector");
+
+        jLabel2.setText("Nombre");
+
+        jLabel3.setText("Capacidad");
+
+        botonAñadirSector.setText("Añadir Sector");
+        botonAñadirSector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAñadirSectorActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Sectores actuales en el sistema");
+
+        listaSectores.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(listaSectores);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel1)
                     .addComponent(jLabel5)
                     .addComponent(jLabel18)
                     .addComponent(jLabel19)
@@ -100,52 +164,78 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
-                            .addComponent(jLabel15))
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
                         .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(botonRegistrar)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                            .addComponent(ubicacion)
-                            .addComponent(nSectores)
-                            .addComponent(valorArriendo)
-                            .addComponent(nombre))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(botonAñadirSector)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonRegistrar))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(nombreSector)
+                                .addComponent(jScrollPane1)
+                                .addComponent(ubicacion)
+                                .addComponent(capacidadTotal)
+                                .addComponent(nombre)
+                                .addComponent(valorArriendo, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                .addComponent(capacidad))))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(371, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel18)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel19)
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addComponent(jLabel18)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel19)
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(capacidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(valorArriendo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(nombreSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(capacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
+                    .addComponent(botonAñadirSector)
+                    .addComponent(botonRegistrar))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nSectores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
+                .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(valorArriendo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
-                .addGap(18, 18, 18)
-                .addComponent(botonRegistrar)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(126, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -155,10 +245,20 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         // TODO add your handling code here:
-        int resp = validarEntradaRegistrar();
+        int resp = validarEntradaRegistrar(this.nombre.getText(), this.descripcion.getText(), this.ubicacion.getText(), this.capacidadTotal.getText(), this.valorArriendo.getText(), this.finalizar);
         if(resp==0){
             //realizar operacion
-            
+            java.util.Date fechaDePublicacion = new Date();
+            int resultado = this.papa.getControladorPropietario().registrarPropiedad(this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, Integer.parseInt(this.capacidadTotal.getText()), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
+            if(resultado!=0){
+                //agregando sectores
+                for(int i=1; i<=this.nombresSectores.size(); i++){
+                    this.papa.getControladorPropietario().añadirSector(resultado, this.capacidades.get(i),this.nombresSectores.get(i));
+                }
+            }else{
+                //fallo
+                JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  
+            }
         }
         //nombre
         if(resp==1){
@@ -185,24 +285,60 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: valor de arriendo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
             return;
         }
+        //Finalizado
+        if(resp==6){
+            JOptionPane.showMessageDialog(null, "No a agregado un sector", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            return;
+        }
 
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
+    private void botonAñadirSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirSectorActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        int resp = validarEntrada(this.nombreSector.getText(), this.capacidad.getText());
+        if(resp==0){
+            this.nombresSectores.add(this.nombreSector.getText());
+            this.capacidades.add(Integer.parseInt(this.capacidad.getText()));
+            this.nombreSector.setText("");
+            this.capacidad.setText("");
+            JOptionPane.showMessageDialog(null, "Se a guardado un sector");
+            this.finalizar=true;
+            actualizarListaDeSectores();
+        }
+        if(resp==1){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+        }
+        if(resp==2){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Capacidad", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_botonAñadirSectorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonAñadirSector;
     public javax.swing.JButton botonRegistrar;
+    private javax.swing.JTextField capacidad;
+    private javax.swing.JTextField capacidadTotal;
     private javax.swing.JTextArea descripcion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nSectores;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> listaSectores;
     private javax.swing.JTextField nombre;
+    private javax.swing.JTextField nombreSector;
     private javax.swing.JTextField ubicacion;
     private javax.swing.JTextField valorArriendo;
     // End of variables declaration//GEN-END:variables
@@ -220,8 +356,54 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
       * 
       * @return 
       */
-    public int validarEntradaRegistrar() {
-        
+    private int validarEntrada(String nombre, String capacidad) {
+        if(nombre.equals("")){
+            return 1;
+        }
+        if(capacidad.equals("")){
+            return 2;
+        }
         return 0;
+    }
+
+    /**
+     * 
+     * @param nombre
+     * @param descripcion
+     * @param ubicacion
+     * @param nSectores
+     * @param valorArriendo
+     * @param finalizar
+     * @return 
+     */
+    private int validarEntradaRegistrar(String nombre, String descripcion, String ubicacion, String nSectores, String valorArriendo, boolean finalizar) {
+        if(nombre.equals("")){
+            return 1;
+        }
+        if(descripcion.equals("")){
+            return 2;
+        }
+        if(ubicacion.equals("")){
+            return 3;
+        }
+        if(nSectores.equals("")){
+            return 4;
+        }
+        if(valorArriendo.equals("")){
+            return 5;
+        }
+        if(!finalizar){
+            return 6;
+        }
+        return 0;
+    }
+    
+    
+    public void actualizarListaDeSectores(){
+        this.modeloLista=new DefaultListModel();
+        for(int i=0;i<this.nombresSectores.size();i++){
+                this.modeloLista.addElement("Nombre sector: " + this.nombresSectores.get(i) + "  Capacidad: " + this.capacidades.get(i));
+            }
+        this.listaSectores.setModel(this.modeloLista);
     }
 }

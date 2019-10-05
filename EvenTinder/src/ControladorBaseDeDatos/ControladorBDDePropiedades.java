@@ -26,7 +26,6 @@ public class ControladorBDDePropiedades {
     }
 
     /**
-     * @param String rut 
      * @param String nombre 
      * @param String ubicacion 
      * @param String fechaDePublicacion 
@@ -35,9 +34,9 @@ public class ControladorBDDePropiedades {
      * @param String descripcion 
      * @return
      */
-    public boolean registrarPropiedad(String rut, String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
+    public int registrarPropiedad(String rut, String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
         // TODO implement here
-        return false;
+        return 0;
     }
 
     /**
@@ -90,7 +89,7 @@ public class ControladorBDDePropiedades {
      * @param int id 
      * @return
      */
-    public boolean eliminarSector( int id) {
+    public boolean eliminarSector(int id, String nombre) {
         // TODO implement here
         return false;
     }

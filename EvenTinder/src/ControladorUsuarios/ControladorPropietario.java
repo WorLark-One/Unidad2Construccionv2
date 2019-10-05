@@ -55,9 +55,9 @@ public class ControladorPropietario {
      * @param String descripcion 
      * @return
      */
-    public boolean registrarPropiedad( String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
+    public int registrarPropiedad( String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
         // TODO implement here
-        return false;
+        return 0;
     }
 
     /**
@@ -101,7 +101,7 @@ public class ControladorPropietario {
      * @param String nombre 
      * @return
      */
-    public boolean modificarSector( int id,  int capacidad,  String nombre) {
+    public boolean modificarSector( int id, String nombreAnterior,  int capacidad,  String nombre) {
         // TODO implement here
         return false;
     }
@@ -110,7 +110,7 @@ public class ControladorPropietario {
      * @param int id 
      * @return
      */
-    public boolean eliminarSector( int id) {
+    public boolean eliminarSector( int id, String nombre) {
         // TODO implement here
         return false;
     }
