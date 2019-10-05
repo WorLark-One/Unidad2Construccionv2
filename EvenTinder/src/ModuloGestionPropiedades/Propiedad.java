@@ -3,19 +3,19 @@ package ModuloGestionPropiedades;
 import java.util.ArrayList;
 import java.util.Date;
 
-
 /**
- * 
+ *
  */
 public class Propiedad {
-     int id;
-     String nombre;
-     String descripcion;
-     Date fechaDePublicacion;
-     String ubicacion;
-     int capacidadTotal;
-     int valorArriendo;
-     ArrayList<Sector> listaSectores;
+
+    int id;
+    String nombre;
+    String descripcion;
+    Date fechaDePublicacion;
+    String ubicacion;
+    int capacidadTotal;
+    int valorArriendo;
+    ArrayList<Sector> listaSectores;
 
     public Propiedad(int id, String nombre, String descripcion, Date fechaDePublicacion, String ubicacion, int capacidadTotal, int valorArriendo) {
         this.id = id;
@@ -27,27 +27,55 @@ public class Propiedad {
         this.valorArriendo = valorArriendo;
         this.listaSectores = new ArrayList<>();
     }
-  
-    
 
     /**
-     * 
+     *
      * @param sector
-     * @return 
+     * @return
      */
-    public boolean añadirSector( Sector sector) {
-        
-        return this.añadirSector(sector);
-    }
+    public boolean añadirSector(Sector sector) {
 
-    public boolean modificarSector( int id,  String nombre,  int capSector) {
-        
+        if (this.listaSectores != null) {
+            this.listaSectores.add(sector);
+            return true;
+        }
         return false;
     }
 
-    public boolean eliminarSector( Sector sector) {
-        // TODO implement here
+    public boolean modificarSector(String nombreSector, int idPropiedad, String nuevoNombre, int nuevaCapacidad) {
+
+        if (this.listaSectores != null) {
+            for (int i = 0; i < listaSectores.size(); i++) {
+                Sector sector = listaSectores.get(i);
+                String nombre = sector.getNombre();
+                int id = sector.getId();
+                if (nombreSector.equalsIgnoreCase(nombre) == true && idPropiedad == id) {
+                    sector.setNombre(nombre);
+                    sector.setCapacidadDelSector(capacidadTotal);
+                    return true;
+                }
+
+            }
+        }
         return false;
+    }
+
+    public boolean eliminarSector(String nombreSector, int idPropiedad) {
+        if (this.listaSectores != null) {
+            for (int i = 0; i < listaSectores.size(); i++) {
+                Sector miSector = listaSectores.get(i);
+                if (id == miSector.getId()) {
+                this.listaSectores.remove(i);
+                return true;
+                }
+
+            }
+        }
+        return false;
+    }
+
+    public int numeroSectore() {
+        return this.listaSectores.size();
     }
 
     public int getId() {
@@ -113,7 +141,5 @@ public class Propiedad {
     public void setListaSectores(ArrayList<Sector> listaSectores) {
         this.listaSectores = listaSectores;
     }
-
-
 
 }
