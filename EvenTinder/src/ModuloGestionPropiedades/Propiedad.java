@@ -8,94 +8,43 @@ import java.util.Date;
  * 
  */
 public class Propiedad {
+     int id;
+     String nombre;
+     String descripcion;
+     Date fechaDePublicacion;
+     String ubicacion;
+     int capacidadTotal;
+     int valorArriendo;
+     ArrayList<Sector> listaSectores;
 
-    /**
-     * Default constructor
-     */
-    public Propiedad() {
+    public Propiedad(int id, String nombre, String descripcion, Date fechaDePublicacion, String ubicacion, int capacidadTotal, int valorArriendo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaDePublicacion = fechaDePublicacion;
+        this.ubicacion = ubicacion;
+        this.capacidadTotal = capacidadTotal;
+        this.valorArriendo = valorArriendo;
+        this.listaSectores = new ArrayList<>();
     }
+  
+    
 
     /**
      * 
-     */
-    private int id;
-
-    /**
-     * 
-     */
-    public String nombre;
-
-    /**
-     * 
-     */
-    private String descripcion;
-
-    /**
-     * 
-     */
-    private Date fechaDePublicacion;
-
-    /**
-     * 
-     */
-    private String ubicacion;
-
-    /**
-     * 
-     */
-    private int capacidadTotal;
-
-    /**
-     * 
-     */
-    private int valorArriendo;
-
-    /**
-     * 
-     */
-    private ArrayList<Sector> listaSectores;
-
-
-
-    /**
-     * @param int id 
-     * @param String nombre 
-     * @param String ubicacion 
-     * @param Date fechaDePublicacion 
-     * @param int capacidadTotal 
-     * @param int valorDeArriendo 
-     * @param String descripcion 
-     * @return
-     */
-    public boolean Propiedad( int id,  String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
-        // TODO implement here
-        return false;
-    }
-
-    /**
-     * @param Sector sector 
-     * @return
+     * @param sector
+     * @return 
      */
     public boolean añadirSector( Sector sector) {
-        // TODO implement here
-        return false;
+        
+        return this.añadirSector(sector);
     }
 
-    /**
-     * @param int id 
-     * @param String nombre 
-     * @param int capSector 
-     * @return
-     */
     public boolean modificarSector( int id,  String nombre,  int capSector) {
-        // TODO implement here
+        
         return false;
     }
 
-    /**
-     * @param Sector sector 
-     * @return
-     */
     public boolean eliminarSector( Sector sector) {
         // TODO implement here
         return false;
