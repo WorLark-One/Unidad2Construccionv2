@@ -16,9 +16,15 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
     /**
      * Creates new form PanelModificarPropiedad
      */
-    public PanelModificarPropiedad() {
+    
+    private VentanaPrincipalPropietario papa;
+    private int id;
+    
+    public PanelModificarPropiedad(VentanaPrincipalPropietario papa) {
+        this.papa=papa;
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,7 +49,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         descripcion = new javax.swing.JTextArea();
         valorArriendo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        listaPropiedades = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         agregarSector = new javax.swing.JButton();
         modificarSector = new javax.swing.JButton();
@@ -88,7 +94,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("1. Seleccione la propiedad a modificar");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaPropiedades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setText("3. Agregar, modificar y/o eliminar sector");
 
@@ -139,7 +145,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                                 .addComponent(numeroDeSectores)
                                 .addComponent(valorArriendo)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)))
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(listaPropiedades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botonRegistrar, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(agregarSector)
@@ -162,7 +168,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)))
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel19)
                 .addGap(18, 18, 18)
@@ -233,20 +239,37 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void eliminarSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarSectorActionPerformed
-        
+        if(this.listaPropiedades.getUI().equals("")){
+            JOptionPane.showMessageDialog(null, "No a seleccionado una propiedad", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE); 
+            return;
+        }
+        int id=0;
+        PanelEliminarSector sector = new PanelEliminarSector(this.papa, id);
+        this.papa.eliminarSector(sector);
         
         
     }//GEN-LAST:event_eliminarSectorActionPerformed
 
     private void agregarSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarSectorActionPerformed
-        
+        if(this.listaPropiedades.getUI().equals("")){
+            JOptionPane.showMessageDialog(null, "No a seleccionado una propiedad", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE); 
+            return;
+        }
+        int id=0;
+        PanelAgregarSector sector = new PanelAgregarSector(this.papa, id);
+        this.papa.añadirSector(sector);
         
         
     }//GEN-LAST:event_agregarSectorActionPerformed
 
     private void modificarSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarSectorActionPerformed
-        
-        
+        if(this.listaPropiedades.getUI().equals("")){
+            JOptionPane.showMessageDialog(null, "No a seleccionado una propiedad", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE); 
+            return;
+        }
+        int id=0;
+        PanelModificarSector sector = new PanelModificarSector(this.papa, id);
+        this.papa.modificarSector(sector);
         
     }//GEN-LAST:event_modificarSectorActionPerformed
 
@@ -256,7 +279,6 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
     private javax.swing.JButton botonRegistrar;
     private javax.swing.JTextArea descripcion;
     private javax.swing.JButton eliminarSector;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -267,6 +289,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> listaPropiedades;
     private javax.swing.JButton modificarSector;
     private javax.swing.JTextField numeroDeSectores;
     private javax.swing.JTextField ubicacion;

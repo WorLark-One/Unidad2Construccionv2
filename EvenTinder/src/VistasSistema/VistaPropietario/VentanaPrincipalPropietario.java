@@ -27,6 +27,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     private ControladorCliente controladorUsuario;
     private ControladorPrincipal controladorPrincipal;
     private PanelHome home;
+    private PanelModificarPropiedad modificarPropiedad ;
 
     public VentanaPrincipalPropietario() {
         this.controladorUsuario= new ControladorCliente();
@@ -154,12 +155,13 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     }
 
     public void ModificarPropiedad() {
-        PanelModificarPropiedad modificarPropiedad = new PanelModificarPropiedad();
+        modificarPropiedad = new PanelModificarPropiedad(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(modificarPropiedad, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=modificarPropiedad;
         this.repaint();
-        this.revalidate();    }
+        this.revalidate();    
+    }
 
     public void EliminarPropiedad() {
         PanelEliminarPropiedad eliminarPropiedad = new PanelEliminarPropiedad();
@@ -167,7 +169,8 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         getContentPane().add(eliminarPropiedad, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=eliminarPropiedad;
         this.repaint();
-        this.revalidate();    }
+        this.revalidate();    
+    }
 
     public void ListaDePropiedades() {
         
@@ -176,7 +179,8 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         getContentPane().add(listaPropiedades, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=listaPropiedades;
         this.repaint();
-        this.revalidate();    }
+        this.revalidate();    
+    }
 
     public void SolicitudDeEventos() {
         PanelAceptarYRechasarEventos eventos = new PanelAceptarYRechasarEventos();
@@ -184,7 +188,8 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=eventos;
         this.repaint();
-        this.revalidate();    }
+        this.revalidate();    
+    }   
 
     public void ventanaContactenos() {
         PanelNosotros nosotros = new PanelNosotros();
@@ -194,5 +199,39 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();
     }
-    
+
+    public void eliminarSector(PanelEliminarSector sector ){
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(sector, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=sector;
+        this.repaint();
+        this.revalidate();
+    }
+
+    public void añadirSector(PanelAgregarSector sector) {
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(sector, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=sector;
+        this.repaint();
+        this.revalidate();
+    }
+
+    public void modificarSector(PanelModificarSector sector) {
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(sector, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=sector;
+        this.repaint();
+        this.revalidate();
+    }
+
+    public void volverAModificarPropiedad() {
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(modificarPropiedad, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=modificarPropiedad;
+        this.repaint();
+        this.revalidate();  
+    }
+
+
+
 }
