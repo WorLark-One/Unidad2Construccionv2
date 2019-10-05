@@ -1,5 +1,7 @@
 package ControladorBaseDeDatos;
 
+import ModuloGestionPropiedades.Propiedad;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -13,52 +15,84 @@ public class ControladorBDDePropiedades {
     public ControladorBDDePropiedades() {
     }
 
+
     /**
-     * @param rut
+     * @param String rut 
+     * @return
      */
-    public void obtenerInformacionDePropiedades( String rut) {
+    public ArrayList<Propiedad> obtenerInformacionDePropiedades(String rut) {
         // TODO implement here
+        return null;
     }
 
     /**
-     * @param  rut 
-     * @param  id
+     * @param String rut 
+     * @param String nombre 
+     * @param String ubicacion 
+     * @param String fechaDePublicacion 
+     * @param int capacidadTotal 
+     * @param int valorDeArriendo 
+     * @param String descripcion 
+     * @return
      */
-    public void obtenerInformacionDeUnaPropiedad( String rut,  int id) {
+    public boolean registrarPropiedad(String rut, String nombre,  String ubicacion,  String fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
         // TODO implement here
+        return false;
     }
 
     /**
-     * @param  rut 
-     * @param  nombre 
-     * @param  descripcion 
-     * @param  fechaDePublicacion 
-     * @param  ubicacion 
-     * @param  numeroDeSectores 
-     * @param  valorDeArriendo
+     * @param int id 
+     * @param String nombre 
+     * @param String ubicacion 
+     * @param String fechaDePublicacion 
+     * @param int capacidadTotal 
+     * @param int valorDeArriendo 
+     * @param String descripcion 
+     * @return
      */
-    public void registrarPropiedad( String rut,  String nombre,  String descripcion,  Date fechaDePublicacion,  String ubicacion,  int numeroDeSectores,  int valorDeArriendo) {
+    public boolean modifcarPropiedad( int id,  String nombre,  String ubicacion,  String fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
         // TODO implement here
+        return false;
     }
 
     /**
-     * @param  id 
-     * @param  nombre 
-     * @param  descripcion 
-     * @param  fechaDePublicacion 
-     * @param  ubicacion 
-     * @param  numeroDeSectores 
-     * @param  valorDeArriendo
+     * @param int id 
+     * @return
      */
-    public void modifcarPropiedad( int id,  String nombre,  String descripcion,  Date fechaDePublicacion,  String ubicacion,  int numeroDeSectores,  int valorDeArriendo) {
+    public boolean eliminarPropiedad( int id) {
         // TODO implement here
+        return false;
     }
 
     /**
-     * @param  id 
+     * @param int id 
+     * @param int capacidad 
+     * @param String nombre 
+     * @return
      */
-    public void eliminarPropiedad( int id) {
+    public boolean añadirSector( int id,  int capacidad,  String nombre) {
         // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param int id 
+     * @param int capacidad 
+     * @param String nombre 
+     * @return
+     */
+    public boolean modificarSector( int id,  int capacidad,  String nombre) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param int id 
+     * @return
+     */
+    public boolean eliminarSector( int id) {
+        // TODO implement here
+        return false;
     }
 
 }
