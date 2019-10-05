@@ -8,14 +8,14 @@ import java.util.Date;
  */
 public class Propiedad {
 
-    int id;
-    String nombre;
-    String descripcion;
-    Date fechaDePublicacion;
-    String ubicacion;
-    int capacidadTotal;
-    int valorArriendo;
-    ArrayList<Sector> listaSectores;
+    private int id;
+    private String nombre;
+    private String descripcion;
+    private Date fechaDePublicacion;
+    private String ubicacion;
+    private int capacidadTotal;
+    private int valorArriendo;
+    private ArrayList<Sector> listaSectores;
 
     public Propiedad(int id, String nombre, String descripcion, Date fechaDePublicacion, String ubicacion, int capacidadTotal, int valorArriendo) {
         this.id = id;
@@ -65,8 +65,8 @@ public class Propiedad {
             for (int i = 0; i < listaSectores.size(); i++) {
                 Sector miSector = listaSectores.get(i);
                 if (id == miSector.getId()) {
-                this.listaSectores.remove(i);
-                return true;
+                    this.listaSectores.remove(i);
+                    return true;
                 }
 
             }
