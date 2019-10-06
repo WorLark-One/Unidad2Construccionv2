@@ -201,9 +201,9 @@ public class ControladorBDDePropiedades {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = " UPDATE propiedad SET nombre='"+nuevoNombre+"', ubicacion='"+NuevaUbicacion+"',fechapublicacion='"+fechaDePublicacion+"',capacidadtotal='"+nuevaCapacidadTotal+"',\n"
                         + "valorarriendo='"+nuevoValorDeArriendo+"',descripcion='"+nuevaDescripcion+"'"
-                        + "where propiedad.id=37 ";
+                        + "where propiedad.id= " + id + " ";
                 st.executeUpdate(sql);
-
+                System.out.println(sql);
                 st.close();
                 return true;
 
