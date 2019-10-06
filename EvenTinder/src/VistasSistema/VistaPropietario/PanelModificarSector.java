@@ -220,7 +220,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
       * 
       * @return 
       */
-    private int validarEntrada(String nombre, String capacidad) {
+    public int validarEntrada(String nombre, String capacidad) {
         if(nombre.equals("")){
             return 1;
         }
@@ -230,7 +230,8 @@ public class PanelModificarSector extends javax.swing.JPanel {
         return 0;
     }
 
-    public void actualizarMenuSectores(){
+    //no se puede hacer tdd
+    private void actualizarMenuSectores(){
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.listaSectores.removeAllItems();
         if(this.propiedades!=null){

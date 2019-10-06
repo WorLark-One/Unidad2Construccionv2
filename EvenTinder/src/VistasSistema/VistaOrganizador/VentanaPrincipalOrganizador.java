@@ -185,7 +185,7 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
         this.revalidate();
     }
 
-    public void estadisticasDeVentasPorEvento() {
+    public  void estadisticasDeVentasPorEvento() {
         PanelMostrarEstadisticasDeVentasPorEvento evento = new PanelMostrarEstadisticasDeVentasPorEvento();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(evento, java.awt.BorderLayout.CENTER);
@@ -194,7 +194,7 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
         this.revalidate();
     }
 
-    void crearEvento() {
+    public void crearEvento() {
         PanelCrearEvento evento = new PanelCrearEvento();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(evento, java.awt.BorderLayout.CENTER);

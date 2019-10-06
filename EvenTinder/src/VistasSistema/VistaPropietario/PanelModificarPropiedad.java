@@ -226,7 +226,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
     }//GEN-LAST:event_ubicacionActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
-        int resp = validarEntradaRegistrar(this.nombre.getText(),this.descripcion.getText(), this.ubicacion.getText(), this.capacidadTotal.getText(), this.valorArriendo.getText());
+        int resp = validarEntrada(this.nombre.getText(),this.descripcion.getText(), this.ubicacion.getText(), this.capacidadTotal.getText(), this.valorArriendo.getText());
         if(resp==0){
             //realizar operacion
             java.util.Date fechaDePublicacion = new Date();
@@ -370,7 +370,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
      * @param finalizar
      * @return 
      */
-    private int validarEntradaRegistrar(String nombre, String descripcion, String ubicacion, String nSectores, String valorArriendo) {
+    public int validarEntrada(String nombre, String descripcion, String ubicacion, String nSectores, String valorArriendo) {
         if(nombre.equals("")){
             return 1;
         }
