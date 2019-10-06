@@ -177,40 +177,45 @@ public class PanelInicioSesion extends javax.swing.JPanel {
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
-        int aux = validarDatos(this.tipoUsuario, this.rut.getText(),this.clave.getText());
+        int resp = validarDatosIniciarSesion(this.tipoUsuario, this.rut.getText(),this.clave.getText());
         // TODO add your handling code here:
-        if(aux == 1){
+        if(resp==0){
+            boolean respuesta = false;
+            try {
+                respuesta = this.papa.getControlador().solicitudDeAcceso(tipoUsuario, this.rut.getText(), this.clave.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(respuesta){
+                JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+                if("cliente".equals(this.tipoUsuario)){
+                    this.papa.derivarAVentanaPrincipalUsuario();
+                }
+                if("propietario".equals(this.tipoUsuario)){
+                    try {
+                        this.papa.derivarAVentanaPrincipalPropietario();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(PanelInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if("organizador".equals(this.tipoUsuario)){
+                    this.papa.derivarAVentanaPrincipalOrganizador();
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encuentra registrado en el sistema");
+            }
+        }
+        if(resp == 1){
             JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de usuario", "Error al seleccionar el tipo de usuario", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if(aux == 2){
+        if(resp == 2){
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if(aux == 3){
+        if(resp == 3){
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        boolean respuesta = false;
-        try {
-            respuesta = this.papa.getControlador().solicitudDeAcceso(tipoUsuario, this.rut.getText(), this.clave.getText());
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(respuesta){
-            JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
-            if("cliente".equals(this.tipoUsuario)){
-                this.papa.derivarAVentanaPrincipalUsuario();
-            }
-            if("propietario".equals(this.tipoUsuario)){
-                this.papa.derivarAVentanaPrincipalPropietario();
-            }
-            if("organizador".equals(this.tipoUsuario)){
-                this.papa.derivarAVentanaPrincipalOrganizador();
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "No se encuentra registrado en el sistema");
-        }
+        }  
     }//GEN-LAST:event_botonIniciarSesionActionPerformed
 
     private void botonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClienteActionPerformed
@@ -231,25 +236,6 @@ public class PanelInicioSesion extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Usuario Organizador");
     }//GEN-LAST:event_botonOrganizadorActionPerformed
 
-    // 0 es ok
-// 1 falta tipiUsuario
-// 2 falta rut
-// 3 falta clave
-    public int validarDatos(String tipoUsuario, String rut, String clave){
-        if("".equals(tipoUsuario)){
-           // JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de usuario", "Error al seleccionar el tipo de usuario", JOptionPane.WARNING_MESSAGE);
-            return 1;
-        }
-        if("".equals(rut)){
-            //JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return 2;
-        }
-        if("".equals(clave)){
-            //JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return 3;
-        }
-        return 0;
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton botonCliente;
@@ -265,4 +251,33 @@ public class PanelInicioSesion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField rut;
     // End of variables declaration//GEN-END:variables
+
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    
+    /**
+     * Este va a ser el formato de las consultas para ser luego testeadas en el junit
+     * 0 = Correcto
+     * numeros mayores que 0 son errores
+     */
+
+    /**
+     * 
+     * @param tipoUsuario
+     * @param rut
+     * @param clave
+     * @return 
+     */
+    public int validarDatosIniciarSesion(String tipoUsuario, String rut, String clave){
+        if("".equals(tipoUsuario)){
+            return 1;
+        }
+        if("".equals(rut)){
+            return 2;
+        }
+        if("".equals(clave)){
+            return 3;
+        }
+        return 0;
+    }
+
 }

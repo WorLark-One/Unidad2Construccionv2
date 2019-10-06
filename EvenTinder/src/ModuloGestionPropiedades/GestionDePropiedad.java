@@ -1,5 +1,7 @@
 package ModuloGestionPropiedades;
 
+import ControladorBaseDeDatos.ControladorBDDePropiedades;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -7,114 +9,176 @@ import java.util.Date;
  * 
  */
 public class GestionDePropiedad {
+    
+    private ArrayList<Propiedad> listaPropiedades;
+    private ControladorBDDePropiedades controlador;
+    
     /**
      * Default constructor
      */
     public GestionDePropiedad() {
+        this.listaPropiedades = new ArrayList();
+        this.controlador= new ControladorBDDePropiedades();
     }
-
-    /**
-     * 
-     */
-    private ArrayList<Propiedad> listaPropiedades;
-
-
-
 
     /**
      * @return
      */
-    public ArrayList<Propiedad> mostrarListaDePropiedades() {
-        // TODO implement here
-        return null;
+    public ArrayList<Propiedad> mostrarListaDePropiedades() { 
+        
+        return this.listaPropiedades;
     }
 
     /**
-     * @param int id 
+     * @param id 
      * @return
      */
     public Propiedad mostrarPropiedad( int id) {
-        // TODO implement here
+        
+        for(int i = 0; i<this.listaPropiedades.size();i++){
+            if(this.listaPropiedades.get(i).getId() == id){
+                return this.listaPropiedades.get(i);
+            }
+        }
         return null;
     }
 
+
     /**
-     * @param String rut 
+     * @param rut 
      * @return
      */
-    public boolean obtenerInformacionDePropiedades( String rut) {
+    public void obtenerInformacionDePropiedades(String rut) throws SQLException {
+        this.listaPropiedades = this.controlador.obtenerInformacionDePropiedades(rut);
+    }
+    
+
+    /**
+     * @param rut 
+     * @param nombre 
+     * @param ubicacion 
+     * @param fechaDePublicacion 
+     * @param capacidadTotal 
+     * @param valorDeArriendo 
+     * @param descripcion 
+     * @return
+     */
+    public int registrarPropiedad( String rut,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo) throws SQLException {
         // TODO implement here
+        int i = this.controlador.registrarPropiedad(rut, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion);
+        if(i>=0){
+            Propiedad p = new Propiedad(i, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
+            this.listaPropiedades.add(p);
+            return i;
+        }
+        return -1;
+    }
+
+    /**
+     * @param id 
+     * @param nombre 
+     * @param ubicacion 
+     * @param fechaDePublicacion 
+     * @param capacidadTotal 
+     * @param valorDeArriendo 
+     * @param descripcion 
+     * @return
+     */
+    public boolean modifcarPropiedad( int id,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo) throws SQLException {
+        boolean result = this.controlador.modifcarPropiedad(id, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion);
+        if(result){
+            for(Propiedad p:this.listaPropiedades){
+                if(p.getId() == id){
+                    p.setNombre(nombre);
+                    p.setDescripcion(descripcion);
+                    p.setFechaDePublicacion(fechaDePublicacion);
+                    p.setUbicacion(ubicacion);
+                    p.setCapacidadTotal(capacidadTotal);                                        
+                    p.setValorArriendo(valorDeArriendo);
+                    return true;
+                }
+            }
+        }        
         return false;
     }
 
     /**
-     * @param String rut 
-     * @param String nombre 
-     * @param String ubicacion 
-     * @param String fechaDePublicacion 
-     * @param int capacidadTotal 
-     * @param int valorDeArriendo 
-     * @param String descripcion 
+     * @param id 
      * @return
      */
-    public boolean registrarPropiedad( String rut,  String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
-        // TODO implement here
+    public boolean eliminarPropiedad( int id) throws SQLException {
+        this.controlador.eliminarPropiedad(id);
+        for(Propiedad p:this.listaPropiedades){
+            if(p.getId() == id){
+                this.listaPropiedades.remove(p);
+                return true;
+            }
+        }
         return false;
     }
 
     /**
-     * @param int id 
-     * @param String nombre 
-     * @param String ubicacion 
-     * @param String fechaDePublicacion 
-     * @param int capacidadTotal 
-     * @param int valorDeArriendo 
-     * @param String descripcion 
+     * @param id 
+     * @param capacidad 
+     * @param nombre 
      * @return
      */
-    public boolean modifcarPropiedad( int id,  String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
-        // TODO implement here
+    public boolean añadirSector( int id,  int capacidad,  String nombre) throws SQLException {
+        this.controlador.registrarSector(nombre, capacidad,id);
+        for(Propiedad p : this.listaPropiedades){
+            if(p.getId() == id){
+                p.añadirSector(new Sector(id,nombre,capacidad));
+                return true;
+            }
+        }
         return false;
     }
 
     /**
-     * @param int id 
+     * @param id 
+     * @param nombreActual 
+     * @param capacidad 
+     * @param nombre 
      * @return
      */
-    public boolean eliminarPropiedad( int id) {
-        // TODO implement here
+    public boolean modificarSector(int id, String nombreActual,int capacidad,  String nombre) throws SQLException {
+        boolean bandera = this.controlador.modificarSector(nombreActual, id, nombre, capacidad);
+        for(Propiedad p : this.listaPropiedades){
+            if(p.getId() == id){
+                for(Sector s: p.getListaSectores()){
+                    if(s.getIdPropiedad()== id && s.getNombre().equals(nombreActual)){
+                        s.setNombre(nombre);
+                        s.setCapacidadDelSector(capacidad);
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
     /**
-     * @param int id 
-     * @param int capacidad 
-     * @param String nombre 
+     * @param id 
+     * @param nombreActual 
      * @return
      */
-    public boolean añadirSector( int id,  int capacidad,  String nombre) {
-        // TODO implement here
+    public boolean eliminarSector( int id, String nombreActual) throws SQLException {
+        this.controlador.eliminarSector(nombreActual, id);
+        for(Propiedad p:this.listaPropiedades){
+            if(p.getId() == id){
+                p.eliminarSector(nombreActual, id);
+                return true;
+            }
+        }
         return false;
     }
 
-    /**
-     * @param int id 
-     * @param int capacidad 
-     * @param String nombre 
-     * @return
-     */
-    public boolean modificarSector( int id,  int capacidad,  String nombre) {
-        // TODO implement here
-        return false;
+    public ArrayList<Propiedad> getListaPropiedades() {
+        return listaPropiedades;
     }
 
-    /**
-     * @param int id 
-     * @return
-     */
-    public boolean eliminarSector( int id) {
-        // TODO implement here
-        return false;
+    public void setListaPropiedades(ArrayList<Propiedad> listaPropiedades) {
+        this.listaPropiedades = listaPropiedades;
     }
-
+            
 }

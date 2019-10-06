@@ -3,102 +3,79 @@ package ModuloGestionPropiedades;
 import java.util.ArrayList;
 import java.util.Date;
 
-
 /**
- * 
+ *
  */
 public class Propiedad {
 
-    /**
-     * Default constructor
-     */
-    public Propiedad() {
-    }
-
-    /**
-     * 
-     */
     private int id;
-
-    /**
-     * 
-     */
-    public String nombre;
-
-    /**
-     * 
-     */
+    private String nombre;
     private String descripcion;
-
-    /**
-     * 
-     */
     private Date fechaDePublicacion;
-
-    /**
-     * 
-     */
     private String ubicacion;
-
-    /**
-     * 
-     */
     private int capacidadTotal;
-
-    /**
-     * 
-     */
     private int valorArriendo;
-
-    /**
-     * 
-     */
     private ArrayList<Sector> listaSectores;
 
-
-
-    /**
-     * @param int id 
-     * @param String nombre 
-     * @param String ubicacion 
-     * @param Date fechaDePublicacion 
-     * @param int capacidadTotal 
-     * @param int valorDeArriendo 
-     * @param String descripcion 
-     * @return
-     */
-    public boolean Propiedad( int id,  String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
-        // TODO implement here
-        return false;
+    public Propiedad(int id, String nombre, String descripcion, Date fechaDePublicacion, String ubicacion, int capacidadTotal, int valorArriendo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaDePublicacion = fechaDePublicacion;
+        this.ubicacion = ubicacion;
+        this.capacidadTotal = capacidadTotal;
+        this.valorArriendo = valorArriendo;
+        this.listaSectores = new ArrayList<>();
     }
 
     /**
-     * @param Sector sector 
+     *
+     * @param sector
      * @return
      */
-    public boolean añadirSector( Sector sector) {
-        // TODO implement here
+    public boolean añadirSector(Sector sector) {
+
+        if (this.listaSectores != null) {
+            this.listaSectores.add(sector);
+            return true;
+        }
         return false;
     }
 
-    /**
-     * @param int id 
-     * @param String nombre 
-     * @param int capSector 
-     * @return
-     */
-    public boolean modificarSector( int id,  String nombre,  int capSector) {
-        // TODO implement here
+    public boolean modificarSector(String nombreSector, int idPropiedad, String nuevoNombre, int nuevaCapacidad) {
+
+        if (this.listaSectores != null) {
+            for (int i = 0; i < listaSectores.size(); i++) {
+                Sector sector = listaSectores.get(i);
+                String nombre = sector.getNombre();
+                int id = sector.getIdPropiedad();
+                if (nombreSector.equalsIgnoreCase(nombre) == true && idPropiedad == id) {
+                    sector.setNombre(nombre);
+                    sector.setCapacidadDelSector(capacidadTotal);
+                    return true;
+                }
+
+            }
+        }
         return false;
     }
 
-    /**
-     * @param Sector sector 
-     * @return
-     */
-    public boolean eliminarSector( Sector sector) {
-        // TODO implement here
+    public boolean eliminarSector(String nombreSector, int idPropiedad) {
+        if (this.listaSectores != null) {
+            for (int i = 0; i < listaSectores.size(); i++) {
+                Sector miSector = listaSectores.get(i);
+                if (id == miSector.getIdPropiedad()) {
+                    this.listaSectores.remove(i);
+                    return true;
+                }
+
+            }
+        }
         return false;
+    }
+
+    public int numeroSectore() {
+        return this.listaSectores.size();
     }
 
     public int getId() {
@@ -164,7 +141,5 @@ public class Propiedad {
     public void setListaSectores(ArrayList<Sector> listaSectores) {
         this.listaSectores = listaSectores;
     }
-
-
 
 }
