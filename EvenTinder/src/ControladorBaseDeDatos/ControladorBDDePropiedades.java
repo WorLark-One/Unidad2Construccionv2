@@ -53,8 +53,10 @@ public class ControladorBDDePropiedades {
                     int numeroSectores = Integer.parseInt(resultado.getString("numerodesectores"));
                     String refPropietario = resultado.getString("refpropietario");
                     Date fechaPublicacion = resultado.getDate("fechapublicacion");
+                    ArrayList<Sector>sectores=obtenerInformacionDeSectores(idPropiedad);
 
                     Propiedad propiedad = new Propiedad(idPropiedad, nombre, descripcion, fechaPublicacion, ubicacion, idPropiedad, valorArriendo);
+                    propiedad.setListaSectores(sectores);
                     propiedades.add(propiedad);
                 }
                 resultado.close();
@@ -105,7 +107,9 @@ public class ControladorBDDePropiedades {
                     int numeroSectores = Integer.parseInt(resultado.getString("numerodesectores"));
                     String refPropietario = resultado.getString("refpropietario");
                     Date fechaPublicacion = resultado.getDate("fechapublicacion");
+                    ArrayList<Sector>sectores=obtenerInformacionDeSectores(idPropiedad);
                     Propiedad propiedad = new Propiedad(id, nombre, descripcion, fechaPublicacion, ubicacion, idPropiedad, valorArriendo);
+                    propiedad.setListaSectores(sectores);
                     return propiedad;
                 }
                 resultado.close();
