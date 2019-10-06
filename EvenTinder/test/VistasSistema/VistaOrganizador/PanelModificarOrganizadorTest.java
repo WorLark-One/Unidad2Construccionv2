@@ -48,12 +48,36 @@ public class PanelModificarOrganizadorTest {
         String numeroTelefonico = "";
         String correoElectronico = "";
         String tarjetaDeCredito = "";
-        PanelModificarOrganizador instance = null;
-        int expResult = 0;
+        PanelModificarOrganizador instance = new PanelModificarOrganizador(null);
+        //error nombre
+        int expResult = 1;
         int result = instance.validarModificarOrganizador(nombre, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //error clave
+        nombre = "Sebastian Ibarra";
+        expResult = 2;
+        result = instance.validarModificarOrganizador(nombre, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito);
+        assertEquals(expResult, result);
+        //error numeroTelefonico
+        clave = "1234567890";
+        expResult = 3;
+        result = instance.validarModificarOrganizador(nombre, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito);
+        assertEquals(expResult, result);
+        //error correoElectronico
+        numeroTelefonico = "994049789";
+        expResult = 4;
+        result = instance.validarModificarOrganizador(nombre, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito);
+        assertEquals(expResult, result);
+        //error tarjetaDeCredito
+        correoElectronico = "xebaelvemgador@gmail.com";
+        expResult = 5;
+        result = instance.validarModificarOrganizador(nombre, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito);
+        assertEquals(expResult, result);
+        //Exito
+        tarjetaDeCredito = "5573457894455";
+        expResult = 0;
+        result = instance.validarModificarOrganizador(nombre, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito);
+        assertEquals(expResult, result);
     }
     
 }

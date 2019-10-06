@@ -50,11 +50,40 @@ public class PanelCrearEventoTest {
         String descripcion = "";
         String diasMaximos = "";
         PanelCrearEvento instance = new PanelCrearEvento();
-        int expResult = 0;
+        //fallo con nombre
+        int expResult = 1;
         int result = instance.validarDatos(nombre, fechaDeInicio, fechaDeTermino, capacidad, descripcion, diasMaximos);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fallo con fechaDeInicio
+        nombre = "Primer evento de EvenTinder";
+        expResult = 2;
+        result = instance.validarDatos(nombre, fechaDeInicio, fechaDeTermino, capacidad, descripcion, diasMaximos);
+        assertEquals(expResult, result);
+        //fallo con fechaDeTermino
+        fechaDeInicio = "1/9/2019";
+        expResult = 3;
+        result = instance.validarDatos(nombre, fechaDeInicio, fechaDeTermino, capacidad, descripcion, diasMaximos);
+        assertEquals(expResult, result);
+        //fallo con capacidad
+        fechaDeTermino = "11/10/2019";
+        expResult = 4;
+        result = instance.validarDatos(nombre, fechaDeInicio, fechaDeTermino, capacidad, descripcion, diasMaximos);
+        assertEquals(expResult, result);
+        //fallo con descripcion
+        capacidad = "13";
+        expResult = 5;
+        result = instance.validarDatos(nombre, fechaDeInicio, fechaDeTermino, capacidad, descripcion, diasMaximos);
+        assertEquals(expResult, result);
+        //fallo con diasMaximos
+        descripcion = "teste descripcion";
+        expResult = 6;
+        result = instance.validarDatos(nombre, fechaDeInicio, fechaDeTermino, capacidad, descripcion, diasMaximos);
+        assertEquals(expResult, result);
+        //devuelve correcto
+        diasMaximos = "13";
+        expResult = 0;
+        result = instance.validarDatos(nombre, fechaDeInicio, fechaDeTermino, capacidad, descripcion, diasMaximos);
+        assertEquals(expResult, result);
     }
     
 }

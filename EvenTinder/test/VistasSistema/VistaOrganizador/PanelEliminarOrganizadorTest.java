@@ -45,12 +45,21 @@ public class PanelEliminarOrganizadorTest {
         System.out.println("validarDatosEliminarOrganizador");
         String rut = "";
         String clave = "";
-        PanelEliminarOrganizador instance = null;
-        int expResult = 0;
+        PanelEliminarOrganizador instance = new PanelEliminarOrganizador(null);
+        //error rut
+        int expResult = 1;
         int result = instance.validarDatosEliminarOrganizador(rut, clave);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //error clave
+        rut = "19392599-5";
+        expResult = 2;
+        result = instance.validarDatosEliminarOrganizador(rut, clave);
+        assertEquals(expResult, result);
+        //exito
+        clave = "1234567890";
+        expResult = 0;
+        result = instance.validarDatosEliminarOrganizador(rut, clave);
+        assertEquals(expResult, result);
     }
     
 }
