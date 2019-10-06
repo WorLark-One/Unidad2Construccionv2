@@ -237,8 +237,11 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             }
             boolean resultado = false;
             try {
+                System.out.println("Entre a modificar");
                 resultado = this.papa.getControladorPropietario().modifcarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getId() ,this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, Integer.parseInt(this.capacidadTotal.getText()), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
+                System.out.println(resultado);
             } catch (SQLException ex) {
+                System.out.println("Cayo");
                 Logger.getLogger(PanelModificarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(resultado){
