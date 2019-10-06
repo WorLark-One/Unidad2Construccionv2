@@ -146,7 +146,7 @@ public class GestionDePropiedad {
         for(Propiedad p : this.listaPropiedades){
             if(p.getId() == id){
                 for(Sector s: p.getListaSectores()){
-                    if(s.getId()== id && s.getNombre().equals(nombreActual)){
+                    if(s.getIdPropiedad()== id && s.getNombre().equals(nombreActual)){
                         s.setNombre(nombre);
                         s.setCapacidadDelSector(capacidad);
                         return true;

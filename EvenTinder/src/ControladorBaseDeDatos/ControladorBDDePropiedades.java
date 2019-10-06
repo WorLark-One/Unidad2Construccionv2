@@ -272,18 +272,22 @@ public class ControladorBDDePropiedades {
 
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "insert into sector values('" + nombreSector + "'," + capacidad + "," + idPropiedad + ")";
+                System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
                 return true;
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                
+                System.out.println("error");
                 return false;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
 
             }
         }
+        System.out.println("esta la caga");
         return false;
     }
 
