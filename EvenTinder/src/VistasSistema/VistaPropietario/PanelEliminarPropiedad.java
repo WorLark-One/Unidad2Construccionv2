@@ -6,7 +6,10 @@
 package VistasSistema.VistaPropietario;
 
 import ModuloGestionPropiedades.Propiedad;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -107,7 +110,12 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "No a seleccionado la propiedad a modificar", "Error al seleccionar propiedad", JOptionPane.WARNING_MESSAGE);    
             return;
         }
-        boolean resultado = this.papa.getControladorPropietario().eliminarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getId());
+        boolean resultado = false;
+        try {
+            resultado = this.papa.getControladorPropietario().eliminarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelEliminarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(resultado){
             //agregando sectores
             JOptionPane.showMessageDialog(null, "Se a eliminado correctamente");

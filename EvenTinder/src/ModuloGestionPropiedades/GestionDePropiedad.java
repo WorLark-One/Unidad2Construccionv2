@@ -106,8 +106,8 @@ public class GestionDePropiedad {
      * @param id 
      * @return
      */
-    public boolean eliminarPropiedad( int id) {
-       
+    public boolean eliminarPropiedad( int id) throws SQLException {
+        this.controlador.eliminarPropiedad(id);
         for(Propiedad p:this.listaPropiedades){
             if(p.getId() == id){
                 this.listaPropiedades.remove(p);

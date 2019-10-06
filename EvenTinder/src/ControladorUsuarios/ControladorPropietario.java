@@ -81,7 +81,7 @@ public class ControladorPropietario {
      * @param id 
      * @return
      */
-    public boolean eliminarPropiedad( int id) {
+    public boolean eliminarPropiedad( int id) throws SQLException {
         return this.gestorPropiedades.eliminarPropiedad(id);
     }
 
