@@ -192,7 +192,11 @@ public class PanelInicioSesion extends javax.swing.JPanel {
                     this.papa.derivarAVentanaPrincipalUsuario();
                 }
                 if("propietario".equals(this.tipoUsuario)){
-                    this.papa.derivarAVentanaPrincipalPropietario();
+                    try {
+                        this.papa.derivarAVentanaPrincipalPropietario();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(PanelInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 if("organizador".equals(this.tipoUsuario)){
                     this.papa.derivarAVentanaPrincipalOrganizador();

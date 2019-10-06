@@ -10,6 +10,7 @@ import VistasSistema.VistaOrganizador.VentanaPrincipalOrganizador;
 import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
 import VistasSistema.VistaUsuario.VentanaPrincipalUsuario;
 import java.awt.Component;
+import java.sql.SQLException;
 
 
 /**
@@ -224,7 +225,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }
 
-    public void derivarAVentanaPrincipalPropietario() {
+    public void derivarAVentanaPrincipalPropietario() throws SQLException {
         VentanaPrincipalPropietario nuevaVentana = new VentanaPrincipalPropietario();
         nuevaVentana.arranque();
         this.setVisible(false);

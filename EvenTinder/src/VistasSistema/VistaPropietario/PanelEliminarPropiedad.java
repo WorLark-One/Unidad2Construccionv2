@@ -5,6 +5,11 @@
  */
 package VistasSistema.VistaPropietario;
 
+import ModuloGestionPropiedades.Propiedad;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,8 +21,14 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
     /**
      * Creates new form PanelEliminarPropiedad
      */
-    public PanelEliminarPropiedad() {
+    
+    private ArrayList<Propiedad> propiedades;
+    private VentanaPrincipalPropietario papa;
+    
+    public PanelEliminarPropiedad(VentanaPrincipalPropietario papa) {
+        this.papa=papa;
         initComponents();
+        this.actualizarMenuOpciones();
     }
 
     /**
@@ -33,7 +44,7 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         botonEliminarCuenta = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        listaPropiedades = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -53,7 +64,7 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaPropiedades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -64,11 +75,11 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
+                        .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel18)
                             .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(listaPropiedades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(212, 212, 212)
                         .addComponent(botonEliminarCuenta)))
@@ -87,7 +98,7 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel19)))
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botonEliminarCuenta)
                 .addContainerGap(139, Short.MAX_VALUE))
@@ -95,16 +106,33 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarCuentaActionPerformed
-        
+        if(this.listaPropiedades.getSelectedIndex()==-1){
+            JOptionPane.showMessageDialog(null, "No a seleccionado la propiedad a modificar", "Error al seleccionar propiedad", JOptionPane.WARNING_MESSAGE);    
+            return;
+        }
+        boolean resultado = false;
+        try {
+            resultado = this.papa.getControladorPropietario().eliminarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelEliminarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(resultado){
+            //agregando sectores
+            JOptionPane.showMessageDialog(null, "Se a eliminado correctamente");
+            this.actualizarMenuOpciones();
+        }else{
+            //fallo
+            JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  
+        }
     }//GEN-LAST:event_botonEliminarCuentaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonEliminarCuenta;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JComboBox<String> listaPropiedades;
     // End of variables declaration//GEN-END:variables
 
     //Aca abajo van a estar los metodos que se tienen que hacer 
@@ -116,4 +144,16 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
      */
     
     //no existen validaciones posibles en este panel
+    // no se puede hacer tdd ya que necesita otro metodo
+    public void actualizarMenuOpciones(){
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.listaPropiedades.removeAllItems();
+        if(this.propiedades!=null){
+            for(int i=0; i<this.propiedades.size(); i++){
+                this.listaPropiedades.addItem("Nombre : " + this.propiedades.get(i).getNombre());
+            }
+            this.repaint();
+            this.revalidate();
+        }
+    }
 }

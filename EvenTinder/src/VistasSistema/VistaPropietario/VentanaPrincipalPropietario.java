@@ -6,11 +6,14 @@
 package VistasSistema.VistaPropietario;
 
 
-import ControladorUsuarios.ControladorCliente;
 import ControladorUsuarios.ControladorPrincipal;
+import ControladorUsuarios.ControladorPropietario;
 import VistasSistema.VistaPrincipal.PanelNosotros;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
 import java.awt.Component;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,13 +27,13 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     
     private PanelDeOpciones panelDeOpciones;
     private Component componenteAnterior= null;
-    private ControladorCliente controladorUsuario;
+    private ControladorPropietario controladorPropietario;
     private ControladorPrincipal controladorPrincipal;
     private PanelHome home;
     private PanelModificarPropiedad modificarPropiedad ;
 
-    public VentanaPrincipalPropietario() {
-        this.controladorUsuario= new ControladorCliente();
+    public VentanaPrincipalPropietario() throws SQLException {
+        this.controladorPropietario= new ControladorPropietario();
         this.controladorPrincipal= new ControladorPrincipal();
         this.panelDeOpciones=new PanelDeOpciones(this);
         initComponents();
@@ -90,7 +93,11 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new VentanaPrincipalPropietario().setVisible(true);
+                try {
+                    new VentanaPrincipalPropietario().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VentanaPrincipalPropietario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -98,13 +105,15 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    public ControladorCliente getControladorUsuario() {
-        return controladorUsuario;
-    }
-
     public ControladorPrincipal getControladorPrincipal() {
         return controladorPrincipal;
     }
+
+    public ControladorPropietario getControladorPropietario() {
+        return controladorPropietario;
+    }
+    
+    
     
     public void modificarCuenta() {
         PanelModificarPropietario modificar = new PanelModificarPropietario(this);
@@ -146,7 +155,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     }
 
     public void RegistrarPropiedad() {
-        PanelCrearPropiedad crearPropiedad = new PanelCrearPropiedad();
+        PanelCrearPropiedad crearPropiedad = new PanelCrearPropiedad(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(crearPropiedad, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=crearPropiedad;
@@ -164,7 +173,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     }
 
     public void EliminarPropiedad() {
-        PanelEliminarPropiedad eliminarPropiedad = new PanelEliminarPropiedad();
+        PanelEliminarPropiedad eliminarPropiedad = new PanelEliminarPropiedad(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eliminarPropiedad, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=eliminarPropiedad;
@@ -174,7 +183,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
 
     public void ListaDePropiedades() {
         
-        PanelListaDePropiedades listaPropiedades = new PanelListaDePropiedades();
+        PanelListaDePropiedades listaPropiedades = new PanelListaDePropiedades(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(listaPropiedades, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=listaPropiedades;
