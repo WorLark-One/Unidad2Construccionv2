@@ -122,6 +122,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Sectores actuales en el sistema");
 
         listaSectores.setModel(new javax.swing.AbstractListModel<String>() {
@@ -238,7 +239,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -269,6 +270,15 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                     }
                 }
                 JOptionPane.showMessageDialog(null, "Se a registrado la propiedad correctamente");
+                this.nombre.setText("");
+                this.descripcion.setText("");
+                this.ubicacion.setText("");
+                this.capacidadTotal.setText("");
+                this.valorArriendo.setText("");
+                this.finalizar=false;
+                this.nombresSectores=new ArrayList<>();
+                this.capacidades=new ArrayList<>();      
+                this.actualizarListaDeSectores();
             }else{
                 //fallo
                 JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  

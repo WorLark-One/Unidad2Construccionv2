@@ -247,6 +247,11 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             if(resultado){
                 //agregando sectores
                 JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
+                this.nombre.setText("");
+                this.descripcion.setText("");
+                this.ubicacion.setText("");
+                this.capacidadTotal.setText("");
+                this.valorArriendo.setText("");
             }else{
                 //fallo
                 JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  

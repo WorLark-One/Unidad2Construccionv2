@@ -168,7 +168,8 @@ public class PanelModificarSector extends javax.swing.JPanel {
             if(bandera){
                 //si se pudo
                 JOptionPane.showMessageDialog(null, "Se a añadido el sector correctamente");
-                this.papa.volverAModificarPropiedad();
+                this.nombre.setText("");
+                this.capacidad.setText("");
             }else{
                 //no se pudo
                 JOptionPane.showMessageDialog(null, "No se a podido añadir el sector a la base de datos", "Error al guardar sector", JOptionPane.WARNING_MESSAGE);

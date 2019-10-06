@@ -182,6 +182,11 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             }
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
+                this.nombre.setText("");
+                this.clave.setText("");
+                this.numeroTelefonico.setText("");
+                this.correoElectronico.setText("");
+                this.cuentaBancaria.setText("");
             }else{
                 JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
             }
