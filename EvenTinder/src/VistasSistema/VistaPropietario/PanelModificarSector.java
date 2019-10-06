@@ -6,7 +6,10 @@
 package VistasSistema.VistaPropietario;
 
 import ModuloGestionPropiedades.Propiedad;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -156,7 +159,12 @@ public class PanelModificarSector extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se a seleccionado el sector a modificar", "Error al seleccioanr sector", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            boolean bandera = this.papa.getControladorPropietario().modificarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
+            boolean bandera = false;
+            try {
+                bandera = this.papa.getControladorPropietario().modificarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelModificarSector.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if(bandera){
                 //si se pudo
                 JOptionPane.showMessageDialog(null, "Se a añadido el sector correctamente");

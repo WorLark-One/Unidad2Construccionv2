@@ -11,6 +11,9 @@ import ControladorUsuarios.ControladorPropietario;
 import VistasSistema.VistaPrincipal.PanelNosotros;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
 import java.awt.Component;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,7 +32,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     private PanelHome home;
     private PanelModificarPropiedad modificarPropiedad ;
 
-    public VentanaPrincipalPropietario() {
+    public VentanaPrincipalPropietario() throws SQLException {
         this.controladorPropietario= new ControladorPropietario();
         this.controladorPrincipal= new ControladorPrincipal();
         this.panelDeOpciones=new PanelDeOpciones(this);
@@ -90,7 +93,11 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new VentanaPrincipalPropietario().setVisible(true);
+                try {
+                    new VentanaPrincipalPropietario().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VentanaPrincipalPropietario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

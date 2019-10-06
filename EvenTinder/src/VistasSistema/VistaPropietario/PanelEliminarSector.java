@@ -6,7 +6,10 @@
 package VistasSistema.VistaPropietario;
 
 import ModuloGestionPropiedades.Propiedad;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -126,7 +129,12 @@ public class PanelEliminarSector extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se puede eliminar el sector dado que es el ultimo", "Error al eliminar el sector", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            boolean bandera = this.papa.getControladorPropietario().eliminarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre());
+            boolean bandera = false;
+            try {
+                bandera = this.papa.getControladorPropietario().eliminarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre());
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelEliminarSector.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if(bandera){
                 JOptionPane.showMessageDialog(null, "Se a eliminado el sector correctamente");
                 this.actualizarMenuSectores();

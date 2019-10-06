@@ -5,8 +5,11 @@
  */
 package VistasSistema.VistaPropietario;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -249,11 +252,21 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         if(resp==0){
             //realizar operacion
             java.util.Date fechaDePublicacion = new Date();
-            int resultado = this.papa.getControladorPropietario().registrarPropiedad(this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, Integer.parseInt(this.capacidadTotal.getText()), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
+            int resultado = 0;
+            try {
+                resultado = this.papa.getControladorPropietario().registrarPropiedad(this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, Integer.parseInt(this.capacidadTotal.getText()), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelCrearPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if(resultado!=0){
                 //agregando sectores
                 for(int i=0; i<this.nombresSectores.size(); i++){
-                    this.papa.getControladorPropietario().añadirSector(resultado, this.capacidades.get(i),this.nombresSectores.get(i));
+                    try {
+                        System.out.println("agrego: " + this.capacidades.get(i) + "  " + this.nombresSectores.get(i));
+                        this.papa.getControladorPropietario().añadirSector(resultado, this.capacidades.get(i),this.nombresSectores.get(i));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(PanelCrearPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 JOptionPane.showMessageDialog(null, "Se a registrado la propiedad correctamente");
             }else{

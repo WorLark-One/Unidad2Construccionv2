@@ -6,7 +6,10 @@
 package VistasSistema.VistaPropietario;
 
 import ModuloGestionPropiedades.Propiedad;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -179,7 +182,12 @@ public class PanelAgregarSector extends javax.swing.JPanel {
         // TODO add your handling code here:
         int resp = validarEntrada(this.nombre.getText(), this.capacidad.getText());
         if(resp==0){
-            boolean bandera = this.papa.getControladorPropietario().añadirSector(this.propiedades.get(id).getId(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
+            boolean bandera = false;
+            try {
+                bandera = this.papa.getControladorPropietario().añadirSector(this.propiedades.get(id).getId(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelAgregarSector.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if(bandera){
                 //si se pudo
                 JOptionPane.showMessageDialog(null, "Se a añadido el sector correctamente");

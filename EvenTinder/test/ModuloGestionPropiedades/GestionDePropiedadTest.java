@@ -5,6 +5,7 @@
  */
 package ModuloGestionPropiedades;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import org.junit.After;
@@ -39,7 +40,7 @@ public class GestionDePropiedadTest {
      * Test of registrarPropiedad method, of class GestionDePropiedad.
      */
     @Test
-    public void testRegistrarPropiedad() {
+    public void testRegistrarPropiedad() throws SQLException {
         System.out.println("registrarPropiedad");
         
         String rut = "1";
@@ -63,7 +64,7 @@ public class GestionDePropiedadTest {
      * Test of modifcarPropiedad method, of class GestionDePropiedad.
      */
     @Test
-    public void testModifcarPropiedad() {
+    public void testModifcarPropiedad() throws SQLException {
         System.out.println("modifcarPropiedad");
         int id = 1;
         String nombre = "";
@@ -90,7 +91,7 @@ public class GestionDePropiedadTest {
      * Test of eliminarPropiedad method, of class GestionDePropiedad.
      */
     @Test
-    public void testEliminarPropiedad() {
+    public void testEliminarPropiedad() throws SQLException {
         System.out.println("eliminarPropiedad");
         
         int id = 1;
@@ -119,7 +120,7 @@ public class GestionDePropiedadTest {
      * Test of añadirSector method, of class GestionDePropiedad.
      */
     @Test
-    public void testAñadirSector() {
+    public void testAñadirSector() throws SQLException {
         System.out.println("añadirSector");               
         String rut = "";
         String nombre = "";
@@ -146,7 +147,7 @@ public class GestionDePropiedadTest {
      * Test of modificarSector method, of class GestionDePropiedad.
      */
     @Test
-    public void testModificarSector() {
+    public void testModificarSector() throws SQLException {
         System.out.println("modificarSector");
         //Se crea una propiedad de prueba
         String rut = "";
@@ -178,7 +179,7 @@ public class GestionDePropiedadTest {
      * Test of eliminarSector method, of class GestionDePropiedad.
      */
     @Test
-    public void testEliminarSector() {
+    public void testEliminarSector() throws SQLException {
         System.out.println("eliminarSector");
         //Se crea una propiedad de prueba
         String rut = "";
