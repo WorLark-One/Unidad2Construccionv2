@@ -48,7 +48,7 @@ public class Propiedad {
             for (int i = 0; i < listaSectores.size(); i++) {
                 Sector sector = listaSectores.get(i);
                 String nombre = sector.getNombre();
-                int id = sector.getId();
+                int id = sector.getIdPropiedad();
                 if (nombreSector.equalsIgnoreCase(nombre) == true && idPropiedad == id) {
                     sector.setNombre(nombre);
                     sector.setCapacidadDelSector(capacidadTotal);
@@ -64,7 +64,7 @@ public class Propiedad {
         if (this.listaSectores != null) {
             for (int i = 0; i < listaSectores.size(); i++) {
                 Sector miSector = listaSectores.get(i);
-                if (id == miSector.getId()) {
+                if (id == miSector.getIdPropiedad()) {
                     this.listaSectores.remove(i);
                     return true;
                 }
