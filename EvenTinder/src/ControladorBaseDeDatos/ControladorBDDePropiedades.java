@@ -148,7 +148,7 @@ public class ControladorBDDePropiedades {
             try {
 
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = "insert into propiedad values(DEFAULT,'" + nombre + "','" + descripcion + "','" + fechaDePublicacion + "','0','" + valorDeArriendo + "','" + ubicacion + "','50','" + rut + "')"
+                String sql = "insert into propiedad values(DEFAULT,'" + nombre + "','" + descripcion + "','" + fechaDePublicacion + "','0','" + valorDeArriendo + "','" + ubicacion + "','"+capacidadTotal+"','" + rut + "')"
                         + " RETURNING id";
 
                 ResultSet resultado = st.executeQuery(sql);
