@@ -285,54 +285,11 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Usuario cliente");
     }//GEN-LAST:event_botonClienteActionPerformed
 
+    
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         // TODO add your handling code here:
-        if("".equals(this.tipoUsuario)){
-            JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de usuario", "Error al seleccionar el tipo de usuario", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if("".equals(this.nombre.getText())){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Nombre completo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if("".equals(this.rut.getText())){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if("".equals(this.clave.getText())){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if("".equals(this.numeroTelefonico.getText())){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Numero Telefonico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if("".equals(this.correoElectronico.getText())){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if("organizador".equals(this.tipoUsuario) || "cliente".equals(this.tipoUsuario)){
-            if("".equals(this.tarjetaDeCredito.getText())){
-                JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Tarjeta De Credito", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            boolean respuesta = false;
-            try {
-                respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.tarjetaDeCredito.getText());
-            } catch (SQLException ex) {
-                Logger.getLogger(PanelCreacionUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(respuesta){
-                JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
-            }else{
-                JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
-            }
-        }
-        if("propietario".equals(this.tipoUsuario)){
-            if("".equals(this.CuentaBancaria.getText())){
-                JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Cuenta Bancaria", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
+        int resp = this.validarResgistro(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(),this.tarjetaDeCredito.getText() , this.CuentaBancaria.getText());
+        if(resp==0){
             boolean respuesta = false;
             try {
                 respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(),this.CuentaBancaria.getText());
@@ -344,6 +301,37 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             }else{
                 JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
             }
+        }
+        if(resp==1){
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de usuario", "Error al seleccionar el tipo de usuario", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==2){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Nombre completo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==3){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==4){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==5){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Numero Telefonico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==6){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==7){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: tarjeta de credito", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==8){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: cuenta bancario", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
@@ -377,4 +365,68 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
     private javax.swing.JTextField rut;
     private javax.swing.JTextField tarjetaDeCredito;
     // End of variables declaration//GEN-END:variables
+
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    
+    /**
+     * Este va a ser el formato de las consultas para ser luego testeadas en el junit
+     * 0 = Correcto
+     * numeros mayores que 0 son errores
+     */
+
+            /* 0 es ok
+    1 falta tipoUsuario
+    2 falta nombre
+    3 falta rut
+    4 falta clave
+    5 falta numeroTelefonico
+    6 falta correoElectronico
+    7 falta tarjetaDeCredito
+    8 falta CuentaBancaria 
+    */
+    
+    /**
+     * 
+     * @param tipoUsuario
+     * @param rut
+     * @param clave
+     * @param numeroTelefonico
+     * @param correoElectronico
+     * @param tarjetaDeCredito
+     * @param CuentaBancaria
+     * @return 
+     */
+    public int validarResgistro(String tipoUsuario, String nombre, String rut, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito, String CuentaBancaria) {                                               
+        // TODO add your handling code here:
+        if("".equals(tipoUsuario)){
+            return 1;
+        }
+        if("".equals(nombre)){
+            return 2;
+        }
+        if("".equals(rut)){
+            return 3;
+        }
+        if("".equals(clave)){
+            return 4;
+        }
+        if("".equals(numeroTelefonico)){
+            return 5;
+        }
+        if("".equals(correoElectronico)){
+            return 6;
+        }
+        if("organizador".equals(tipoUsuario) || "cliente".equals(tipoUsuario)){
+            if("".equals(tarjetaDeCredito)){
+                return 7;
+            }
+            if("propietario".equals(tipoUsuario)){
+                if("".equals(CuentaBancaria)){
+                    return 8;
+                }
+            }
+        }
+        return 0;
+    }
+
 }

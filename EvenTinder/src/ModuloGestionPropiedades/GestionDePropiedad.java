@@ -1,58 +1,120 @@
 package ModuloGestionPropiedades;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * 
  */
 public class GestionDePropiedad {
-    private ArrayList<Propiedad> listaPropiedades;
-        
     /**
      * Default constructor
      */
     public GestionDePropiedad() {
     }
 
-
-    
-    public void registrarPropiedad() {
-        // TODO implement here
-    }
-
     /**
      * 
      */
-    public void modificarPropiedad() {
+    private ArrayList<Propiedad> listaPropiedades;
+
+
+
+
+    /**
+     * @return
+     */
+    public ArrayList<Propiedad> mostrarListaDePropiedades() {
         // TODO implement here
+        return null;
     }
 
     /**
-     * 
+     * @param int id 
+     * @return
      */
-    public void eliminarPropiedad() {
+    public Propiedad mostrarPropiedad( int id) {
         // TODO implement here
+        return null;
     }
 
     /**
-     * 
+     * @param String rut 
+     * @return
      */
-    public void aceptarSolicitudDeEvento() {
+    public boolean obtenerInformacionDePropiedades( String rut) {
         // TODO implement here
+        return false;
     }
 
     /**
-     * 
+     * @param String rut 
+     * @param String nombre 
+     * @param String ubicacion 
+     * @param String fechaDePublicacion 
+     * @param int capacidadTotal 
+     * @param int valorDeArriendo 
+     * @param String descripcion 
+     * @return
      */
-    public void rechazarSolicitudDeEventos() {
+    public boolean registrarPropiedad( String rut,  String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
         // TODO implement here
+        return false;
     }
 
     /**
-     * 
+     * @param int id 
+     * @param String nombre 
+     * @param String ubicacion 
+     * @param String fechaDePublicacion 
+     * @param int capacidadTotal 
+     * @param int valorDeArriendo 
+     * @param String descripcion 
+     * @return
      */
-    public void mostrarListaDePropiedades() {
+    public boolean modifcarPropiedad( int id,  String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
         // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param int id 
+     * @return
+     */
+    public boolean eliminarPropiedad( int id) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param int id 
+     * @param int capacidad 
+     * @param String nombre 
+     * @return
+     */
+    public boolean añadirSector( int id,  int capacidad,  String nombre) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param int id 
+     * @param int capacidad 
+     * @param String nombre 
+     * @return
+     */
+    public boolean modificarSector( int id,  int capacidad,  String nombre) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param int id 
+     * @return
+     */
+    public boolean eliminarSector( int id) {
+        // TODO implement here
+        return false;
     }
 
 }
