@@ -168,7 +168,8 @@ public class PanelModificarSector extends javax.swing.JPanel {
             if(bandera){
                 //si se pudo
                 JOptionPane.showMessageDialog(null, "Se a añadido el sector correctamente");
-                this.papa.volverAModificarPropiedad();
+                this.nombre.setText("");
+                this.capacidad.setText("");
             }else{
                 //no se pudo
                 JOptionPane.showMessageDialog(null, "No se a podido añadir el sector a la base de datos", "Error al guardar sector", JOptionPane.WARNING_MESSAGE);
@@ -220,7 +221,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
       * 
       * @return 
       */
-    private int validarEntrada(String nombre, String capacidad) {
+    public int validarEntrada(String nombre, String capacidad) {
         if(nombre.equals("")){
             return 1;
         }
@@ -230,7 +231,8 @@ public class PanelModificarSector extends javax.swing.JPanel {
         return 0;
     }
 
-    public void actualizarMenuSectores(){
+    //no se puede hacer tdd
+    private void actualizarMenuSectores(){
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.listaSectores.removeAllItems();
         if(this.propiedades!=null){
