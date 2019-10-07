@@ -168,7 +168,7 @@ public class PanelEliminarSector extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
 
-    public void actualizarMenuSectores(){
+    private void actualizarMenuSectores(){
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.listaSectores.removeAllItems();
         if(this.propiedades!=null){

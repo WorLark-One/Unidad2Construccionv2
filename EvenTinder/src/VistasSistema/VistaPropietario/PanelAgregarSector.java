@@ -258,7 +258,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
       * @param capacidad
       * @return 
       */
-    private int validarEntrada(String nombre, String capacidad) {
+    public int validarEntrada(String nombre, String capacidad) {
         if(nombre.equals("")){
             return 1;
         }

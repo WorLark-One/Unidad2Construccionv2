@@ -145,7 +145,7 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
     
     //no existen validaciones posibles en este panel
     // no se puede hacer tdd ya que necesita otro metodo
-    public void actualizarMenuOpciones(){
+    private void actualizarMenuOpciones(){
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.listaPropiedades.removeAllItems();
         if(this.propiedades!=null){

@@ -122,6 +122,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Sectores actuales en el sistema");
 
         listaSectores.setModel(new javax.swing.AbstractListModel<String>() {
@@ -238,7 +239,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -248,7 +249,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         // TODO add your handling code here:
-        int resp = validarEntradaRegistrar(this.nombre.getText(), this.descripcion.getText(), this.ubicacion.getText(), this.capacidadTotal.getText(), this.valorArriendo.getText(), this.finalizar);
+        int resp = validarEntradaPropiedad(this.nombre.getText(), this.descripcion.getText(), this.ubicacion.getText(), this.capacidadTotal.getText(), this.valorArriendo.getText(), this.finalizar);
         if(resp==0){
             //realizar operacion
             java.util.Date fechaDePublicacion = new Date();
@@ -269,6 +270,15 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                     }
                 }
                 JOptionPane.showMessageDialog(null, "Se a registrado la propiedad correctamente");
+                this.nombre.setText("");
+                this.descripcion.setText("");
+                this.ubicacion.setText("");
+                this.capacidadTotal.setText("");
+                this.valorArriendo.setText("");
+                this.finalizar=false;
+                this.nombresSectores=new ArrayList<>();
+                this.capacidades=new ArrayList<>();      
+                this.actualizarListaDeSectores();
             }else{
                 //fallo
                 JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  
@@ -310,7 +320,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
     private void botonAñadirSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirSectorActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
-        int resp = validarEntrada(this.nombreSector.getText(), this.capacidad.getText());
+        int resp = validarEntradaSector(this.nombreSector.getText(), this.capacidad.getText());
         if(resp==0){
             this.nombresSectores.add(this.nombreSector.getText());
             this.capacidades.add(Integer.parseInt(this.capacidad.getText()));
@@ -370,7 +380,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
       * 
       * @return 
       */
-    private int validarEntrada(String nombre, String capacidad) {
+    public int validarEntradaSector(String nombre, String capacidad) {
         if(nombre.equals("")){
             return 1;
         }
@@ -390,7 +400,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
      * @param finalizar
      * @return 
      */
-    private int validarEntradaRegistrar(String nombre, String descripcion, String ubicacion, String nSectores, String valorArriendo, boolean finalizar) {
+    public int validarEntradaPropiedad(String nombre, String descripcion, String ubicacion, String nSectores, String valorArriendo, boolean finalizar) {
         if(nombre.equals("")){
             return 1;
         }
@@ -413,7 +423,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
     }
     
     
-    public void actualizarListaDeSectores(){
+    private void actualizarListaDeSectores(){
         this.modeloLista=new DefaultListModel();
         for(int i=0;i<this.nombresSectores.size();i++){
                 this.modeloLista.addElement("Nombre sector: " + this.nombresSectores.get(i) + "  Capacidad: " + this.capacidades.get(i));

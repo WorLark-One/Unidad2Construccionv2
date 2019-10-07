@@ -172,7 +172,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
-        int resp = validarModificarUsuario(this.nombre.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.cuentaBancaria.getText());
+        int resp = validarEntrada(this.nombre.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.cuentaBancaria.getText());
         if(resp==0){
             boolean respuesta = false;
             try {
@@ -182,6 +182,11 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             }
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
+                this.nombre.setText("");
+                this.clave.setText("");
+                this.numeroTelefonico.setText("");
+                this.correoElectronico.setText("");
+                this.cuentaBancaria.setText("");
             }else{
                 JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
             }
@@ -254,7 +259,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
      * @param cuentaBancaria
      * @return 
      */
-    public int validarModificarUsuario(String nombre, String clave, String numeroTelefonico, String correoElectronico, String cuentaBancaria){                                               
+    public int validarEntrada(String nombre, String clave, String numeroTelefonico, String correoElectronico, String cuentaBancaria){                                               
         if("".equals(nombre)){
             return 1;
         }

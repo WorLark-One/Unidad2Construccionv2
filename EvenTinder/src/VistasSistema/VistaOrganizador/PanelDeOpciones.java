@@ -43,10 +43,18 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         jLabel22 = new javax.swing.JLabel();
         botonEliminarCuenta = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        botoListaDeEventos = new javax.swing.JPanel();
+        botonCrearEvento = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        botonHome1 = new javax.swing.JPanel();
+        botonHome = new javax.swing.JPanel();
         botonListaDeEventos2 = new javax.swing.JLabel();
+        botonModificarEvento = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        botonEliminarEvento = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        botonListaDeEventoss = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        botoEstadisticasDeVentasPorEvento = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -130,55 +138,113 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(12, 104, 12, 114);
         botonEliminarCuenta.add(jLabel1, gridBagConstraints);
 
-        botoListaDeEventos.setBackground(new java.awt.Color(255, 255, 255));
-        botoListaDeEventos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        botoListaDeEventos.addMouseListener(new java.awt.event.MouseAdapter() {
+        botonCrearEvento.setBackground(new java.awt.Color(255, 255, 255));
+        botonCrearEvento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        botonCrearEvento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botoListaDeEventosMouseClicked(evt);
+                botonCrearEventoMouseClicked(evt);
             }
         });
-        botoListaDeEventos.setLayout(new java.awt.GridBagLayout());
+        botonCrearEvento.setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setText("Lista de eventos");
+        jLabel2.setText("Crear evento");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 105, 12, 115);
-        botoListaDeEventos.add(jLabel2, gridBagConstraints);
+        botonCrearEvento.add(jLabel2, gridBagConstraints);
 
-        botonHome1.setBackground(new java.awt.Color(255, 255, 255));
-        botonHome1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        botonHome1.addMouseListener(new java.awt.event.MouseAdapter() {
+        botonHome.setBackground(new java.awt.Color(255, 255, 255));
+        botonHome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        botonHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botonHome1MouseClicked(evt);
+                botonHomeMouseClicked(evt);
             }
         });
-        botonHome1.setLayout(new java.awt.GridBagLayout());
+        botonHome.setLayout(new java.awt.GridBagLayout());
 
         botonListaDeEventos2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         botonListaDeEventos2.setText("EvenTinder");
-        botonHome1.add(botonListaDeEventos2, new java.awt.GridBagConstraints());
+        botonHome.add(botonListaDeEventos2, new java.awt.GridBagConstraints());
+
+        botonModificarEvento.setBackground(new java.awt.Color(255, 255, 255));
+        botonModificarEvento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        botonModificarEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonModificarEventoMouseClicked(evt);
+            }
+        });
+        botonModificarEvento.setLayout(new java.awt.GridBagLayout());
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setText("Modificar evento");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 105, 12, 115);
+        botonModificarEvento.add(jLabel3, gridBagConstraints);
+
+        botonEliminarEvento.setBackground(new java.awt.Color(255, 255, 255));
+        botonEliminarEvento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        botonEliminarEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonEliminarEventoMouseClicked(evt);
+            }
+        });
+        botonEliminarEvento.setLayout(new java.awt.GridBagLayout());
+
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel4.setText("Eliminar evento");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 105, 12, 115);
+        botonEliminarEvento.add(jLabel4, gridBagConstraints);
+
+        botonListaDeEventoss.setBackground(new java.awt.Color(255, 255, 255));
+        botonListaDeEventoss.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        botonListaDeEventoss.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonListaDeEventossMouseClicked(evt);
+            }
+        });
+        botonListaDeEventoss.setLayout(new java.awt.GridBagLayout());
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel5.setText("Lista de eventos");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 105, 12, 115);
+        botonListaDeEventoss.add(jLabel5, gridBagConstraints);
+
+        botoEstadisticasDeVentasPorEvento.setBackground(new java.awt.Color(255, 255, 255));
+        botoEstadisticasDeVentasPorEvento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        botoEstadisticasDeVentasPorEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botoEstadisticasDeVentasPorEventoMouseClicked(evt);
+            }
+        });
+        botoEstadisticasDeVentasPorEvento.setLayout(new java.awt.GridBagLayout());
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setText("Estadisticas de ventas por evento");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 105, 12, 115);
+        botoEstadisticasDeVentasPorEvento.add(jLabel6, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonHome1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonModificarCuenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonEliminarCuenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botoListaDeEventos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(5, 5, 5))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,6 +256,24 @@ public class PanelDeOpciones extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(botonContactenos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botoEstadisticasDeVentasPorEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonListaDeEventoss, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonEliminarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonModificarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(95, 95, 95)
+                            .addComponent(jLabel21))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(5, 5, 5)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(botonHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(botonModificarCuenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(botonEliminarCuenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(botonCrearEvento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(5, 5, 5))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,14 +285,22 @@ public class PanelDeOpciones extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(botonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
-                .addComponent(botonHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonModificarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonEliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botoListaDeEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 490, Short.MAX_VALUE)
+                .addComponent(botonCrearEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonModificarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonEliminarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonListaDeEventoss, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botoEstadisticasDeVentasPorEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 346, Short.MAX_VALUE)
                 .addComponent(botonContactenos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -234,31 +326,59 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         this.papa.eliminarCuenta();
     }//GEN-LAST:event_botonEliminarCuentaMouseClicked
 
-    private void botoListaDeEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoListaDeEventosMouseClicked
+    private void botonCrearEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCrearEventoMouseClicked
         // TODO add your handling code here:
-        this.papa.listaDeEventos();
-    }//GEN-LAST:event_botoListaDeEventosMouseClicked
+        this.papa.crearEvento();
+    }//GEN-LAST:event_botonCrearEventoMouseClicked
 
-    private void botonHome1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonHome1MouseClicked
+    private void botonHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonHomeMouseClicked
         // TODO add your handling code here:
         this.papa.ventanaHome();
-    }//GEN-LAST:event_botonHome1MouseClicked
+    }//GEN-LAST:event_botonHomeMouseClicked
+
+    private void botonModificarEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarEventoMouseClicked
+        // TODO add your handling code here:
+        this.papa.modificarEvento();
+    }//GEN-LAST:event_botonModificarEventoMouseClicked
+
+    private void botonEliminarEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarEventoMouseClicked
+        // TODO add your handling code here:
+        this.papa.eliminarEvento();
+    }//GEN-LAST:event_botonEliminarEventoMouseClicked
+
+    private void botonListaDeEventossMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonListaDeEventossMouseClicked
+        // TODO add your handling code here:
+        this.papa.listaDeEventosDeOrganizador();
+    }//GEN-LAST:event_botonListaDeEventossMouseClicked
+
+    private void botoEstadisticasDeVentasPorEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoEstadisticasDeVentasPorEventoMouseClicked
+        // TODO add your handling code here:
+        this.papa.estadisticasDeVentasPorEvento();
+    }//GEN-LAST:event_botoEstadisticasDeVentasPorEventoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel botoListaDeEventos;
+    private javax.swing.JPanel botoEstadisticasDeVentasPorEvento;
     private javax.swing.JPanel botonCerrarSesion;
     private javax.swing.JPanel botonContactenos;
+    private javax.swing.JPanel botonCrearEvento;
     private javax.swing.JPanel botonEliminarCuenta;
-    private javax.swing.JPanel botonHome1;
+    private javax.swing.JPanel botonEliminarEvento;
+    private javax.swing.JPanel botonHome;
     private javax.swing.JLabel botonListaDeEventos;
     private javax.swing.JLabel botonListaDeEventos2;
+    private javax.swing.JPanel botonListaDeEventoss;
     private javax.swing.JPanel botonModificarCuenta;
+    private javax.swing.JPanel botonModificarEvento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }
