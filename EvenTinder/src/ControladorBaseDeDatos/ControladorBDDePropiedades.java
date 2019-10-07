@@ -27,6 +27,7 @@ public class ControladorBDDePropiedades {
      *
      * @param rut: rut del propietario
      * @return lista de propiedades
+     * @throws java.sql.SQLException
      */
     public ArrayList<Propiedad> obtenerInformacionDePropiedades(String rut) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
@@ -75,7 +76,7 @@ public class ControladorBDDePropiedades {
     }
 
     /**
-     * Entrega una propiedad, atravez del identificador y rut del propietario.
+     * Entrega una propiedad, a traves del identificador de la propiedad y rut del propietario.
      *
      * @param rut; rut del dueño de la propiedad.
      * @param id: identificador de la propiedad.
@@ -117,7 +118,7 @@ public class ControladorBDDePropiedades {
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
-                //return cliente;
+                return null;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
             }
@@ -158,12 +159,14 @@ public class ControladorBDDePropiedades {
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idPropiedad = Integer.parseInt(resultado.getString("id"));
+                    System.out.println("pasoooo");
                     return idPropiedad;
                 }
                 st.close();
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                System.out.println("callo dentro");
                 return 0;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
@@ -171,6 +174,7 @@ public class ControladorBDDePropiedades {
             }
 
         }
+        System.out.println("wololoooo");
         return 0;
     }
     
@@ -269,18 +273,22 @@ public class ControladorBDDePropiedades {
 
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "insert into sector values('" + nombreSector + "'," + capacidad + "," + idPropiedad + ")";
+                System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
                 return true;
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                
+                System.out.println("error");
                 return false;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
 
             }
         }
+        System.out.println("esta la caga");
         return false;
     }
 
@@ -295,7 +303,7 @@ public class ControladorBDDePropiedades {
      * @return: true si borra el sector, false de lo contrario.
      * @throws SQLException
      */
-    public boolean eliminarSector(String nombreSector, String idPropiedad) throws SQLException {
+    public boolean eliminarSector(String nombreSector, int idPropiedad) throws SQLException {
         this.conexion.crearConexion("EventTinder", "1");
         Connection miConexion = this.conexion.getConexion();
 
