@@ -29,9 +29,9 @@ public class Propiedad {
     }
 
     /**
-     *
+     * Añade un sector a la lista de sectores.
      * @param sector
-     * @return
+     * @return true si se añade el sector, false de lo contrario.
      */
     public boolean añadirSector(Sector sector) {
 
@@ -41,7 +41,14 @@ public class Propiedad {
         }
         return false;
     }
-
+    /**
+     * modifica la informacion de un sector.
+     * @param nombreSector: nombre del sector.
+     * @param idPropiedad: identificador de la propiedad.
+     * @param nuevoNombre: nuevo nombre del sector
+     * @param nuevaCapacidad: nueva capacidad del sector.
+     * @return 
+     */
     public boolean modificarSector(String nombreSector, int idPropiedad, String nuevoNombre, int nuevaCapacidad) {
 
         if (this.listaSectores != null) {
@@ -59,7 +66,12 @@ public class Propiedad {
         }
         return false;
     }
-
+    /**
+     * Borra un sector de la lista de sectores.
+     * @param nombreSector: nombre del sector.
+     * @param idPropiedad: identificador de la propiedad a la cual pertenece la propiedad.
+     * @return true si elimina el sector, false de lo contrario.
+     */
     public boolean eliminarSector(String nombreSector, int idPropiedad) {
         if (this.listaSectores != null) {
             for (int i = 0; i < listaSectores.size(); i++) {
