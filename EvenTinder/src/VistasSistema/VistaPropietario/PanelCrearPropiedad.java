@@ -28,10 +28,12 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
     private ArrayList<Integer> capacidades=new ArrayList<>();
     private VentanaPrincipalPropietario papa;
     private DefaultListModel modeloLista;
+    private int contador=0;
     
     public PanelCrearPropiedad(VentanaPrincipalPropietario papa) {
         this.papa=papa;
         initComponents();
+        this.capacidadTotal.setEditable(false);
         this.modeloLista=new DefaultListModel();
         this.listaSectores1.setModel(modeloLista);
     }
@@ -74,7 +76,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         listaSectores1 = new javax.swing.JList<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setLayout(new java.awt.GridLayout());
+        setLayout(new java.awt.GridLayout(1, 0));
 
         jScrollPane1.setBorder(null);
 
@@ -97,6 +99,8 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
+
+        capacidadTotal.setText("0");
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú Registrar propiedad");
@@ -284,7 +288,8 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 this.nombre.setText("");
                 this.descripcion.setText("");
                 this.ubicacion.setText("");
-                this.capacidadTotal.setText("");
+                this.capacidadTotal.setText("0");
+                this.contador=0;
                 this.valorArriendo.setText("");
                 this.finalizar=false;
                 this.nombresSectores=new ArrayList<>();
@@ -334,10 +339,12 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         if(resp==0){
             this.nombresSectores.add(this.nombreSector.getText());
             this.capacidades.add(Integer.parseInt(this.capacidad.getText()));
-            this.nombreSector.setText("");
-            this.capacidad.setText("");
             JOptionPane.showMessageDialog(null, "Se a guardado un sector");
             this.finalizar=true;
+            this.contador+=Integer.parseInt(this.capacidad.getText());
+            this.capacidadTotal.setText(Integer.toString(this.contador));
+            this.nombreSector.setText("");
+            this.capacidad.setText("");
             actualizarListaDeSectores();
         }
         if(resp==1){
@@ -367,13 +374,10 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JList<String> listaSectores;
     private javax.swing.JList<String> listaSectores1;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField nombreSector;
@@ -410,12 +414,13 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
      * @param nombre
      * @param descripcion
      * @param ubicacion
+     * @param capacidadTotal
      * @param nSectores
      * @param valorArriendo
      * @param finalizar
      * @return 
      */
-    public int validarEntradaPropiedad(String nombre, String descripcion, String ubicacion, String nSectores, String valorArriendo, boolean finalizar) {
+    public int validarEntradaPropiedad(String nombre, String descripcion, String ubicacion, String capacidadTotal, String valorArriendo, boolean finalizar) {
         if(nombre.equals("")){
             return 1;
         }
@@ -425,7 +430,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         if(ubicacion.equals("")){
             return 3;
         }
-        if(nSectores.equals("")){
+        if(capacidadTotal.equals("")){
             return 4;
         }
         if(valorArriendo.equals("")){
@@ -443,6 +448,6 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         for(int i=0;i<this.nombresSectores.size();i++){
                 this.modeloLista.addElement("Nombre sector: " + this.nombresSectores.get(i) + "  Capacidad: " + this.capacidades.get(i));
             }
-        this.listaSectores.setModel(this.modeloLista);
+        this.listaSectores1.setModel(this.modeloLista);
     }
 }

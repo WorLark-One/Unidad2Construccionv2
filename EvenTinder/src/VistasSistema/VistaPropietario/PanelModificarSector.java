@@ -154,6 +154,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
 
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
         int resp = validarEntrada(this.nombre.getText(), this.capacidad.getText());
+        int capacidad=0;
         if(resp==0){
             if(listaSectores.getSelectedIndex()==-1){
                 JOptionPane.showMessageDialog(null, "No se a seleccionado el sector a modificar", "Error al seleccioanr sector", JOptionPane.WARNING_MESSAGE);
@@ -161,6 +162,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
             }
             boolean bandera = false;
             try {
+                capacidad=Integer.parseInt(this.capacidad.getText()) - this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getCapacidadDelSector();
                 bandera = this.papa.getControladorPropietario().modificarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(PanelModificarSector.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,6 +170,11 @@ public class PanelModificarSector extends javax.swing.JPanel {
             if(bandera){
                 //si se pudo
                 JOptionPane.showMessageDialog(null, "Se a añadido el sector correctamente");
+                try {
+                    this.papa.getControladorPropietario().modifcarPropiedad(this.propiedades.get(id).getId(), this.propiedades.get(id).getNombre(), this.propiedades.get(id).getUbicacion(), this.propiedades.get(id).getFechaDePublicacion(), (this.propiedades.get(id).getCapacidadTotal() + capacidad), this.propiedades.get(id).getValorArriendo(), this.propiedades.get(id).getDescripcion());
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelModificarSector.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 this.nombre.setText("");
                 this.capacidad.setText("");
             }else{

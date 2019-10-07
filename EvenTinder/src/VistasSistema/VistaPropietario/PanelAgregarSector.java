@@ -8,6 +8,7 @@ package VistasSistema.VistaPropietario;
 import ModuloGestionPropiedades.Propiedad;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -191,6 +192,11 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             if(bandera){
                 //si se pudo
                 JOptionPane.showMessageDialog(null, "Se a añadido el sector correctamente");
+                try {
+                    this.papa.getControladorPropietario().modifcarPropiedad(this.propiedades.get(id).getId(), this.propiedades.get(id).getNombre(), this.propiedades.get(id).getUbicacion(), this.propiedades.get(id).getFechaDePublicacion(), (this.propiedades.get(id).getCapacidadTotal()+Integer.parseInt(this.capacidad.getText())), this.propiedades.get(id).getValorArriendo(), this.propiedades.get(id).getDescripcion());
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelAgregarSector.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 this.nombre.setText("") ;
                 this.capacidad.setText("");
                 this.actualizarListaDeSectores();
