@@ -27,7 +27,7 @@ public class PropiedadTest {
         System.out.println("a\u00f1adirSector");
         SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy"); 
         Date dt_1 = objSDF.parse("20-08-1981"); 
-        propiedad = new Propiedad(1, "brayan", "casa", dt_1, "hola", 0, 0);
+        propiedad = new Propiedad(1, "brayan", "un grato lugar para pasar en familia", "talca", dt_1, 0, 10, 2220);
         Sector sector = new Sector(1, "prueba2", 1000);
         propiedad.añadirSector(sector);
     }

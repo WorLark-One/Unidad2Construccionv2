@@ -68,7 +68,7 @@ public class ControladorBDDePropiedades {
                     if (sectores != null) {
                         numeroSectores = sectores.size();
                     }
-                    Propiedad propiedad = new Propiedad(idPropiedad, nombre, descripcion, ubicacion, fechaPublicacion, numeroSectores, capacidadtotal, valorArriendo, sectores);
+                    Propiedad propiedad = new Propiedad(idPropiedad, nombre, descripcion, ubicacion, fechaPublicacion, numeroSectores, capacidadtotal, valorArriendo);
                     propiedad.setListaSectores(sectores);
                     propiedades.add(propiedad);
                 }
@@ -126,7 +126,7 @@ public class ControladorBDDePropiedades {
                     if (sectores != null) {
                         numeroSectores = sectores.size();
                     }
-                    Propiedad propiedad = new Propiedad(idPropiedad, nombre, descripcion, ubicacion, fechaPublicacion, numeroSectores, capacidadTotal, valorArriendo, sectores);
+                    Propiedad propiedad = new Propiedad(idPropiedad, nombre, descripcion, ubicacion, fechaPublicacion, numeroSectores, capacidadTotal, valorArriendo);
 
                     propiedad.setListaSectores(sectores);
                     return propiedad;
