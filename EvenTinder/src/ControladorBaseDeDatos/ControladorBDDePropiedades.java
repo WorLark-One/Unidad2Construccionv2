@@ -103,14 +103,14 @@ public class ControladorBDDePropiedades {
                     int idPropiedad = Integer.parseInt(resultado.getString("id"));
                     String nombre = resultado.getString("nombre");
                     String ubicacion = resultado.getString("ubicacion");
-                    String capacidadtotal = resultado.getString("capacidadtotal");
+                    int capacidadtotal = Integer.parseInt(resultado.getString("capacidadtotal"));
                     int valorArriendo = Integer.parseInt(resultado.getString("valorarriendo"));
                     String descripcion = resultado.getString("descripcion");
-                    int numeroSectores = Integer.parseInt(resultado.getString("numerodesectores"));
-                    String refPropietario = resultado.getString("refpropietario");
+                    //int numeroSectores = Integer.parseInt(resultado.getString("numerodesectores"));
+                    //String refPropietario = resultado.getString("refpropietario");
                     Date fechaPublicacion = resultado.getDate("fechapublicacion");
                     ArrayList<Sector>sectores=obtenerInformacionDeSectores(idPropiedad);
-                    Propiedad propiedad = new Propiedad(id, nombre, descripcion, fechaPublicacion, ubicacion, idPropiedad, valorArriendo);
+                    Propiedad propiedad = new Propiedad(idPropiedad, nombre, descripcion, fechaPublicacion, ubicacion, capacidadtotal, valorArriendo);
                     propiedad.setListaSectores(sectores);
                     return propiedad;
                 }
