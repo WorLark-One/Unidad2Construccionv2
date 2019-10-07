@@ -160,14 +160,12 @@ public class ControladorBDDePropiedades {
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idPropiedad = Integer.parseInt(resultado.getString("id"));
-                    System.out.println("pasoooo");
                     return idPropiedad;
                 }
                 st.close();
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
-                System.out.println("callo dentro");
                 return 0;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
@@ -175,7 +173,6 @@ public class ControladorBDDePropiedades {
             }
 
         }
-        System.out.println("wololoooo");
         return 0;
     }
     
@@ -222,7 +219,7 @@ public class ControladorBDDePropiedades {
     }
 
     /**
-     * Elima una propiedad de la base de datos.
+     * Elimina una propiedad de la base de datos.
      * @param idPropiedad: identificador de la propiedad.
      * @return true si se elimina la propiedad, false de lo contrario.
      * @throws SQLException 
@@ -282,15 +279,12 @@ public class ControladorBDDePropiedades {
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
-                
-                System.out.println("error");
                 return false;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
 
             }
         }
-        System.out.println("esta la caga");
         return false;
     }
 
@@ -327,7 +321,15 @@ public class ControladorBDDePropiedades {
         }
         return false;
     }
-
+    /**
+     * Modifca la informacion de un sector.
+     * @param nombreSector
+     * @param idPropiedad
+     * @param nuevoNombre
+     * @param nuevaCapacidad
+     * @return
+     * @throws SQLException 
+     */
     public boolean modificarSector(String nombreSector, int idPropiedad, String nuevoNombre, int nuevaCapacidad) throws SQLException {
 
         this.conexion.crearConexion("EventTinder", "1");
@@ -393,7 +395,7 @@ public class ControladorBDDePropiedades {
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
-                //return cliente;
+                return null;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
             }
