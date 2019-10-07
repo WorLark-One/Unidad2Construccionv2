@@ -3,9 +3,6 @@ package ModuloGestionPropiedades;
 import java.util.ArrayList;
 import java.util.Date;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 /**
  *
  */
@@ -14,27 +11,22 @@ public class Propiedad {
     private int id;
     private String nombre;
     private String descripcion;
-    private String ubicacion;
     private Date fechaDePublicacion;
-    private  int numeroSectores;
+    private String ubicacion;
     private int capacidadTotal;
     private int valorArriendo;
     private ArrayList<Sector> listaSectores;
 
-    public Propiedad(int id, String nombre, String descripcion, String ubicacion, Date fechaDePublicacion, int numeroSectores, int capacidadTotal, int valorArriendo) {
+    public Propiedad(int id, String nombre, String descripcion, Date fechaDePublicacion, String ubicacion, int capacidadTotal, int valorArriendo) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.ubicacion = ubicacion;
         this.fechaDePublicacion = fechaDePublicacion;
-        this.numeroSectores = numeroSectores;
+        this.ubicacion = ubicacion;
         this.capacidadTotal = capacidadTotal;
         this.valorArriendo = valorArriendo;
         this.listaSectores = new ArrayList<>();
     }
-    
-    
-    
 
     /**
      * Añade un sector a la lista de sectores.
@@ -62,9 +54,9 @@ public class Propiedad {
         if (this.listaSectores != null) {
             for (int i = 0; i < listaSectores.size(); i++) {
                 Sector sector = listaSectores.get(i);
-                String nombre = sector.getNombre();
-                int id = sector.getIdPropiedad();
-                if (nombreSector.equalsIgnoreCase(nombre) == true && idPropiedad == id) {
+                String miNombre = sector.getNombre();
+                int miId = sector.getIdPropiedad();
+                if (nombreSector.equalsIgnoreCase(miNombre) == true && idPropiedad == miId) {
                     sector.setNombre(nombre);
                     sector.setCapacidadDelSector(capacidadTotal);
                     return true;
@@ -84,7 +76,7 @@ public class Propiedad {
         if (this.listaSectores != null) {
             for (int i = 0; i < listaSectores.size(); i++) {
                 Sector miSector = listaSectores.get(i);
-                if (id == miSector.getIdPropiedad()) {
+                if (miSector.getNombre().equalsIgnoreCase(nombreSector) == true && miSector.getIdPropiedad()== idPropiedad) {
                     this.listaSectores.remove(i);
                     return true;
                 }
@@ -162,13 +154,4 @@ public class Propiedad {
         this.listaSectores = listaSectores;
     }
 
-    public int getNumeroSectores() {
-        return numeroSectores;
-    }
-
-    public void setNumeroSectores(int numeroSectores) {
-        this.numeroSectores = numeroSectores;
-    }
-
-    
 }
