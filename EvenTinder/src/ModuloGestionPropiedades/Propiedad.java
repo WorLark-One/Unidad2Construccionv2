@@ -21,7 +21,7 @@ public class Propiedad {
     private int valorArriendo;
     private ArrayList<Sector> listaSectores;
 
-    public Propiedad(int id, String nombre, String descripcion, String ubicacion, Date fechaDePublicacion, int numeroSectores, int capacidadTotal, int valorArriendo, ArrayList<Sector> listaSectores) {
+    public Propiedad(int id, String nombre, String descripcion, String ubicacion, Date fechaDePublicacion, int numeroSectores, int capacidadTotal, int valorArriendo) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -30,7 +30,7 @@ public class Propiedad {
         this.numeroSectores = numeroSectores;
         this.capacidadTotal = capacidadTotal;
         this.valorArriendo = valorArriendo;
-        this.listaSectores = listaSectores;
+        this.listaSectores = new ArrayList<>();
     }
     
     
