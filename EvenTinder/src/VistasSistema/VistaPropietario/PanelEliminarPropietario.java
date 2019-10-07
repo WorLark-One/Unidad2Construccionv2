@@ -127,7 +127,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarCuentaActionPerformed
-        int resp =  validarDatosEliminarUsuario(this.rut.getText(),  this.clave.getText());
+        int resp =  validarEntrada(this.rut.getText(),  this.clave.getText());
         if(resp==0){
             boolean respuesta = false;
             try {
@@ -179,7 +179,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
      * @param clave
      * @return 
      */
-    public int validarDatosEliminarUsuario(String rut, String clave){
+    public int validarEntrada(String rut, String clave){
         if("".equals(rut)){
             return 1;
         }

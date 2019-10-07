@@ -55,6 +55,7 @@ public class PanelInicioSesion extends javax.swing.JPanel {
         botonCliente = new javax.swing.JButton();
         botonPropietario = new javax.swing.JButton();
         botonOrganizador = new javax.swing.JButton();
+        labelTipoUsuario = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -108,16 +109,30 @@ public class PanelInicioSesion extends javax.swing.JPanel {
             }
         });
 
+        labelTipoUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel4)
-                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel4)
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(botonCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonOrganizador, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(180, 180, 180)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
                             .addComponent(jLabel13))
@@ -125,16 +140,10 @@ public class PanelInicioSesion extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rut, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonIniciarSesion)))
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(botonCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonOrganizador, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(botonIniciarSesion)
+                                .addGap(18, 18, 18)
+                                .addComponent(labelTipoUsuario)))))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -166,7 +175,9 @@ public class PanelInicioSesion extends javax.swing.JPanel {
                     .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
-                .addComponent(botonIniciarSesion)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonIniciarSesion)
+                    .addComponent(labelTipoUsuario))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -221,19 +232,19 @@ public class PanelInicioSesion extends javax.swing.JPanel {
     private void botonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClienteActionPerformed
         // TODO add your handling code here:
         this.tipoUsuario="cliente";        
-        JOptionPane.showMessageDialog(null, "Usuario cliente");
+        this.botonIniciarSesion.setText("Iniciar Sesion cliente");
     }//GEN-LAST:event_botonClienteActionPerformed
 
     private void botonPropietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPropietarioActionPerformed
         // TODO add your handling code here:
         this.tipoUsuario="propietario";
-        JOptionPane.showMessageDialog(null, "Usuario Propietario");
+        this.botonIniciarSesion.setText("Iniciar Sesion propietario");
     }//GEN-LAST:event_botonPropietarioActionPerformed
 
     private void botonOrganizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOrganizadorActionPerformed
         // TODO add your handling code here:
         this.tipoUsuario="organizador";
-        JOptionPane.showMessageDialog(null, "Usuario Organizador");
+        this.botonIniciarSesion.setText("Iniciar Sesion organizador");
     }//GEN-LAST:event_botonOrganizadorActionPerformed
 
     
@@ -249,6 +260,7 @@ public class PanelInicioSesion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel labelTipoUsuario;
     private javax.swing.JTextField rut;
     // End of variables declaration//GEN-END:variables
 

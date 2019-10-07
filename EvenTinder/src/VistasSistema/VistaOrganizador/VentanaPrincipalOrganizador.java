@@ -131,7 +131,7 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
         return controladorPrincipal;
     }
 
-    void ventanaHome() {
+    public void ventanaHome() {
         PanelHome home = new PanelHome();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(home, java.awt.BorderLayout.CENTER);
@@ -140,7 +140,7 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
         this.revalidate();
     }
 
-    void ventanaContactenos() {
+    public void ventanaContactenos() {
         PanelNosotros nosotros = new PanelNosotros();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(nosotros, java.awt.BorderLayout.CENTER);
@@ -149,13 +149,58 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
         this.revalidate();
     }
 
-    void listaDeEventos() {
-        PanelListaDeEventos eventos = new PanelListaDeEventos();
+    public void listaDeEventos() {
+        PanelMostrarListaEventosOrganizador eventos = new PanelMostrarListaEventosOrganizador();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=eventos;
         this.repaint();
         this.revalidate();
     }
-     
+
+    public void modificarEvento() {
+        PanelModificarEvento evento = new PanelModificarEvento();
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(evento, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=evento;
+        this.repaint();
+        this.revalidate();
+    }
+
+    public void eliminarEvento() {
+        PanelEliminarEvento evento = new PanelEliminarEvento();
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(evento, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=evento;
+        this.repaint();
+        this.revalidate();
+    }
+
+    public void listaDeEventosDeOrganizador() {
+        PanelMostrarListaEventosOrganizador eventos = new PanelMostrarListaEventosOrganizador();
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=eventos;
+        this.repaint();
+        this.revalidate();
+    }
+
+    public  void estadisticasDeVentasPorEvento() {
+        PanelMostrarEstadisticasDeVentasPorEvento evento = new PanelMostrarEstadisticasDeVentasPorEvento();
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(evento, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=evento;
+        this.repaint();
+        this.revalidate();
+    }
+
+    public void crearEvento() {
+        PanelCrearEvento evento = new PanelCrearEvento();
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(evento, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=evento;
+        this.repaint();
+        this.revalidate();
+    }
+    
 }
