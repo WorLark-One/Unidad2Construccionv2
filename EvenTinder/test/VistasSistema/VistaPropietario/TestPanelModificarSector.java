@@ -6,8 +6,8 @@
 package VistasSistemaVistaPropietario;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import VistasSistemaVistaPropietario.PanelModificarSector;
-import VistasSistemaVistaPropietario.VentanaPrincipalPropietario;
+import VistasSistema.VistaPropietario.PanelModificarSector;
+import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
 /**
  *
  * @author crist

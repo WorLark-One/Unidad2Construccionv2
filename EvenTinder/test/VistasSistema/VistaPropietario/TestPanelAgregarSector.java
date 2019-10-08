@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistasSistemaVistaPropietario;
+package VistasSistema.VistaPropietario;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import VistasSistemaVistaPropietario.PanelAgregarSector;
-import VistasSistemaVistaPropietario.VentanaPrincipalPropietario;
+import VistasSistema.VistaPropietario.PanelAgregarSector;
+import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
 /**
  *
  * @author crist

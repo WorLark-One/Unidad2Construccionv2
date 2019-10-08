@@ -3,23 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistasSistemaVistaPropietario;
+package VistasSistema.VistaPropietario;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import VistasSistemaVistaPropietario.PanelModificarPropietario;
-import VistasSistemaVistaPropietario.VentanaPrincipalPropietario;
+import VistasSistema.VistaPropietario.PanelModificarPropietario;
+import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
+import java.sql.SQLException;
 /**
  *
  * @author crist
  */
 public class TestPenalModificarPropietario {
-    VentanaPrincipalPropietario papa = new VentanaPrincipalPropietario();
-    PanelModificarPropietario pmp = new PanelModificarPropietario(papa);
+    VentanaPrincipalPropietario papa;
     
-    public TestPenalModificarPropietario(){}
+    
+    public TestPenalModificarPropietario(){
+    }
     
      @Test
-    public void testValidarModificarUsuario(){
+    public void testValidarModificarUsuario()throws SQLException{
+        this.papa = new VentanaPrincipalPropietario();
+        PanelModificarPropietario pmp = new PanelModificarPropietario(papa);
         String nombre = "";
         String clave = "";
         String numeroTelefonico = "";
