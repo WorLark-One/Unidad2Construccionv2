@@ -43,11 +43,9 @@ public class GestionDePropiedad {
 
     /**
      * @param rut 
-     * @return
      */
-    public boolean obtenerInformacionDePropiedades(String rut) {
-        this.controlador.obtenerInformacionDePropiedades(rut);
-        return false;
+    public void obtenerInformacionDePropiedades(String rut) {
+        this.listaPropiedades = this.controlador.obtenerInformacionDePropiedades(rut);        
     }
     
 
@@ -107,6 +105,7 @@ public class GestionDePropiedad {
      * @return
      */
     public boolean eliminarPropiedad( int id) {
+        this.controlador.eliminarPropiedad(id);
         for(Propiedad p:this.listaPropiedades){
             if(p.getId() == id){
                 this.listaPropiedades.remove(p);

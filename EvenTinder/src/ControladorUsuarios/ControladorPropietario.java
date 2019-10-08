@@ -59,7 +59,7 @@ public class ControladorPropietario {
      * @return
      */
     public int registrarPropiedad( String nombre,  String ubicacion,  Date fechaDePublicacion,  int capacidadTotal,  int valorDeArriendo,  String descripcion) {
-        return this.gestorPropiedades.registrarPropiedad(nombre, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
+        return this.gestorPropiedades.registrarPropiedad(this.controlAcceso.getRut(), nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
     }
 
     /**
