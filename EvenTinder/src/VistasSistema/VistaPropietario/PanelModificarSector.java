@@ -177,16 +177,17 @@ public class PanelModificarSector extends javax.swing.JPanel {
                 }
                 this.nombre.setText("");
                 this.capacidad.setText("");
+                this.actualizarMenuSectores();
             }else{
                 //no se pudo
                 JOptionPane.showMessageDialog(null, "No se a podido añadir el sector a la base de datos", "Error al guardar sector", JOptionPane.WARNING_MESSAGE);
             }
         }
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Capacidad", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Capacidad", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
@@ -232,10 +233,33 @@ public class PanelModificarSector extends javax.swing.JPanel {
         if(nombre.equals("")){
             return 1;
         }
-        if(capacidad.equals("")){
+        if(capacidad.equals("") || !isNumero(capacidad)){
             return 2;
         }
         return 0;
+    }
+    
+                /**
+     * Método que se encarga de verificar que los numeros ingresados son numeros validos
+     */
+    private boolean isNumero(String cadena) {
+        boolean resultado;
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+        if (resultado==true) {
+            int a = Integer.parseInt(cadena);
+            if (a>0) {
+                resultado = true;
+            }
+            else{
+                resultado = false;
+            }
+        }
+        return resultado;
     }
 
     //no se puede hacer tdd

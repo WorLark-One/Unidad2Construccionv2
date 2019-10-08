@@ -403,7 +403,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         if(nombre.equals("")){
             return 1;
         }
-        if(capacidad.equals("")){
+        if(capacidad.equals("")|| !isNumero(capacidad)){
             return 2;
         }
         return 0;
@@ -430,16 +430,39 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         if(ubicacion.equals("")){
             return 3;
         }
-        if(capacidadTotal.equals("")){
+        if(capacidadTotal.equals("") || !isNumero(capacidadTotal)){
             return 4;
         }
-        if(valorArriendo.equals("")){
+        if(valorArriendo.equals("") || !isNumero(valorArriendo)){
             return 5;
         }
         if(!finalizar){
             return 6;
         }
         return 0;
+    }
+    
+        /**
+     * Método que se encarga de verificar que los numeros ingresados son numeros validos
+     */
+    private boolean isNumero(String cadena) {
+        boolean resultado;
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+        if (resultado==true) {
+            int a = Integer.parseInt(cadena);
+            if (a>0) {
+                resultado = true;
+            }
+            else{
+                resultado = false;
+            }
+        }
+        return resultado;
     }
     
     
