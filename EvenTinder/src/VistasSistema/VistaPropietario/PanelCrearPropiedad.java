@@ -5,8 +5,11 @@
  */
 package VistasSistema.VistaPropietario;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -25,12 +28,14 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
     private ArrayList<Integer> capacidades=new ArrayList<>();
     private VentanaPrincipalPropietario papa;
     private DefaultListModel modeloLista;
+    private int contador=0;
     
     public PanelCrearPropiedad(VentanaPrincipalPropietario papa) {
         this.papa=papa;
         initComponents();
+        this.capacidadTotal.setEditable(false);
         this.modeloLista=new DefaultListModel();
-        this.listaSectores.setModel(modeloLista);
+        this.listaSectores1.setModel(modeloLista);
     }
 
     /**
@@ -42,6 +47,8 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panel = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         ubicacion = new javax.swing.JTextField();
         botonRegistrar = new javax.swing.JButton();
@@ -55,7 +62,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         descripcion = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -64,12 +71,17 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         capacidad = new javax.swing.JTextField();
         botonAñadirSector = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listaSectores = new javax.swing.JList<>();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        listaSectores1 = new javax.swing.JList<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        setLayout(new java.awt.GridLayout(1, 0));
+
+        jScrollPane1.setBorder(null);
+
+        panel.setBackground(new java.awt.Color(255, 255, 255));
+        panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel15.setText("Valor de arriendo");
 
@@ -88,6 +100,8 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
+        capacidadTotal.setText("0");
+
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú Registrar propiedad");
 
@@ -104,7 +118,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
 
         descripcion.setColumns(20);
         descripcion.setRows(5);
-        jScrollPane1.setViewportView(descripcion);
+        jScrollPane2.setViewportView(descripcion);
 
         jLabel1.setText("2. Añadir un sector");
 
@@ -119,124 +133,129 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Sectores actuales en el sistema");
 
-        listaSectores.setModel(new javax.swing.AbstractListModel<String>() {
+        listaSectores1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(listaSectores);
+        jScrollPane4.setViewportView(listaSectores1);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane4)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6)
                     .addComponent(jLabel1)
                     .addComponent(jLabel5)
                     .addComponent(jLabel18)
                     .addComponent(jLabel19)
                     .addComponent(jLabel12)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelLayout.createSequentialGroup()
                                 .addComponent(botonAñadirSector)
                                 .addGap(18, 18, 18)
                                 .addComponent(botonRegistrar))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(nombreSector)
-                                .addComponent(jScrollPane1)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                                 .addComponent(ubicacion)
                                 .addComponent(capacidadTotal)
                                 .addComponent(nombre)
-                                .addComponent(valorArriendo, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                .addComponent(valorArriendo)
                                 .addComponent(capacidad))))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(371, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelLayout.createSequentialGroup()
                                 .addGap(50, 50, 50)
                                 .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(panelLayout.createSequentialGroup()
                                 .addGap(100, 100, 100)
                                 .addComponent(jLabel18)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel19)
                                 .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
                                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(capacidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(valorArriendo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(nombreSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(capacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAñadirSector)
                     .addComponent(botonRegistrar))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
+
+        jScrollPane1.setViewportView(panel);
+
+        add(jScrollPane1);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ubicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubicacionActionPerformed
@@ -245,66 +264,87 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         // TODO add your handling code here:
-        int resp = validarEntradaRegistrar(this.nombre.getText(), this.descripcion.getText(), this.ubicacion.getText(), this.capacidadTotal.getText(), this.valorArriendo.getText(), this.finalizar);
+        int resp = validarEntradaPropiedad(this.nombre.getText(), this.descripcion.getText(), this.ubicacion.getText(), this.capacidadTotal.getText(), this.valorArriendo.getText(), this.finalizar);
         if(resp==0){
             //realizar operacion
             java.util.Date fechaDePublicacion = new Date();
-            int resultado = this.papa.getControladorPropietario().registrarPropiedad(this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, Integer.parseInt(this.capacidadTotal.getText()), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
+            int resultado = 0;
+            try {
+                resultado = this.papa.getControladorPropietario().registrarPropiedad(this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, Integer.parseInt(this.capacidadTotal.getText()), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelCrearPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if(resultado!=0){
                 //agregando sectores
                 for(int i=0; i<this.nombresSectores.size(); i++){
-                    this.papa.getControladorPropietario().añadirSector(resultado, this.capacidades.get(i),this.nombresSectores.get(i));
+                    try {
+                        System.out.println("agrego: " + this.capacidades.get(i) + "  " + this.nombresSectores.get(i));
+                        this.papa.getControladorPropietario().añadirSector(resultado, this.capacidades.get(i),this.nombresSectores.get(i));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(PanelCrearPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 JOptionPane.showMessageDialog(null, "Se a registrado la propiedad correctamente");
+                this.nombre.setText("");
+                this.descripcion.setText("");
+                this.ubicacion.setText("");
+                this.capacidadTotal.setText("0");
+                this.contador=0;
+                this.valorArriendo.setText("");
+                this.finalizar=false;
+                this.nombresSectores=new ArrayList<>();
+                this.capacidades=new ArrayList<>();
+                this.actualizarListaDeSectores();
             }else{
                 //fallo
-                JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  
+                JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);
             }
         }
         //nombre
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);    
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         //descripcion
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: descripcion", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: descripcion", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         //ubicacion
         if(resp==3){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: ubicacion", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: ubicacion", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         //numero de sectores
         if(resp==4){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: numero de sectores", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: numero de sectores", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         //valor de arriendo
         if(resp==5){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: valor de arriendo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: valor de arriendo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         //Finalizado
         if(resp==6){
-            JOptionPane.showMessageDialog(null, "No a agregado un sector", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            JOptionPane.showMessageDialog(null, "No a agregado un sector", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void botonAñadirSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirSectorActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
-        int resp = validarEntrada(this.nombreSector.getText(), this.capacidad.getText());
+        int resp = validarEntradaSector(this.nombreSector.getText(), this.capacidad.getText());
         if(resp==0){
             this.nombresSectores.add(this.nombreSector.getText());
             this.capacidades.add(Integer.parseInt(this.capacidad.getText()));
-            this.nombreSector.setText("");
-            this.capacidad.setText("");
             JOptionPane.showMessageDialog(null, "Se a guardado un sector");
             this.finalizar=true;
+            this.contador+=Integer.parseInt(this.capacidad.getText());
+            this.capacidadTotal.setText(Integer.toString(this.contador));
+            this.nombreSector.setText("");
+            this.capacidad.setText("");
             actualizarListaDeSectores();
         }
         if(resp==1){
@@ -334,12 +374,14 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<String> listaSectores;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JList<String> listaSectores1;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField nombreSector;
+    private javax.swing.JPanel panel;
     private javax.swing.JTextField ubicacion;
     private javax.swing.JTextField valorArriendo;
     // End of variables declaration//GEN-END:variables
@@ -357,11 +399,11 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
       * 
       * @return 
       */
-    private int validarEntrada(String nombre, String capacidad) {
+    public int validarEntradaSector(String nombre, String capacidad) {
         if(nombre.equals("")){
             return 1;
         }
-        if(capacidad.equals("")){
+        if(capacidad.equals("")|| !isNumero(capacidad)){
             return 2;
         }
         return 0;
@@ -372,12 +414,13 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
      * @param nombre
      * @param descripcion
      * @param ubicacion
+     * @param capacidadTotal
      * @param nSectores
      * @param valorArriendo
      * @param finalizar
      * @return 
      */
-    private int validarEntradaRegistrar(String nombre, String descripcion, String ubicacion, String nSectores, String valorArriendo, boolean finalizar) {
+    public int validarEntradaPropiedad(String nombre, String descripcion, String ubicacion, String capacidadTotal, String valorArriendo, boolean finalizar) {
         if(nombre.equals("")){
             return 1;
         }
@@ -387,10 +430,10 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         if(ubicacion.equals("")){
             return 3;
         }
-        if(nSectores.equals("")){
+        if(capacidadTotal.equals("") || !isNumero(capacidadTotal)){
             return 4;
         }
-        if(valorArriendo.equals("")){
+        if(valorArriendo.equals("") || !isNumero(valorArriendo)){
             return 5;
         }
         if(!finalizar){
@@ -399,12 +442,35 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         return 0;
     }
     
+        /**
+     * Método que se encarga de verificar que los numeros ingresados son numeros validos
+     */
+    private boolean isNumero(String cadena) {
+        boolean resultado;
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+        if (resultado==true) {
+            int a = Integer.parseInt(cadena);
+            if (a>0) {
+                resultado = true;
+            }
+            else{
+                resultado = false;
+            }
+        }
+        return resultado;
+    }
     
-    public void actualizarListaDeSectores(){
+    
+    private void actualizarListaDeSectores(){
         this.modeloLista=new DefaultListModel();
         for(int i=0;i<this.nombresSectores.size();i++){
                 this.modeloLista.addElement("Nombre sector: " + this.nombresSectores.get(i) + "  Capacidad: " + this.capacidades.get(i));
             }
-        this.listaSectores.setModel(this.modeloLista);
+        this.listaSectores1.setModel(this.modeloLista);
     }
 }

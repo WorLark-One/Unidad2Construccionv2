@@ -1,26 +1,29 @@
 package ModuloGestionPropiedades;
 
 
+
 /**
  * 
  */
 public class Sector {
-    private int id;
+    private int idPropiedad;
     private String nombre;
     private int capacidadDelSector;
 
-    public Sector(int id, String nombre, int capacidadDelSector) {
-        this.id = id;
+    public Sector(int idPropiedad, String nombre, int capacidadDelSector) {
+        this.idPropiedad = idPropiedad;
         this.nombre = nombre;
         this.capacidadDelSector = capacidadDelSector;
     }
 
-    public int getId() {
-        return id;
+    
+    
+    public int getIdPropiedad() {
+        return idPropiedad;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdPropiedad(int idPropiedad) {
+        this.idPropiedad = idPropiedad;
     }
 
     public String getNombre() {
@@ -38,7 +41,7 @@ public class Sector {
     public void setCapacidadDelSector(int capacidadDelSector) {
         this.capacidadDelSector = capacidadDelSector;
     }
- 
+
   
 
 }

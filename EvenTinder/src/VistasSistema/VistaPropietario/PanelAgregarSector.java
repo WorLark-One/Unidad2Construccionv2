@@ -6,7 +6,11 @@
 package VistasSistema.VistaPropietario;
 
 import ModuloGestionPropiedades.Propiedad;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -179,10 +183,20 @@ public class PanelAgregarSector extends javax.swing.JPanel {
         // TODO add your handling code here:
         int resp = validarEntrada(this.nombre.getText(), this.capacidad.getText());
         if(resp==0){
-            boolean bandera = this.papa.getControladorPropietario().añadirSector(this.propiedades.get(id).getId(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
+            boolean bandera = false;
+            try {
+                bandera = this.papa.getControladorPropietario().añadirSector(this.propiedades.get(id).getId(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelAgregarSector.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if(bandera){
                 //si se pudo
                 JOptionPane.showMessageDialog(null, "Se a añadido el sector correctamente");
+                try {
+                    this.papa.getControladorPropietario().modifcarPropiedad(this.propiedades.get(id).getId(), this.propiedades.get(id).getNombre(), this.propiedades.get(id).getUbicacion(), this.propiedades.get(id).getFechaDePublicacion(), (this.propiedades.get(id).getCapacidadTotal()+Integer.parseInt(this.capacidad.getText())), this.propiedades.get(id).getValorArriendo(), this.propiedades.get(id).getDescripcion());
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelAgregarSector.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 this.nombre.setText("") ;
                 this.capacidad.setText("");
                 this.actualizarListaDeSectores();
@@ -192,10 +206,10 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             }
         }
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Capacidad", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Capacidad", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
@@ -250,13 +264,36 @@ public class PanelAgregarSector extends javax.swing.JPanel {
       * @param capacidad
       * @return 
       */
-    private int validarEntrada(String nombre, String capacidad) {
+    public int validarEntrada(String nombre, String capacidad) {
         if(nombre.equals("")){
             return 1;
         }
-        if(capacidad.equals("")){
+        if(capacidad.equals("") || !isNumero(capacidad)){
             return 2;
         }
         return 0;
+    }
+    
+    /**
+     * Método que se encarga de verificar que los numeros ingresados son numeros validos
+     */
+    private boolean isNumero(String cadena) {
+        boolean resultado;
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+        if (resultado==true) {
+            int a = Integer.parseInt(cadena);
+            if (a>0) {
+                resultado = true;
+            }
+            else{
+                resultado = false;
+            }
+        }
+        return resultado;
     }
 }

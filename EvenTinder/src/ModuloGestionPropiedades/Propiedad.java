@@ -8,14 +8,14 @@ import java.util.Date;
  */
 public class Propiedad {
 
-    int id;
-    String nombre;
-    String descripcion;
-    Date fechaDePublicacion;
-    String ubicacion;
-    int capacidadTotal;
-    int valorArriendo;
-    ArrayList<Sector> listaSectores;
+    private int id;
+    private String nombre;
+    private String descripcion;
+    private Date fechaDePublicacion;
+    private String ubicacion;
+    private int capacidadTotal;
+    private int valorArriendo;
+    private ArrayList<Sector> listaSectores;
 
     public Propiedad(int id, String nombre, String descripcion, Date fechaDePublicacion, String ubicacion, int capacidadTotal, int valorArriendo) {
         this.id = id;
@@ -29,9 +29,9 @@ public class Propiedad {
     }
 
     /**
-     *
+     * Añade un sector a la lista de sectores.
      * @param sector
-     * @return
+     * @return true si se añade el sector, false de lo contrario.
      */
     public boolean añadirSector(Sector sector) {
 
@@ -41,15 +41,22 @@ public class Propiedad {
         }
         return false;
     }
-
+    /**
+     * modifica la informacion de un sector.
+     * @param nombreSector: nombre del sector.
+     * @param idPropiedad: identificador de la propiedad.
+     * @param nuevoNombre: nuevo nombre del sector
+     * @param nuevaCapacidad: nueva capacidad del sector.
+     * @return 
+     */
     public boolean modificarSector(String nombreSector, int idPropiedad, String nuevoNombre, int nuevaCapacidad) {
 
         if (this.listaSectores != null) {
             for (int i = 0; i < listaSectores.size(); i++) {
                 Sector sector = listaSectores.get(i);
-                String nombre = sector.getNombre();
-                int id = sector.getId();
-                if (nombreSector.equalsIgnoreCase(nombre) == true && idPropiedad == id) {
+                String miNombre = sector.getNombre();
+                int miId = sector.getIdPropiedad();
+                if (nombreSector.equalsIgnoreCase(miNombre) == true && idPropiedad == miId) {
                     sector.setNombre(nombre);
                     sector.setCapacidadDelSector(capacidadTotal);
                     return true;
@@ -59,14 +66,19 @@ public class Propiedad {
         }
         return false;
     }
-
+    /**
+     * Borra un sector de la lista de sectores.
+     * @param nombreSector: nombre del sector.
+     * @param idPropiedad: identificador de la propiedad a la cual pertenece la propiedad.
+     * @return true si elimina el sector, false de lo contrario.
+     */
     public boolean eliminarSector(String nombreSector, int idPropiedad) {
         if (this.listaSectores != null) {
             for (int i = 0; i < listaSectores.size(); i++) {
                 Sector miSector = listaSectores.get(i);
-                if (id == miSector.getId()) {
-                this.listaSectores.remove(i);
-                return true;
+                if (miSector.getNombre().equalsIgnoreCase(nombreSector) == true && miSector.getIdPropiedad()== idPropiedad) {
+                    this.listaSectores.remove(i);
+                    return true;
                 }
 
             }
