@@ -160,6 +160,14 @@ public class PanelModificarSector extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se a seleccionado el sector a modificar", "Error al seleccioanr sector", JOptionPane.WARNING_MESSAGE);
                 return;
             }
+            for (int i = 0; i < this.propiedades.get(this.id).getListaSectores().size(); i++) {
+                if(listaSectores.getSelectedIndex()!=i){
+                    if(this.propiedades.get(this.id).getListaSectores().get(i).getNombre().equals(this.nombre.getText())){
+                        JOptionPane.showMessageDialog(null, "El nombre del sector ya se encuentra registrado", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                }
+            }
             boolean bandera = false;
             try {
                 capacidad=Integer.parseInt(this.capacidad.getText()) - this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getCapacidadDelSector();

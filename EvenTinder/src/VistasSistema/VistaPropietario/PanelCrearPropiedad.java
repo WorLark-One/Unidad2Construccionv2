@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaPropietario;
 
+import ModuloGestionPropiedades.Propiedad;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -269,7 +270,14 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         if(resp==0){
             //realizar operacion
             java.util.Date fechaDePublicacion = new Date();
-            int resultado = 0;
+            int resultado = 0; 
+            ArrayList<Propiedad> propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+            for (int i = 0; i < propiedades.size(); i++) {
+                if (propiedades.get(i).getNombre().equals(this.nombre.getText())){
+                    JOptionPane.showMessageDialog(null, "El nombre de la propiedad ya se encuentra registrado", "Error en el ingreso de datos", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
             try {
                 resultado = this.papa.getControladorPropietario().registrarPropiedad(this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, Integer.parseInt(this.capacidadTotal.getText()), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
             } catch (SQLException ex) {
@@ -338,6 +346,12 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         // TODO add your handling code here:
         int resp = validarEntradaSector(this.nombreSector.getText(), this.capacidad.getText());
         if(resp==0){
+            for (int i = 0; i < this.nombresSectores.size(); i++) {
+                if(this.nombresSectores.get(i).equals(this.nombreSector.getText())){
+                    JOptionPane.showMessageDialog(null, "El nombre del sector ya se encuentra registrado", "Error en el ingreso de datos", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
             this.nombresSectores.add(this.nombreSector.getText());
             this.capacidades.add(Integer.parseInt(this.capacidad.getText()));
             JOptionPane.showMessageDialog(null, "Se a guardado un sector");
