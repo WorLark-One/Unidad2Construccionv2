@@ -160,12 +160,14 @@ public class ControladorBDDePropiedades {
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idPropiedad = Integer.parseInt(resultado.getString("id"));
+                    System.out.println("pasoooo");
                     return idPropiedad;
                 }
                 st.close();
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                System.out.println("callo dentro");
                 return 0;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
@@ -173,6 +175,7 @@ public class ControladorBDDePropiedades {
             }
 
         }
+        System.out.println("wololoooo");
         return 0;
     }
     
@@ -202,7 +205,7 @@ public class ControladorBDDePropiedades {
                         + "valorarriendo='"+nuevoValorDeArriendo+"',descripcion='"+nuevaDescripcion+"'"
                         + "where propiedad.id="+id+" ";
                 st.executeUpdate(sql);
-
+                System.out.println(sql);
                 st.close();
                 return true;
 
@@ -279,12 +282,15 @@ public class ControladorBDDePropiedades {
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                
+                System.out.println("error");
                 return false;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
 
             }
         }
+        System.out.println("esta la caga");
         return false;
     }
 

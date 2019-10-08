@@ -80,7 +80,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +93,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
                             .addComponent(botonEliminarCuenta)))
                     .addComponent(jLabel18)
                     .addComponent(jLabel19))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +127,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarCuentaActionPerformed
-        int resp =  validarDatosEliminarUsuario(this.rut.getText(),  this.clave.getText());
+        int resp =  validarEntrada(this.rut.getText(),  this.clave.getText());
         if(resp==0){
             boolean respuesta = false;
             try {
@@ -143,11 +143,11 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
             }
         }
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
     }//GEN-LAST:event_botonEliminarCuentaActionPerformed
@@ -179,7 +179,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
      * @param clave
      * @return 
      */
-    public int validarDatosEliminarUsuario(String rut, String clave){
+    public int validarEntrada(String rut, String clave){
         if("".equals(rut)){
             return 1;
         }
