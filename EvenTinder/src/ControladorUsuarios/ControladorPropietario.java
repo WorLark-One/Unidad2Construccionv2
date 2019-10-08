@@ -15,6 +15,11 @@ public class ControladorPropietario {
     private ControlDeAcceso  controlAcceso;
     private GestionDePropiedad gestorPropiedades;
 
+    /**
+     * Constructor del Controlador de Propietarios.
+     * Al crearse, actualiza los datos en memoria, consultando a la base de datos si existen Propiedades asociadas al Propietario que acaba de ingresar al sistema.
+     * @throws SQLException 
+     */
     public ControladorPropietario() throws SQLException {
         this.controlAcceso = ControlDeAcceso.getIntancia();
         this.gestorPropiedades = new GestionDePropiedad();

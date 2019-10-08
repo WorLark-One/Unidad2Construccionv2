@@ -14,7 +14,7 @@ public class GestionDePropiedad {
     private ControladorBDDePropiedades controlador;
     
     /**
-     * Default constructor
+     * Constructor de un Gestor de Propiedades.
      */
     public GestionDePropiedad() {
         this.listaPropiedades = new ArrayList();
