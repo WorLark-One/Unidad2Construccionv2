@@ -34,7 +34,6 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         this.papa=papa;
         initComponents();
         this.capacidadTotal.setEditable(false);
-        this.capacidadTotal.setEnabled(false);
         this.modeloLista=new DefaultListModel();
         this.listaSectores1.setModel(modeloLista);
     }
