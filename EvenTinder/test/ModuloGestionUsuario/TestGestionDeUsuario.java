@@ -29,14 +29,8 @@ public class TestGestionDeUsuario {
         String correoElectronico = "";
         String contraseña = "";
         String telefono = "5695568444";
-        String tarjeta = "060606";
-        
-        
-        
-        
+        String tarjeta = "060606";   
         g.crearUsuario(tipoUsuario, nombreUsuario, rutUsuario, contraseña, correoElectronico, telefono, tarjeta);
-        
-    
     }
     
     

@@ -69,6 +69,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         clave = new javax.swing.JTextField();
+        labelTipoUsuario = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,6 +147,8 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             }
         });
 
+        labelTipoUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,7 +184,10 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(botonRegistrar)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(botonRegistrar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(labelTipoUsuario))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(CuentaBancaria)
                                         .addComponent(tarjetaDeCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
@@ -210,37 +216,40 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                             .addComponent(botonPropietario)
                             .addComponent(botonOrganizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel19)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(tarjetaDeCredito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(CuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(botonRegistrar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(rut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel14)
+                                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel15)
+                                    .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel16)
+                                    .addComponent(tarjetaDeCredito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel17)
+                                    .addComponent(CuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(botonRegistrar))
+                            .addComponent(labelTipoUsuario))))
                 .addContainerGap(270, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -255,7 +264,8 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         this.numeroTelefonico.setEnabled(true);
         this.tarjetaDeCredito.setEnabled(true);
         this.CuentaBancaria.setEnabled(false);
-        JOptionPane.showMessageDialog(null, "Usuario Organizador");
+        this.CuentaBancaria.setText("");
+        this.botonRegistrar.setText("Registrar organizador");
 
     }//GEN-LAST:event_botonOrganizadorActionPerformed
 
@@ -268,8 +278,9 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         this.correoElectronico.setEnabled(true);
         this.numeroTelefonico.setEnabled(true);
         this.tarjetaDeCredito.setEnabled(false);
+        this.tarjetaDeCredito.setText("");
         this.CuentaBancaria.setEnabled(true);
-        JOptionPane.showMessageDialog(null, "Usuario Propietario");
+        this.botonRegistrar.setText("Registrar propietario");
     }//GEN-LAST:event_botonPropietarioActionPerformed
 
     private void botonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClienteActionPerformed
@@ -282,57 +293,15 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         this.numeroTelefonico.setEnabled(true);
         this.tarjetaDeCredito.setEnabled(true);
         this.CuentaBancaria.setEnabled(false);
-        JOptionPane.showMessageDialog(null, "Usuario cliente");
+        this.CuentaBancaria.setText("");
+        this.botonRegistrar.setText("Registrar cliente");
     }//GEN-LAST:event_botonClienteActionPerformed
 
+    
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         // TODO add your handling code here:
-        if("".equals(this.tipoUsuario)){
-            JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de usuario", "Error al seleccionar el tipo de usuario", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if("".equals(this.nombre.getText())){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Nombre completo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if("".equals(this.rut.getText())){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if("".equals(this.clave.getText())){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if("".equals(this.numeroTelefonico.getText())){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Numero Telefonico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if("".equals(this.correoElectronico.getText())){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if("organizador".equals(this.tipoUsuario) || "cliente".equals(this.tipoUsuario)){
-            if("".equals(this.tarjetaDeCredito.getText())){
-                JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Tarjeta De Credito", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            boolean respuesta = false;
-            try {
-                respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.tarjetaDeCredito.getText());
-            } catch (SQLException ex) {
-                Logger.getLogger(PanelCreacionUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(respuesta){
-                JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
-            }else{
-                JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
-            }
-        }
-        if("propietario".equals(this.tipoUsuario)){
-            if("".equals(this.CuentaBancaria.getText())){
-                JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Cuenta Bancaria", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
+        int resp = this.validarResgistro(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(),this.tarjetaDeCredito.getText() , this.CuentaBancaria.getText());
+        if(resp==0){
             boolean respuesta = false;
             try {
                 respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(),this.CuentaBancaria.getText());
@@ -341,9 +310,49 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             }
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+                this.tipoUsuario="";
+                this.nombre.setText("");
+                this.rut.setText("");
+                this.clave.setText("");
+                this.numeroTelefonico.setText("");
+                this.correoElectronico.setText("");
+                this.tarjetaDeCredito.setText("");
+                this.CuentaBancaria.setText("");
+                this.botonRegistrar.setText("Registrar");
             }else{
                 JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
             }
+        }
+        if(resp==1){
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de usuario", "Error al seleccionar el tipo de usuario", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==2){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Nombre completo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==3){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==4){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==5){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Numero Telefonico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==6){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==7){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: tarjeta de credito", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==8){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: cuenta bancario", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
@@ -372,9 +381,74 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelTipoUsuario;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField numeroTelefonico;
     private javax.swing.JTextField rut;
     private javax.swing.JTextField tarjetaDeCredito;
     // End of variables declaration//GEN-END:variables
+
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    
+    /**
+     * Este va a ser el formato de las consultas para ser luego testeadas en el junit
+     * 0 = Correcto
+     * numeros mayores que 0 son errores
+     */
+
+            /* 0 es ok
+    1 falta tipoUsuario
+    2 falta nombre
+    3 falta rut
+    4 falta clave
+    5 falta numeroTelefonico
+    6 falta correoElectronico
+    7 falta tarjetaDeCredito
+    8 falta CuentaBancaria 
+    */
+    
+    /**
+     * 
+     * @param tipoUsuario
+     * @param rut
+     * @param clave
+     * @param numeroTelefonico
+     * @param correoElectronico
+     * @param tarjetaDeCredito
+     * @param CuentaBancaria
+     * @return 
+     */
+    public int validarResgistro(String tipoUsuario, String nombre, String rut, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito, String CuentaBancaria) {                                               
+        // TODO add your handling code here:
+        if("".equals(tipoUsuario)){
+            return 1;
+        }
+        if("".equals(nombre)){
+            return 2;
+        }
+        if("".equals(rut)){
+            return 3;
+        }
+        if("".equals(clave)){
+            return 4;
+        }
+        if("".equals(numeroTelefonico)){
+            return 5;
+        }
+        if("".equals(correoElectronico)){
+            return 6;
+        }
+        if("organizador".equals(tipoUsuario) || "cliente".equals(tipoUsuario)){
+            if("".equals(tarjetaDeCredito)){
+                return 7;
+            }
+            if("propietario".equals(tipoUsuario)){
+                if("".equals(CuentaBancaria)){
+                    return 8;
+                }
+            }
+        }
+        return 0;
+    }
+
 }

@@ -11,6 +11,9 @@ import ControladorUsuarios.ControladorPrincipal;
 import VistasSistema.VistaPrincipal.PanelListaDeEventos;
 import VistasSistema.VistaPrincipal.PanelNosotros;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
+import VistasSistema.VistaPropietario.PanelAgregarSector;
+import VistasSistema.VistaPropietario.PanelEliminarSector;
+import VistasSistema.VistaPropietario.PanelModificarSector;
 import java.awt.Component;
 
 /**
@@ -159,8 +162,6 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
         this.componenteAnterior=nosotros;
         this.repaint();
         this.revalidate();
-    }
-    
-    
+    }   
      
 }

@@ -93,7 +93,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +127,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
                                 .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel19)
                             .addComponent(jLabel18))
-                        .addContainerGap(153, Short.MAX_VALUE))))
+                        .addContainerGap(121, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,39 +173,40 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
-        // TODO add your handling code here:
-        if("".equals(this.nombre.getText())){
+        int resp = validarModificarOrganizador(this.nombre.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.tarjetaDeCredito.getText());
+        if(resp==0){
+            boolean respuesta = false;
+            try {
+                respuesta = this.papa.getControladorPrincipal().modificarUsuario(this.nombre.getText(),this.clave.getText(),this.correoElectronico.getText(),this.numeroTelefonico.getText(),this.tarjetaDeCredito.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelModificarPropietario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(respuesta){
+                JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
+            }
+        }
+        if(resp==1){
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Nombre completo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if("".equals(this.clave.getText())){
+        if(resp==2){
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if("".equals(this.numeroTelefonico.getText())){
+        if(resp==3){
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Numero Telefonico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if("".equals(this.correoElectronico.getText())){
+        if(resp==4){
             JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if("".equals(this.tarjetaDeCredito.getText())){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+        if(resp==5){
+            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: tarjeta De Credito", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        boolean respuesta = false;
-        try {
-            respuesta = this.papa.getControladorPrincipal().modificarUsuario(this.nombre.getText(),this.clave.getText(),this.correoElectronico.getText(),this.numeroTelefonico.getText(),this.tarjetaDeCredito.getText());
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelModificarPropietario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(respuesta){
-            JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
-        }else{
-            JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
-        }
-        
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
 
@@ -225,4 +226,51 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
     private javax.swing.JTextField numeroTelefonico;
     private javax.swing.JTextField tarjetaDeCredito;
     // End of variables declaration//GEN-END:variables
+
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    
+    /**
+     * Este va a ser el formato de las consultas para ser luego testeadas en el junit
+     * 0 = Correcto
+     * numeros mayores que 0 son errores
+     */
+
+            /* 0 es ok
+    1 falta tipoUsuario
+    2 falta nombre
+    3 falta rut
+    4 falta clave
+    5 falta numeroTelefonico
+    6 falta correoElectronico
+    7 falta tarjetaDeCredito
+    8 falta CuentaBancaria 
+    */
+    
+    /**
+     * 
+     * @param clave
+     * @param numeroTelefonico
+     * @param correoElectronico
+     * @param tarjetaDeCredito
+     * @return 
+     */
+    public int validarModificarOrganizador (String nombre, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito){                                               
+        if("".equals(nombre)){
+            return 1;
+        }
+        if("".equals(clave)){
+            return 2;
+        }
+        if("".equals(numeroTelefonico)){
+            return 3;
+        }
+        if("".equals(correoElectronico)){
+            return 4;
+        }
+        if("".equals(tarjetaDeCredito)){
+            return 5;
+        }
+        return 0;
+    }
+
 }
