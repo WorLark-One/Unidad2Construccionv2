@@ -184,6 +184,12 @@ public class PanelAgregarSector extends javax.swing.JPanel {
         int resp = validarEntrada(this.nombre.getText(), this.capacidad.getText());
         if(resp==0){
             boolean bandera = false;
+            for (int i = 0; i < this.propiedades.get(this.id).getListaSectores().size(); i++) {
+                if(this.propiedades.get(this.id).getListaSectores().get(i).getNombre().equals(this.nombre.getText())){
+                    JOptionPane.showMessageDialog(null, "El nombre del sector ya se encuentra registrado", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
             try {
                 bandera = this.papa.getControladorPropietario().añadirSector(this.propiedades.get(id).getId(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
             } catch (SQLException ex) {
