@@ -198,7 +198,6 @@ public class PanelInicioSesion extends javax.swing.JPanel {
                 Logger.getLogger(PanelInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(respuesta){
-                JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
                 if("cliente".equals(this.tipoUsuario)){
                     this.papa.derivarAVentanaPrincipalUsuario();
                 }

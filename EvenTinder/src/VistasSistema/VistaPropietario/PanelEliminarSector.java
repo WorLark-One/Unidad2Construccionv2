@@ -124,6 +124,7 @@ public class PanelEliminarSector extends javax.swing.JPanel {
 
     private void eliminarSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarSectorActionPerformed
         // TODO add your handling code here:
+        int capacidad=0;
         if(listaSectores.getSelectedIndex()!=-1){
             if(this.propiedades.get(id).getListaSectores().size()==1){
                 JOptionPane.showMessageDialog(null, "No se puede eliminar el sector dado que es el ultimo", "Error al eliminar el sector", JOptionPane.WARNING_MESSAGE);
@@ -131,12 +132,18 @@ public class PanelEliminarSector extends javax.swing.JPanel {
             }
             boolean bandera = false;
             try {
+                capacidad=this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getCapacidadDelSector();
                 bandera = this.papa.getControladorPropietario().eliminarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre());
             } catch (SQLException ex) {
                 Logger.getLogger(PanelEliminarSector.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(bandera){
                 JOptionPane.showMessageDialog(null, "Se a eliminado el sector correctamente");
+                try {
+                    this.papa.getControladorPropietario().modifcarPropiedad(this.propiedades.get(id).getId(), this.propiedades.get(id).getNombre(), this.propiedades.get(id).getUbicacion(), this.propiedades.get(id).getFechaDePublicacion(), (this.propiedades.get(id).getCapacidadTotal() - capacidad), this.propiedades.get(id).getValorArriendo(), this.propiedades.get(id).getDescripcion());
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelEliminarSector.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 this.actualizarMenuSectores();
             }else{
                 JOptionPane.showMessageDialog(null, "No se a podido eliminar el sector de la base de datos", "Error al eliminar el sector", JOptionPane.WARNING_MESSAGE);

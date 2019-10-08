@@ -154,6 +154,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
 
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
         int resp = validarEntrada(this.nombre.getText(), this.capacidad.getText());
+        int capacidad=0;
         if(resp==0){
             if(listaSectores.getSelectedIndex()==-1){
                 JOptionPane.showMessageDialog(null, "No se a seleccionado el sector a modificar", "Error al seleccioanr sector", JOptionPane.WARNING_MESSAGE);
@@ -161,6 +162,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
             }
             boolean bandera = false;
             try {
+                capacidad=Integer.parseInt(this.capacidad.getText()) - this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getCapacidadDelSector();
                 bandera = this.papa.getControladorPropietario().modificarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(PanelModificarSector.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,18 +170,24 @@ public class PanelModificarSector extends javax.swing.JPanel {
             if(bandera){
                 //si se pudo
                 JOptionPane.showMessageDialog(null, "Se a añadido el sector correctamente");
+                try {
+                    this.papa.getControladorPropietario().modifcarPropiedad(this.propiedades.get(id).getId(), this.propiedades.get(id).getNombre(), this.propiedades.get(id).getUbicacion(), this.propiedades.get(id).getFechaDePublicacion(), (this.propiedades.get(id).getCapacidadTotal() + capacidad), this.propiedades.get(id).getValorArriendo(), this.propiedades.get(id).getDescripcion());
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelModificarSector.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 this.nombre.setText("");
                 this.capacidad.setText("");
+                this.actualizarMenuSectores();
             }else{
                 //no se pudo
                 JOptionPane.showMessageDialog(null, "No se a podido añadir el sector a la base de datos", "Error al guardar sector", JOptionPane.WARNING_MESSAGE);
             }
         }
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Capacidad", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Capacidad", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
@@ -225,10 +233,33 @@ public class PanelModificarSector extends javax.swing.JPanel {
         if(nombre.equals("")){
             return 1;
         }
-        if(capacidad.equals("")){
+        if(capacidad.equals("") || !isNumero(capacidad)){
             return 2;
         }
         return 0;
+    }
+    
+                /**
+     * Método que se encarga de verificar que los numeros ingresados son numeros validos
+     */
+    private boolean isNumero(String cadena) {
+        boolean resultado;
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+        if (resultado==true) {
+            int a = Integer.parseInt(cadena);
+            if (a>0) {
+                resultado = true;
+            }
+            else{
+                resultado = false;
+            }
+        }
+        return resultado;
     }
 
     //no se puede hacer tdd

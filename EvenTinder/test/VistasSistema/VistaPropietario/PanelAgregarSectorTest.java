@@ -30,7 +30,7 @@ public class PanelAgregarSectorTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp(){
     }
     
     @After
