@@ -117,11 +117,13 @@ public class GestionDePropiedad {
      * @throws java.sql.SQLException
      */
     public boolean eliminarPropiedad( int id) throws SQLException {
-        this.controlador.eliminarPropiedad(id);
-        for(Propiedad p:this.listaPropiedades){
-            if(p.getId() == id){
-                this.listaPropiedades.remove(p);
-                return true;
+        boolean result = this.controlador.eliminarPropiedad(id);
+        if(result){
+            for(Propiedad p:this.listaPropiedades){
+                if(p.getId() == id){
+                    this.listaPropiedades.remove(p);
+                    return true;
+                }
             }
         }
         return false;
@@ -136,11 +138,13 @@ public class GestionDePropiedad {
      * @throws java.sql.SQLException
      */
     public boolean añadirSector( int id,  int capacidad,  String nombre) throws SQLException {
-        this.controlador.registrarSector(nombre, capacidad,id);
-        for(Propiedad p : this.listaPropiedades){
-            if(p.getId() == id){
-                p.añadirSector(new Sector(id,nombre,capacidad));
-                return true;
+        boolean result = this.controlador.registrarSector(nombre, capacidad,id);
+        if(result){
+            for(Propiedad p : this.listaPropiedades){
+                if(p.getId() == id){
+                    p.añadirSector(new Sector(id,nombre,capacidad));
+                    return true;
+                }
             }
         }
         return false;
@@ -156,14 +160,16 @@ public class GestionDePropiedad {
      * @throws java.sql.SQLException
      */
     public boolean modificarSector(int id, String nombreActual,int capacidad,  String nombre) throws SQLException {
-        boolean bandera = this.controlador.modificarSector(nombreActual, id, nombre, capacidad);
-        for(Propiedad p : this.listaPropiedades){
-            if(p.getId() == id){
-                for(Sector s: p.getListaSectores()){
-                    if(s.getIdPropiedad()== id && s.getNombre().equals(nombreActual)){
-                        s.setNombre(nombre);
-                        s.setCapacidadDelSector(capacidad);
-                        return true;
+        boolean result = this.controlador.modificarSector(nombreActual, id, nombre, capacidad);
+        if(result){
+            for(Propiedad p : this.listaPropiedades){
+                if(p.getId() == id){
+                    for(Sector s: p.getListaSectores()){
+                        if(s.getIdPropiedad()== id && s.getNombre().equals(nombreActual)){
+                            s.setNombre(nombre);
+                            s.setCapacidadDelSector(capacidad);
+                            return true;
+                        }
                     }
                 }
             }
@@ -179,11 +185,13 @@ public class GestionDePropiedad {
      * @throws java.sql.SQLException
      */
     public boolean eliminarSector( int id, String nombreActual) throws SQLException {
-        this.controlador.eliminarSector(nombreActual, id);
-        for(Propiedad p:this.listaPropiedades){
-            if(p.getId() == id){
-                p.eliminarSector(nombreActual, id);
-                return true;
+        boolean result = this.controlador.eliminarSector(nombreActual, id);
+        if(result){
+            for(Propiedad p:this.listaPropiedades){
+                if(p.getId() == id){
+                    p.eliminarSector(nombreActual, id);
+                    return true;
+                }
             }
         }
         return false;
