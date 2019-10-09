@@ -1,6 +1,7 @@
 package ControladorUsuarios;
 
 import ModuloAutenticacion.ControlDeAcceso;
+import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.GestionDePropiedad;
 import ModuloGestionPropiedades.Propiedad;
 import java.sql.SQLException;
@@ -113,6 +114,49 @@ public class ControladorPropietario {
      */
     public boolean eliminarSector( int id, String nombreActual) throws SQLException {
         return this.gestorPropiedades.eliminarSector(id, nombreActual);
+    }
+
+
+    /**
+     * @param int idEvento 
+     * @return
+     */
+    public boolean aceptarSolicitud(int idEvento) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param int idEvento 
+     * @return
+     */
+    public boolean rechazarSolicitud( int idEvento) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @return
+     */
+    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos() {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public ArrayList<Evento> obtenerInformacionDeEventosActuales() {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public ArrayList<Evento> obtenerInformacionDeEventosFinalizados() {
+        // TODO implement here
+        return null;
     }
 
 }
