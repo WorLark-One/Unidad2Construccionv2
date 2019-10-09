@@ -225,6 +225,15 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No a seleccionado la propiedad a modificar", "Error al seleccionar propiedad", JOptionPane.WARNING_MESSAGE);    
                 return;
             }
+            for (int i = 0; i < this.propiedades.size(); i++) {
+                if(this.listaPropiedades.getSelectedIndex()!=i){
+                    if(this.propiedades.get(i).getNombre().equals(this.nombre.getText())){
+                        JOptionPane.showMessageDialog(null, "Este nombre ya se encuentra en la base de datos", "Error ingreso de datos", JOptionPane.WARNING_MESSAGE); 
+                        return;
+                    }
+                }
+            }
+            
             boolean resultado = false;
             try {
                 System.out.println("Entre a modificar");

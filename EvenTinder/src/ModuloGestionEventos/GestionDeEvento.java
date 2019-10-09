@@ -1,14 +1,11 @@
 package ModuloGestionEventos;
 
-import java.util.ArrayList;
-import java.util.Date;
-
+import java.util.*;
 
 /**
  * 
  */
 public class GestionDeEvento {
-    private ArrayList<Evento> listaDeEventos;
 
     /**
      * Default constructor
@@ -17,59 +14,72 @@ public class GestionDeEvento {
     }
 
     /**
-     * 
+     * @param String nombre 
+     * @param String descripcion 
+     * @param Date fechaDeInicio 
+     * @param Date fechaDeTermino 
+     * @param int capacidad 
+     * @param int diasMaximoDevolucion 
+     * @param boolean publicado 
+     * @param int idPropiedad 
+     * @return
      */
-    public void crearEvento() {
+    public boolean crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad) {
         // TODO implement here
+        return false;
     }
 
     /**
-     * 
+     * @param int idEvento 
+     * @param String nombre 
+     * @param String descripcion 
+     * @param Date fechaDeInicio 
+     * @param Date fechaDeTermino 
+     * @param int capacidad 
+     * @param int diasMaximoDevolucion 
+     * @param boolean publicado 
+     * @param int idPropiedad 
+     * @return
      */
-    public void modificarEvento() {
+    public boolean modificarEvento(int idEvento, String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad) {
         // TODO implement here
+        return false;
     }
 
     /**
-     * 
+     * @param int idEvento 
+     * @return
      */
-    public void cancelarEventoPublicado() {
+    public boolean eliminarEvento(int idEvento) {
         // TODO implement here
+        return false;
     }
 
     /**
-     * 
+     * @param int idEvento 
+     * @return
      */
-    public void aceptarSolicitudDeEvento() {
+    public boolean aceptarSolicitud(int idEvento) {
         // TODO implement here
+        return false;
     }
 
     /**
-     * 
+     * @param int idEvento 
+     * @return
      */
-    public void rechazarSolicitudDeEvento() {
+    public boolean rechazarSolicitud(int idEvento) {
         // TODO implement here
+        return false;
     }
 
     /**
-     * 
+     * @param String rut 
+     * @param String opcion 
+     * @return
      */
-    public void mostrarHistorialDeEventosRealizados() {
+    public ArrayList<Evento> obtenerInformacion(String rut, String opcion) {
         // TODO implement here
+        return null;
     }
-
-    /**
-     * @param fecha
-     */
-    public void mostrarCalendario(Date fecha) {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
-    public void mostrarHistorialDeEventosDeUnaPropiedad() {
-        // TODO implement here
-    }
-
 }
