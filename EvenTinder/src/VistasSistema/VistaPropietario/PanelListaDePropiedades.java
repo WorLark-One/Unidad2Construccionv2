@@ -328,6 +328,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
             this.capacidadTotal.setText("capacidadTotal: ");
             this.cantidadDeSectores.setText("cantidadDeSectores: ");
             this.valorArriendo.setText("valorArriendo: ");
+            this.listaSectores.removeAll();
             return;
         }
         if(opciones.getSelectedIndex()>0){

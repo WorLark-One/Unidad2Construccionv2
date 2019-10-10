@@ -33,7 +33,6 @@
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="botonEliminarCuenta" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -43,6 +42,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="clave" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                           <Component id="rut" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="botonEliminarCuenta" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
