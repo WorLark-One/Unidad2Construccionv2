@@ -27,13 +27,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
     public PanelCreacionUsuario(VentanaPrincipal papa) {
         this.papa=papa;
         initComponents();
-        this.nombre.setEnabled(false);
-        this.rut.setEnabled(false);
-        this.clave.setEnabled(false);
-        this.correoElectronico.setEnabled(false);
-        this.numeroTelefonico.setEnabled(false);
-        this.tarjetaDeCredito.setEnabled(false);
-        this.CuentaBancaria.setEnabled(false);
+        this.actualizarMenuOpciones();
     }
 
     /**
@@ -47,29 +41,29 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        labelTipoUsuario = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        listaTipoUsuario = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        clave = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         tarjetaDeCredito = new javax.swing.JTextField();
-        botonRegistrar = new javax.swing.JButton();
         rut = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         correoElectronico = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
-        numeroTelefonico = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        CuentaBancaria = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        botonCliente = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        botonPropietario = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        botonOrganizador = new javax.swing.JButton();
+        numeroTelefonico = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
+        CuentaBancaria = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        clave = new javax.swing.JTextField();
-        labelTipoUsuario = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        botonRegistrar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,59 +81,47 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jLabel16.setText("Tarjeta de crédito");
-
-        botonRegistrar.setText("Registrar");
-        botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRegistrarActionPerformed(evt);
-            }
-        });
-
-        jLabel17.setText("Cuenta bancaria");
-
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú Creación de usuario");
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel19.setText("2. Ingrese los siguientes datos");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
-        jLabel5.setText("Nombre completo");
+        labelTipoUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        botonCliente.setText("Cliente");
-        botonCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonClienteActionPerformed(evt);
-            }
-        });
+        jPanel2.setBackground(new java.awt.Color(229, 229, 229));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("1. Seleccione el tipo de usuario que quiere crear");
 
-        jLabel12.setText("Rut");
-
-        botonPropietario.setText("Propietario");
-        botonPropietario.addActionListener(new java.awt.event.ActionListener() {
+        listaTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonPropietarioActionPerformed(evt);
+                listaTipoUsuarioActionPerformed(evt);
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(listaTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(listaTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        jLabel13.setText("Clave");
-
-        botonOrganizador.setText("Organizador");
-        botonOrganizador.setMinimumSize(new java.awt.Dimension(100, 23));
-        botonOrganizador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonOrganizadorActionPerformed(evt);
-            }
-        });
-
-        jLabel14.setText("N° Telefónico");
-
-        jLabel15.setText("Correo Electrónico");
+        jPanel3.setBackground(new java.awt.Color(243, 243, 243));
 
         clave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +129,100 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             }
         });
 
-        labelTipoUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel5.setText("Nombre completo");
+
+        jLabel12.setText("Rut");
+
+        jLabel17.setText("Cuenta bancaria");
+
+        jLabel13.setText("Clave");
+
+        jLabel14.setText("N° Telefónico");
+
+        jLabel15.setText("Correo Electrónico");
+
+        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel19.setText("2. Ingrese los siguientes datos");
+
+        jLabel16.setText("Tarjeta de crédito");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rut, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CuentaBancaria)
+                                    .addComponent(tarjetaDeCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(tarjetaDeCredito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(CuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        botonRegistrar.setText("Registrar");
+        botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegistrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -157,46 +232,15 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel18)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel17))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rut, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(botonRegistrar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(labelTipoUsuario))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(CuentaBancaria)
-                                        .addComponent(tarjetaDeCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(botonCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonOrganizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(124, 124, 124)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(botonRegistrar)
+                            .addComponent(labelTipoUsuario))))
                 .addContainerGap(773, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -209,93 +253,16 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                         .addGap(50, 50, 50)
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonCliente)
-                            .addComponent(botonPropietario)
-                            .addComponent(botonOrganizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel19)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(rut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel13))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel14)
-                                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel15)
-                                    .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel16)
-                                    .addComponent(tarjetaDeCredito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel17)
-                                    .addComponent(CuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(botonRegistrar))
-                            .addComponent(labelTipoUsuario))))
-                .addContainerGap(270, Short.MAX_VALUE))
+                        .addComponent(botonRegistrar)
+                        .addGap(61, 61, 61)
+                        .addComponent(labelTipoUsuario)))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void botonOrganizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOrganizadorActionPerformed
-        // TODO add your handling code here:
-        this.tipoUsuario="organizador";
-        this.nombre.setEnabled(true);
-        this.rut.setEnabled(true);
-        this.clave.setEnabled(true);
-        this.correoElectronico.setEnabled(true);
-        this.numeroTelefonico.setEnabled(true);
-        this.tarjetaDeCredito.setEnabled(true);
-        this.CuentaBancaria.setEnabled(false);
-        this.CuentaBancaria.setText("");
-        this.botonRegistrar.setText("Registrar organizador");
-
-    }//GEN-LAST:event_botonOrganizadorActionPerformed
-
-    private void botonPropietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPropietarioActionPerformed
-        // TODO add your handling code here:
-        this.tipoUsuario="propietario";
-        this.nombre.setEnabled(true);
-        this.rut.setEnabled(true);
-        this.clave.setEnabled(true);
-        this.correoElectronico.setEnabled(true);
-        this.numeroTelefonico.setEnabled(true);
-        this.tarjetaDeCredito.setEnabled(false);
-        this.tarjetaDeCredito.setText("");
-        this.CuentaBancaria.setEnabled(true);
-        this.botonRegistrar.setText("Registrar propietario");
-    }//GEN-LAST:event_botonPropietarioActionPerformed
-
-    private void botonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClienteActionPerformed
-        // TODO add your handling code here:
-        this.tipoUsuario="cliente";
-        this.nombre.setEnabled(true);
-        this.rut.setEnabled(true);
-        this.clave.setEnabled(true);
-        this.correoElectronico.setEnabled(true);
-        this.numeroTelefonico.setEnabled(true);
-        this.tarjetaDeCredito.setEnabled(true);
-        this.CuentaBancaria.setEnabled(false);
-        this.CuentaBancaria.setText("");
-        this.botonRegistrar.setText("Registrar cliente");
-    }//GEN-LAST:event_botonClienteActionPerformed
 
     
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
@@ -359,12 +326,47 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
     private void claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_claveActionPerformed
+
+    private void listaTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaTipoUsuarioActionPerformed
+        // TODO add your handling code here:
+        if(this.listaTipoUsuario.getSelectedIndex()==-1){
+            return;
+        }
+        if(this.listaTipoUsuario.getSelectedIndex()==0){
+            this.tipoUsuario="cliente";
+            this.nombre.setEnabled(true);
+            this.rut.setEnabled(true);
+            this.clave.setEnabled(true);
+            this.correoElectronico.setEnabled(true);
+            this.numeroTelefonico.setEnabled(true);
+            this.tarjetaDeCredito.setEnabled(true);
+            this.CuentaBancaria.setEnabled(false);
+        }
+        if(this.listaTipoUsuario.getSelectedIndex()==1){
+            this.tipoUsuario="organizador";
+            this.nombre.setEnabled(true);
+            this.rut.setEnabled(true);
+            this.clave.setEnabled(true);
+            this.correoElectronico.setEnabled(true);
+            this.numeroTelefonico.setEnabled(true);
+            this.tarjetaDeCredito.setEnabled(true);
+            this.CuentaBancaria.setEnabled(false);
+        }
+        if(this.listaTipoUsuario.getSelectedIndex()==2){
+            this.tipoUsuario="propietario";
+            this.nombre.setEnabled(true);
+            this.rut.setEnabled(true);
+            this.clave.setEnabled(true);
+            this.correoElectronico.setEnabled(true);
+            this.numeroTelefonico.setEnabled(true);
+            this.tarjetaDeCredito.setEnabled(false);
+            this.CuentaBancaria.setEnabled(true);
+        }
+        
+    }//GEN-LAST:event_listaTipoUsuarioActionPerformed
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CuentaBancaria;
-    private javax.swing.JButton botonCliente;
-    private javax.swing.JButton botonOrganizador;
-    private javax.swing.JButton botonPropietario;
     private javax.swing.JButton botonRegistrar;
     private javax.swing.JTextField clave;
     private javax.swing.JTextField correoElectronico;
@@ -381,7 +383,10 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel labelTipoUsuario;
+    private javax.swing.JComboBox<String> listaTipoUsuario;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField numeroTelefonico;
     private javax.swing.JTextField rut;
@@ -449,6 +454,23 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             }
         }
         return 0;
+    }
+    
+    /**
+     * Este va a ser el formato de las consultas para ser luego testeadas en el junit
+     * 0 = Correcto
+     * numeros mayores que 0 son errores
+     */
+
+    //
+    // no se puede hacer tdd ya que necesita otro metodo
+    public void actualizarMenuOpciones(){
+        this.listaTipoUsuario.removeAllItems();
+        this.listaTipoUsuario.addItem("Cliente");
+        this.listaTipoUsuario.addItem("Organizador");
+        this.listaTipoUsuario.addItem("Propietario");
+        this.repaint();
+        this.revalidate();
     }
 
 }
