@@ -14,9 +14,13 @@ import java.util.Date;
 public class ControladorBDDePropiedades {
 
     ConexionBD conexion;
+    String nombreBD;
+        String contraseñaUsuarioBD;
 
     public ControladorBDDePropiedades() {
         this.conexion = new ConexionBD();
+        this.nombreBD = "EventTinder";
+        this.contraseñaUsuarioBD = "1";
     }
 
     /**
@@ -27,7 +31,7 @@ public class ControladorBDDePropiedades {
      * @throws java.sql.SQLException
      */
     public ArrayList<Propiedad> obtenerInformacionDePropiedades(String rut) throws SQLException {
-        this.conexion.crearConexion("EventTinder", "1");
+         this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<Propiedad> propiedades = new ArrayList<>();
@@ -81,7 +85,7 @@ public class ControladorBDDePropiedades {
      * @throws java.sql.SQLException
      */
     public Propiedad obtenerInformacionDeUnaPropiedad(String rut, int id) throws SQLException {
-        this.conexion.crearConexion("EventTinder", "1");
+         this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<String> informacion = new ArrayList<>();
@@ -142,7 +146,7 @@ public class ControladorBDDePropiedades {
      * @throws java.sql.SQLException
      */
     public int registrarPropiedad(String rut, String nombre, String ubicacion, Date fechaDePublicacion, int capacidadTotal, int valorDeArriendo, String descripcion) throws SQLException {
-        this.conexion.crearConexion("EventTinder", "1");
+         this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -188,7 +192,7 @@ public class ControladorBDDePropiedades {
      */
     public boolean modifcarPropiedad(int id, String nuevoNombre, String NuevaUbicacion, Date fechaDePublicacion, int nuevaCapacidadTotal, int nuevoValorDeArriendo, String nuevaDescripcion) throws SQLException {
 
-        this.conexion.crearConexion("EventTinder", "1");
+         this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -223,7 +227,7 @@ public class ControladorBDDePropiedades {
      * @throws SQLException 
      */
     public boolean eliminarPropiedad( int idPropiedad) throws SQLException {
-        this.conexion.crearConexion("EventTinder", "1");
+         this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
@@ -261,7 +265,7 @@ public class ControladorBDDePropiedades {
      */
     public boolean registrarSector(String nombreSector, int capacidad, int idPropiedad) throws SQLException {
 
-        this.conexion.crearConexion("EventTinder", "1");
+         this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
@@ -301,7 +305,7 @@ public class ControladorBDDePropiedades {
      * @throws SQLException
      */
     public boolean eliminarSector(String nombreSector, int idPropiedad) throws SQLException {
-        this.conexion.crearConexion("EventTinder", "1");
+         this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
@@ -333,7 +337,7 @@ public class ControladorBDDePropiedades {
      */
     public boolean modificarSector(String nombreSector, int idPropiedad, String nuevoNombre, int nuevaCapacidad) throws SQLException {
 
-        this.conexion.crearConexion("EventTinder", "1");
+         this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -370,7 +374,7 @@ public class ControladorBDDePropiedades {
      * @throws SQLException
      */
     public Sector obtenerInformacionDeUnSector(String nombreSector, int idPropiedad) throws SQLException {
-        this.conexion.crearConexion("EventTinder", "1");
+         this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<String> informacion = new ArrayList<>();
@@ -414,7 +418,7 @@ public class ControladorBDDePropiedades {
      * @throws SQLException
      */
     public ArrayList<Sector> obtenerInformacionDeSectores(int idPropiedad) throws SQLException {
-        this.conexion.crearConexion("EventTinder", "1");
+         this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<Sector> sectores = new ArrayList<>();
