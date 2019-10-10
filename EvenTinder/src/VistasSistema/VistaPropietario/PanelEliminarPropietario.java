@@ -69,7 +69,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
         jLabel18.setText("Menú Eliminar cuenta de propietario");
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel19.setText("1. Para eliminar cuenta ingrese su rut con su clave");
+        jLabel19.setText("1. Ingrese los siguientes datos");
 
         jLabel13.setText("Clave");
 
@@ -82,6 +82,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonEliminarCuenta)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
@@ -89,11 +90,10 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rut, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonEliminarCuenta)))
+                            .addComponent(rut, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel18)
                     .addComponent(jLabel19))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

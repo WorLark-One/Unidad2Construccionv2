@@ -25,6 +25,11 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     public PanelModificarPropietario(VentanaPrincipalPropietario papa) {
         this.papa=papa;
         initComponents();
+        this.nombre.setText("");
+        this.clave.setText("");
+        this.numeroTelefonico.setText("");
+        this.correoElectronico.setText("");
+        this.cuentaBancaria.setText("");
     }
 
     /**
