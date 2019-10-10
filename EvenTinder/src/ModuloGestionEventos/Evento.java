@@ -13,18 +13,26 @@ public class Evento {
     public Evento() {
     }
 
-    /**
-     * 
-     */
-    private int id;
+    private int idEvento;
     private String nombre;
     private String descripcion;
     private Date fechaDeInicio;
     private Date fechaDeTermino;
     private int capacidadMaximaDelEvento;
-    private int plazoDevolucionDeEntrada;
+    private int plazoDevolucionEntrada;
     private boolean publicado;
-    private ArrayList<Entrada> listaDeEntrada;
+    private ArrayList<Entrada>listaEntradas;
+
+    public Evento(int idEvento, String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int plazoDevolucionEntrada, boolean publicado) {
+        this.idEvento = idEvento;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaDeInicio = fechaDeInicio;
+        this.fechaDeTermino = fechaDeTermino;
+        this.capacidadMaximaDelEvento = capacidad;
+        this.plazoDevolucionEntrada = plazoDevolucionEntrada;
+        this.publicado = publicado;
+    }
 
 
 
@@ -52,6 +60,102 @@ public class Evento {
     public boolean verificarDisponibilidadDeEntrada() {
         // TODO implement here
         return false;
+    }
+    
+     /**
+     * Se obtienen el identificador del eveto.
+     * @return identificador del evento
+     */
+    public int getIdEvento() {
+        return idEvento;
+    }
+    /**
+     * Modifica el identificador del evento.
+     * @param idEvento 
+     */
+    public void setIdEvento(int idEvento) {
+        this.idEvento = idEvento;
+    }
+    /**
+     * se obtiene el nombre del evento.
+     * @return String
+     */
+    public String getNombre() {
+        return nombre;
+    }
+    /**
+     * modifica el nombre del evento por un nuevo nombre.
+     * @param nombre 
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    /**
+     * Se obtiene la descripcion del evento.
+     * @return 
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+    /**
+     * Modifica la descripción del evento
+     * @param descripcion 
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    /**
+     * se obtienen la fecha de inicio del evento.
+     * @return Date
+     */
+    public Date getFechaDeInicio() {
+        return fechaDeInicio;
+    }
+    /**
+     * Modifica la fecha de inicio del evento.
+     * @param fechaDeInicio 
+     */
+    public void setFechaDeInicio(Date fechaDeInicio) {
+        this.fechaDeInicio = fechaDeInicio;
+    }
+    /**
+     * obtiene la fecha de termino del proyecto.
+     * @return Date
+     */
+    public Date getFechaDeTermino() {
+        return fechaDeTermino;
+    }
+
+    public void setFechaDeTermino(Date fechaDeTermino) {
+        this.fechaDeTermino = fechaDeTermino;
+    }
+    /**
+     * Obtiene el plazo de devolucion de las entradas.
+     * @return 
+     */
+    public int getPlazoDevolucionEntrada() {
+        return plazoDevolucionEntrada;
+    }
+    /**
+     * Modifica el plazo de devolución de las entradas.
+     * @param plazoDevolucionEntrada 
+     */
+    public void setPlazoDevolucionEntrada(int plazoDevolucionEntrada) {
+        this.plazoDevolucionEntrada = plazoDevolucionEntrada;
+    }
+    /**
+     * Se obtiene la capacidadMaximaDelEvento del evento " numero de personas"
+     * @return 
+     */
+    public int getCapacidadMaximaDelEvento() {
+        return capacidadMaximaDelEvento;
+    }
+    /**
+     * Modifica la capacidadMaximaDelEvento del propyecto.
+     * @param capacidadMaximaDelEvento 
+     */
+    public void setCapacidadMaximaDelEvento(int capacidadMaximaDelEvento) {
+        this.capacidadMaximaDelEvento = capacidadMaximaDelEvento;
     }
 
 }
