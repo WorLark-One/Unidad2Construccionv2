@@ -263,7 +263,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             //realizar operacion
             java.util.Date fechaDePublicacion = new Date();
             //falta id
-            if(this.listaPropiedades.getSelectedIndex()==-1){
+            if(this.listaPropiedades.getSelectedIndex()==0){
                 JOptionPane.showMessageDialog(null, "No a seleccionado la propiedad a modificar", "Error al seleccionar propiedad", JOptionPane.WARNING_MESSAGE);    
                 return;
             }
@@ -279,7 +279,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             boolean resultado = false;
             try {
                 System.out.println("Entre a modificar");
-                resultado = this.papa.getControladorPropietario().modifcarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getId() ,this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getCapacidadTotal(), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
+                resultado = this.papa.getControladorPropietario().modifcarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId() ,this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getCapacidadTotal(), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
                 System.out.println(resultado);
             } catch (SQLException ex) {
                 System.out.println("Cayo");
@@ -335,19 +335,19 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             return;
         }
         if(this.listaOpciones.getSelectedIndex()==1){
-            PanelAgregarSector sector = new PanelAgregarSector(this.papa, this.listaPropiedades.getSelectedIndex());
+            PanelAgregarSector sector = new PanelAgregarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
             this.papa.añadirSector(sector);
             this.actualizarMenuOpcionesModificar();
             return;
         }
         if(this.listaOpciones.getSelectedIndex()==2){
-            PanelModificarSector sector = new PanelModificarSector(this.papa, this.listaPropiedades.getSelectedIndex());
+            PanelModificarSector sector = new PanelModificarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
             this.papa.modificarSector(sector);
             this.actualizarMenuOpcionesModificar();
             return;
         }
         if(this.listaOpciones.getSelectedIndex()==3){
-            PanelEliminarSector sector = new PanelEliminarSector(this.papa, this.listaPropiedades.getSelectedIndex());
+            PanelEliminarSector sector = new PanelEliminarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
             this.papa.eliminarSector(sector);
             this.actualizarMenuOpcionesModificar();
             return;
@@ -359,10 +359,17 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         if(this.listaPropiedades.getSelectedIndex()==-1){
             return;
         }
-        this.nombre.setText(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getNombre());
-        this.descripcion.setText(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getDescripcion());
-        this.ubicacion.setText(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getUbicacion());
-        this.valorArriendo.setText(Integer.toString(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getValorArriendo()));
+        if(this.listaPropiedades.getSelectedIndex()==0){
+            this.nombre.setText("");
+            this.descripcion.setText("");
+            this.ubicacion.setText("");
+            this.valorArriendo.setText("");
+            return;
+        }
+        this.nombre.setText(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getNombre());
+        this.descripcion.setText(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getDescripcion());
+        this.ubicacion.setText(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getUbicacion());
+        this.valorArriendo.setText(Integer.toString(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getValorArriendo()));
     }//GEN-LAST:event_listaPropiedadesActionPerformed
 
 
@@ -402,6 +409,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
     public void actualizarMenuOpciones(){
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.listaPropiedades.removeAllItems();
+        this.listaPropiedades.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.size(); i++){
                 this.listaPropiedades.addItem("Nombre : " + this.propiedades.get(i).getNombre());

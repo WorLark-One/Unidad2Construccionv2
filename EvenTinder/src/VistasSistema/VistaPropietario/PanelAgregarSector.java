@@ -73,7 +73,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
         jLabel5.setText("Nombre");
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("1. Ingrese los siguientes datos");
+        jLabel3.setText("Ingrese los siguientes datos");
 
         jLabel12.setText("Capacidad");
 
@@ -112,11 +112,11 @@ public class PanelAgregarSector extends javax.swing.JPanel {
                         .addGap(65, 65, 65)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(capacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(guardarCambios)
-                        .addGap(18, 18, 18)
-                        .addComponent(volver)))
+                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(guardarCambios)
+                                .addGap(18, 18, 18)
+                                .addComponent(volver)))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(

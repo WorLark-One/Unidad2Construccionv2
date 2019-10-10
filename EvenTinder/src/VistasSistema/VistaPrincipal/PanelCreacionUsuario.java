@@ -88,7 +88,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
 
         labelTipoUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jPanel2.setBackground(new java.awt.Color(236, 236, 236));
+        jPanel2.setBackground(new java.awt.Color(229, 229, 229));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("1. Seleccione el tipo de usuario que quiere crear");
@@ -121,7 +121,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel3.setBackground(new java.awt.Color(243, 243, 243));
 
         clave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

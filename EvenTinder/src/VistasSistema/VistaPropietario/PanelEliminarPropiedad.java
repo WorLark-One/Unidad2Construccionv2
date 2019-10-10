@@ -53,7 +53,7 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
         jLabel18.setText("Menú Eliminar propiedad");
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel19.setText("1. Seleccione la propiedad");
+        jLabel19.setText("Seleccione la propiedad");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
@@ -103,13 +103,13 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarCuentaActionPerformed
-        if(this.listaPropiedades.getSelectedIndex()==-1){
+        if(this.listaPropiedades.getSelectedIndex()>0){
             JOptionPane.showMessageDialog(null, "No a seleccionado la propiedad a modificar", "Error al seleccionar propiedad", JOptionPane.WARNING_MESSAGE);    
             return;
         }
         boolean resultado = false;
         try {
-            resultado = this.papa.getControladorPropietario().eliminarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getId());
+            resultado = this.papa.getControladorPropietario().eliminarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
         } catch (SQLException ex) {
             Logger.getLogger(PanelEliminarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -145,6 +145,7 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
     private void actualizarMenuOpciones(){
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.listaPropiedades.removeAllItems();
+        this.listaPropiedades.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.size(); i++){
                 this.listaPropiedades.addItem("Nombre : " + this.propiedades.get(i).getNombre());
