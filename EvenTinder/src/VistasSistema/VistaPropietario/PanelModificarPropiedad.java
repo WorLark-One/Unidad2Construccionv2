@@ -65,6 +65,15 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         listaPropiedades = new javax.swing.JComboBox<>();
+<<<<<<< HEAD
+=======
+        jLabel2 = new javax.swing.JLabel();
+        agregarSector = new javax.swing.JButton();
+        modificarSector = new javax.swing.JButton();
+        eliminarSector = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        nombre = new javax.swing.JTextField();
+>>>>>>> Testing-v2
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -196,6 +205,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             }
         });
 
+<<<<<<< HEAD
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -216,6 +226,9 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+=======
+        jLabel3.setText("Nombre");
+>>>>>>> Testing-v2
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -227,11 +240,42 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+<<<<<<< HEAD
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(719, Short.MAX_VALUE))
+=======
+                        .addComponent(jLabel12)
+                        .addComponent(botonRegistrar, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(jLabel3))
+                            .addGap(33, 33, 33)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(ubicacion)
+                                .addComponent(capacidadTotal)
+                                .addComponent(valorArriendo)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                .addComponent(nombre))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(agregarSector)
+                        .addGap(18, 18, 18)
+                        .addComponent(modificarSector)
+                        .addGap(18, 18, 18)
+                        .addComponent(eliminarSector))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel19)
+                        .addComponent(jLabel18)
+                        .addComponent(jLabel1)
+                        .addComponent(listaPropiedades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(739, Short.MAX_VALUE))
+>>>>>>> Testing-v2
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,8 +292,18 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+<<<<<<< HEAD
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(222, Short.MAX_VALUE))
+=======
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(agregarSector)
+                    .addComponent(modificarSector)
+                    .addComponent(eliminarSector))
+                .addGap(60, 60, 60)
+                .addComponent(botonRegistrar)
+                .addContainerGap(217, Short.MAX_VALUE))
+>>>>>>> Testing-v2
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -368,6 +422,10 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonRegistrar;
+<<<<<<< HEAD
+=======
+    private javax.swing.JTextField capacidadTotal;
+>>>>>>> Testing-v2
     private javax.swing.JTextArea descripcion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
