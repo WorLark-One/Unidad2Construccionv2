@@ -148,7 +148,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                                 .addComponent(ubicacion)
                                 .addComponent(capacidadTotal)
                                 .addComponent(nombre)
-                                .addComponent(valorArriendo)))))
+                                .addComponent(valorArriendo, javax.swing.GroupLayout.Alignment.TRAILING)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -261,9 +261,12 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(botonAñadirSector)
-                                .addGap(0, 177, Short.MAX_VALUE))
-                            .addComponent(nombreSector)
-                            .addComponent(capacidad))))
+                                .addGap(0, 178, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(nombreSector, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                    .addComponent(capacidad))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(

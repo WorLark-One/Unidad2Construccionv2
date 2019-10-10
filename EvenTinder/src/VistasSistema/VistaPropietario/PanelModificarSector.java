@@ -200,12 +200,12 @@ public class PanelModificarSector extends javax.swing.JPanel {
         int resp = validarEntrada(this.nombre.getText(), this.capacidad.getText());
         int capacidad=0;
         if(resp==0){
-            if(listaSectores.getSelectedIndex()==-1){
+            if(listaSectores.getSelectedIndex()==-1 || listaSectores.getSelectedIndex()==0 ){
                 JOptionPane.showMessageDialog(null, "No se a seleccionado el sector a modificar", "Error al seleccioanr sector", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             for (int i = 0; i < this.propiedades.get(this.id).getListaSectores().size(); i++) {
-                if(listaSectores.getSelectedIndex()!=i){
+                if(listaSectores.getSelectedIndex()-1!=i){
                     if(this.propiedades.get(this.id).getListaSectores().get(i).getNombre().equals(this.nombre.getText())){
                         JOptionPane.showMessageDialog(null, "El nombre del sector ya se encuentra registrado", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
                         return;
@@ -214,8 +214,8 @@ public class PanelModificarSector extends javax.swing.JPanel {
             }
             boolean bandera = false;
             try {
-                capacidad=Integer.parseInt(this.capacidad.getText()) - this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getCapacidadDelSector();
-                bandera = this.papa.getControladorPropietario().modificarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
+                capacidad=Integer.parseInt(this.capacidad.getText()) - this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()-1).getCapacidadDelSector();
+                bandera = this.papa.getControladorPropietario().modificarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()-1).getNombre(), Integer.parseInt(this.capacidad.getText()), this.nombre.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(PanelModificarSector.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -257,8 +257,13 @@ public class PanelModificarSector extends javax.swing.JPanel {
         if(listaSectores.getSelectedIndex()==-1){
             return;
         }
-        this.nombre.setText(this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre());
-        this.capacidad.setText(Integer.toString(this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getCapacidadDelSector()));
+        if(listaSectores.getSelectedIndex()==0){
+            this.nombre.setText("");
+            this.capacidad.setText("");
+            return;
+        }
+        this.nombre.setText(this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()-1).getNombre());
+        this.capacidad.setText(Integer.toString(this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()-1).getCapacidadDelSector()));
     }//GEN-LAST:event_listaSectoresActionPerformed
 
 
@@ -328,6 +333,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
     private void actualizarMenuSectores(){
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.listaSectores.removeAllItems();
+        this.listaSectores.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.get(id).getListaSectores().size(); i++){
                 this.listaSectores.addItem("Nombre Sector: " + this.propiedades.get(id).getListaSectores().get(i).getNombre());

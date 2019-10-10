@@ -321,17 +321,26 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
     private void opcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionesActionPerformed
         // TODO add your handling code here:
         System.out.println(opciones.getSelectedIndex());
-        if(opciones.getSelectedIndex()!=-1){
+        if(opciones.getSelectedIndex()==0){
+            this.nombre.setText("Nombre: " );
+            this.descripcion.setText("descripcion: ");
+            this.ubicacion.setText("ubicacion: ");
+            this.capacidadTotal.setText("capacidadTotal: ");
+            this.cantidadDeSectores.setText("cantidadDeSectores: ");
+            this.valorArriendo.setText("valorArriendo: ");
+            return;
+        }
+        if(opciones.getSelectedIndex()>0){
             this.listaSectores.removeAll();
             this.modeloLista=new DefaultListModel();
-            this.nombre.setText("Nombre: " + this.propiedades.get(opciones.getSelectedIndex()).getNombre());
-            this.descripcion.setText("descripcion: " + this.propiedades.get(opciones.getSelectedIndex()).getDescripcion());
-            this.ubicacion.setText("ubicacion: "+ this.propiedades.get(opciones.getSelectedIndex()).getUbicacion());
-            this.capacidadTotal.setText("capacidadTotal: "+ this.propiedades.get(opciones.getSelectedIndex()).getCapacidadTotal());
-            this.cantidadDeSectores.setText("cantidadDeSectores: "+ this.propiedades.get(opciones.getSelectedIndex()).getListaSectores().size());
-            this.valorArriendo.setText("valorArriendo: "+ this.propiedades.get(opciones.getSelectedIndex()).getValorArriendo());
-            for(int i=0;i<this.propiedades.get(opciones.getSelectedIndex()).getListaSectores().size();i++){
-                this.modeloLista.addElement("Nombre sector: " + this.propiedades.get(opciones.getSelectedIndex()).getListaSectores().get(i).getNombre() + "  Capacidad: " + this.propiedades.get(opciones.getSelectedIndex()).getListaSectores().get(i).getCapacidadDelSector());
+            this.nombre.setText("Nombre: " + this.propiedades.get(opciones.getSelectedIndex()-1).getNombre());
+            this.descripcion.setText("descripcion: " + this.propiedades.get(opciones.getSelectedIndex()-1).getDescripcion());
+            this.ubicacion.setText("ubicacion: "+ this.propiedades.get(opciones.getSelectedIndex()-1).getUbicacion());
+            this.capacidadTotal.setText("capacidadTotal: "+ this.propiedades.get(opciones.getSelectedIndex()-1).getCapacidadTotal());
+            this.cantidadDeSectores.setText("cantidadDeSectores: "+ this.propiedades.get(opciones.getSelectedIndex()-1).getListaSectores().size());
+            this.valorArriendo.setText("valorArriendo: "+ this.propiedades.get(opciones.getSelectedIndex()-1).getValorArriendo());
+            for(int i=0;i<this.propiedades.get(opciones.getSelectedIndex()-1).getListaSectores().size();i++){
+                this.modeloLista.addElement("Nombre sector: " + this.propiedades.get(opciones.getSelectedIndex()-1).getListaSectores().get(i).getNombre() + "  Capacidad: " + this.propiedades.get(opciones.getSelectedIndex()-1).getListaSectores().get(i).getCapacidadDelSector());
             }
             this.listaSectores.setModel(this.modeloLista);
         }
@@ -381,6 +390,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         opciones.removeAllItems();
         this.listaSectores.setModel(this.modeloLista);
         this.listaSectores.removeAll();
+        opciones.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.size(); i++){
                 opciones.addItem("Nombre : " + this.propiedades.get(i).getNombre());
