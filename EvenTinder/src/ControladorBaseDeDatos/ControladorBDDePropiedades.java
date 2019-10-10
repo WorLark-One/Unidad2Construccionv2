@@ -167,7 +167,6 @@ public class ControladorBDDePropiedades {
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
-                System.out.println("callo dentro");
                 return 0;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);

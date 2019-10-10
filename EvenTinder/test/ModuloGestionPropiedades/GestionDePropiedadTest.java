@@ -52,10 +52,9 @@ public class GestionDePropiedadTest {
         String descripcion = "descripcion";
         
         GestionDePropiedad instance = new GestionDePropiedad();
-        int expResult = 1;
         
         int result = instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
-        assertEquals(expResult, result);
+        assertTrue(result > 0);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -66,7 +65,6 @@ public class GestionDePropiedadTest {
     @Test
     public void testModifcarPropiedad() throws SQLException {
         System.out.println("modifcarPropiedad");
-        int id = 1;
         String nombre = "";
         String ubicacion = "";
         Date fechaDePublicacion = null;
@@ -77,7 +75,7 @@ public class GestionDePropiedadTest {
         GestionDePropiedad instance = new GestionDePropiedad();
         
         String rut ="";
-        instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
+        int id = instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
         
         boolean expResult = true;
         boolean result = instance.modifcarPropiedad(id, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
@@ -94,7 +92,6 @@ public class GestionDePropiedadTest {
     public void testEliminarPropiedad() throws SQLException {
         System.out.println("eliminarPropiedad");
         
-        int id = 1;
         GestionDePropiedad instance = new GestionDePropiedad();
         String rut = "";
         String nombre = "";
@@ -103,7 +100,7 @@ public class GestionDePropiedadTest {
         int capacidadTotal = 0;
         int valorDeArriendo = 0;
         String descripcion = "";        
-        instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
+        int id = instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
        
         assertNotNull(instance.mostrarPropiedad(id));
         
@@ -130,9 +127,8 @@ public class GestionDePropiedadTest {
         int valorDeArriendo = 0;
         String descripcion = "";
         GestionDePropiedad instance = new GestionDePropiedad();
-        instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
-        
-        int id = 1;
+        int id = instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
+
         int capacidad = 0;
         String nombreSector = "";
         boolean expResult = true;
@@ -158,10 +154,8 @@ public class GestionDePropiedadTest {
         int valorDeArriendo = 0;
         String descripcion = "";
         GestionDePropiedad instance = new GestionDePropiedad();
-        instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
+        int id = instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
         
-        
-        int id = 1;
         int capacidad = 1;
         String nombreActual = "nombre";        
         instance.añadirSector(id, capacidad, nombreActual);
@@ -190,17 +184,19 @@ public class GestionDePropiedadTest {
         int valorDeArriendo = 0;
         String descripcion = "";
         GestionDePropiedad instance = new GestionDePropiedad();
-        instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
+        int i = instance.registrarPropiedad(rut, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
         
         
         int id = 1;
         int capacidad = 1;
         String nombreActual = "nombre";        
         instance.añadirSector(id, capacidad, nombreActual);
-                
-        boolean expResult = true;
-        boolean result = instance.eliminarSector(id,nombreActual);
-        assertEquals(expResult, result);
+        
+        
+        int expResult = 0;
+        instance.eliminarSector(id,nombreActual);
+        ArrayList<Sector> result = instance.mostrarPropiedad(i).getListaSectores();
+        assertEquals(expResult, result.size());
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
