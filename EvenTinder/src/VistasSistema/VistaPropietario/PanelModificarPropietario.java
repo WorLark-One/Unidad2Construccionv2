@@ -25,6 +25,11 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     public PanelModificarPropietario(VentanaPrincipalPropietario papa) {
         this.papa=papa;
         initComponents();
+        this.nombre.setText("");
+        this.clave.setText("");
+        this.numeroTelefonico.setText("");
+        this.correoElectronico.setText("");
+        this.cuentaBancaria.setText("");
     }
 
     /**
@@ -92,7 +97,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +131,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                                 .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel19)
                             .addComponent(jLabel18))
-                        .addContainerGap(153, Short.MAX_VALUE))))
+                        .addContainerGap(441, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +167,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                     .addComponent(cuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(botonRegistrar)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(376, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -172,7 +177,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
-        int resp = validarModificarUsuario(this.nombre.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.cuentaBancaria.getText());
+        int resp = validarEntrada(this.nombre.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.cuentaBancaria.getText());
         if(resp==0){
             boolean respuesta = false;
             try {
@@ -182,28 +187,33 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             }
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
+                this.nombre.setText("");
+                this.clave.setText("");
+                this.numeroTelefonico.setText("");
+                this.correoElectronico.setText("");
+                this.cuentaBancaria.setText("");
             }else{
                 JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
             }
         }
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Nombre completo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Nombre completo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==3){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Numero Telefonico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Numero Telefonico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==4){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==5){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Cuenta Bancaria", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Cuenta Bancaria", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
@@ -254,7 +264,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
      * @param cuentaBancaria
      * @return 
      */
-    public int validarModificarUsuario(String nombre, String clave, String numeroTelefonico, String correoElectronico, String cuentaBancaria){                                               
+    public int validarEntrada(String nombre, String clave, String numeroTelefonico, String correoElectronico, String cuentaBancaria){                                               
         if("".equals(nombre)){
             return 1;
         }

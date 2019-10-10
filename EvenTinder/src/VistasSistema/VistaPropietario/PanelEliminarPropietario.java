@@ -69,7 +69,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
         jLabel18.setText("Menú Eliminar cuenta de propietario");
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel19.setText("1. Para eliminar cuenta ingrese su rut con su clave");
+        jLabel19.setText("1. Ingrese los siguientes datos");
 
         jLabel13.setText("Clave");
 
@@ -80,8 +80,9 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonEliminarCuenta)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
@@ -89,8 +90,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rut, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonEliminarCuenta)))
+                            .addComponent(rut, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel18)
                     .addComponent(jLabel19))
                 .addContainerGap(138, Short.MAX_VALUE))
@@ -127,7 +127,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarCuentaActionPerformed
-        int resp =  validarDatosEliminarUsuario(this.rut.getText(),  this.clave.getText());
+        int resp =  validarEntrada(this.rut.getText(),  this.clave.getText());
         if(resp==0){
             boolean respuesta = false;
             try {
@@ -143,11 +143,11 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
             }
         }
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
     }//GEN-LAST:event_botonEliminarCuentaActionPerformed
@@ -179,7 +179,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
      * @param clave
      * @return 
      */
-    public int validarDatosEliminarUsuario(String rut, String clave){
+    public int validarEntrada(String rut, String clave){
         if("".equals(rut)){
             return 1;
         }

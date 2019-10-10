@@ -16,6 +16,8 @@ public class Sector {
         this.capacidadDelSector = capacidadDelSector;
     }
 
+    
+    
     public int getIdPropiedad() {
         return idPropiedad;
     }
