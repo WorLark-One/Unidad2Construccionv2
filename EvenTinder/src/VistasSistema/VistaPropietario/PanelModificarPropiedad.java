@@ -334,6 +334,11 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         if(this.listaOpciones.getSelectedIndex()==0){
             return;
         }
+        if(this.listaPropiedades.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(null, "Primero debe elegir la propiedad a modificar", "Error al seleccionar la propiedad", JOptionPane.WARNING_MESSAGE);  
+            this.listaOpciones.setSelectedIndex(0);
+            return;
+        }
         if(this.listaOpciones.getSelectedIndex()==1){
             PanelAgregarSector sector = new PanelAgregarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
             this.papa.añadirSector(sector);
