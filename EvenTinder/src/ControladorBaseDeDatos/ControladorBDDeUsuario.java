@@ -33,7 +33,6 @@ public class ControladorBDDeUsuario {
      */
     public boolean preguntarPorUsuario(String tipoUsuario, String rut, String clave) throws SQLException {
         // se establece la conexion.
-        System.out.println("preginwensamaermnmrfnm");
         this.conexion.crearConexion("EventTinder", "1");
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
