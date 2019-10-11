@@ -14,16 +14,20 @@ import java.util.ArrayList;
 public class ControladorBDDeUsuario {
 
     ConexionBD conexion;
-    String nombreBD;
-    String contraseñaUsuarioBD;
 
     /**
      * Default constructor
      */
     public ControladorBDDeUsuario() {
         this.conexion = new ConexionBD();
-        this.nombreBD = "EventTinder";
-        this.contraseñaUsuarioBD = "1";
+        iniciarlizarBD();
+    }
+    
+    
+    public void iniciarlizarBD(){
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+        this.conexion.crearTablas(miConexion);
     }
 
     /**
@@ -37,7 +41,7 @@ public class ControladorBDDeUsuario {
      */
     public boolean preguntarPorUsuario(String tipoUsuario, String rut, String clave) throws SQLException {
         // se establece la conexion.
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         //se realiza la consulta.
@@ -76,7 +80,7 @@ public class ControladorBDDeUsuario {
      */
     public Cliente obtenerInformacionCliente(String rut) throws SQLException {
         Cliente cliente = null;
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<String> informacion = new ArrayList<>();
@@ -122,7 +126,7 @@ public class ControladorBDDeUsuario {
      */
     public Organizador obtenerInformacionOrganizador(String rut) throws SQLException {
         Organizador organizador = null;
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<String> informacion = new ArrayList<>();
@@ -168,7 +172,7 @@ public class ControladorBDDeUsuario {
      */
     public Propietario obtenerInformacionPropietario(String rut) throws SQLException {
         Propietario propietario = null;
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<String> informacion = new ArrayList<>();
@@ -222,7 +226,7 @@ public class ControladorBDDeUsuario {
      */
     public boolean añadirUsuario(String tipoUsuario, String nombre, String rut, String correo, String clave, String telefono, String tarjeta) throws SQLException {
         
-       this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+       this.conexion.crearConexion();
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -275,7 +279,7 @@ public class ControladorBDDeUsuario {
      */
     public boolean modificarUsuario(String tipoUsuario, String rutUsuarioModificar, String nombre, String correo, String clave, String telefono, String tarjeta) throws SQLException {
 
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         System.out.println(tipoUsuario);
 
@@ -342,7 +346,7 @@ public class ControladorBDDeUsuario {
      * @throws java.sql.SQLException
      */
     public boolean eliminarUsuario(String tipoUsuario, String rut) throws SQLException {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
