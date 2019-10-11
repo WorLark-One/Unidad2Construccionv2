@@ -15,9 +15,6 @@ public class ControladorBDDePropiedades {
 
     ConexionBD conexion;
 
-    /**
-     * Default constructor
-     */
     public ControladorBDDePropiedades() {
         this.conexion = new ConexionBD();
     }
@@ -44,7 +41,6 @@ public class ControladorBDDePropiedades {
 
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    // obtengo la informacion del cliente.
                     int idPropiedad = Integer.parseInt(resultado.getString("id"));
                     String nombre = resultado.getString("nombre");
                     String ubicacion = resultado.getString("ubicacion");
