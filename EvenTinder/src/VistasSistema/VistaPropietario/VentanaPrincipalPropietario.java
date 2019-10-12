@@ -241,6 +241,15 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();  
     }
 
+    void HistorialDeEventos() {
+        PanelHistorialDeEventos historial = new PanelHistorialDeEventos(this);
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(historial, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=historial;
+        this.repaint();
+        this.revalidate();  
+    }
+
 
 
 }

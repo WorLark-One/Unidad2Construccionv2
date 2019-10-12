@@ -104,9 +104,8 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel21.setText("3. Añadir precio de la entrada por sector");
+        jLabel21.setText("3. modifique precio de la entrada por sector");
 
-        listaSectores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listaSectores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaSectoresActionPerformed(evt);
@@ -115,7 +114,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
 
         jLabel1.setText("Precio");
 
-        botonRegistrarPrecio.setText("Guardar");
+        botonRegistrarPrecio.setText("Modificar precio sector");
         botonRegistrarPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonRegistrarPrecioActionPerformed(evt);
@@ -157,11 +156,6 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lista.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(lista);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -226,7 +220,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
 
         jLabel5.setText("Nombre");
 
-        botonCrearEvento.setText("Crear Evento");
+        botonCrearEvento.setText("Modificar Evento");
         botonCrearEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCrearEventoActionPerformed(evt);
@@ -304,7 +298,6 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         jLabel23.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel23.setText("1. Seleccione el evento");
 
-        listaEventos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listaEventos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaEventosActionPerformed(evt);
