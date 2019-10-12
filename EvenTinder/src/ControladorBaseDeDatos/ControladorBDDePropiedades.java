@@ -2,6 +2,7 @@ package ControladorBaseDeDatos;
 
 import ModuloGestionPropiedades.Propiedad;
 import ModuloGestionPropiedades.Sector;
+import ModuloGestionUsuario.Propietario;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ public class ControladorBDDePropiedades {
 
     public ControladorBDDePropiedades() {
         this.conexion = new ConexionBD();
+        
         iniciarlizarBD();
     }
     
@@ -455,4 +457,9 @@ public class ControladorBDDePropiedades {
         return sectores;
     }
 
+    
+    
+    
+    
+    
 }

@@ -17,14 +17,13 @@ import java.util.logging.Logger;
 public class ControladorBDDeUsuario {
 
     ConexionBD conexion;
-    ControladorBDDePropiedades propiedades;
+    
 
     /**
      * Default constructor
      */
     public ControladorBDDeUsuario() {
         this.conexion = new ConexionBD();
-        this.propiedades= new ControladorBDDePropiedades();
         iniciarlizarBD();
     }
     
@@ -386,8 +385,8 @@ public class ControladorBDDeUsuario {
      * propietario", si este ya esta registrado en la base de datos, retorna 1,
      * -1 de lo contrario. metodo de uso interno
      *
-     * @param conexionAux
-     * @param tipoUsuario
+     * @param conexionAux: conexion con la base de datos.
+     * @param tipoUsuario: tipo de usuario, el 
      * @param rut
      * @return
      */
@@ -417,59 +416,6 @@ public class ControladorBDDeUsuario {
         return -1;
     }
 
-    /**
-     * Obtiene una lista de todos los propietarios registrados en la base de datos con sus respectivas 
-     * propiedades asiciadas..
-     * @return lista de propietario, o null en caso de que no existan.
-     */
-    public ArrayList<Propietario> obtenerListaDePropietarios(){
-         
-        this.conexion.crearConexion();
-        Connection miConexion = this.conexion.getConexion();
-
-        ArrayList<Propietario> listaPropietario = new ArrayList<>();
-        if (miConexion != null)// si hay conexion.
-        {
-
-            try {
-                java.sql.Statement st = miConexion.createStatement();
-
-                String sql = "select * from propietario";
-
-                ResultSet resultado = st.executeQuery(sql);
-                while (resultado.next()) {
-                    String nombreCompleto = resultado.getString("nombrecompleto");
-                    String rutCliente = resultado.getString("rut");
-                    String correo = resultado.getString("correo");
-                    String contraseña = resultado.getString("contraseña");
-                    String telefono = resultado.getString("telefono");
-                    String cuentaCorriente = resultado.getString("cuentacorriente");
-                    Propietario propietario = new Propietario(nombreCompleto, rutCliente,contraseña,telefono,  correo,  cuentaCorriente);
-                    
-                    ArrayList<Propiedad>listaPropiedades=this.propiedades.obtenerInformacionDePropiedades(rutCliente);
-                    propietario.setListaDePropiedades(listaPropiedades);
-                    listaPropietario.add(propietario);
-                    
-                }
-                resultado.close();
-                st.close();
-                return listaPropietario;
-
-            } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
-                return null;
-            } finally {
-                try {
-                    this.conexion.cerrarBaseDeDatos(miConexion);
-                } catch (SQLException ex) {
-                    //Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-        }
-        return null;
-    
-    }
     
    
 }
