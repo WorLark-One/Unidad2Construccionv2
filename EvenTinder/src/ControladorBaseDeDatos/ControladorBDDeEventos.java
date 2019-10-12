@@ -498,7 +498,7 @@ public class ControladorBDDeEventos {
                     int capacidad = Integer.parseInt(resultado.getString("capacidad"));
                     int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
                     boolean publicado = resultado.getBoolean("publicado");
-                    System.out.println("nombre evento:"+nombre+" rut del organizador:"+rutOrganizador);
+                    System.out.println("nombre evento:" + nombre + " rut del organizador:" + rutOrganizador);
                     int idPropiedad = obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
                     Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
                     miEvento.setIdPropiedad(idPropiedad);
@@ -637,7 +637,7 @@ public class ControladorBDDeEventos {
 
             try {
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = "delete from celebra where celebra.refevento="+idEvento+"";
+                String sql = "delete from celebra where celebra.refevento=" + idEvento + "";
                 System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
@@ -645,7 +645,7 @@ public class ControladorBDDeEventos {
             } catch (SQLException e) {
                 System.out.println("ERROR DE CONEXION: eliminarAsociacionEventoPropiedad" + e);
                 return false;
-            } 
+            }
 
         }
         return false;
@@ -976,7 +976,7 @@ public class ControladorBDDeEventos {
                 int idEntradaPrueba = crearEntradaPrueba(miConexion);
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "insert into asociacion values(" + idEvento + "," + idEntradaPrueba + "," + precioEntrada + ",'" + nombreSector + "'," + idPropiedad + ")";
-                    System.out.println(sql);
+                System.out.println(sql);
                 st.executeQuery(sql);
                 st.close();
             } catch (SQLException e) {
@@ -987,6 +987,44 @@ public class ControladorBDDeEventos {
                     this.conexion.cerrarBaseDeDatos(miConexion);
                 } catch (SQLException ex) {
                     //System.out.println("error al cerrar la base de datos.");
+                }
+            }
+        }
+        return false;
+
+    }
+
+    /**
+     * modifica el precio de una entrada
+     *
+     * @param idEvento: identificador de evento.
+     * @param nuevoPrecioEntrada : nuevo precio que se le asignara a la entrada.
+     * @param nombreSector: nombre del sector.
+     * @param idPropiedad: identificador de la propiedad
+     * @return true si modifica el precio, false de lo contrario.
+     */
+    public boolean modificarPrecioEntradaPorSector(int idEvento, int nuevoPrecioEntrada, String nombreSector, int idPropiedad) {
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+        if (miConexion != null) {
+            boolean EstadoEvento = obtenerPublicadoDeEvento(miConexion, idEvento);
+            if (EstadoEvento == false) {
+                try {
+                    int idEntradaPrueba = crearEntradaPrueba(miConexion);
+                    java.sql.Statement st = miConexion.createStatement();
+                    String sql = "update asociacion set precio= " + nuevoPrecioEntrada + " where asociacion.refevento=" + idEvento + " and asociacion.refentrada=" + idEntradaPrueba + " and asociacion.refpropiedad=" + idPropiedad + "";
+                    System.out.println(sql);
+                    st.executeUpdate(sql);
+                    st.close();
+                } catch (SQLException e) {
+                    //System.out.println("error conexion");
+                    return false;
+                } finally {
+                    try {
+                        this.conexion.cerrarBaseDeDatos(miConexion);
+                    } catch (SQLException ex) {
+                        //System.out.println("error al cerrar la base de datos.");
+                    }
                 }
             }
         }
