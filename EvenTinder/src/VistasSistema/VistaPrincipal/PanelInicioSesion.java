@@ -27,6 +27,7 @@ public class PanelInicioSesion extends javax.swing.JPanel {
     public PanelInicioSesion(VentanaPrincipal papa) {
         this.papa=papa;
         initComponents();
+        this.actualizarMenuOpciones();
     }
     
     public PanelInicioSesion() {
@@ -52,10 +53,8 @@ public class PanelInicioSesion extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        botonCliente = new javax.swing.JButton();
-        botonPropietario = new javax.swing.JButton();
-        botonOrganizador = new javax.swing.JButton();
         labelTipoUsuario = new javax.swing.JLabel();
+        listaTipoUsuario = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -88,28 +87,14 @@ public class PanelInicioSesion extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("1. Seleccione el tipo de usuario con el que quiere ingresar");
 
-        botonCliente.setText("Cliente");
-        botonCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonClienteActionPerformed(evt);
-            }
-        });
-
-        botonPropietario.setText("Propietario");
-        botonPropietario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonPropietarioActionPerformed(evt);
-            }
-        });
-
-        botonOrganizador.setText("Organizador");
-        botonOrganizador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonOrganizadorActionPerformed(evt);
-            }
-        });
-
         labelTipoUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        listaTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaTipoUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -125,12 +110,7 @@ public class PanelInicioSesion extends javax.swing.JPanel {
                             .addComponent(jLabel18)
                             .addComponent(jLabel19)
                             .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(botonCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(botonPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(botonOrganizador, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(listaTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(180, 180, 180)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,12 +139,8 @@ public class PanelInicioSesion extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonPropietario)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(botonCliente)
-                        .addComponent(botonOrganizador)))
-                .addGap(18, 18, 18)
+                .addComponent(listaTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel19)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -209,7 +185,11 @@ public class PanelInicioSesion extends javax.swing.JPanel {
                     }
                 }
                 if("organizador".equals(this.tipoUsuario)){
-                    this.papa.derivarAVentanaPrincipalOrganizador();
+                    try {
+                        this.papa.derivarAVentanaPrincipalOrganizador();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(PanelInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "No se encuentra registrado en el sistema");
@@ -228,30 +208,26 @@ public class PanelInicioSesion extends javax.swing.JPanel {
         }  
     }//GEN-LAST:event_botonIniciarSesionActionPerformed
 
-    private void botonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClienteActionPerformed
+    private void listaTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaTipoUsuarioActionPerformed
         // TODO add your handling code here:
-        this.tipoUsuario="cliente";        
-        this.botonIniciarSesion.setText("Iniciar Sesion cliente");
-    }//GEN-LAST:event_botonClienteActionPerformed
-
-    private void botonPropietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPropietarioActionPerformed
         // TODO add your handling code here:
-        this.tipoUsuario="propietario";
-        this.botonIniciarSesion.setText("Iniciar Sesion propietario");
-    }//GEN-LAST:event_botonPropietarioActionPerformed
-
-    private void botonOrganizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOrganizadorActionPerformed
-        // TODO add your handling code here:
-        this.tipoUsuario="organizador";
-        this.botonIniciarSesion.setText("Iniciar Sesion organizador");
-    }//GEN-LAST:event_botonOrganizadorActionPerformed
+        if(this.listaTipoUsuario.getSelectedIndex()==-1){
+            return;
+        }
+        if(this.listaTipoUsuario.getSelectedIndex()==0){
+            this.tipoUsuario="cliente";
+        }
+        if(this.listaTipoUsuario.getSelectedIndex()==1){
+            this.tipoUsuario="organizador";
+        }
+        if(this.listaTipoUsuario.getSelectedIndex()==2){
+            this.tipoUsuario="propietario";
+        }
+    }//GEN-LAST:event_listaTipoUsuarioActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton botonCliente;
     public javax.swing.JButton botonIniciarSesion;
-    public javax.swing.JButton botonOrganizador;
-    public javax.swing.JButton botonPropietario;
     private javax.swing.JTextField clave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
@@ -260,6 +236,7 @@ public class PanelInicioSesion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel labelTipoUsuario;
+    private javax.swing.JComboBox<String> listaTipoUsuario;
     private javax.swing.JTextField rut;
     // End of variables declaration//GEN-END:variables
 
@@ -291,4 +268,21 @@ public class PanelInicioSesion extends javax.swing.JPanel {
         return 0;
     }
 
+    
+    /**
+     * Este va a ser el formato de las consultas para ser luego testeadas en el junit
+     * 0 = Correcto
+     * numeros mayores que 0 son errores
+     */
+
+    //
+    // no se puede hacer tdd ya que necesita otro metodo
+    public void actualizarMenuOpciones(){
+        this.listaTipoUsuario.removeAllItems();
+        this.listaTipoUsuario.addItem("Cliente");
+        this.listaTipoUsuario.addItem("Organizador");
+        this.listaTipoUsuario.addItem("Propietario");
+        this.repaint();
+        this.revalidate();
+    }
 }

@@ -69,7 +69,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
         jLabel18.setText("Menú Eliminar cuenta de propietario");
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel19.setText("1. Para eliminar cuenta ingrese su rut con su clave");
+        jLabel19.setText("Ingrese los siguientes datos");
 
         jLabel13.setText("Clave");
 
@@ -93,7 +93,7 @@ public class PanelEliminarPropietario extends javax.swing.JPanel {
                             .addComponent(botonEliminarCuenta)))
                     .addComponent(jLabel18)
                     .addComponent(jLabel19))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -9,16 +9,15 @@ import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author xebae
  */
-public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
+public class PanelHistorialDeEventos extends javax.swing.JPanel {
 
     /**
-     * Creates new form PanelAceptarEventos
+     * Creates new form PanelHistorialDeEventos
      */
     
     private VentanaPrincipalPropietario papa;
@@ -26,12 +25,13 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
     private ArrayList<Propiedad> propiedades;
     private DefaultListModel modeloLista;
     
-    public PanelAceptarYRechasarEventos(VentanaPrincipalPropietario papa) {
-        modeloLista= new DefaultListModel();
+    public PanelHistorialDeEventos(VentanaPrincipalPropietario papa) {
         this.papa=papa;
         initComponents();
+        modeloLista= new DefaultListModel();
         lista.setModel(modeloLista);
         actualizarMenuOpciones();
+        actualizarMenuOpciones2();
     }
 
     /**
@@ -43,33 +43,25 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        popupMenu1 = new java.awt.PopupMenu();
-        jLabel4 = new javax.swing.JLabel();
-        listaPropiedades = new javax.swing.JComboBox<>();
-        jLabel20 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lista = new javax.swing.JList<>();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        aceptar = new javax.swing.JButton();
-        rechazar = new javax.swing.JButton();
-
-        popupMenu1.setLabel("popupMenu1");
+        jLabel20 = new javax.swing.JLabel();
+        listaPropiedades = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        opciones = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel18.setText("Menú historial de eventos");
 
-        listaPropiedades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaPropiedadesActionPerformed(evt);
-            }
-        });
-
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel20.setText("Lista de eventos");
+        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel19.setText("2. Elija una propiedad");
 
         jScrollPane1.setViewportView(lista);
 
@@ -90,23 +82,23 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel19.setText("1. Elija una propiedad");
+        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel20.setText("Lista de eventos");
 
-        jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menú Lista de solicitudes de eventos");
-
-        aceptar.setText("Aceptar");
-        aceptar.addActionListener(new java.awt.event.ActionListener() {
+        listaPropiedades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aceptarActionPerformed(evt);
+                listaPropiedadesActionPerformed(evt);
             }
         });
 
-        rechazar.setText("Rechazar");
-        rechazar.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
+
+        jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel21.setText("1. Elija entre finalizados o publicados");
+
+        opciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rechazarActionPerformed(evt);
+                opcionesActionPerformed(evt);
             }
         });
 
@@ -119,106 +111,101 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(aceptar)
-                        .addGap(18, 18, 18)
-                        .addComponent(rechazar))
                     .addComponent(jLabel20)
                     .addComponent(jLabel18)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19)
-                    .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addComponent(jLabel21)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(opciones, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(listaPropiedades, javax.swing.GroupLayout.Alignment.LEADING, 0, 280, Short.MAX_VALUE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel19)
-                        .addGap(18, 18, 18)
-                        .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel20)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel21)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(aceptar)
-                    .addComponent(rechazar))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addComponent(opciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel19)
+                .addGap(18, 18, 18)
+                .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel20)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(176, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void listaPropiedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaPropiedadesActionPerformed
         // TODO add your handling code here:
-        
-        if(this.listaPropiedades.getSelectedIndex()<=0){
+        if(this.opciones.getSelectedIndex()<=0){
+            return;
+        }
+        if(this.listaPropiedades.getSelectedIndex()==0){
+            this.actualizarListaEventosTodos();
             return;
         }
         if(this.listaPropiedades.getSelectedIndex()==1){
             this.actualizarListaEventosTodos();
             return;
         }
-        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-2).getId());  
+        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-2).getId());
     }//GEN-LAST:event_listaPropiedadesActionPerformed
 
-    private void rechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechazarActionPerformed
+    private void opcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionesActionPerformed
         // TODO add your handling code here:
-        if(this.lista.getSelectedIndex()<0){
+        if(this.opciones.getSelectedIndex()<=0){
             return;
         }
-        System.out.println("evento a rechazar id: " +this.eventos.get(this.lista.getSelectedIndex()).getIdEvento());
-        this.papa.getControladorPropietario().rechazarSolicitud(this.eventos.get(this.lista.getSelectedIndex()).getIdEvento());
-        this.listaPropiedadesActionPerformed(evt);
-        JOptionPane.showMessageDialog(null, "Se a rechazo correctamente");
-    }//GEN-LAST:event_rechazarActionPerformed
-
-    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-        // TODO add your handling code here:
-        if(this.lista.getSelectedIndex()<0){
+        if(this.listaPropiedades.getSelectedIndex()==0){
+            this.actualizarListaEventosTodos();
             return;
         }
-        System.out.println("evento a aceptar id: " +this.eventos.get(this.lista.getSelectedIndex()).getIdEvento());
-        this.papa.getControladorPropietario().aceptarSolicitud(this.eventos.get(this.lista.getSelectedIndex()).getIdEvento());
-        this.listaPropiedadesActionPerformed(evt);
-        JOptionPane.showMessageDialog(null, "Se a aceptado correctamente");
-    }//GEN-LAST:event_aceptarActionPerformed
+        if(this.listaPropiedades.getSelectedIndex()==1){
+            this.actualizarListaEventosTodos();
+            return;
+        }
+        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-2).getId());
+    }//GEN-LAST:event_opcionesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aceptar;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> lista;
     private javax.swing.JComboBox<String> listaPropiedades;
-    private java.awt.PopupMenu popupMenu1;
-    private javax.swing.JButton rechazar;
+    private javax.swing.JComboBox<String> opciones;
     // End of variables declaration//GEN-END:variables
 
-    //Aca abajo van a estar los metodos que se tienen que hacer 
     
-    /**
-     * Este va a ser el formato de las consultas para ser luego testeadas en el junit
-     * 0 = Correcto
-     * numeros mayores que 0 son errores
-     */
-    
-    // no se puede hacer tdd ya que necesita otro metodo
-    public void actualizarMenuOpciones(){
+    public void actualizarMenuOpciones2(){
         this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.listaPropiedades.removeAllItems();
         this.listaPropiedades.addItem("");
+        this.listaPropiedades.addItem("Publicados");
+        this.listaPropiedades.addItem("Finalizados");
+        this.repaint();
+        this.revalidate();
+    }
+    
+    public void actualizarMenuOpciones(){
+        this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.listaPropiedades.removeAllItems();
         this.listaPropiedades.addItem("Todas las propiedades");
         for(int i=0; i<this.propiedades.size(); i++){
             this.listaPropiedades.addItem("nombre:" + this.propiedades.get(i).getNombre());
@@ -229,7 +216,11 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
     
     //Aca abajo van a estar los metodos que se tienen que hacer 
     private void actualizarListaEventosTodos(){
-        eventos = papa.getControladorPropietario().obtenerInformacionSolicitudesDeEventos();
+        if(this.opciones.getSelectedIndex()==1){
+            eventos = papa.getControladorPropietario().obtenerInformacionDeEventosActuales();
+        }else{
+            eventos = papa.getControladorPropietario().obtenerInformacionDeEventosFinalizados();
+        }
         this.modeloLista=new DefaultListModel();
         if(this.eventos!=null){
             for(int i=0; i<this.eventos.size(); i++){
@@ -241,14 +232,20 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         this.revalidate();
     }
     
+    
     //Aca abajo van a estar los metodos que se tienen que hacer 
     private void actualizarListaEventosPorPropiedad(int id){
-        this.eventos = papa.getControladorPropietario().obtenerInformacionSolicitudesDeEventos();
+        if(this.opciones.getSelectedIndex()==1){
+            eventos = papa.getControladorPropietario().obtenerInformacionDeEventosActuales();
+        }else{
+            eventos = papa.getControladorPropietario().obtenerInformacionDeEventosFinalizados();
+        }
         this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.modeloLista=new DefaultListModel();
         if(this.eventos!=null && this.propiedades!=null){
             for(int i=0; i<this.eventos.size(); i++){
                 for(int j=0; j<this.propiedades.size(); j++){
+                    System.out.println("evento: ");
                     if(this.eventos.get(i).getIdPropiedad()==id){
                         this.modeloLista.addElement(eventos.get(i).getNombre());
                         break;
@@ -260,6 +257,5 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         this.repaint();
         this.revalidate();
     }
-    
 
 }
