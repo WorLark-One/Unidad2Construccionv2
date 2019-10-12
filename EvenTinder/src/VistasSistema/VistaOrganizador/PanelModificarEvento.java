@@ -550,7 +550,6 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         int numero=-1;
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.size();i++){
-                System.out.println("id evento propiedad: " + this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad() + "   ID PROPIEDAD:" + this.propiedades.get(i).getId());
                 if(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()==this.propiedades.get(i).getId()){
                     numero = i;
                     break;
@@ -561,7 +560,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
             }
             for(int i=0; i<this.propiedades.get(numero).getListaSectores().size(); i++){
                 listaSectores.addItem(this.propiedades.get(numero).getListaSectores().get(i).getNombre());
-                this.modeloLista2.addElement("Nombre:" + this.propiedades.get(numero).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(numero).getListaSectores().get(i).getCapacidadDelSector() + "  precio:" );
+                this.modeloLista2.addElement("Nombre:" + this.propiedades.get(numero).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(numero).getListaSectores().get(i).getCapacidadDelSector() + "  precio: brayan mi metodo" );
             }
         }
         this.lista.setModel(this.modeloLista2);
