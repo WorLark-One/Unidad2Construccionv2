@@ -195,10 +195,10 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
     
     public void actualizarMenuOpciones2(){
         this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedades();
-        this.listaPropiedades.removeAllItems();
-        this.listaPropiedades.addItem("");
-        this.listaPropiedades.addItem("Publicados");
-        this.listaPropiedades.addItem("Finalizados");
+        this.opciones.removeAllItems();
+        this.opciones.addItem("");
+        this.opciones.addItem("Publicados");
+        this.opciones.addItem("Finalizados");
         this.repaint();
         this.revalidate();
     }

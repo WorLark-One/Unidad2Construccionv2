@@ -195,17 +195,20 @@ public class PanelInicioSesion extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se encuentra registrado en el sistema");
             }
         }
+        if(resp==2){
+            JOptionPane.showMessageDialog(null, "Se espera que el rut tenga entre entre sea: nnn nnn nnn - nok \n" + 
+                    "Ej: 11111111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==3){
+            JOptionPane.showMessageDialog(null, "Se espera que la clave tenga minimo 8 digitos \n" + 
+                    "Ej: 12345678", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         if(resp == 1){
             JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de usuario", "Error al seleccionar el tipo de usuario", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if(resp == 2){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: rut", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp == 3){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-        }  
     }//GEN-LAST:event_botonIniciarSesionActionPerformed
 
     private void listaTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaTipoUsuarioActionPerformed
