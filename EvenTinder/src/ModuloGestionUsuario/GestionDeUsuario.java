@@ -86,5 +86,16 @@ public class GestionDeUsuario {
         
         return this.controlador.eliminarUsuario(tipoUsuario,rutUsuario);
     }
-
+    
+    public Cliente obtenerInformacionCliente(String rut) throws SQLException{
+        return this.controlador.obtenerInformacionCliente(rut);
+    }
+    
+    public Propietario obtenerInformacionPropietario(String rut) throws SQLException{
+        return this.controlador.obtenerInformacionPropietario(rut);
+    }
+    
+    public Organizador obtenerInformacionOrganizador(String rut) throws SQLException{
+        return this.controlador.obtenerInformacionOrganizador(rut);
+    }
 }

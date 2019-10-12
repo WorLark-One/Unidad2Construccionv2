@@ -143,21 +143,19 @@ public class ControladorPropietario {
     public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos() {        
         return this.gestorPropiedades.obtenerInformacionSolicitudesDeEventos(this.controlAcceso.getRut());
     }
-
+    
+    
     /**
      * @return
      */
     public ArrayList<Evento> obtenerInformacionDeEventosActuales() {
-        // TODO implement here
-        return null;
+        return this.gestorPropiedades.obtenerInformacionDeEventosActuales(this.controlAcceso.getRut());
     }
 
     /**
      * @return
      */
     public ArrayList<Evento> obtenerInformacionDeEventosFinalizados() {
-        // TODO implement here
-        return null;
+        return this.gestorPropiedades.obtenerInformacionDeEventosFinalizados(this.controlAcceso.getRut());
     }
-
 }

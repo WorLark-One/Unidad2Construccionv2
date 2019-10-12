@@ -2,6 +2,7 @@ package ControladorUsuarios;
 
 import ModuloAutenticacion.ControlDeAcceso;
 import ModuloGestionUsuario.GestionDeUsuario;
+import ModuloGestionUsuario.Usuario;
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -105,6 +106,19 @@ public class ControladorPrincipal {
                     + "actualmente ingresado en el sistema ");
             return false;
         }
+    }
+    
+    public Usuario obtenerInformacionUsuario() throws SQLException{
+        if(this.controlAcceso.getTipoUsuario().equals("Cliente")){
+            return this.gestorUsuarios.obtenerInformacionCliente(this.controlAcceso.getRut());
+        }
+        if(this.controlAcceso.getTipoUsuario().equals("Propietario")){
+            return this.gestorUsuarios.obtenerInformacionPropietario(this.controlAcceso.getRut());
+        }
+        if(this.controlAcceso.getTipoUsuario().equals("Organizador")){
+            return this.gestorUsuarios.obtenerInformacionOrganizador(this.controlAcceso.getRut());
+        }
+        return null;
     }
 
     
