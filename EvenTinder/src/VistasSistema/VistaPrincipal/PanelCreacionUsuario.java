@@ -294,7 +294,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             return;
         }
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre sea solo letras: \n"
+            JOptionPane.showMessageDialog(null, "Se espera que el nombre sea solo letras \n"
                     + "Ej: Daniel Moreno", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -309,7 +309,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             return;
         }
         if(resp==5){
-            JOptionPane.showMessageDialog(null, "Se espera que el numero telefonico tenga minimo 9 digitos \n" + 
+            JOptionPane.showMessageDialog(null, "Se espera que el numero telefonico tenga 9 digitos \n" + 
                     "Ej: 987654321", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
