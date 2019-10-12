@@ -14,6 +14,7 @@ import VistasSistema.VistaPrincipal.PanelNosotros;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
 import java.awt.Component;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +32,8 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
     private ControladorOrganizador controladorOrganizador;
     private ControladorPropietario controladorPropietario;
     private ControladorPrincipal controladorPrincipal;
-
+    
+    
     public VentanaPrincipalOrganizador() throws SQLException {
         this.controladorPropietario= new ControladorPropietario();
         this.controladorOrganizador= new ControladorOrganizador();

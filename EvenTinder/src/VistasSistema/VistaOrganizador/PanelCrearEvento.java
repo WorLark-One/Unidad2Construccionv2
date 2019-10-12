@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -30,12 +31,16 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     private VentanaPrincipalOrganizador papa;
     private ArrayList<Propiedad> propiedades;
     private DefaultListModel modeloLista;
-    
+    private DefaultListModel modeloLista2;
+    private ArrayList<Integer> precios;
     public PanelCrearEvento(VentanaPrincipalOrganizador papa){
         this.papa=papa;
         initComponents();
         this.modeloLista=new DefaultListModel();
+        this.modeloLista2=new DefaultListModel();
         this.actualizarMenuOpciones();
+        this.lista.setModel(modeloLista2);
+        this.listaSectores.removeAllItems();
     }
 
     /**
@@ -47,13 +52,27 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        listaSectores = new javax.swing.JComboBox<>();
+        precio = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        botonRegistrarPrecio = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         listaPropiedades = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         detalles = new javax.swing.JList<>();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lista = new javax.swing.JList<>();
+        jLabel22 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         diasMaximosDevolucion = new javax.swing.JTextField();
         fechaDeInicio = new javax.swing.JTextField();
@@ -68,13 +87,72 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         fechaDeTermino = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         botonCrearEvento = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        setLayout(new java.awt.BorderLayout());
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel18.setText("Menú Creación de evento");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
+
+        jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel21.setText("3. Añadir precio de la entrada por sector");
+
+        listaSectores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaSectores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaSectoresActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Precio");
+
+        botonRegistrarPrecio.setText("Guardar");
+        botonRegistrarPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegistrarPrecioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(listaSectores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(botonRegistrarPrecio)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(precio))))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel21)
+                .addGap(18, 18, 18)
+                .addComponent(listaSectores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addComponent(botonRegistrarPrecio)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel20.setText("2. Seleccione la propiedad donde va a realizar el evento");
@@ -134,6 +212,54 @@ public class PanelCrearEvento extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lista.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(lista);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel22.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel22.setText("Lista de sectores");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel22)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         jLabel12.setText("Fecha de inicio");
 
         jLabel13.setText("Fecha de termino");
@@ -155,12 +281,19 @@ public class PanelCrearEvento extends javax.swing.JPanel {
 
         jLabel5.setText("Nombre");
 
+        botonCrearEvento.setText("Crear Evento");
+        botonCrearEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearEventoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -184,13 +317,15 @@ public class PanelCrearEvento extends javax.swing.JPanel {
                                 .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(diasMaximosDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(botonCrearEvento)
+                                    .addComponent(diasMaximosDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel19)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -215,46 +350,36 @@ public class PanelCrearEvento extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(diasMaximosDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(diasMaximosDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(botonCrearEvento)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menú Creación de evento");
-
-        botonCrearEvento.setText("Crear Evento");
-        botonCrearEvento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCrearEventoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel4)
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(316, 316, 316)
-                        .addComponent(botonCrearEvento)))
-                .addContainerGap(578, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel4)
+                .addGap(50, 50, 50)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel18)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
@@ -262,14 +387,39 @@ public class PanelCrearEvento extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(botonCrearEvento)
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jScrollPane3.setViewportView(jPanel7);
+
+        add(jScrollPane3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void listaPropiedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaPropiedadesActionPerformed
+
+        System.out.println(listaPropiedades.getSelectedIndex());
+        if(listaPropiedades.getSelectedIndex()==0){
+            this.detalles.removeAll();
+        }
+        if(listaPropiedades.getSelectedIndex()>0){
+            this.detalles.removeAll();
+            this.modeloLista=new DefaultListModel();
+            this.modeloLista.addElement(("Nombre: " + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getNombre()));
+            this.modeloLista.addElement(("descripcion: " + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getDescripcion()));
+            this.modeloLista.addElement(("ubicacion: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getUbicacion()));
+            this.modeloLista.addElement(("capacidadTotal: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getCapacidadTotal()));
+            this.modeloLista.addElement(("cantidadDeSectores: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().size()));
+            this.modeloLista.addElement(("valorArriendo: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getValorArriendo()));
+            this.detalles.setModel(this.modeloLista);
+            this.actualizarMenuSectores();
+        }
+    }//GEN-LAST:event_listaPropiedadesActionPerformed
 
     private void fechaDeTerminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaDeTerminoActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_fechaDeTerminoActionPerformed
 
     private void botonCrearEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearEventoActionPerformed
@@ -319,34 +469,34 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_botonCrearEventoActionPerformed
 
-    private void listaPropiedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaPropiedadesActionPerformed
+    private void listaSectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaSectoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaSectoresActionPerformed
 
-        System.out.println(listaPropiedades.getSelectedIndex());
-        if(listaPropiedades.getSelectedIndex()==0){
-            this.detalles.removeAll();
+    private void botonRegistrarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarPrecioActionPerformed
+        // TODO add your handling code here:
+        if(this.listaSectores.getSelectedIndex()<=0){
+            return;
         }
-        if(listaPropiedades.getSelectedIndex()>0){
-            this.detalles.removeAll();
-            this.modeloLista=new DefaultListModel();
-            this.modeloLista.addElement(("Nombre: " + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getNombre()));
-            this.modeloLista.addElement(("descripcion: " + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getDescripcion()));
-            this.modeloLista.addElement(("ubicacion: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getUbicacion()));
-            this.modeloLista.addElement(("capacidadTotal: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getCapacidadTotal()));
-            this.modeloLista.addElement(("cantidadDeSectores: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().size()));
-            this.modeloLista.addElement(("valorArriendo: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getValorArriendo()));
-            this.detalles.setModel(this.modeloLista);
+        if(this.precio.getText().equals("")){
+            return ;
         }
-    }//GEN-LAST:event_listaPropiedadesActionPerformed
+        this.precios.set(this.listaSectores.getSelectedIndex()-1, Integer.parseInt(precio.getText()));
+        this.precio.setText("");
+        this.actualizarListaSectores();
+    }//GEN-LAST:event_botonRegistrarPrecioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCrearEvento;
+    private javax.swing.JButton botonRegistrarPrecio;
     private javax.swing.JTextField capacidad;
     private javax.swing.JTextField descripcion;
     private javax.swing.JList<String> detalles;
     private javax.swing.JTextField diasMaximosDevolucion;
     private javax.swing.JTextField fechaDeInicio;
     private javax.swing.JTextField fechaDeTermino;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -355,14 +505,25 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JList<String> lista;
     private javax.swing.JComboBox<String> listaPropiedades;
+    private javax.swing.JComboBox<String> listaSectores;
     private javax.swing.JTextField nombre;
+    private javax.swing.JTextField precio;
     // End of variables declaration//GEN-END:variables
 
     //Aca abajo van a estar los metodos que se tienen que hacer 
@@ -422,6 +583,39 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             this.repaint();
             this.revalidate();
         }
+    }
+    
+    private void actualizarMenuSectores(){
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.listaSectores.removeAllItems();
+        this.lista.setModel(this.modeloLista2);
+        this.lista.removeAll();
+        listaSectores.addItem("");
+        this.precios.add(-1);
+        this.precios= new ArrayList<>();
+        if(this.propiedades!=null){
+            for(int i=0; i<this.propiedades.get(listaPropiedades.getSelectedIndex()).getListaSectores().size(); i++){
+                this.precios.add(-1);
+                listaPropiedades.addItem("Nombre:" + this.propiedades.get(listaPropiedades.getSelectedIndex()).getListaSectores().get(i).getNombre());
+            }
+            this.repaint();
+            this.revalidate();
+        }
+    }
+    
+    private void actualizarListaSectores(){
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.lista.removeAll();
+        this.modeloLista2=new DefaultListModel();
+        if(this.propiedades!=null){
+            for(int i=0; i<this.propiedades.get(listaPropiedades.getSelectedIndex()).getListaSectores().size(); i++){
+                this.precios.add(-1);
+                this.modeloLista2.addElement("Nombre:" + this.propiedades.get(listaPropiedades.getSelectedIndex()).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(listaPropiedades.getSelectedIndex()).getListaSectores().get(i).getCapacidadDelSector() + "  precio:" + this.precios.get(i-1));
+            }
+        }
+        this.lista.setModel(this.modeloLista2);
+        this.repaint();
+        this.revalidate();
     }
     
     public Date parseFecha(String fecha){
