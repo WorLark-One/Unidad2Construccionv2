@@ -530,8 +530,18 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.lista.removeAll();
         this.modeloLista2=new DefaultListModel();
+        int numero=-1;
         if(this.propiedades!=null){
-            for(int i=0; i<this.propiedades.get(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()).getListaSectores().size(); i++){
+            for(int i=0; i<this.propiedades.size(); i++){
+                if(this.propiedades.get(i).getId()==this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()){
+                    numero=i;
+                    break;
+                }
+            }
+            if(numero==-1){
+                System.out.println("cago");
+            }
+            for(int i=0; i<this.propiedades.get(numero).getListaSectores().size(); i++){
                 this.precios.add(-1);
                 this.modeloLista2.addElement("Nombre:" + this.propiedades.get(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()).getListaSectores().get(i).getCapacidadDelSector() + "  precio: depende del brayan esto");
             }
