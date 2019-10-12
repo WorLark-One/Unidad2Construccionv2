@@ -1031,4 +1031,40 @@ public class ControladorBDDeEventos {
         return false;
 
     }
+
+    public int agregarPrecioEventoSector(int idEvento, String nombreSector, int idPropiedad) {
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+        if (miConexion != null)// si hay conexion.
+        {
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+                int idEntrada = obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
+                String sql = "select asociacion.precio from asociacion where asociacion.refevento=" + idEvento + " and asociacion.refentrada=" + idEntrada + " and asociacion.refpropiedad=" + idPropiedad + "";
+                System.out.println(sql);
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    int precio = resultado.getInt("precio");
+                    resultado.close();
+                    st.close();
+                    return precio;
+                }
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return 0;
+            } finally {
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    //Logger.getLogger(ControladorBDDeEventos.class.getName()).log(Level.SEVERE, null, ex);
+                    //System.out.println("No se cerro la base de datos satisfactoriamente");
+                }
+            }
+
+        }
+        return 0;
+
+    }
+
 }

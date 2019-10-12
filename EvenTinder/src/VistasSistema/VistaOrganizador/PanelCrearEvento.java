@@ -426,7 +426,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             int idEvento = 0;
             idEvento = this.papa.getControladorOrganizador().crearEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false, this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
             if(idEvento>0){
-                for(int i=1; i< this.modeloLista2.getSize(); i++){
+                for(int i=0; i< this.modeloLista2.getSize(); i++){
                     if(this.precios.get(i)!=-1){
                         this.papa.getControladorOrganizador().agregarPrecioSector(idEvento, this.precios.get(i), this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre(), this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
                     }
