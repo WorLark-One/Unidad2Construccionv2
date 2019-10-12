@@ -155,11 +155,7 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
             this.actualizarListaEventosTodos();
             return;
         }
-        if(this.listaPropiedades.getSelectedIndex()==1){
-            this.actualizarListaEventosTodos();
-            return;
-        }
-        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-2).getId());
+        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
     }//GEN-LAST:event_listaPropiedadesActionPerformed
 
     private void opcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionesActionPerformed
@@ -171,11 +167,7 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
             this.actualizarListaEventosTodos();
             return;
         }
-        if(this.listaPropiedades.getSelectedIndex()==1){
-            this.actualizarListaEventosTodos();
-            return;
-        }
-        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-2).getId());
+        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
     }//GEN-LAST:event_opcionesActionPerformed
 
 

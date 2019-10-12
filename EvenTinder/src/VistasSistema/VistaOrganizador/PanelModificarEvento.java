@@ -9,6 +9,7 @@ import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
 import VistasSistema.VistaPrincipal.PanelCreacionUsuario;
 import java.sql.SQLException;
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -382,7 +383,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
             boolean respuesta = false;
             //respuesta = this.papa.getControladorOrganizador().modificarEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false);
             if(respuesta){
-                JOptionPane.showMessageDialog(null, "OperaciÃ³n realizada correctamente");
+                JOptionPane.showMessageDialog(null, "Operacion realizada correctamente");
                 this.nombre.setText("");
                 this.fechaDeInicio.setText("");
                 this.fechaDeTermino.setText("");
@@ -437,19 +438,33 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         if(this.listaSectores.getSelectedIndex()<=0){
             return;
         }
-        if(this.precio.getText().equals("")){
-            return ;
+        //pinki esta validacion hay que hacer
+        if(this.precio.getText().equals("") || !isNumero(this.precio.getText())){
+            return;
         }
-        this.precios.set(this.listaSectores.getSelectedIndex()-1, Integer.parseInt(precio.getText()));
-        this.precio.setText("");
-        this.actualizarListaSectores();
+        for(int i=0; i< this.propiedades.size(); i++){
+            if(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()==this.propiedades.get(i).getId()){
+                this.papa.getControladorOrganizador().modificarPrecioSector(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), Integer.parseInt(this.precio.getText()),this.propiedades.get(i).getListaSectores().get(this.listaSectores.getSelectedIndex()-1).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad());
+                this.precio.setText("");
+                this.actualizarListaSectores();
+                JOptionPane.showMessageDialog(null, "Se a modificado el valor de la entrada con exito");
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "No se pudo modificar el precio en el sistema");
     }//GEN-LAST:event_botonRegistrarPrecioActionPerformed
 
     private void listaEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaEventosActionPerformed
         // TODO add your handling code here:
-        if(this.listaSectores.getSelectedIndex()<=0){
+        if(this.listaEventos.getSelectedIndex()<=0){
             return;
         }
+        this.nombre.setText(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getNombre());
+        this.fechaDeInicio.setText(convertirFechaString(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getFechaDeInicio()));
+        this.fechaDeTermino.setText(convertirFechaString(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getFechaDeTermino()));
+        this.capacidad.setText(Integer.toString(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getCapacidadMaximaDelEvento()));
+        this.descripcion.setText(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getDescripcion());
+        this.diasMaximosDevolucion.setText(Integer.toString(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getPlazoDevolucionEntrada()));
         actualizarListaSectores();
     }//GEN-LAST:event_listaEventosActionPerformed
 
@@ -530,11 +545,14 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.lista.removeAll();
         this.modeloLista2=new DefaultListModel();
+        this.listaSectores.removeAllItems();
+        listaSectores.addItem("");
         int numero=-1;
         if(this.propiedades!=null){
-            for(int i=0; i<this.propiedades.size(); i++){
-                if(this.propiedades.get(i).getId()==this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()){
-                    numero=i;
+            for(int i=0; i<this.propiedades.size();i++){
+                System.out.println("id evento propiedad: " + this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad() + "   ID PROPIEDAD:" + this.propiedades.get(i).getId());
+                if(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()==this.propiedades.get(i).getId()){
+                    numero = i;
                     break;
                 }
             }
@@ -542,8 +560,8 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 System.out.println("cago");
             }
             for(int i=0; i<this.propiedades.get(numero).getListaSectores().size(); i++){
-                this.precios.add(-1);
-                this.modeloLista2.addElement("Nombre:" + this.propiedades.get(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()).getListaSectores().get(i).getCapacidadDelSector() + "  precio: depende del brayan esto");
+                listaSectores.addItem(this.propiedades.get(numero).getListaSectores().get(i).getNombre());
+                this.modeloLista2.addElement("Nombre:" + this.propiedades.get(numero).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(numero).getListaSectores().get(i).getCapacidadDelSector() + "  precio:" );
             }
         }
         this.lista.setModel(this.modeloLista2);
@@ -575,5 +593,12 @@ public class PanelModificarEvento extends javax.swing.JPanel {
             this.repaint();
             this.revalidate();
         }
+    }
+    
+    	
+    public String convertirFechaString(Date date){
+
+       Format formatter = new SimpleDateFormat("dd-MM-yyyy");
+       return formatter.format(date);
     }
 }
