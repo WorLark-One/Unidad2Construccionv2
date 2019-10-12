@@ -47,5 +47,11 @@ public class Propietario extends Usuario {
     public void removePropiedad(Propiedad propiedad){
         this.listaDePropiedades.remove(propiedad);
     }
+
+    public void setListaDePropiedades(ArrayList<Propiedad> listaDePropiedades) {
+        this.listaDePropiedades = listaDePropiedades;
+    }
+    
+    
         
 }
