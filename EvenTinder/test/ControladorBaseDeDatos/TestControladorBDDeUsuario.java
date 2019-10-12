@@ -26,7 +26,7 @@ public class TestControladorBDDeUsuario {
     @Test
     public void preguntarPorUsuario() throws SQLException {
         ConexionBD c = new ConexionBD();
-        c.crearConexion("EvenTinder", "12345");
+        c.crearConexion();
         
         String tipoUsuario = "";
         String rut = "18666568-5";
@@ -45,7 +45,7 @@ public class TestControladorBDDeUsuario {
     @Test
     public void obtenerInformacioDeUsurio() throws SQLException {
          ConexionBD c = new ConexionBD();
-        c.crearConexion("EvenTinder", "12345");
+        c.crearConexion();
 
         String tipoUsuario = "propietario";
         String rut = "18666568-5";
@@ -77,7 +77,7 @@ public class TestControladorBDDeUsuario {
         String tarjeta = "252668884515";
 
         ConexionBD c = new ConexionBD();
-        c.crearConexion("EvenTinder", "12345");
+        c.crearConexion();
         boolean aceptado;
         Connection conexionAux = c.getConexion();
         //=c.añadirUsuario(conexionAux, tipoUsuario, nombre, rut, correo, clave, telefono, tarjeta);
@@ -105,7 +105,7 @@ public class TestControladorBDDeUsuario {
         String telefono = "123";
         String tarjeta = "123";
         ConexionBD c = new ConexionBD();
-        c.crearConexion("EvenTinder", "12345");
+        c.crearConexion();
         boolean aceptado;
         Connection conexionAux = c.getConexion();
         
@@ -130,7 +130,7 @@ public class TestControladorBDDeUsuario {
         String rut = "1616";
         
         ConexionBD c = new ConexionBD();
-        c.crearConexion("EvenTinder", "12345");
+        c.crearConexion();
         boolean aceptado;
         Connection conexionAux = c.getConexion();
         //aceptado=c.eliminarUsuario(conexionAux, tipoUsuario, rut);

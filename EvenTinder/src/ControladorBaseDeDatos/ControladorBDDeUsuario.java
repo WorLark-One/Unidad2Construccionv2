@@ -1,5 +1,6 @@
 package ControladorBaseDeDatos;
 
+import ModuloGestionPropiedades.Propiedad;
 import ModuloGestionUsuario.Cliente;
 import ModuloGestionUsuario.Organizador;
 import ModuloGestionUsuario.Propietario;
@@ -7,6 +8,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * clase que se encarga de interactuar con la base de datos. 1.
@@ -14,12 +17,22 @@ import java.util.ArrayList;
 public class ControladorBDDeUsuario {
 
     ConexionBD conexion;
+    ControladorBDDePropiedades propiedades;
 
     /**
      * Default constructor
      */
     public ControladorBDDeUsuario() {
         this.conexion = new ConexionBD();
+        this.propiedades= new ControladorBDDePropiedades();
+        iniciarlizarBD();
+    }
+    
+    
+    public void iniciarlizarBD(){
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+        this.conexion.crearTablas(miConexion);
     }
 
     /**
@@ -33,7 +46,7 @@ public class ControladorBDDeUsuario {
      */
     public boolean preguntarPorUsuario(String tipoUsuario, String rut, String clave) throws SQLException {
         // se establece la conexion.
-        this.conexion.crearConexion("EventTinder", "1");
+        this.conexion.crearConexion();
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         //se realiza la consulta.
@@ -72,7 +85,7 @@ public class ControladorBDDeUsuario {
      */
     public Cliente obtenerInformacionCliente(String rut) throws SQLException {
         Cliente cliente = null;
-        this.conexion.crearConexion("EventTinder", "1");
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<String> informacion = new ArrayList<>();
@@ -118,7 +131,7 @@ public class ControladorBDDeUsuario {
      */
     public Organizador obtenerInformacionOrganizador(String rut) throws SQLException {
         Organizador organizador = null;
-        this.conexion.crearConexion("EventTinder", "1");
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<String> informacion = new ArrayList<>();
@@ -164,7 +177,7 @@ public class ControladorBDDeUsuario {
      */
     public Propietario obtenerInformacionPropietario(String rut) throws SQLException {
         Propietario propietario = null;
-        this.conexion.crearConexion("EventTinder", "1");
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<String> informacion = new ArrayList<>();
@@ -218,7 +231,7 @@ public class ControladorBDDeUsuario {
      */
     public boolean añadirUsuario(String tipoUsuario, String nombre, String rut, String correo, String clave, String telefono, String tarjeta) throws SQLException {
         
-        this.conexion.crearConexion("EventTinder", "1");
+       this.conexion.crearConexion();
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -271,7 +284,7 @@ public class ControladorBDDeUsuario {
      */
     public boolean modificarUsuario(String tipoUsuario, String rutUsuarioModificar, String nombre, String correo, String clave, String telefono, String tarjeta) throws SQLException {
 
-        this.conexion.crearConexion("EventTinder", "1");
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         System.out.println(tipoUsuario);
 
@@ -338,7 +351,7 @@ public class ControladorBDDeUsuario {
      * @throws java.sql.SQLException
      */
     public boolean eliminarUsuario(String tipoUsuario, String rut) throws SQLException {
-        this.conexion.crearConexion("EventTinder", "1");
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
@@ -404,4 +417,58 @@ public class ControladorBDDeUsuario {
         return -1;
     }
 
+    /**
+     * Obtiene una lista de todos los propietarios registrados en la base de datos.
+     * @return lista de propietario, o null en caso de que no existan.
+     */
+    public ArrayList<Propietario> obtenerListaDePropietarios(){
+         
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+
+        ArrayList<Propietario> listaPropietario = new ArrayList<>();
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select * from propietario";
+
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    String nombreCompleto = resultado.getString("nombrecompleto");
+                    String rutCliente = resultado.getString("rut");
+                    String correo = resultado.getString("correo");
+                    String contraseña = resultado.getString("contraseña");
+                    String telefono = resultado.getString("telefono");
+                    String cuentaCorriente = resultado.getString("cuentacorriente");
+                    Propietario propietario = new Propietario(nombreCompleto, rutCliente,contraseña,telefono,  correo,  cuentaCorriente);
+                    
+                    ArrayList<Propiedad>listaPropiedades=this.propiedades.obtenerInformacionDePropiedades(rutCliente);
+                    propietario.setListaDePropiedades(listaPropiedades);
+                    listaPropietario.add(propietario);
+                    
+                }
+                resultado.close();
+                st.close();
+                return listaPropietario;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return null;
+            } finally {
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    //Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+        return null;
+    
+    }
+    
+   
 }

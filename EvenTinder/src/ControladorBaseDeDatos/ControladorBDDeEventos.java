@@ -12,17 +12,22 @@ import java.util.*;
 public class ControladorBDDeEventos {
 
     ConexionBD conexion;
-    String nombreBD;
-    String contraseñaUsuarioBD;
 
     /**
      * Default constructor
      */
     public ControladorBDDeEventos() {
         this.conexion = new ConexionBD();
-        this.nombreBD = "EventTinder";
-        this.contraseñaUsuarioBD = "1";
+        iniciarlizarBD();
     }
+    
+    
+    public void iniciarlizarBD(){
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+        this.conexion.crearTablas(miConexion);
+    }
+    
 
     /**
      * Registra un Evento en la base de datos, ademas de establer un enlace
@@ -42,7 +47,7 @@ public class ControladorBDDeEventos {
      * crear un evento
      */
     public int crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad, String rutOrganizador) {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -167,7 +172,7 @@ public class ControladorBDDeEventos {
      * @return true si se modifico el evento, false de lo contrario
      */
     public boolean modificarEvento(int idEvento, String nuevoNombre, String nuevaDescripcion, Date nuevaFechaDeInicio, Date nuevaFechaDeTermino, int nuevaCapacidad, int nuevosDiasMaximoDevolucion, boolean nuevoPublicado) {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -213,7 +218,7 @@ public class ControladorBDDeEventos {
      * @return true si se modifica la tabla celebra, false de lo contrario
      */
     public boolean modificarTablaCelebra(int idEvento, int idPropiedad, int nuevoIdPropiedad) {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -287,7 +292,7 @@ public class ControladorBDDeEventos {
      * @return
      */
     public boolean eliminarEvento(int idEvento) {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
@@ -325,7 +330,7 @@ public class ControladorBDDeEventos {
      * @return
      */
     public ArrayList<Evento> obtenerInformacionDeTodosLosEventosDeUnOrganizador(String rutOrganizador) {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<Evento> eventos = new ArrayList<>();
@@ -379,7 +384,7 @@ public class ControladorBDDeEventos {
      * @return lista de eventos.
      */
     public ArrayList<Evento> obtenerInformacionDeEventosPublicadosDeUnOrganizador(String rutOrganizador) {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<Evento> eventos = new ArrayList<>();
@@ -433,7 +438,7 @@ public class ControladorBDDeEventos {
      * @return lista de sectores
      */
     public ArrayList<Evento> obtenerInformacionDeEventosNoPublicadosDeUnOrganizador(String rutOrganizador) {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<Evento> eventos = new ArrayList<>();
@@ -486,7 +491,7 @@ public class ControladorBDDeEventos {
      * @return
      */
     public ArrayList<Evento> obtenerInformacionDeEventosFinalizadosDeUnOrganizador(String rutOrganizador) {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         java.util.Date fecha = new Date();
 
@@ -543,7 +548,7 @@ public class ControladorBDDeEventos {
      * @return true si modifica el parametro publicado, false de lo contrario
      */
     public boolean aceptarSolicitudPropietario(int idEvento) {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -620,7 +625,7 @@ public class ControladorBDDeEventos {
      * @return lista de eventos, o null en caso de que no existan eventos asociados al propietario
      */
     public ArrayList<Evento> obtenerInformacionSolicitudesDeEventosPropietario(String rutPropietario) {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<Evento> eventos = new ArrayList<>();
@@ -679,7 +684,7 @@ public class ControladorBDDeEventos {
      * @return lista de eventos, o null en caso de que no existan eventos asociados al propietario
      */
     public ArrayList<Evento> obtenerInformacionDeEventosActualesPropietario(String rutPropietario) {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<Evento> eventos = new ArrayList<>();
@@ -737,7 +742,7 @@ public class ControladorBDDeEventos {
      * @return lista de eventos, o null en caso de que no existan eventos asociados al propietario
      */
     public ArrayList<Evento> obtenerInformacionDeEventosFinalizadosPropietario(String rutPropietario) {
-        this.conexion.crearConexion(this.nombreBD, this.contraseñaUsuarioBD);
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         java.util.Date fecha = new Date();
         ArrayList<Evento> eventos = new ArrayList<>();
