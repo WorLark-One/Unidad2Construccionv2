@@ -115,7 +115,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     
     
     
-    public void modificarCuenta() {
+    public void modificarCuenta() throws SQLException {
         PanelModificarPropietario modificar = new PanelModificarPropietario(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(modificar, java.awt.BorderLayout.CENTER);

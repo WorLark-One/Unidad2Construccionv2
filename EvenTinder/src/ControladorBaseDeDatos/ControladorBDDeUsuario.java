@@ -238,9 +238,10 @@ public class ControladorBDDeUsuario {
             // a la tabla cliente.
             if (numero == -1) {// el cliente no esta registrado, por lo tanto hay que registrarlo.
                 try {
-
+                    System.out.println("tarjeta:"+tarjeta);
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "insert into " + tipoUsuario + " values('" + nombre + "','" + rut + "','" + correo + "','" + clave + "','" + telefono + "','" + tarjeta + "')";
+                    System.out.println(sql);
                     st.executeUpdate(sql);
 
                     st.close();

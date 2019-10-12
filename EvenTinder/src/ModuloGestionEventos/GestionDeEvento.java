@@ -1,6 +1,7 @@
 package ModuloGestionEventos;
 
 import ControladorBaseDeDatos.ControladorBDDeEventos;
+import ModuloAutenticacion.ControlDeAcceso;
 import ModuloGestionPropiedades.Propiedad;
 import ModuloGestionUsuario.Propietario;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class GestionDeEvento {
     
     private ControladorBDDeEventos controlador;
     private ArrayList<Evento> listaEventos;
+   //ControlDeAcceso controlAcceso;
 
     /**
      * Default constructor
@@ -32,16 +34,21 @@ public class GestionDeEvento {
      * @param diasMaximoDevolucion 
      * @param publicado 
      * @param idPropiedad 
+     * @param rutOrganizador 
      * @return
      */
-    public boolean crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad) {
-        int idEvento = this.controlador.crearEvento(nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado, idPropiedad, descripcion);
+    public int crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad, String rutOrganizador) {        
+        int idEvento = this.controlador.crearEvento(nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado, idPropiedad,rutOrganizador );
         if(idEvento != 0){                        
             Evento e = new Evento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado);
             this.listaEventos.add(e);  
-            return true;
+            return idEvento;
         }        
-        return false;
+        return 0;
+    }
+    
+    public boolean agregarPrecioSector(int idEvento, int nuevoPrecio, String nombreSector,int idPropiedad){
+        return this.controlador.añadirPrecioEntradaPorSector(idEvento, nuevoPrecio, nombreSector, idPropiedad);
     }
 
     /**
@@ -71,6 +78,10 @@ public class GestionDeEvento {
             }
         }                
         return result;
+    }
+    
+    public boolean modificarPrecioSector(int idEvento, int nuevoPrecio, String nombreSector,int idPropiedad){
+        return this.controlador.modificarPrecioEntradaPorSector(idEvento,nuevoPrecio,nombreSector,idPropiedad);
     }
     
     public ArrayList<Propiedad> obtenerInformacionPropiedades(){
@@ -137,4 +148,11 @@ public class GestionDeEvento {
         return this.controlador.obtenerInformacionSolicitudesDeEventosPropietario(rutPropietario);
     }
     
+    public ArrayList<Evento> obtenerInformacionDeEventosActualesPropietario(String rutPropietario) {
+        return this.controlador.obtenerInformacionDeEventosActualesPropietario(rutPropietario);
+    }
+    
+    public ArrayList<Evento> obtenerInformacionDeEventosFinalizadosPropietario(String rutPropietario) {        
+        return this.controlador.obtenerInformacionDeEventosFinalizadosPropietario(rutPropietario);
+    }
 }

@@ -65,7 +65,7 @@ public class ControladorBDDeEventos {
                             + " RETURNING id";
                     System.out.println(sql);
                     ResultSet resultado = st.executeQuery(sql);
-
+                    System.out.println("hola");
                     while (resultado.next()) {
                         int idEvento = Integer.parseInt(resultado.getString("id"));
                         boolean Celebra = tablaCelebra(miConexion, idEvento, idPropiedad);
@@ -186,7 +186,8 @@ public class ControladorBDDeEventos {
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = " UPDATE evento set nombre='" + nuevoNombre + "', descripcion='" + nuevaDescripcion + "',fechainicio='" + nuevaFechaDeInicio + "',fechatermino='" + nuevaFechaDeTermino + "',\n"
                             + "capacidad=" + nuevaCapacidad + ",plazodevolucionentradas=" + nuevosDiasMaximoDevolucion + ",publicado='" + nuevoPublicado + "' where evento.id=" + idEvento + " ";
-                    //boolean modificarCelebra=modificarTablaCelebra(miConexion,idEvento,idPropiedad);
+                    System.out.println(sql);
+//boolean modificarCelebra=modificarTablaCelebra(miConexion,idEvento,idPropiedad);
                     st.executeUpdate(sql);
                     st.close();
                     return true;
@@ -231,6 +232,7 @@ public class ControladorBDDeEventos {
 
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = " UPDATE celebra set  refpropiedad=" + nuevoIdPropiedad + " where  celebra.refevento=" + idEvento + "  and celebra.refpropiedad=" + idPropiedad + " ";
+                    System.out.println(sql);
                     st.executeUpdate(sql);
                     st.close();
                     return true;
@@ -306,6 +308,7 @@ public class ControladorBDDeEventos {
                     eliminarAsociacionEventoPropiedad(miConexion, idEvento);
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "delete from evento where evento.id=" + idEvento + "";
+                    System.out.println(sql);
                     st.executeUpdate(sql);
                     st.close();
                     return true;
@@ -345,7 +348,7 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
 
                 String sql = "select * from evento where evento.publicado=false or evento.publicado=true and evento.reforganizador='" + rutOrganizador + "'";
-
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // obtengo la informacion del cliente.
@@ -393,6 +396,7 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
 
                 String sql = "select * from  celebra where celebra.refevento=" + idEvento + "";
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int id = Integer.parseInt(resultado.getString("refpropiedad"));
@@ -426,7 +430,7 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
 
                 String sql = "select * from evento where evento.publicado=true and evento.reforganizador='" + rutOrganizador + "'";
-
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // obtengo la informacion del cliente.
@@ -482,7 +486,7 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
 
                 String sql = "select * from evento where evento.publicado=false and evento.reforganizador='" + rutOrganizador + "'";
-
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // obtengo la informacion del cliente.
@@ -494,6 +498,7 @@ public class ControladorBDDeEventos {
                     int capacidad = Integer.parseInt(resultado.getString("capacidad"));
                     int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
                     boolean publicado = resultado.getBoolean("publicado");
+                    System.out.println("nombre evento:" + nombre + " rut del organizador:" + rutOrganizador);
                     int idPropiedad = obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
                     Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
                     miEvento.setIdPropiedad(idPropiedad);
@@ -541,6 +546,7 @@ public class ControladorBDDeEventos {
                         + "FROM evento\n"
                         + "WHERE evento.fechatermino <= '" + fecha + "'::date";
 
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // obtengo la informacion del cliente.
@@ -595,6 +601,7 @@ public class ControladorBDDeEventos {
 
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = " UPDATE evento set publicado=true where evento.id=" + idEvento + "";
+                System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
                 return true;
@@ -630,7 +637,7 @@ public class ControladorBDDeEventos {
 
             try {
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = "delete from celebra where celebra.refevento="+idEvento+"";
+                String sql = "delete from celebra where celebra.refevento=" + idEvento + "";
                 System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
@@ -638,7 +645,7 @@ public class ControladorBDDeEventos {
             } catch (SQLException e) {
                 System.out.println("ERROR DE CONEXION: eliminarAsociacionEventoPropiedad" + e);
                 return false;
-            } 
+            }
 
         }
         return false;
@@ -669,7 +676,7 @@ public class ControladorBDDeEventos {
                         + "inner join celebra on propiedad.id= celebra.refpropiedad\n"
                         + "inner join evento on evento.id= celebra.refevento\n"
                         + "where propietario.rut='" + rutPropietario + "'";
-
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idEvento = Integer.parseInt(resultado.getString("id"));
@@ -732,7 +739,7 @@ public class ControladorBDDeEventos {
                         + "inner join celebra on propiedad.id= celebra.refpropiedad\n"
                         + "inner join evento on evento.id= celebra.refevento\n"
                         + "where propietario.rut='" + rutPropietario + "' and evento.publicado=true";
-
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // obtengo la informacion del cliente.
@@ -793,7 +800,7 @@ public class ControladorBDDeEventos {
                         + "inner join celebra on propiedad.id= celebra.refpropiedad\n"
                         + "inner join evento on evento.id= celebra.refevento\n"
                         + "where propietario.rut='" + rutPropietario + "' and evento.fechatermino <= '" + fecha + "'::date";
-
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // obtengo la informacion del cliente.
@@ -848,7 +855,7 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
 
                 String sql = "select * from propietario";
-
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     String rutCliente = resultado.getString("rut");
@@ -937,7 +944,7 @@ public class ControladorBDDeEventos {
 
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "select * from entrada where  entrada.vendida=false";
-                //System.out.println(sql);
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idEvento = Integer.parseInt(resultado.getString("id"));
@@ -969,6 +976,7 @@ public class ControladorBDDeEventos {
                 int idEntradaPrueba = crearEntradaPrueba(miConexion);
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "insert into asociacion values(" + idEvento + "," + idEntradaPrueba + "," + precioEntrada + ",'" + nombreSector + "'," + idPropiedad + ")";
+                System.out.println(sql);
                 st.executeQuery(sql);
                 st.close();
             } catch (SQLException e) {
@@ -979,6 +987,44 @@ public class ControladorBDDeEventos {
                     this.conexion.cerrarBaseDeDatos(miConexion);
                 } catch (SQLException ex) {
                     //System.out.println("error al cerrar la base de datos.");
+                }
+            }
+        }
+        return false;
+
+    }
+
+    /**
+     * modifica el precio de una entrada
+     *
+     * @param idEvento: identificador de evento.
+     * @param nuevoPrecioEntrada : nuevo precio que se le asignara a la entrada.
+     * @param nombreSector: nombre del sector.
+     * @param idPropiedad: identificador de la propiedad
+     * @return true si modifica el precio, false de lo contrario.
+     */
+    public boolean modificarPrecioEntradaPorSector(int idEvento, int nuevoPrecioEntrada, String nombreSector, int idPropiedad) {
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+        if (miConexion != null) {
+            boolean EstadoEvento = obtenerPublicadoDeEvento(miConexion, idEvento);
+            if (EstadoEvento == false) {
+                try {
+                    int idEntradaPrueba = crearEntradaPrueba(miConexion);
+                    java.sql.Statement st = miConexion.createStatement();
+                    String sql = "update asociacion set precio= " + nuevoPrecioEntrada + " where asociacion.refevento=" + idEvento + " and asociacion.refentrada=" + idEntradaPrueba + " and asociacion.refpropiedad=" + idPropiedad + "";
+                    System.out.println(sql);
+                    st.executeUpdate(sql);
+                    st.close();
+                } catch (SQLException e) {
+                    //System.out.println("error conexion");
+                    return false;
+                } finally {
+                    try {
+                        this.conexion.cerrarBaseDeDatos(miConexion);
+                    } catch (SQLException ex) {
+                        //System.out.println("error al cerrar la base de datos.");
+                    }
                 }
             }
         }

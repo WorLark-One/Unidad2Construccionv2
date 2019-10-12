@@ -155,11 +155,7 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
             this.actualizarListaEventosTodos();
             return;
         }
-        if(this.listaPropiedades.getSelectedIndex()==1){
-            this.actualizarListaEventosTodos();
-            return;
-        }
-        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-2).getId());
+        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
     }//GEN-LAST:event_listaPropiedadesActionPerformed
 
     private void opcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionesActionPerformed
@@ -171,11 +167,7 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
             this.actualizarListaEventosTodos();
             return;
         }
-        if(this.listaPropiedades.getSelectedIndex()==1){
-            this.actualizarListaEventosTodos();
-            return;
-        }
-        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-2).getId());
+        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
     }//GEN-LAST:event_opcionesActionPerformed
 
 
@@ -195,10 +187,10 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
     
     public void actualizarMenuOpciones2(){
         this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedades();
-        this.listaPropiedades.removeAllItems();
-        this.listaPropiedades.addItem("");
-        this.listaPropiedades.addItem("Publicados");
-        this.listaPropiedades.addItem("Finalizados");
+        this.opciones.removeAllItems();
+        this.opciones.addItem("");
+        this.opciones.addItem("Publicados");
+        this.opciones.addItem("Finalizados");
         this.repaint();
         this.revalidate();
     }

@@ -37,8 +37,12 @@ public class ControladorOrganizador {
      * @param idPropiedad El ID de la propiedad a la cual estara asociado el evento.
      * @return
      */
-    public boolean crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad) {       
-        return this.gestorEventos.crearEvento(nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado, idPropiedad);
+    public int crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad) {       
+        return this.gestorEventos.crearEvento(nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado, idPropiedad,this.controlAcceso.getRut());
+    }
+    
+    public boolean agregarPrecioSector(int idEvento, int nuevoPrecio, String nombreSector,int idPropiedad){
+        return this.gestorEventos.agregarPrecioSector(idEvento,nuevoPrecio,nombreSector,idPropiedad);
     }
 
     /**
@@ -57,6 +61,10 @@ public class ControladorOrganizador {
      */
     public boolean modificarEvento(int idEvento,  String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado) {
         return this.gestorEventos.modificarEvento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado);
+    }
+    
+    public boolean modificarPrecioSector(int idEvento, int nuevoPrecio, String nombreSector,int idPropiedad){
+        return this.gestorEventos.modificarPrecioSector(idEvento,nuevoPrecio,nombreSector,idPropiedad);
     }
 
     /**

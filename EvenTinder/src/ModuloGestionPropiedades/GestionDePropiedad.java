@@ -31,7 +31,7 @@ public class GestionDePropiedad {
      */
     public ArrayList<Propiedad> mostrarListaDePropiedades() { 
         
-        return this.listaPropiedades;
+        return this.gestorEventos.obtenerInformacionPropiedades();
     }
 
     /**
@@ -234,4 +234,10 @@ public class GestionDePropiedad {
         return this.gestorEventos.obtenerInformacionSolicitudesDeEventos(rut);
     }
             
+    public ArrayList<Evento> obtenerInformacionDeEventosActuales(String rutPropietario) {
+        return this.gestorEventos.obtenerInformacionDeEventosActualesPropietario(rutPropietario);
+    }
+    public ArrayList<Evento> obtenerInformacionDeEventosFinalizados(String rutPropietario) {        
+        return this.gestorEventos.obtenerInformacionDeEventosFinalizadosPropietario(rutPropietario);
+    }
 }
