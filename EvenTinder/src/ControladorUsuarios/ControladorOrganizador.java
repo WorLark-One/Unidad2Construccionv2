@@ -55,7 +55,7 @@ public class ControladorOrganizador {
      * @param publicado 
      * @return
      */
-    public boolean modificarEvento( int idEvento,  String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado) {
+    public boolean modificarEvento(int idEvento,  String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado) {
         return this.gestorEventos.modificarEvento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado);
     }
 

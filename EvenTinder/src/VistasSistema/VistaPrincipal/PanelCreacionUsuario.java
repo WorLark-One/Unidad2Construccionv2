@@ -429,7 +429,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) )){
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 )){
                     return 2;
                 }
             }            
@@ -499,7 +499,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         if(!"".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
                 String[] arroba = correoElectronico.split("@");
-                if(arroba.length == 2){
+                if(arroba.length == 2 && !arroba[0].equals("")){
                     char[] inicio= arroba[0].toCharArray();
                     for(char c : inicio){
                         int ascii = (int) c;
@@ -508,7 +508,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                         }
                     }                    
                     String[] puntos = arroba[1].split("\\.");                    
-                    if(puntos.length == 2 || puntos.length == 3){                        
+                    if((puntos.length == 2 || puntos.length == 3) && !puntos[0].equals("") && !puntos[1].equals("")){   
                         if("cl".equals(puntos[puntos.length-1])){                            
                             int i = 0;
                             while(i < puntos.length-1){
@@ -544,7 +544,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         if("organizador".equals(tipoUsuario) || "cliente".equals(tipoUsuario)){
             if(!"".equals(tarjetaDeCredito)){
                 tarjetaDeCredito = tarjetaDeCredito.replace(" ", "");
-                char[] aux = tarjetaDeCredito.toCharArray();
+                char[] aux = tarjetaDeCredito.toCharArray();                
                 for(char c : aux){
                     int ascii = (int) c;
                     if( !((ascii >=48 && ascii <=57) )){

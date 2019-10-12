@@ -102,7 +102,7 @@ public class PanelCreacionUsuarioTest {
         clave = "12345678";
         numeroTelefonico = "123456789";
         correoElectronico = "mpizarro16@alumnos.utalca.cl";
-        tarjetaDeCredito = "12345678911234";
+        tarjetaDeCredito = "1234 5678 3412";
         result =instance.validarResgistro(tipoUsuario, nombre, rut, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito, CuentaBancaria);
         expResult = 7;
         assertEquals(expResult, result);
