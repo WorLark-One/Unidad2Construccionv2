@@ -267,7 +267,6 @@ public class ControladorBDDeEventos {
 
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "";
-                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     boolean publicado = resultado.getBoolean("publicado");
@@ -685,8 +684,11 @@ public class ControladorBDDeEventos {
                     int capacidad = Integer.parseInt(resultado.getString("capacidad"));
                     int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
                     boolean publicado = resultado.getBoolean("publicado");
-
+                    int idPropiedad=obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
+                   
                     Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
+                    
+                    miEvento.setIdPropiedad(idPropiedad);
                     eventos.add(miEvento);
                 }
                 resultado.close();
@@ -745,8 +747,10 @@ public class ControladorBDDeEventos {
                     int capacidad = Integer.parseInt(resultado.getString("capacidad"));
                     int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
                     boolean publicado = resultado.getBoolean("publicado");
-
+                    int idPropiedad=obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
                     Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
+                    
+                    miEvento.setIdPropiedad(idPropiedad);
                     eventos.add(miEvento);
                 }
                 resultado.close();
@@ -795,9 +799,10 @@ public class ControladorBDDeEventos {
                         + "where propietario.rut='" + rutPropietario + "' and evento.fechatermino <= '" + fecha + "'::date";
 
                 ResultSet resultado = st.executeQuery(sql);
+                int idEvento=0;
                 while (resultado.next()) {
                     // obtengo la informacion del cliente.
-                    int idEvento = Integer.parseInt(resultado.getString("id"));
+                    idEvento = Integer.parseInt(resultado.getString("id"));
                     String nombre = resultado.getString("nombre");
                     String descripcion = resultado.getString("descripcion");
                     Date fechaInicio = resultado.getDate("fechainicio");
@@ -805,8 +810,10 @@ public class ControladorBDDeEventos {
                     int capacidad = Integer.parseInt(resultado.getString("capacidad"));
                     int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
                     boolean publicado = resultado.getBoolean("publicado");
-
+                    int id=obtenerIdDePropiedadDondeSeRealizaEvento(miConexion,idEvento);
                     Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
+                    
+                    miEvento.setIdPropiedad(id);
                     eventos.add(miEvento);
                 }
                 resultado.close();
