@@ -17,6 +17,7 @@ public class Evento {
     private int capacidadMaximaDelEvento;
     private int plazoDevolucionEntrada;
     private boolean publicado;
+    int idPropiedad;
     private ArrayList<Entrada>listaEntradas;
 
     public Evento(int idEvento, String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int plazoDevolucionEntrada, boolean publicado) {
@@ -29,6 +30,7 @@ public class Evento {
         this.plazoDevolucionEntrada = plazoDevolucionEntrada;
         this.publicado = publicado;
         this.listaEntradas= new ArrayList<>();
+        this.idPropiedad=-1;
     }
 
 
@@ -174,4 +176,29 @@ public class Evento {
         this.capacidadMaximaDelEvento = capacidadMaximaDelEvento;
     }
 
+    public boolean isPublicado() {
+        return publicado;
+    }
+
+    public void setPublicado(boolean publicado) {
+        this.publicado = publicado;
+    }
+
+    public int getIdPropiedad() {
+        return idPropiedad;
+    }
+
+    public void setIdPropiedad(int idPropiedad) {
+        this.idPropiedad = idPropiedad;
+    }
+
+    public ArrayList<Entrada> getListaEntradas() {
+        return listaEntradas;
+    }
+
+    public void setListaEntradas(ArrayList<Entrada> listaEntradas) {
+        this.listaEntradas = listaEntradas;
+    }
+    
+    
 }

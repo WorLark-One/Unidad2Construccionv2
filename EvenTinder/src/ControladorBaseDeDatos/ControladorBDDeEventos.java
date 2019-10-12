@@ -2,7 +2,6 @@ package ControladorBaseDeDatos;
 
 import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
-import ModuloGestionUsuario.Propietario;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -358,8 +357,10 @@ public class ControladorBDDeEventos {
                     int capacidad = Integer.parseInt(resultado.getString("capacidad"));
                     int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
                     boolean publicado = resultado.getBoolean("publicado");
+                    int idPropiedad=obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
 
                     Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
+                    miEvento.setIdPropiedad(idPropiedad);
                     eventos.add(miEvento);
                 }
                 resultado.close();
@@ -380,6 +381,32 @@ public class ControladorBDDeEventos {
 
         }
         return null;
+    }
+    
+    
+    public int obtenerIdDePropiedadDondeSeRealizaEvento(Connection conexion, int idEvento){
+        Connection miConexion = this.conexion.getConexion();
+
+        ArrayList<Evento> eventos = new ArrayList<>();
+        if (miConexion != null)// si hay conexion.
+        {
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select *from asociacion where asociacion.refpropiedad="+idEvento+"";
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    int id = Integer.parseInt(resultado.getString("refpropiedad"));
+                    resultado.close();
+                    st.close();
+                    return id;
+                    
+                }
+            } catch (SQLException e) {
+                return 0;
+            } 
+        }
+        return 0;
     }
 
     /**
@@ -412,8 +439,9 @@ public class ControladorBDDeEventos {
                     int capacidad = Integer.parseInt(resultado.getString("capacidad"));
                     int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
                     boolean publicado = resultado.getBoolean("publicado");
-
+                    int idPropiedad=obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
                     Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
+                    miEvento.setIdPropiedad(idPropiedad);
                     eventos.add(miEvento);
                 }
                 resultado.close();
@@ -466,8 +494,9 @@ public class ControladorBDDeEventos {
                     int capacidad = Integer.parseInt(resultado.getString("capacidad"));
                     int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
                     boolean publicado = resultado.getBoolean("publicado");
-
+                    int idPropiedad=obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
                     Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
+                    miEvento.setIdPropiedad(idPropiedad);
                     eventos.add(miEvento);
                 }
                 resultado.close();
@@ -522,8 +551,9 @@ public class ControladorBDDeEventos {
                     int capacidad = Integer.parseInt(resultado.getString("capacidad"));
                     int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
                     boolean publicado = resultado.getBoolean("publicado");
-
+                    int idPropiedad=obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
                     Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
+                    miEvento.setIdPropiedad(idPropiedad);
                     eventos.add(miEvento);
                 }
                 resultado.close();
@@ -794,13 +824,10 @@ public class ControladorBDDeEventos {
                     //System.out.println("No se cerro la base de datos satisfactoriamente");
                 }
             }
-
         }
         return null;
     }
 
-
-    
     /**
      * Obtiene una lista de todos los propietarios registrados en la base de datos con sus respectivas 
      * propiedades asiciadas..
