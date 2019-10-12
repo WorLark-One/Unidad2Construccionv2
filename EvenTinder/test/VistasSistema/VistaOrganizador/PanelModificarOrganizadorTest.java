@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import java.sql.SQLException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -41,7 +42,7 @@ public class PanelModificarOrganizadorTest {
      * Test of validarModificarOrganizador method, of class PanelModificarOrganizador.
      */
     @Test
-    public void testValidarModificarOrganizador() {
+    public void testValidarModificarOrganizador() throws SQLException {
         System.out.println("validarModificarOrganizador");
         String nombre = "";
         String clave = "";

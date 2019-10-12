@@ -5,6 +5,10 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import ModuloGestionEventos.Evento;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author xebae
@@ -14,8 +18,14 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
     /**
      * Creates new form PanelEliminarEvento
      */
-    public PanelEliminarEvento() {
+    
+    private VentanaPrincipalOrganizador papa;
+    private ArrayList<Evento> eventos;
+    
+    public PanelEliminarEvento(VentanaPrincipalOrganizador papa){
+        this.papa=papa;
         initComponents();
+        this.actualizarMenuOpciones();
     }
 
     /**
@@ -31,7 +41,7 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         listaEventos = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
-        botonModificarEvento = new javax.swing.JButton();
+        botonEliminarEvento = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -41,15 +51,19 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
-        listaEventos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaEventosActionPerformed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú eliminar de evento");
 
-        botonModificarEvento.setText("Eliminar evento");
-        botonModificarEvento.addActionListener(new java.awt.event.ActionListener() {
+        botonEliminarEvento.setText("Eliminar evento");
+        botonEliminarEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonModificarEventoActionPerformed(evt);
+                botonEliminarEventoActionPerformed(evt);
             }
         });
 
@@ -69,7 +83,7 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
                             .addComponent(listaEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(299, 299, 299)
-                        .addComponent(botonModificarEvento)))
+                        .addComponent(botonEliminarEvento)))
                 .addContainerGap(385, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -87,22 +101,63 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(listaEventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(botonModificarEvento)
+                .addComponent(botonEliminarEvento)
                 .addContainerGap(456, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonModificarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarEventoActionPerformed
+    private void botonEliminarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarEventoActionPerformed
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_botonModificarEventoActionPerformed
+        if(this.listaEventos.getSelectedIndex()<=0){
+            JOptionPane.showMessageDialog(null, "No a seleccionado la propiedad a modificar", "Error al seleccionar propiedad", JOptionPane.WARNING_MESSAGE);    
+            return;
+        }
+        boolean resultado = false;
+        resultado = this.papa.getControladorOrganizador().eliminarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento());
+        if(resultado){
+            //agregando sectores
+            JOptionPane.showMessageDialog(null, "Se a eliminado correctamente");
+            this.actualizarMenuOpciones();
+        }else{
+            //fallo
+            JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  
+        }
+    }//GEN-LAST:event_botonEliminarEventoActionPerformed
+
+    private void listaEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaEventosActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_listaEventosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonModificarEvento;
+    private javax.swing.JButton botonEliminarEvento;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JComboBox<String> listaEventos;
     // End of variables declaration//GEN-END:variables
+
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    
+    /**
+     * Este va a ser el formato de las consultas para ser luego testeadas en el junit
+     * 0 = Correcto
+     * numeros mayores que 0 son errores
+     */
+ 
+    // no se puede hacer tdd ya que necesita otro metodo
+    private void actualizarMenuOpciones(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
+        listaEventos.removeAllItems();
+        listaEventos.addItem("");
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                listaEventos.addItem(eventos.get(i).getNombre());
+            }
+            this.repaint();
+            this.revalidate();
+        }
+    }
+
 }

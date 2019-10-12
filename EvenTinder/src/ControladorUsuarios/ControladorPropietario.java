@@ -1,6 +1,7 @@
 package ControladorUsuarios;
 
 import ModuloAutenticacion.ControlDeAcceso;
+import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.GestionDePropiedad;
 import ModuloGestionPropiedades.Propiedad;
 import java.sql.SQLException;
@@ -24,20 +25,6 @@ public class ControladorPropietario {
         this.controlAcceso = ControlDeAcceso.getIntancia();
         this.gestorPropiedades = new GestionDePropiedad();
         this.gestorPropiedades.obtenerInformacionDePropiedades(controlAcceso.getRut());
-    }
-
-    /**
-     * Implementacion en proximo incremento
-     */
-    public void aceptarSolicitud() {
-        // TODO implement here
-    }
-
-    /**
-     * Implementacion en proximo incremento
-     */
-    public void rechazarSolicitud() {
-        // TODO implement here
     }
 
     /**
@@ -134,4 +121,41 @@ public class ControladorPropietario {
         return this.gestorPropiedades.eliminarSector(id, nombreActual);
     }
 
+    /**
+     * @param idEvento 
+     * @return
+     */
+    public boolean aceptarSolicitud(int idEvento) {
+        return this.gestorPropiedades.aceptarSolicitud(idEvento);
+    }
+
+    /**
+     * @param idEvento 
+     * @return
+     */
+    public boolean rechazarSolicitud( int idEvento) {
+        return this.gestorPropiedades.rechazarSolicitud(idEvento);
+    }
+
+    /**
+     * @return
+     */
+    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos() {        
+        return this.gestorPropiedades.obtenerInformacionSolicitudesDeEventos(this.controlAcceso.getRut());
+    }
+    
+    
+    /**
+     * @return
+     */
+    public ArrayList<Evento> obtenerInformacionDeEventosActuales() {
+        return this.gestorPropiedades.obtenerInformacionDeEventosActuales(this.controlAcceso.getRut());
+    }
+
+    /**
+     * @return
+     */
+    public ArrayList<Evento> obtenerInformacionDeEventosFinalizados() {
+        return this.gestorPropiedades.obtenerInformacionDeEventosFinalizados(this.controlAcceso.getRut());
+    }
 }

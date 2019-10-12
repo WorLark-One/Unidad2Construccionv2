@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaPropietario;
 
+import ModuloGestionUsuario.Propietario;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,9 +23,10 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     
     private VentanaPrincipalPropietario papa;
     
-    public PanelModificarPropietario(VentanaPrincipalPropietario papa) {
+    public PanelModificarPropietario(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
         initComponents();
+        this.actualizarInfomacion();
     }
 
     /**
@@ -96,27 +98,24 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel16))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel16))
+                                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(botonRegistrar)
-                                .addGap(140, 140, 140)))
+                                    .addComponent(botonRegistrar)
+                                    .addComponent(cuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,29 +186,43 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                 this.numeroTelefonico.setText("");
                 this.correoElectronico.setText("");
                 this.cuentaBancaria.setText("");
+                try {
+                    this.actualizarInfomacion();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelModificarPropietario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
             }
         }
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Nombre completo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el nombre sea solo letras \n"
+                    + "Ej: Daniel Moreno", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el rut tenga entre entre sea: nnn nnn nnn - nok \n" + 
+                    "Ej: 11111111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==3){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Numero Telefonico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la clave tenga minimo 8 digitos \n" + 
+                    "Ej: 12345678", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==4){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el numero telefonico tenga 9 digitos \n" + 
+                    "Ej: 987654321", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==5){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Cuenta Bancaria", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el correo electronico sea algo@gmail.com o sea algo@gmail.cl \n" + 
+                    "Ej: elmejorproyectodelmundo@gmail.cl", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
+        }
+        if(resp==6){
+            JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria algo \n" + 
+                    "Ej: no se como valido esto", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
@@ -276,6 +289,18 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             return 5;
         }
         return 0;
+    }
+    
+    public void actualizarInfomacion() throws SQLException{
+        Propietario usuario =(Propietario) this.papa.getControladorPrincipal().obtenerInformacionUsuario();
+        if(usuario==null){
+            return;
+        }
+        this.clave.setText("");
+        this.cuentaBancaria.setText("");
+        this.nombre.setText(usuario.getNombreCompleto());
+        this.numeroTelefonico.setText(usuario.getTelefono());
+        this.correoElectronico.setText(usuario.getCorreoElectronico());
     }
 
 }

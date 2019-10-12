@@ -15,6 +15,7 @@ import VistasSistema.VistaPropietario.PanelAgregarSector;
 import VistasSistema.VistaPropietario.PanelEliminarSector;
 import VistasSistema.VistaPropietario.PanelModificarSector;
 import java.awt.Component;
+import java.sql.SQLException;
 
 /**
  *
@@ -98,7 +99,7 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    void modificarCuenta() {
+    void modificarCuenta() throws SQLException {
         PanelModificarUsuario modificar = new PanelModificarUsuario(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(modificar, java.awt.BorderLayout.CENTER);
