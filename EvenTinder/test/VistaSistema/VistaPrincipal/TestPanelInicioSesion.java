@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistaSistemaVistaPrincipal;
-import VistasSistemaVistaPrincipal.PanelInicioSesion;
-import VistasSistemaVistaPrincipal.VentanaPrincipal;
+package VistaSistema.VistaPrincipal;
+import VistasSistema.VistaPrincipal.PanelInicioSesion;
+import VistasSistema.VistaPrincipal.VentanaPrincipal;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -55,7 +55,7 @@ public class TestPanelInicioSesion {
             this.clave = "clave";
             break;
     }
-    aux = p.validarDatos(this.tipoUsuario, this.rut, this.clave);
+    aux = this.p.validarDatosIniciarSesion(this.tipoUsuario, this.rut, this.clave);
     switch (casos){
         case 0: //1 falta tipiUsuario
             assertEquals(1, aux);

@@ -6,8 +6,6 @@
 package VistasSistema.VistaPropietario;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
-import VistasSistema.VistaPropietario.PanelModificarPropietario;
 import java.sql.SQLException;
 /**
  *
@@ -28,7 +26,7 @@ public class TestPanelModificarPropietario {
     String numeroTelefonico = "";
     String correoElectronico = "";
     String cuentaBancaria = "";
-    int esperado = pmp.validarModificarUsuario(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
+    int esperado = pmp.validarEntrada(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
     assertEquals(1,esperado); // faltaa el nombre
     }
     @Test
@@ -38,7 +36,7 @@ public class TestPanelModificarPropietario {
     String numeroTelefonico = "";
     String correoElectronico = "";
     String cuentaBancaria = "";
-     int esperado = pmp.validarModificarUsuario(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
+     int esperado = pmp.validarEntrada(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
     assertEquals(2,esperado); // faltaa la clave
     }
      @Test
@@ -48,7 +46,7 @@ public class TestPanelModificarPropietario {
     String numeroTelefonico = "";
     String correoElectronico = "";
     String cuentaBancaria = "";
-    int esperado = pmp.validarModificarUsuario(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
+    int esperado = pmp.validarEntrada(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
     assertEquals(3,esperado); // faltaa el numeroTelefonico
     }
     @Test
@@ -58,7 +56,7 @@ public class TestPanelModificarPropietario {
     String numeroTelefonico = "+56997815288";
     String correoElectronico = "";
     String cuentaBancaria = "";
-    int esperado = pmp.validarModificarUsuario(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
+    int esperado = pmp.validarEntrada(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
     assertEquals(4,esperado); // faltaa el correoElectronico
     }
     @Test
@@ -68,7 +66,7 @@ public class TestPanelModificarPropietario {
     String numeroTelefonico = "+56997815288";
     String correoElectronico = "ejemplo@gmail.com";
     String cuentaBancaria = "";
-    int esperado = pmp.validarModificarUsuario(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
+    int esperado = pmp.validarEntrada(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
     assertEquals(5,esperado); // faltaa la cuentaBancaria
     }
      @Test
@@ -78,7 +76,7 @@ public class TestPanelModificarPropietario {
     String numeroTelefonico = "+56997815288";
     String correoElectronico = "ejemplo@gmail.com";
     String cuentaBancaria = "17586721";
-    int esperado = pmp.validarModificarUsuario(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
+    int esperado = pmp.validarEntrada(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
     assertEquals(0,esperado); // esta todo bien 
     }
      @Test
@@ -88,7 +86,7 @@ public class TestPanelModificarPropietario {
     String numeroTelefonico = "+56997815288";
     String correoElectronico = "ejemplo@gmail.com";
     String cuentaBancaria = "17586721";
-    int esperado = pmp.validarModificarUsuario(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
+    int esperado = pmp.validarEntrada(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
     assertEquals(1,esperado); // nombre invalido, deveria dar 1
     }
      @Test
@@ -98,7 +96,7 @@ public class TestPanelModificarPropietario {
     String numeroTelefonico = "CELULAR";
     String correoElectronico = "ejemplo@gmail.com";
     String cuentaBancaria = "17586721";
-    int esperado = pmp.validarModificarUsuario(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
+    int esperado = pmp.validarEntrada(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
     assertEquals(3,esperado); // celular invalido, deveria dar 3 
     }
      @Test
@@ -108,7 +106,7 @@ public class TestPanelModificarPropietario {
     String numeroTelefonico = "+56997815288";
     String correoElectronico = "ejemplo";
     String cuentaBancaria = "17586721";
-    int esperado = pmp.validarModificarUsuario(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
+    int esperado = pmp.validarEntrada(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
     assertEquals(4,esperado); // correo invalido deberia dar 4
     }
      @Test
@@ -118,7 +116,7 @@ public class TestPanelModificarPropietario {
     String numeroTelefonico = "+56997815288";
     String correoElectronico = "ejemplo@gmail.com";
     String cuentaBancaria = "Targeta";
-    int esperado = pmp.validarModificarUsuario(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
+    int esperado = pmp.validarEntrada(nombre, clave, numeroTelefonico, correoElectronico, cuentaBancaria);
     assertEquals(5,esperado); // cuentaBancaria invalida deveria dar 5
     }
     
