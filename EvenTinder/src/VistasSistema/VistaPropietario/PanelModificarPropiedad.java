@@ -446,7 +446,16 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
      * @return 
      */
     public int validarEntrada(String nombre, String descripcion, String ubicacion, String valorArriendo) {
-        if(nombre.equals("")){
+        if(!nombre.equals("")){
+            char[] aux = nombre.toCharArray();
+            for(char c : aux){                
+                int ascii = (int) c;
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
+                    return 1;
+                }
+            } 
+        }
+        else{
             return 1;
         }
         if(descripcion.equals("")){
@@ -455,7 +464,15 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         if(ubicacion.equals("")){
             return 3;
         }
-        if(valorArriendo.equals("") || !isNumero(valorArriendo)){
+        if(!valorArriendo.equals("") || !isNumero(valorArriendo)){
+            try{
+                Integer.parseInt(valorArriendo);                
+            }
+            catch(NumberFormatException nfe){
+                return 5;
+            }
+        }
+        else{
             return 5;
         }
         return 0;
