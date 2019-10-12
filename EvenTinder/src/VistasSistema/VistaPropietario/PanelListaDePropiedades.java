@@ -68,7 +68,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         cantidadDeSectores = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setLayout(new java.awt.GridLayout());
+        setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -84,10 +84,13 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setText("1. Seleccione la propiedad");
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel5.setText("1. Seleccione una propiedad");
 
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Descripcion de la propiedad");
 
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Lista de sectores");
 
         listaSectores.setModel(new javax.swing.AbstractListModel<String>() {
@@ -317,6 +320,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
 
     private void opcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionesActionPerformed
         // TODO add your handling code here:
+        System.out.println(opciones.getSelectedIndex());
         if(opciones.getSelectedIndex()!=-1){
             this.listaSectores.removeAll();
             this.modeloLista=new DefaultListModel();

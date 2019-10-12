@@ -1,5 +1,6 @@
 package ControladorBaseDeDatos;
 
+import ModuloGestionEventos.Evento;
 import java.util.*;
 
 /**
@@ -13,116 +14,101 @@ public class ControladorBDDeEventos {
     public ControladorBDDeEventos() {
     }
 
+
     /**
-     * @param rut 
+
      * @return
      */
-    public ArrayList<String> obtenerInformacionDeSolicitudesDeEventos(String rut) {
+    public boolean crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad, String rutOrganizador) {
         // TODO implement here
-        return null;
+        return false;
     }
 
-    /**
-     * @param rut 
-     * @param id 
-     */
-    public ArrayList<String> obtenerInformacionDeUnaSolicitudDeEvento(String rut,int id) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param rut 
-     * @param id 
-     */
-    public void aceptarSolicitudDeUnEvento(String rut,int id) {
-        // TODO implement here
-    }
-
-    /**
-     * @param rut 
-     * @param id 
-     */
-    public void rechazarSolicitud(String rut,int id) {
-        // TODO implement here
-    }
-
-    /**
-     * @param rut 
+    /*
      * @return
      */
-    public ArrayList<String> obtenerInformacionDeTodosLosEventosDeUnOrganizador(String rut) {
+    public boolean modificarEvento(int idEvento, String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad) {
         // TODO implement here
-        return null;
+        return false;
     }
 
     /**
-     * @param rut 
+     * @param int idEvento 
      * @return
      */
-    public ArrayList<String> obtenerInformacionDeEventosPublicadosDeUnOrganizador(String rut) {
+    public boolean eliminarEvento(int idEvento) {
         // TODO implement here
-        return null;
-    }
-
-
-    public ArrayList<String> obtenerInformacionDeEventosNoPublicados(String rut) {
-        // TODO implement here
-        return null;
+        return false;
     }
 
     /**
-     * 
-     * @param nombre
-     * @param fechaDeInicio
-     * @param fechaDeTermino
-     * @param capacidad
-     * @param descripcion
-     * @param diasMaximoDevolucion
-     * @param publicado 
-     */
-    public void crearEvento(String nombre,Date fechaDeInicio, Date fechaDeTermino,int capacidad, String descripcion, int diasMaximoDevolucion, boolean publicado) {
-        // TODO implement here
-
-    }
-    
-    /**
-     * 
-     * @param id
-     * @param nombre
-     * @param fechaDeInicio
-     * @param fechaDeTermino
-     * @param capacidad
-     * @param descripcion
-     * @param diasMaximoDevolucion
-     * @param publicado 
-     */
-    public void modificarEvento(int id,String nombre,Date fechaDeInicio,Date fechaDeTermino,int capacidad, String descripcion,int diasMaximoDevolucion, boolean publicado) {
-        // TODO implement here
-  
-    }
-
-    /**
-     * @param id 
-     */
-    public void eliminarEvento(int id) {
-        // TODO implement here
-    }
-
-    /**
-     * @param id 
+     * @param String rut 
      * @return
      */
-    public ArrayList<String> obtenerInformacionDeEstadisticasDeVentasPorEventos(int id) {
+    public ArrayList<Evento> obtenerInformacionDeTodosLosEventosDeUnOrganizador(String rut) {
         // TODO implement here
         return null;
     }
 
     /**
-     * @param  id 
+     * @param String rut 
      * @return
      */
-    public ArrayList<String>  obtenerInformacionDeHistorialDeEventosPorPropiedad( int id) {
+    public ArrayList<Evento> obtenerInformacionDeEventosPublicadosDeUnOrganizador(String rut) {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @param String rut 
+     * @return
+     */
+    public ArrayList<Evento> obtenerInformacionDeEventosNoPublicadosDeUnOrganizador(String rut) {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @param String rut 
+     * @return
+     */
+    public ArrayList<Evento> obtenerInformacionDeEventosFinalizadosDeUnOrganizador(String rut) {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @param int idEvento 
+     * @return
+     */
+    public boolean aceptarSolicitudPropietario(int idEvento) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param String rutPropietario 
+     * @return
+     */
+    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventosPropietario(String rutPropietario) {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @param String rutPropietario 
+     * @return
+     */
+    public ArrayList<Evento> obtenerInformacionDeEventosActualesPropietario(String rutPropietario) {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @param String rutPropietario 
+     * @return
+     */
+    public ArrayList<Evento> obtenerInformacionDeEventosFinalizadosPropietario(String rutPropietario) {
         // TODO implement here
         return null;
     }
