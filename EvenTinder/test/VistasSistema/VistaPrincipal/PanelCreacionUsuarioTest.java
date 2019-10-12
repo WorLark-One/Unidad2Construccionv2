@@ -105,9 +105,7 @@ public class PanelCreacionUsuarioTest {
         tarjetaDeCredito = "1234 5678 3412";
         result =instance.validarResgistro(tipoUsuario, nombre, rut, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito, CuentaBancaria);
         expResult = 7;
-        assertEquals(expResult, result);
-                
-        
+        assertEquals(expResult, result);      
     }
 
     /**
