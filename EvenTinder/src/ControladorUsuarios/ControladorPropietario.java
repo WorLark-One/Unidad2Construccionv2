@@ -28,20 +28,6 @@ public class ControladorPropietario {
     }
 
     /**
-     * Implementacion en proximo incremento
-     */
-    public void aceptarSolicitud() {
-        // TODO implement here
-    }
-
-    /**
-     * Implementacion en proximo incremento
-     */
-    public void rechazarSolicitud() {
-        // TODO implement here
-    }
-
-    /**
      * Metodo que pide y retorna la lista de las Propiedades existentes.
      * @return El arreglo de Propiedades obtenidas.
      */
@@ -135,31 +121,27 @@ public class ControladorPropietario {
         return this.gestorPropiedades.eliminarSector(id, nombreActual);
     }
 
-
     /**
-     * @param int idEvento 
+     * @param idEvento 
      * @return
      */
     public boolean aceptarSolicitud(int idEvento) {
-        // TODO implement here
-        return false;
+        return this.gestorPropiedades.aceptarSolicitud(idEvento);
     }
 
     /**
-     * @param int idEvento 
+     * @param idEvento 
      * @return
      */
     public boolean rechazarSolicitud( int idEvento) {
-        // TODO implement here
-        return false;
+        return this.gestorPropiedades.rechazarSolicitud(idEvento);
     }
 
     /**
      * @return
      */
-    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos() {
-        // TODO implement here
-        return null;
+    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos() {        
+        return this.gestorPropiedades.obtenerInformacionSolicitudesDeEventos(this.controlAcceso.getRut());
     }
 
     /**

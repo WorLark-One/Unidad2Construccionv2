@@ -192,7 +192,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     }
 
     public void SolicitudDeEventos() {
-        PanelAceptarYRechasarEventos eventos = new PanelAceptarYRechasarEventos();
+        PanelAceptarYRechasarEventos eventos = new PanelAceptarYRechasarEventos(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=eventos;
@@ -237,6 +237,15 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(modificarPropiedad, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=modificarPropiedad;
+        this.repaint();
+        this.revalidate();  
+    }
+
+    void HistorialDeEventos() {
+        PanelHistorialDeEventos historial = new PanelHistorialDeEventos(this);
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(historial, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=historial;
         this.repaint();
         this.revalidate();  
     }

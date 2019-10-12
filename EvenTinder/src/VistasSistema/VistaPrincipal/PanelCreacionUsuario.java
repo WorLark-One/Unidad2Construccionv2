@@ -424,33 +424,147 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
      * @return 
      */
     public int validarResgistro(String tipoUsuario, String nombre, String rut, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito, String CuentaBancaria) {                                               
-        // TODO add your handling code here:
-        if("".equals(tipoUsuario)){
-            return 1;
+        
+        if(!"".equals(nombre)){
+            char[] aux = nombre.toCharArray();
+            for(char c : aux){                
+                int ascii = (int) c;
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 )){
+                    return 2;
+                }
+            }            
         }
-        if("".equals(nombre)){
+        else{
             return 2;
         }
-        if("".equals(rut)){
+        if(!"".equals(rut)){
+            boolean validacion = false;
+            try {
+                rut =  rut.toUpperCase();
+                rut = rut.replace(".", "");
+                rut = rut.replace("-", "");
+                int rutAux = Integer.parseInt(rut.substring(0, rut.length() - 1));
+
+                char dv = rut.charAt(rut.length() - 1);
+
+                int m = 0, s = 1;
+                for (; rutAux != 0; rutAux /= 10) {
+                    s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
+                }
+                if (dv == (char) (s != 0 ? s + 47 : 75)) {
+                    validacion = true;
+                }
+            } 
+            catch (java.lang.NumberFormatException e) {
+            } 
+            catch (Exception e) {
+            }
+            if(!validacion){
+                return 3;
+            }
+        }
+        else{
             return 3;
         }
-        if("".equals(clave)){
+        if(!"".equals(clave)){
+            char[] aux = clave.toCharArray();
+            for(char c : aux){
+                int ascii = (int) c;
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) )){
+                    return 4;
+                }
+            }
+            if(aux.length <8){
+                return 4;
+            }
+        }
+        else{
             return 4;
         }
-        if("".equals(numeroTelefonico)){
+        if(!"".equals(numeroTelefonico)){
+            char[] aux = numeroTelefonico.toCharArray();
+            for(char c : aux){
+                int ascii = (int) c;
+                if( !((ascii >=48 && ascii <=57) )){
+                    return 5;
+                }
+            }
+            if(aux.length != 9){
+                return 5;
+            }
+        }
+        else{
             return 5;
         }
-        if("".equals(correoElectronico)){
+        if(!"".equals(correoElectronico)){
+            if(correoElectronico.contains("@")){
+                String[] arroba = correoElectronico.split("@");
+                if(arroba.length == 2 && !arroba[0].equals("")){
+                    char[] inicio= arroba[0].toCharArray();
+                    for(char c : inicio){
+                        int ascii = (int) c;
+                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) )){
+                            return 6;
+                        }
+                    }                    
+                    String[] puntos = arroba[1].split("\\.");                    
+                    if((puntos.length == 2 || puntos.length == 3) && !puntos[0].equals("") && !puntos[1].equals("")){   
+                        if("cl".equals(puntos[puntos.length-1])){                            
+                            int i = 0;
+                            while(i < puntos.length-1){
+                                char[] dominio = puntos[i].toCharArray();
+                                for(char c : dominio){
+                                    int ascii = (int) c;
+                                    if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) )){
+                                        return 6;
+                                    }
+                                }
+                                i++;
+                            }
+                        }
+                        else{
+                            return 6;
+                        }
+                    }
+                    else{                        
+                        return 6;
+                    }
+                }       
+                else{
+                    return 6;
+                }
+            }
+            else{
+                return 6;
+            }            
+        }
+        else{
             return 6;
         }
         if("organizador".equals(tipoUsuario) || "cliente".equals(tipoUsuario)){
-            if("".equals(tarjetaDeCredito)){
-                return 7;
-            }
-            if("propietario".equals(tipoUsuario)){
-                if("".equals(CuentaBancaria)){
-                    return 8;
+            if(!"".equals(tarjetaDeCredito)){
+                tarjetaDeCredito = tarjetaDeCredito.replace(" ", "");
+                char[] aux = tarjetaDeCredito.toCharArray();                
+                for(char c : aux){
+                    int ascii = (int) c;
+                    if( !((ascii >=48 && ascii <=57) )){
+                        return 7;
+                    }
                 }
+                if(aux.length !=16){
+                    return 7;
+                }                                                    
+            }
+            else{
+                return 7;
+            }            
+        }
+        if("propietario".equals(tipoUsuario)){
+            if(!"".equals(CuentaBancaria)){
+                
+            }
+            else{
+                return 8;
             }
         }
         return 0;

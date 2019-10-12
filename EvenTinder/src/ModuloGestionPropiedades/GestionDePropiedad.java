@@ -2,6 +2,7 @@ package ModuloGestionPropiedades;
 
 import ControladorBaseDeDatos.ControladorBDDePropiedades;
 import ModuloGestionEventos.Evento;
+import ModuloGestionEventos.GestionDeEvento;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,6 +14,7 @@ public class GestionDePropiedad {
     
     private ArrayList<Propiedad> listaPropiedades;
     private ControladorBDDePropiedades controlador;
+    private GestionDeEvento gestorEventos;
     
     /**
      * Constructor de un Gestor de Propiedades.
@@ -20,6 +22,7 @@ public class GestionDePropiedad {
     public GestionDePropiedad() {
         this.listaPropiedades = new ArrayList();
         this.controlador= new ControladorBDDePropiedades();
+        this.gestorEventos = new GestionDeEvento();
     }
 
     /**
@@ -73,7 +76,7 @@ public class GestionDePropiedad {
     public int registrarPropiedad( String rut,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo) throws SQLException {
         // TODO implement here
         int i = this.controlador.registrarPropiedad(rut, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion);
-        if(i>=0){
+        if(i>0){
             Propiedad p = new Propiedad(i, nombre, descripcion, fechaDePublicacion, ubicacion, capacidadTotal, valorDeArriendo);
             this.listaPropiedades.add(p);
             return i;
@@ -150,6 +153,7 @@ public class GestionDePropiedad {
         }
         return false;
     }
+   
 
     /**
      * Metodo que modifica los datos de un Sector existente asociado a una Propiedad especifica.
@@ -207,29 +211,27 @@ public class GestionDePropiedad {
     }
     
         /**
-     * @param int idEvento 
+     * @param idEvento 
      * @return
      */
     public boolean aceptarSolicitud(int idEvento) {
-        // TODO implement here
-        return false;
+        return this.gestorEventos.aceptarSolicitud(idEvento);
     }
 
     /**
-     * @param int idEvento 
+     * @param idEvento 
      * @return
      */
     public boolean rechazarSolicitud(int idEvento) {
-        // TODO implement here
-        return false;
+        return this.gestorEventos.eliminarEvento(idEvento);
     }
 
     /**
+     * @param rut
      * @return
      */
-    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos() {
-        // TODO implement here
-        return null;
+    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos(String rut) {
+        return this.gestorEventos.obtenerInformacionSolicitudesDeEventos(rut);
     }
             
 }

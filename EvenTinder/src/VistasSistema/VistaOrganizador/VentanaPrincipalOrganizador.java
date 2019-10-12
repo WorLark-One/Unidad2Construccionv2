@@ -7,10 +7,16 @@ package VistasSistema.VistaOrganizador;
 
 
 import ControladorUsuarios.ControladorCliente;
+import ControladorUsuarios.ControladorOrganizador;
 import ControladorUsuarios.ControladorPrincipal;
+import ControladorUsuarios.ControladorPropietario;
 import VistasSistema.VistaPrincipal.PanelNosotros;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
 import java.awt.Component;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,11 +29,14 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
      */
     
     private Component componenteAnterior= null;
-    private ControladorCliente controladorUsuario;
+    private ControladorOrganizador controladorOrganizador;
+    private ControladorPropietario controladorPropietario;
     private ControladorPrincipal controladorPrincipal;
-
-    public VentanaPrincipalOrganizador() {
-        this.controladorUsuario= new ControladorCliente();
+    
+    
+    public VentanaPrincipalOrganizador() throws SQLException {
+        this.controladorPropietario= new ControladorPropietario();
+        this.controladorOrganizador= new ControladorOrganizador();
         this.controladorPrincipal= new ControladorPrincipal();
         PanelDeOpciones panelDeOpciones=new PanelDeOpciones(this);
         initComponents();
@@ -87,7 +96,11 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new VentanaPrincipalOrganizador().setVisible(true);
+                try {
+                    new VentanaPrincipalOrganizador().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VentanaPrincipalOrganizador.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -123,12 +136,16 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
         this.setVisible(false);
     }
 
-    public ControladorCliente getControladorUsuario() {
-        return controladorUsuario;
+    public ControladorOrganizador getControladorOrganizador() {
+        return controladorOrganizador;
     }
 
     public ControladorPrincipal getControladorPrincipal() {
         return controladorPrincipal;
+    }
+
+    public ControladorPropietario getControladorPropietario() {
+        return controladorPropietario;
     }
 
     public void ventanaHome() {
@@ -150,7 +167,7 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
     }
 
     public void listaDeEventos() {
-        PanelMostrarListaEventosOrganizador eventos = new PanelMostrarListaEventosOrganizador();
+        PanelMostrarListaEventosOrganizador eventos = new PanelMostrarListaEventosOrganizador(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=eventos;
@@ -159,7 +176,7 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
     }
 
     public void modificarEvento() {
-        PanelModificarEvento evento = new PanelModificarEvento();
+        PanelModificarEvento evento = new PanelModificarEvento(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(evento, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=evento;
@@ -168,7 +185,7 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
     }
 
     public void eliminarEvento() {
-        PanelEliminarEvento evento = new PanelEliminarEvento();
+        PanelEliminarEvento evento = new PanelEliminarEvento(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(evento, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=evento;
@@ -177,7 +194,7 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
     }
 
     public void listaDeEventosDeOrganizador() {
-        PanelMostrarListaEventosOrganizador eventos = new PanelMostrarListaEventosOrganizador();
+        PanelMostrarListaEventosOrganizador eventos = new PanelMostrarListaEventosOrganizador(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=eventos;
@@ -195,7 +212,7 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
     }
 
     public void crearEvento() {
-        PanelCrearEvento evento = new PanelCrearEvento();
+        PanelCrearEvento evento = new PanelCrearEvento(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(evento, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=evento;

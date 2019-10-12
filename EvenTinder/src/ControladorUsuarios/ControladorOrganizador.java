@@ -3,6 +3,8 @@ package ControladorUsuarios;
 import ModuloAutenticacion.ControlDeAcceso;
 import ModuloGestionEventos.Evento;
 import ModuloGestionEventos.GestionDeEvento;
+import ModuloGestionPropiedades.Propiedad;
+import ModuloGestionUsuario.Propietario;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,7 +21,7 @@ public class ControladorOrganizador {
      */
     public ControladorOrganizador() {
         this.controlAcceso = ControlDeAcceso.getIntancia();
-        this.gestorEventos = new GestionDeEvento();
+        this.gestorEventos = new GestionDeEvento();        
     }
 
     /**
@@ -36,8 +38,7 @@ public class ControladorOrganizador {
      * @return
      */
     public boolean crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad) {       
-        boolean result = this.gestorEventos.crearEvento(nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado, idPropiedad);
-        return result;
+        return this.gestorEventos.crearEvento(nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado, idPropiedad);
     }
 
     /**
@@ -52,11 +53,10 @@ public class ControladorOrganizador {
      * @param capacidad La nueva capacidad maxima de asistentes del Evento a modificar.
      * @param diasMaximoDevolucion 
      * @param publicado 
-     * @param idPropiedad 
      * @return
      */
-    public boolean modificarEvento( int idEvento,  String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad) {
-        return this.gestorEventos.modificarEvento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado, idPropiedad);
+    public boolean modificarEvento(int idEvento,  String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado) {
+        return this.gestorEventos.modificarEvento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado);
     }
 
     /**
@@ -103,6 +103,10 @@ public class ControladorOrganizador {
      */
     public ArrayList<Evento> obtenerInformacionDeEventosFinalizadosDeUnOrganizador() {
         return this.gestorEventos.obtenerInformacion(this.controlAcceso.getRut(),"Finalizados");
+    }
+    
+    public ArrayList<Propiedad> obtenerInformacionPropiedades(){
+        return this.gestorEventos.obtenerInformacionPropiedades();
     }
 
     /**
