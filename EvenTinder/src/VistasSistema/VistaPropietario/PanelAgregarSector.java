@@ -142,11 +142,6 @@ public class PanelAgregarSector extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Lista de sectores actuales en el sistema");
 
-        listaSectores.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listaSectores);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -251,10 +246,14 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             }
         }
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el nombre del sector tenga letras y/o numero \n"
+                    + "Ej: Platea", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;        
         }
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Capacidad", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la capacidad del sector sea mayor que 0 \n" + 
+                    "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_guardarCambiosActionPerformed
 

@@ -181,11 +181,6 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        listaSectores1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane4.setViewportView(listaSectores1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -378,32 +373,36 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         }
         //nombre
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
+            JOptionPane.showMessageDialog(null, "Se espera que el nombre tenga letras y/o numero: \n"
+                    + "Ej: Grado 6", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;   
         }
         //descripcion
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: descripcion", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
+            JOptionPane.showMessageDialog(null, "Se espera que la descripcion tenga letras y/o numero: \n"
+                    + "Ej: Grado 6", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;   
         }
         //ubicacion
         if(resp==3){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: ubicacion", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
+            JOptionPane.showMessageDialog(null, "Se espera que la descripcion tenga letras y/o numero: \n"
+                    + "Ej: Grado 6", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;   
         }
         //numero de sectores
         if(resp==4){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: numero de sectores", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error en la capacidad del sector", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         //valor de arriendo
         if(resp==5){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: valor de arriendo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el valor del arriendo sea un numero mayor que 0 \n"
+                    + "Ej: 1000000", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         //Finalizado
         if(resp==6){
-            JOptionPane.showMessageDialog(null, "No a agregado un sector", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Para registrar la propiedad por lo menos debe haber creado un sector", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed

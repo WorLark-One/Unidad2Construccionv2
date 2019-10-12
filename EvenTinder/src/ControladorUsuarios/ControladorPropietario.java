@@ -121,7 +121,6 @@ public class ControladorPropietario {
         return this.gestorPropiedades.eliminarSector(id, nombreActual);
     }
 
-
     /**
      * @param idEvento 
      * @return

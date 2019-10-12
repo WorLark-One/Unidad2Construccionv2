@@ -17,6 +17,7 @@ public class ControladorBDDePropiedades {
 
     public ControladorBDDePropiedades() {
         this.conexion = new ConexionBD();
+        
         iniciarlizarBD();
     }
     
@@ -163,7 +164,6 @@ public class ControladorBDDePropiedades {
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idPropiedad = Integer.parseInt(resultado.getString("id"));
-                    System.out.println("pasoooo");
                     return idPropiedad;
                 }
                 st.close();
@@ -455,4 +455,9 @@ public class ControladorBDDePropiedades {
         return sectores;
     }
 
+    
+    
+    
+    
+    
 }

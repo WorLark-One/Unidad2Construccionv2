@@ -5,6 +5,11 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import ModuloGestionEventos.Evento;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author xebae
@@ -14,8 +19,17 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
     /**
      * Creates new form PanelMostrarListaEventosOrganizador
      */
-    public PanelMostrarListaEventosOrganizador() {
+    
+    private ArrayList<Evento> eventos;
+    private VentanaPrincipalOrganizador papa;
+    private DefaultListModel modeloLista2;
+    
+    public PanelMostrarListaEventosOrganizador(VentanaPrincipalOrganizador papa) {
+        this.papa=papa;
         initComponents();
+        modeloLista2 = new DefaultListModel();
+        this.lista.setModel(this.modeloLista2);
+        this.actualizarMenuOpciones();
     }
 
     /**
@@ -32,7 +46,7 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lista = new javax.swing.JList<>();
         jLabel20 = new javax.swing.JLabel();
         listaEventos = new javax.swing.JComboBox<>();
 
@@ -47,12 +61,7 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel19.setText("1. Seleccione una opcion de listado de eventos");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lista);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,7 +83,6 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
         jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel20.setText("Lista de eventos");
 
-        listaEventos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listaEventos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaEventosActionPerformed(evt);
@@ -122,7 +130,22 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
 
     private void listaEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaEventosActionPerformed
         // TODO add your handling code here:
-        
+        if(this.listaEventos.getSelectedIndex()<=0){
+            return;
+        }
+        if(this.listaEventos.getSelectedIndex()==1){
+            this.actualizarListaEventosTodos();
+        }
+        if(this.listaEventos.getSelectedIndex()==2){
+            this.actualizarListaEventosPublicados();
+        }
+        if(this.listaEventos.getSelectedIndex()==3){
+            this.actualizarListaEventosNoPublicados();
+        }
+        if(this.listaEventos.getSelectedIndex()==4){
+            this.actualizarListaEventosFinalizados();
+        }
+
     }//GEN-LAST:event_listaEventosActionPerformed
 
 
@@ -131,9 +154,9 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> lista;
     private javax.swing.JComboBox<String> listaEventos;
     // End of variables declaration//GEN-END:variables
 
@@ -146,10 +169,68 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
     //
     // no se puede hacer tdd ya que necesita otro metodo
     public void actualizarMenuOpciones(){
+        this.listaEventos.removeAllItems();
+        this.listaEventos.addItem("");
         this.listaEventos.addItem("Todos los eventos");
         this.listaEventos.addItem("Eventos Publicados");
-        this.listaEventos.addItem("Eventos No Publicadops");
+        this.listaEventos.addItem("Eventos No Publicados");
         this.listaEventos.addItem("Eventos Finalizados");
+        this.repaint();
+        this.revalidate();
+    }
+    
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    private void actualizarListaEventosTodos(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeTodosLosEventosDeUnOrganizador();
+        this.modeloLista2=new DefaultListModel();
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                this.modeloLista2.addElement(eventos.get(i).getNombre());
+            }
+        }
+        this.lista.setModel(this.modeloLista2);
+        this.repaint();
+        this.revalidate();
+    }
+    
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    private void actualizarListaEventosPublicados(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosPublicadosDeUnOrganizador();
+        this.modeloLista2=new DefaultListModel();
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                this.modeloLista2.addElement(eventos.get(i).getNombre());
+            }
+        }
+        this.lista.setModel(this.modeloLista2);
+        this.repaint();
+        this.revalidate();
+    }
+    
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    private void actualizarListaEventosNoPublicados(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
+        this.modeloLista2=new DefaultListModel();
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                this.modeloLista2.addElement(eventos.get(i).getNombre());
+            }
+        }
+        this.lista.setModel(this.modeloLista2);
+        this.repaint();
+        this.revalidate();
+    }
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    // no se puede hacer tdd ya que necesita otro metodo
+    private void actualizarListaEventosFinalizados(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosFinalizadosDeUnOrganizador();
+        this.modeloLista2=new DefaultListModel();
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                this.modeloLista2.addElement(eventos.get(i).getNombre());
+            }
+        }
+        this.lista.setModel(this.modeloLista2);
         this.repaint();
         this.revalidate();
     }
