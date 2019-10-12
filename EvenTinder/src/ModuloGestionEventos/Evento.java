@@ -7,11 +7,7 @@ import java.util.*;
  */
 public class Evento {
 
-    /**
-     * Default constructor
-     */
-    public Evento() {
-    }
+    
 
     private int idEvento;
     private String nombre;
@@ -32,33 +28,53 @@ public class Evento {
         this.capacidadMaximaDelEvento = capacidad;
         this.plazoDevolucionEntrada = plazoDevolucionEntrada;
         this.publicado = publicado;
+        this.listaEntradas= new ArrayList<>();
     }
 
 
 
 
     /**
-     * @return
+     * Añade una entrada a la lista de entradas del evento.
+     * @param entrada
+     * @return true si la añadio correctamente, false de lo contrario.
      */
-    public boolean añadorEntrada() {
-        // TODO implement here
-        return false;
+    public boolean AñadirEntrada(Entrada entrada) {
+
+        return this.listaEntradas.add(entrada);
     }
 
     /**
-     * @param int idEntrada 
-     * @return
+     * Elimina una entrada de la lista de entradas del evento.
+     * @param idEntrada
+     * @return true si se elimina, false de lo contrario.
      */
     public boolean eliminarEntrada(int idEntrada) {
-        // TODO implement here
+        if (this.listaEntradas != null) {
+            for (int i = 0; i < listaEntradas.size(); i++) {
+                Entrada entrada = listaEntradas.get(i);
+                if (entrada.getIdEntrada() == idEntrada) {
+                    this.listaEntradas.remove(i);
+                    return true;
+                }
+
+            }
+        }
         return false;
     }
 
     /**
-     * @return
+     * verifica si hay entradas disponibles para un evento.
+     * @return true si hay entradas disponibles, false de lo contrario.
      */
     public boolean verificarDisponibilidadDeEntrada() {
-        // TODO implement here
+        System.out.println("disponivilidad de entrada:"+this.capacidadMaximaDelEvento+" lista entradas:"+this.listaEntradas.size());
+        if (this.listaEntradas != null) {
+            if (getCapacidadMaximaDelEvento() > this.listaEntradas.size()) {
+                return true;
+            }
+
+        }
         return false;
     }
     
