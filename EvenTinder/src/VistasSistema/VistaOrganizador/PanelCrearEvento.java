@@ -428,7 +428,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             if(idEvento>0){
                 for(int i=1; i< this.modeloLista2.getSize(); i++){
                     if(this.precios.get(i)!=-1){
-                        this.papa.getControladorOrganizador().agregarPrecioSector(idEvento, this.precios.get(i), this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i), this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
+                        this.papa.getControladorOrganizador().agregarPrecioSector(idEvento, this.precios.get(i), this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre(), this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
                     }
                 }
                 JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
