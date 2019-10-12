@@ -6,7 +6,6 @@
 package VistasSistema.VistaOrganizador;
 
 
-import ControladorUsuarios.ControladorCliente;
 import ControladorUsuarios.ControladorOrganizador;
 import ControladorUsuarios.ControladorPrincipal;
 import ControladorUsuarios.ControladorPropietario;
@@ -14,7 +13,6 @@ import VistasSistema.VistaPrincipal.PanelNosotros;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
 import java.awt.Component;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -108,7 +106,7 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    void modificarCuenta() {
+    void modificarCuenta() throws SQLException {
         PanelModificarOrganizador modificar = new PanelModificarOrganizador(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(modificar, java.awt.BorderLayout.CENTER);

@@ -109,13 +109,13 @@ public class ControladorPrincipal {
     }
     
     public Usuario obtenerInformacionUsuario() throws SQLException{
-        if(this.controlAcceso.getTipoUsuario().equals("Cliente")){
+        if(this.controlAcceso.getTipoUsuario().equals("cliente")){
             return this.gestorUsuarios.obtenerInformacionCliente(this.controlAcceso.getRut());
         }
-        if(this.controlAcceso.getTipoUsuario().equals("Propietario")){
+        if(this.controlAcceso.getTipoUsuario().equals("propietario")){
             return this.gestorUsuarios.obtenerInformacionPropietario(this.controlAcceso.getRut());
         }
-        if(this.controlAcceso.getTipoUsuario().equals("Organizador")){
+        if(this.controlAcceso.getTipoUsuario().equals("organizador")){
             return this.gestorUsuarios.obtenerInformacionOrganizador(this.controlAcceso.getRut());
         }
         return null;

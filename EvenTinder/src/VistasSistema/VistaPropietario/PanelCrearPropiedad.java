@@ -385,14 +385,9 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         }
         //ubicacion
         if(resp==3){
-            JOptionPane.showMessageDialog(null, "Se espera que la descripcion tenga letras y/o numero: \n"
-                    + "Ej: Grado 6", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la ubicacion tenga letras y/o numero: \n"
+                    + "Ej: Aguas negras calle 14 pasaje 2", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;   
-        }
-        //numero de sectores
-        if(resp==4){
-            JOptionPane.showMessageDialog(null, "Error en la capacidad del sector", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
         }
         //valor de arriendo
         if(resp==5){

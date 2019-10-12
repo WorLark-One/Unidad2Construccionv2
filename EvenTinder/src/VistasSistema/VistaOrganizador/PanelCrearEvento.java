@@ -28,11 +28,17 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     private DefaultListModel modeloLista;
     private DefaultListModel modeloLista2;
     private ArrayList<Integer> precios;
+    private boolean go;
+    private int contador;
+    
     public PanelCrearEvento(VentanaPrincipalOrganizador papa){
         this.papa=papa;
         initComponents();
         this.modeloLista=new DefaultListModel();
         this.modeloLista2=new DefaultListModel();
+        capacidad.setText("0");
+        capacidad.setEnabled(false);
+        capacidad.setEditable(false);
         this.actualizarMenuOpciones();
         this.lista.setModel(modeloLista2);
         this.listaSectores.removeAllItems();
@@ -384,7 +390,8 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listaPropiedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaPropiedadesActionPerformed
-
+        this.go=false;
+        this.contador=0;
         System.out.println(listaPropiedades.getSelectedIndex());
         if(listaPropiedades.getSelectedIndex()==0){
             this.detalles.removeAll();
@@ -413,13 +420,22 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         // TODO add your handling code here:
         int resp = this.validarDatos(this.nombre.getText(), this.descripcion.getText(), this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.capacidad.getText(),this.diasMaximosDevolucion.getText());
         if(this.listaPropiedades.getSelectedIndex()<=0){
-            JOptionPane.showMessageDialog(null, "Por favor seleccione una propiedad", "Error al seleccionar una propiedad", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una propiedad", "Error al seleccionar una propiedad", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(!go){
+            JOptionPane.showMessageDialog(null, "Debe agregar por lo menos un valor de entrada", "Error al registrar sector", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==0){
-            boolean respuesta = false;
-            respuesta = this.papa.getControladorOrganizador().crearEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false, this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
-            if(respuesta){
+            int idEvento = 0;
+            idEvento = this.papa.getControladorOrganizador().crearEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false, this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
+            if(idEvento>0){
+                for(int i=0; i< this.modeloLista2.getSize(); i++){
+                    if(this.precios.get(i)!=-1){
+                        this.papa.getControladorOrganizador().agregarPrecioSector(idEvento, this.precios.get(i), this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre(), this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
+                    }
+                }
                 JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
                 this.nombre.setText("");
                 this.fechaDeInicio.setText("");
@@ -465,7 +481,6 @@ public class PanelCrearEvento extends javax.swing.JPanel {
 
     private void listaSectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaSectoresActionPerformed
         // TODO add your handling code here:
-       
     }//GEN-LAST:event_listaSectoresActionPerformed
 
     private void botonRegistrarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarPrecioActionPerformed
@@ -476,7 +491,15 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         if(this.precio.getText().equals("")){
             return ;
         }
+        go=true;
         this.precios.set(this.listaSectores.getSelectedIndex()-1, Integer.parseInt(precio.getText()));
+        contador=0;
+        for (int i = 0; i < this.precios.size(); i++) {
+            if(this.precios.get(i)!=-1){
+                contador+=this.precios.get(i);
+            }
+        }
+        this.capacidad.setText(Integer.toString(this.contador));
         this.precio.setText("");
         this.actualizarListaSectores();
     }//GEN-LAST:event_botonRegistrarPrecioActionPerformed
