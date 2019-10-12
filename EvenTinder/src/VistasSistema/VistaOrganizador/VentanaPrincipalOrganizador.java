@@ -176,7 +176,7 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
     }
 
     public void modificarEvento() {
-        PanelModificarEvento evento = new PanelModificarEvento(this);
+        PanelModificarEvento3 evento = new PanelModificarEvento3(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(evento, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=evento;

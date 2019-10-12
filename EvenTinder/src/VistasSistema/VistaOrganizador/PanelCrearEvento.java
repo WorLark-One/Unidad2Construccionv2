@@ -415,6 +415,8 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             this.modeloLista.addElement(("valorArriendo: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getValorArriendo()));
             this.detalles.setModel(this.modeloLista);
             this.actualizarMenuSectores();
+            this.actualizarListaSectores();
+            
         }
     }//GEN-LAST:event_listaPropiedadesActionPerformed
 
@@ -471,6 +473,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
 
     private void listaSectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaSectoresActionPerformed
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_listaSectoresActionPerformed
 
     private void botonRegistrarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarPrecioActionPerformed
@@ -535,6 +538,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
      */
     
     public int validarDatos(String nombre,String descripcion, String fechaDeInicio, String fechaDeTermino, String capacidad, String diasMaximos){
+        
         return 0;
     }
     
@@ -591,12 +595,12 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         this.lista.setModel(this.modeloLista2);
         this.lista.removeAll();
         listaSectores.addItem("");
-        this.precios.add(-1);
         this.precios= new ArrayList<>();
+        this.precios.add(-1);
         if(this.propiedades!=null){
-            for(int i=0; i<this.propiedades.get(listaPropiedades.getSelectedIndex()).getListaSectores().size(); i++){
+            for(int i=0; i<this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().size(); i++){
                 this.precios.add(-1);
-                listaPropiedades.addItem("Nombre:" + this.propiedades.get(listaPropiedades.getSelectedIndex()).getListaSectores().get(i).getNombre());
+                listaSectores.addItem("Nombre:" + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre());
             }
             this.repaint();
             this.revalidate();
@@ -608,9 +612,9 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         this.lista.removeAll();
         this.modeloLista2=new DefaultListModel();
         if(this.propiedades!=null){
-            for(int i=0; i<this.propiedades.get(listaPropiedades.getSelectedIndex()).getListaSectores().size(); i++){
+            for(int i=0; i<this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().size(); i++){
                 this.precios.add(-1);
-                this.modeloLista2.addElement("Nombre:" + this.propiedades.get(listaPropiedades.getSelectedIndex()).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(listaPropiedades.getSelectedIndex()).getListaSectores().get(i).getCapacidadDelSector() + "  precio:" + this.precios.get(i-1));
+                this.modeloLista2.addElement("Nombre:" + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getCapacidadDelSector() + "  precio:" + this.precios.get(i));
             }
         }
         this.lista.setModel(this.modeloLista2);

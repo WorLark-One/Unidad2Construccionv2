@@ -542,7 +542,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             return 6;
         }
         if("organizador".equals(tipoUsuario) || "cliente".equals(tipoUsuario)){
-            if("".equals(tarjetaDeCredito)){
+            if(!"".equals(tarjetaDeCredito)){
                 tarjetaDeCredito = tarjetaDeCredito.replace(" ", "");
                 char[] aux = tarjetaDeCredito.toCharArray();
                 for(char c : aux){

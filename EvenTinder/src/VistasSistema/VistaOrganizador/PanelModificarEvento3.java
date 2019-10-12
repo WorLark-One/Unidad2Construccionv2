@@ -5,42 +5,35 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
-import VistasSistema.VistaPrincipal.PanelCreacionUsuario;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 
 /**
  *
  * @author xebae
  */
-public class PanelModificarEvento extends javax.swing.JPanel {
+public class PanelModificarEvento3 extends javax.swing.JPanel {
 
     /**
-     * Creates new form PanelCrearEvento
+     * Creates new form PanelModificarEvento
      */
     
     private VentanaPrincipalOrganizador papa;
     private ArrayList<Propiedad> propiedades;
     private DefaultListModel modeloLista;
-    private DefaultListModel modeloLista2;
-    private ArrayList<Integer> precios;
-    public PanelModificarEvento(VentanaPrincipalOrganizador papa){
+    private ArrayList<Evento> eventos;
+    
+    public PanelModificarEvento3(VentanaPrincipalOrganizador papa) {
         this.papa=papa;
         initComponents();
         this.modeloLista=new DefaultListModel();
-        this.modeloLista2=new DefaultListModel();
-        this.actualizarMenuOpciones();
-        this.lista.setModel(modeloLista2);
-        this.listaSectores.removeAllItems();
+        this.actualizarlistaEventos();
     }
 
     /**
@@ -52,7 +45,6 @@ public class PanelModificarEvento extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane3 = new javax.swing.JScrollPane();
         jPanel7 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -61,7 +53,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         listaSectores = new javax.swing.JComboBox<>();
         precio = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        botonRegistrarPrecio = new javax.swing.JButton();
+        botonModificarPrecio = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -81,9 +73,9 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         fechaDeTermino = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        botonCrearEvento = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
+        botonModificarEvento = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
         listaEventos = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -93,12 +85,12 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menú Creación de evento");
+        jLabel18.setText("Menú modificar de evento");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel21.setText("3. Añadir precio de la entrada por sector");
+        jLabel21.setText("3. Modificar precio de la entrada por sector");
 
         listaSectores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listaSectores.addActionListener(new java.awt.event.ActionListener() {
@@ -109,10 +101,10 @@ public class PanelModificarEvento extends javax.swing.JPanel {
 
         jLabel1.setText("Precio");
 
-        botonRegistrarPrecio.setText("Guardar");
-        botonRegistrarPrecio.addActionListener(new java.awt.event.ActionListener() {
+        botonModificarPrecio.setText("Modificar");
+        botonModificarPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRegistrarPrecioActionPerformed(evt);
+                botonModificarPrecioActionPerformed(evt);
             }
         });
 
@@ -125,13 +117,13 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(listaSectores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(71, 71, 71)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(botonRegistrarPrecio)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(botonModificarPrecio)
+                                .addGap(119, 119, 119))
                             .addComponent(precio))))
                 .addContainerGap())
         );
@@ -147,7 +139,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                     .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(botonRegistrarPrecio)
+                .addComponent(botonModificarPrecio)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -220,10 +212,10 @@ public class PanelModificarEvento extends javax.swing.JPanel {
 
         jLabel5.setText("Nombre");
 
-        botonCrearEvento.setText("Crear Evento");
-        botonCrearEvento.addActionListener(new java.awt.event.ActionListener() {
+        botonModificarEvento.setText("Modificar Evento");
+        botonModificarEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCrearEventoActionPerformed(evt);
+                botonModificarEventoActionPerformed(evt);
             }
         });
 
@@ -257,7 +249,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(botonCrearEvento)
+                                    .addComponent(botonModificarEvento)
                                     .addComponent(diasMaximosDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
@@ -291,33 +283,33 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                     .addComponent(jLabel16)
                     .addComponent(diasMaximosDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(botonCrearEvento)
+                .addComponent(botonModificarEvento)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel23.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel23.setText("1. Seleccione el evento");
+        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel20.setText("1. Seleccione el evento");
 
         listaEventos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel23)
-                        .addGap(0, 200, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(listaEventos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel23)
+                .addComponent(jLabel20)
                 .addGap(18, 18, 18)
                 .addComponent(listaEventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -331,14 +323,13 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel18)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(253, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,33 +342,45 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                         .addGap(100, 100, 100)
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
-        jScrollPane3.setViewportView(jPanel7);
-
-        add(jScrollPane3, java.awt.BorderLayout.CENTER);
+        add(jPanel7, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void listaSectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaSectoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaSectoresActionPerformed
+
+    private void botonModificarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarPrecioActionPerformed
+        // TODO add your handling code here:
+        if(this.listaSectores.getSelectedIndex()<=0){
+            return;
+        }
+        if(this.precio.getText().equals("")){
+            return ;
+        }
+    }//GEN-LAST:event_botonModificarPrecioActionPerformed
 
     private void fechaDeTerminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaDeTerminoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fechaDeTerminoActionPerformed
 
-    private void botonCrearEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearEventoActionPerformed
+    private void botonModificarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarEventoActionPerformed
         // TODO add your handling code here:
         int resp = this.validarDatos(this.nombre.getText(), this.descripcion.getText(), this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.capacidad.getText(),this.diasMaximosDevolucion.getText());
         if(resp==0){
             boolean respuesta = false;
             //respuesta = this.papa.getControladorOrganizador().modificarEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false);
             if(respuesta){
-                JOptionPane.showMessageDialog(null, "OperaciÃ³n realizada correctamente");
+                JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
                 this.nombre.setText("");
                 this.fechaDeInicio.setText("");
                 this.fechaDeTermino.setText("");
@@ -412,30 +415,12 @@ public class PanelModificarEvento extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-    }//GEN-LAST:event_botonCrearEventoActionPerformed
-
-    private void listaSectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaSectoresActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_listaSectoresActionPerformed
-
-    private void botonRegistrarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarPrecioActionPerformed
-        // TODO add your handling code here:
-        if(this.listaSectores.getSelectedIndex()<=0){
-            return;
-        }
-        if(this.precio.getText().equals("")){
-            return ;
-        }
-        this.precios.set(this.listaSectores.getSelectedIndex()-1, Integer.parseInt(precio.getText()));
-        this.precio.setText("");
-        this.actualizarListaSectores();
-    }//GEN-LAST:event_botonRegistrarPrecioActionPerformed
+    }//GEN-LAST:event_botonModificarEventoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonCrearEvento;
-    private javax.swing.JButton botonRegistrarPrecio;
+    private javax.swing.JButton botonModificarEvento;
+    private javax.swing.JButton botonModificarPrecio;
     private javax.swing.JTextField capacidad;
     private javax.swing.JTextField descripcion;
     private javax.swing.JTextField diasMaximosDevolucion;
@@ -449,26 +434,24 @@ public class PanelModificarEvento extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> lista;
     private javax.swing.JComboBox<String> listaEventos;
     private javax.swing.JComboBox<String> listaSectores;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField precio;
     // End of variables declaration//GEN-END:variables
-
     //Aca abajo van a estar los metodos que se tienen que hacer 
     
     /**
@@ -477,91 +460,25 @@ public class PanelModificarEvento extends javax.swing.JPanel {
      * numeros mayores que 0 son errores
      */
     
-    public int validarDatos(String nombre,String descripcion, String fechaDeInicio, String fechaDeTermino, String capacidad, String diasMaximos){
-        
+    public int validarDatos(String nombre, String descripcion, String fechaDeInicio, String fechaDeTermino, String capacidad, String diasMaximos){
         return 0;
     }
     
-       /**
-     * MÃ©todo que se encarga de verificar que los numeros ingresados son numeros validos
-     */
-    private boolean isNumero(String cadena) {
-        boolean resultado;
-        try {
-            Integer.parseInt(cadena);
-            resultado = true;
-        } catch (NumberFormatException excepcion) {
-            resultado = false;
-        }
-        if (resultado==true) {
-            int a = Integer.parseInt(cadena);
-            if (a>0) {
-                resultado = true;
-            }
-            else{
-                resultado = false;
-            }
-        }
-        return resultado;
-    }
+     //Aca abajo van a estar los metodos que se tienen que hacer 
     
-    //Aca abajo van a estar los metodos que se tienen que hacer 
-    
-    /**
-     * Este va a ser el formato de las consultas para ser luego testeadas en el junit
-     * 0 = Correcto
-     * numeros mayores que 0 son errores
-     */
- 
-    // no se puede hacer tdd ya que necesita otro metodo
-    private void actualizarMenuOpciones(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
-        listaPropiedades.removeAllItems();
-        this.detalles.setModel(this.modeloLista);
-        this.detalles.removeAll();
-        listaPropiedades.addItem("");
-        if(this.propiedades!=null){
-            for(int i=0; i<this.propiedades.size(); i++){
-                listaPropiedades.addItem("id:" + this.propiedades.get(i).getId() + "  Nombre:" + this.propiedades.get(i).getNombre());
+    private void actualizarlistaEventos(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
+        listaEventos.removeAllItems();
+        listaEventos.addItem("");
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                listaEventos.addItem(eventos.get(i).getNombre());
             }
             this.repaint();
             this.revalidate();
         }
     }
-    
-    private void actualizarMenuSectores(){
-        this.propiedades = this.papa.getControladorOrganizador().obtenerInformacionPropiedades();
-        this.listaSectores.removeAllItems();
-        this.lista.setModel(this.modeloLista2);
-        this.lista.removeAll();
-        listaSectores.addItem("");
-        this.precios= new ArrayList<>();
-        this.precios.add(-1);
-        if(this.propiedades!=null){
-            for(int i=0; i<this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().size(); i++){
-                this.precios.add(-1);
-                listaSectores.addItem("Nombre:" + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre());
-            }
-            this.repaint();
-            this.revalidate();
-        }
-    }
-    
-    private void actualizarListaSectores(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
-        this.lista.removeAll();
-        this.modeloLista2=new DefaultListModel();
-        if(this.propiedades!=null){
-            for(int i=0; i<this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().size(); i++){
-                this.precios.add(-1);
-                this.modeloLista2.addElement("Nombre:" + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getCapacidadDelSector() + "  precio:" + this.precios.get(i));
-            }
-        }
-        this.lista.setModel(this.modeloLista2);
-        this.repaint();
-        this.revalidate();
-    }
-    
+
     public Date parseFecha(String fecha){
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaDate = null;
