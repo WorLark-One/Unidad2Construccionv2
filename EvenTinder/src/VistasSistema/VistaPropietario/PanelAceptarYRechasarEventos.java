@@ -9,6 +9,7 @@ import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,6 +30,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         this.papa=papa;
         initComponents();
         lista.setModel(modeloLista);
+        actualizarMenuOpciones();
     }
 
     /**
@@ -49,6 +51,8 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         lista = new javax.swing.JList<>();
         jLabel19 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        aceptar = new javax.swing.JButton();
+        rechazar = new javax.swing.JButton();
 
         popupMenu1.setLabel("popupMenu1");
 
@@ -97,6 +101,20 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú Lista de solicitudes de eventos");
 
+        aceptar.setText("Aceptar");
+        aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarActionPerformed(evt);
+            }
+        });
+
+        rechazar.setText("Rechazar");
+        rechazar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rechazarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,6 +124,10 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(aceptar)
+                        .addGap(18, 18, 18)
+                        .addComponent(rechazar))
                     .addComponent(jLabel20)
                     .addComponent(jLabel18)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,12 +153,17 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                         .addComponent(jLabel20)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aceptar)
+                    .addComponent(rechazar))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void listaPropiedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaPropiedadesActionPerformed
         // TODO add your handling code here:
+        
         if(this.listaPropiedades.getSelectedIndex()<=0){
             return;
         }
@@ -144,12 +171,34 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
             this.actualizarListaEventosTodos();
             return;
         }
-        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-2).getId());
-        
+        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-2).getId());  
     }//GEN-LAST:event_listaPropiedadesActionPerformed
+
+    private void rechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechazarActionPerformed
+        // TODO add your handling code here:
+        if(this.lista.getSelectedIndex()<0){
+            return;
+        }
+        System.out.println("evento a rechazar id: " +this.eventos.get(this.lista.getSelectedIndex()).getIdEvento());
+        this.papa.getControladorPropietario().rechazarSolicitud(this.eventos.get(this.lista.getSelectedIndex()).getIdEvento());
+        this.listaPropiedadesActionPerformed(evt);
+        JOptionPane.showMessageDialog(null, "Se a rechazo correctamente");
+    }//GEN-LAST:event_rechazarActionPerformed
+
+    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
+        // TODO add your handling code here:
+        if(this.lista.getSelectedIndex()<0){
+            return;
+        }
+        System.out.println("evento a aceptar id: " +this.eventos.get(this.lista.getSelectedIndex()).getIdEvento());
+        this.papa.getControladorPropietario().aceptarSolicitud(this.eventos.get(this.lista.getSelectedIndex()).getIdEvento());
+        this.listaPropiedadesActionPerformed(evt);
+        JOptionPane.showMessageDialog(null, "Se a aceptado correctamente");
+    }//GEN-LAST:event_aceptarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton aceptar;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
@@ -159,6 +208,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
     private javax.swing.JList<String> lista;
     private javax.swing.JComboBox<String> listaPropiedades;
     private java.awt.PopupMenu popupMenu1;
+    private javax.swing.JButton rechazar;
     // End of variables declaration//GEN-END:variables
 
     //Aca abajo van a estar los metodos que se tienen que hacer 
@@ -175,7 +225,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         this.listaPropiedades.removeAllItems();
         this.listaPropiedades.addItem("");
         this.listaPropiedades.addItem("Todos las solicitudes de eventos");
-        for(int i=0; i<this.eventos.size(); i++){
+        for(int i=0; i<this.propiedades.size(); i++){
             this.listaPropiedades.addItem("nombre:" + this.propiedades.get(i).getNombre());
         }
         this.repaint();

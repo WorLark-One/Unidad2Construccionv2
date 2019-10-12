@@ -434,7 +434,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         }
         if(resp==0){
             boolean respuesta = false;
-            respuesta = this.papa.getControladorOrganizador().crearEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false, this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getId());
+            respuesta = this.papa.getControladorOrganizador().crearEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false, this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
                 this.nombre.setText("");
