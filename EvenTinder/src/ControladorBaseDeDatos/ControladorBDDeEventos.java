@@ -1032,7 +1032,7 @@ public class ControladorBDDeEventos {
 
     }
 
-    public int agregarPrecioEventoSector(int idEvento, String nombreSector, int idPropiedad) {
+    public int obtenerPrecioEntradaPorSector(int idEvento, String nombreSector, int idPropiedad) {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null)// si hay conexion.
