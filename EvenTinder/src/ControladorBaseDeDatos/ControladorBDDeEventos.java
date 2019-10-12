@@ -1,6 +1,8 @@
 package ControladorBaseDeDatos;
 
 import ModuloGestionEventos.Evento;
+import ModuloGestionPropiedades.Propiedad;
+import ModuloGestionUsuario.Propietario;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,12 +14,14 @@ import java.util.*;
 public class ControladorBDDeEventos {
 
     ConexionBD conexion;
+    ControladorBDDePropiedades propiedades;
 
     /**
      * Default constructor
      */
     public ControladorBDDeEventos() {
         this.conexion = new ConexionBD();
+        this.propiedades = new ControladorBDDePropiedades();
         iniciarlizarBD();
     }
     
@@ -45,6 +49,8 @@ public class ControladorBDDeEventos {
      * evento.
      * @return identificador del evento o cero en caso de que surga un error al
      * crear un evento
+     * 
+     * PRECIO DE ENTRADAS POR SECTOR.
      */
     public int crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad, String rutOrganizador) {
         this.conexion.crearConexion();
@@ -794,4 +800,58 @@ public class ControladorBDDeEventos {
     }
 
 
+    
+    /**
+     * Obtiene una lista de todos los propietarios registrados en la base de datos con sus respectivas 
+     * propiedades asiciadas..
+     * @return lista de propietario, o null en caso de que no existan.
+     */
+    public ArrayList<Propietario> obtenerListaDePropietarios(){
+         
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+
+        ArrayList<Propietario> listaPropietario = new ArrayList<>();
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select * from propietario";
+
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    String nombreCompleto = resultado.getString("nombrecompleto");
+                    String rutCliente = resultado.getString("rut");
+                    String correo = resultado.getString("correo");
+                    String contraseña = resultado.getString("contraseña");
+                    String telefono = resultado.getString("telefono");
+                    String cuentaCorriente = resultado.getString("cuentacorriente");
+                    Propietario propietario = new Propietario(nombreCompleto, rutCliente,contraseña,telefono,  correo,  cuentaCorriente);
+                    
+                    ArrayList<Propiedad>listaPropiedades=this.propiedades.obtenerInformacionDePropiedades(rutCliente);
+                    propietario.setListaDePropiedades(listaPropiedades);
+                    listaPropietario.add(propietario);
+                    
+                }
+                resultado.close();
+                st.close();
+                return listaPropietario;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return null;
+            } finally {
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    //Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+        return null;
+    
+    }
 }
