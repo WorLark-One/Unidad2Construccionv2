@@ -45,6 +45,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         this.lista.setModel(modeloLista2);
         this.listaSectores.removeAllItems();
         this.eventos=this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
+        actualizarMenuEventos();
     }
 
     /**
@@ -525,9 +526,6 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         return resultado;
     }
     
-    
-    
-    
     private void actualizarListaSectores(){
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.lista.removeAll();
@@ -554,5 +552,18 @@ public class PanelModificarEvento extends javax.swing.JPanel {
             System.out.println(ex);
         }
         return fechaDate;
+    }
+    
+    private void actualizarMenuEventos(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
+        listaEventos.removeAllItems();
+        listaEventos.addItem("");
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                listaEventos.addItem(eventos.get(i).getNombre());
+            }
+            this.repaint();
+            this.revalidate();
+        }
     }
 }
