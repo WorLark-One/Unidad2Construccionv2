@@ -168,7 +168,6 @@ public class ControladorBDDeEventos {
      * entrada que se le asignara al proyecto.
      * @param nuevoPublicado: nuevo estado que se le asiganra al proyecto, si
      * esta publicado o no.
-     * @param idPropiedad: identificador de una propiedad.
      * @return true si se modifico el evento, false de lo contrario
      */
     public boolean modificarEvento(int idEvento, String nuevoNombre, String nuevaDescripcion, Date nuevaFechaDeInicio, Date nuevaFechaDeTermino, int nuevaCapacidad, int nuevosDiasMaximoDevolucion, boolean nuevoPublicado) {
@@ -183,7 +182,7 @@ public class ControladorBDDeEventos {
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = " UPDATE evento set nombre='" + nuevoNombre + "', descripcion='" + nuevaDescripcion + "',fechainicio='" + nuevaFechaDeInicio + "',fechatermino='" + nuevaFechaDeTermino + "',\n"
                             + "capacidad=" + nuevaCapacidad + ",plazodevolucionentradas=" + nuevosDiasMaximoDevolucion + ",publicado='" + nuevoPublicado + "' where evento.id=" + idEvento + " ";
-                    //boolean modificarCelebra=ModificarTsblaCelelebra(miConexion,idevento,idPropiedad);
+                    //boolean modificarCelebra=modificarTablaCelebra(miConexion,idEvento,idPropiedad);
                     st.executeUpdate(sql);
                     st.close();
                     return true;
@@ -235,7 +234,7 @@ public class ControladorBDDeEventos {
                 } catch (SQLException e) {
                     //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
                     return false;
-                } finally {
+                }finally {
                     try {
                         this.conexion.cerrarBaseDeDatos(miConexion);
                     } catch (SQLException ex) {

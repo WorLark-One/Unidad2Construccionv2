@@ -418,7 +418,8 @@ public class ControladorBDDeUsuario {
     }
 
     /**
-     * Obtiene una lista de todos los propietarios registrados en la base de datos.
+     * Obtiene una lista de todos los propietarios registrados en la base de datos con sus respectivas 
+     * propiedades asiciadas..
      * @return lista de propietario, o null en caso de que no existan.
      */
     public ArrayList<Propietario> obtenerListaDePropietarios(){
