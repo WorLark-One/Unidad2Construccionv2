@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
 import VistasSistema.VistaPrincipal.PanelCreacionUsuario;
 import java.sql.SQLException;
@@ -33,14 +34,17 @@ public class PanelModificarEvento extends javax.swing.JPanel {
     private DefaultListModel modeloLista;
     private DefaultListModel modeloLista2;
     private ArrayList<Integer> precios;
+    private ArrayList<Evento> eventos;
+    
     public PanelModificarEvento(VentanaPrincipalOrganizador papa){
         this.papa=papa;
         initComponents();
         this.modeloLista=new DefaultListModel();
         this.modeloLista2=new DefaultListModel();
-        this.actualizarMenuOpciones();
+        this.listaEventos.removeAllItems();
         this.lista.setModel(modeloLista2);
         this.listaSectores.removeAllItems();
+        this.eventos=this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
     }
 
     /**
@@ -88,12 +92,14 @@ public class PanelModificarEvento extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        setLayout(new java.awt.BorderLayout());
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
+
+        jScrollPane3.setBorder(null);
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menú Creación de evento");
+        jLabel18.setText("Menú modificacion de evento");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
@@ -299,6 +305,11 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         jLabel23.setText("1. Seleccione el evento");
 
         listaEventos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaEventosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -338,7 +349,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -363,7 +374,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
 
         jScrollPane3.setViewportView(jPanel7);
 
-        add(jScrollPane3, java.awt.BorderLayout.CENTER);
+        add(jScrollPane3);
     }// </editor-fold>//GEN-END:initComponents
 
     private void fechaDeTerminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaDeTerminoActionPerformed
@@ -431,6 +442,14 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         this.precio.setText("");
         this.actualizarListaSectores();
     }//GEN-LAST:event_botonRegistrarPrecioActionPerformed
+
+    private void listaEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaEventosActionPerformed
+        // TODO add your handling code here:
+        if(this.listaSectores.getSelectedIndex()<=0){
+            return;
+        }
+        actualizarListaSectores();
+    }//GEN-LAST:event_listaEventosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -505,56 +524,17 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         return resultado;
     }
     
-    //Aca abajo van a estar los metodos que se tienen que hacer 
     
-    /**
-     * Este va a ser el formato de las consultas para ser luego testeadas en el junit
-     * 0 = Correcto
-     * numeros mayores que 0 son errores
-     */
- 
-    // no se puede hacer tdd ya que necesita otro metodo
-    private void actualizarMenuOpciones(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
-        listaPropiedades.removeAllItems();
-        this.detalles.setModel(this.modeloLista);
-        this.detalles.removeAll();
-        listaPropiedades.addItem("");
-        if(this.propiedades!=null){
-            for(int i=0; i<this.propiedades.size(); i++){
-                listaPropiedades.addItem("id:" + this.propiedades.get(i).getId() + "  Nombre:" + this.propiedades.get(i).getNombre());
-            }
-            this.repaint();
-            this.revalidate();
-        }
-    }
     
-    private void actualizarMenuSectores(){
-        this.propiedades = this.papa.getControladorOrganizador().obtenerInformacionPropiedades();
-        this.listaSectores.removeAllItems();
-        this.lista.setModel(this.modeloLista2);
-        this.lista.removeAll();
-        listaSectores.addItem("");
-        this.precios= new ArrayList<>();
-        this.precios.add(-1);
-        if(this.propiedades!=null){
-            for(int i=0; i<this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().size(); i++){
-                this.precios.add(-1);
-                listaSectores.addItem("Nombre:" + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre());
-            }
-            this.repaint();
-            this.revalidate();
-        }
-    }
     
     private void actualizarListaSectores(){
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
         this.lista.removeAll();
         this.modeloLista2=new DefaultListModel();
         if(this.propiedades!=null){
-            for(int i=0; i<this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().size(); i++){
+            for(int i=0; i<this.propiedades.get(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()).getListaSectores().size(); i++){
                 this.precios.add(-1);
-                this.modeloLista2.addElement("Nombre:" + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getCapacidadDelSector() + "  precio:" + this.precios.get(i));
+                this.modeloLista2.addElement("Nombre:" + this.propiedades.get(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()).getListaSectores().get(i).getCapacidadDelSector() + "  precio: depende del brayan esto");
             }
         }
         this.lista.setModel(this.modeloLista2);

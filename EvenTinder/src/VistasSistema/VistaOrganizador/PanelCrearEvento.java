@@ -93,6 +93,8 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         setLayout(new java.awt.BorderLayout());
 
+        jScrollPane3.setBorder(null);
+
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
