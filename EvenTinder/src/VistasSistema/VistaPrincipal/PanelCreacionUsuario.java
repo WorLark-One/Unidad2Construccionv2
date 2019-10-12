@@ -277,8 +277,6 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 if("propietario".equals(this.tipoUsuario)){
                     respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(),this.CuentaBancaria.getText());
                 }
-            
-            
             } catch (SQLException ex) {
                 Logger.getLogger(PanelCreacionUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
