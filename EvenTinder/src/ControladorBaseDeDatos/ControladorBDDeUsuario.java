@@ -1,6 +1,5 @@
 package ControladorBaseDeDatos;
 
-import ModuloGestionPropiedades.Propiedad;
 import ModuloGestionUsuario.Cliente;
 import ModuloGestionUsuario.Organizador;
 import ModuloGestionUsuario.Propietario;
@@ -8,8 +7,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * clase que se encarga de interactuar con la base de datos. 1.
