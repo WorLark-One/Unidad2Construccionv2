@@ -1,6 +1,8 @@
 package ModuloGestionEventos;
 
 import ControladorBaseDeDatos.ControladorBDDeEventos;
+import ModuloGestionPropiedades.Propiedad;
+import ModuloGestionUsuario.Propietario;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -70,6 +72,10 @@ public class GestionDeEvento {
             }
         }                
         return result;
+    }
+    
+    public ArrayList<Propiedad> obtenerInformacionPropiedades(){
+        return this.controlador.obtenerListaDePropietarios();
     }
 
     /**

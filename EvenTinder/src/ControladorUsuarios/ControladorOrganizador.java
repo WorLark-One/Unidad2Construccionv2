@@ -3,6 +3,8 @@ package ControladorUsuarios;
 import ModuloAutenticacion.ControlDeAcceso;
 import ModuloGestionEventos.Evento;
 import ModuloGestionEventos.GestionDeEvento;
+import ModuloGestionPropiedades.Propiedad;
+import ModuloGestionUsuario.Propietario;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -101,6 +103,10 @@ public class ControladorOrganizador {
      */
     public ArrayList<Evento> obtenerInformacionDeEventosFinalizadosDeUnOrganizador() {
         return this.gestorEventos.obtenerInformacion(this.controlAcceso.getRut(),"Finalizados");
+    }
+    
+    public ArrayList<Propiedad> obtenerInformacionPropiedades(){
+        return this.gestorEventos.obtenerInformacionPropiedades();
     }
 
     /**

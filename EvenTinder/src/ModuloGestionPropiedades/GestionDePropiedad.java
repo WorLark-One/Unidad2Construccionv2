@@ -150,6 +150,7 @@ public class GestionDePropiedad {
         }
         return false;
     }
+   
 
     /**
      * Metodo que modifica los datos de un Sector existente asociado a una Propiedad especifica.

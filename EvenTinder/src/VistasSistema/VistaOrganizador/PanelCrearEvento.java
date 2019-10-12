@@ -425,7 +425,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     private void botonCrearEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearEventoActionPerformed
         // TODO add your handling code here:
         int resp = this.validarDatos(this.nombre.getText(), this.descripcion.getText(), this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.capacidad.getText(),this.diasMaximosDevolucion.getText());
-        if(this.listaPropiedades.getSelectedIndex()==0){
+        if(this.listaPropiedades.getSelectedIndex()<=0){
             JOptionPane.showMessageDialog(null, "Por favor seleccione una propiedad", "Error al seleccionar una propiedad", JOptionPane.WARNING_MESSAGE);
         }
         if(resp==0){
@@ -586,7 +586,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     }
     
     private void actualizarMenuSectores(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.propiedades = this.papa.getControladorOrganizador().obtenerInformacionPropiedades();
         this.listaSectores.removeAllItems();
         this.lista.setModel(this.modeloLista2);
         this.lista.removeAll();
