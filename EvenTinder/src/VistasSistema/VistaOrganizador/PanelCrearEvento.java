@@ -432,27 +432,33 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             }
         }
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el nombre del evento tenga solo letras y numeros \n"
+                    + "Ej: LolaPaluzza", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la descripcion tenga entre entre sea: nnn nnn nnn - nok \n" + 
+                    "Ej: 11111111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==3){
-            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la fecha de inicio tenga el siguiente formato: dd-mm-aaaa \n" + 
+                    "Ej: 10-10-2010", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==4){
-            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la fecha de termino tenga el siguiente formato: dd-mm-aaaa \n" + 
+                    "Ej: 10-10-2020", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==5){
-            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la capacidad sea mayor que 0 \n" + 
+                    "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==6){
-            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que los dias maximos de devolucion sea mayor que 0 \n" + 
+                    "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
     }//GEN-LAST:event_botonCrearEventoActionPerformed
