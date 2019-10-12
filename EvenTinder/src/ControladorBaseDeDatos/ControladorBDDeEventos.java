@@ -65,7 +65,7 @@ public class ControladorBDDeEventos {
                             + " RETURNING id";
                     System.out.println(sql);
                     ResultSet resultado = st.executeQuery(sql);
-
+                    System.out.println("hola");
                     while (resultado.next()) {
                         int idEvento = Integer.parseInt(resultado.getString("id"));
                         boolean Celebra = tablaCelebra(miConexion, idEvento, idPropiedad);
@@ -482,7 +482,7 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
 
                 String sql = "select * from evento where evento.publicado=false and evento.reforganizador='" + rutOrganizador + "'";
-
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // obtengo la informacion del cliente.
@@ -494,6 +494,7 @@ public class ControladorBDDeEventos {
                     int capacidad = Integer.parseInt(resultado.getString("capacidad"));
                     int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
                     boolean publicado = resultado.getBoolean("publicado");
+                    System.out.println("nombre evento:"+nombre+" rut del organizador:"+rutOrganizador);
                     int idPropiedad = obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
                     Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
                     miEvento.setIdPropiedad(idPropiedad);
