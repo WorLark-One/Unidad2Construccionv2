@@ -31,7 +31,7 @@ public class GestionDePropiedad {
      */
     public ArrayList<Propiedad> mostrarListaDePropiedades() { 
         
-        return this.listaPropiedades;
+        return this.gestorEventos.obtenerInformacionPropiedades();
     }
 
     /**

@@ -241,6 +241,7 @@ public class ControladorBDDeUsuario {
 
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "insert into " + tipoUsuario + " values('" + nombre + "','" + rut + "','" + correo + "','" + clave + "','" + telefono + "','" + tarjeta + "')";
+                    System.out.println(sql);
                     st.executeUpdate(sql);
 
                     st.close();
