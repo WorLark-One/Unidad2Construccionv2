@@ -50,13 +50,12 @@ public class GestionDeEvento {
      * @param fechaDeTermino 
      * @param capacidad 
      * @param diasMaximoDevolucion 
-     * @param publicado 
+     * @param publicado      
      * @return
      */
     public boolean modificarEvento(int idEvento, String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado) {
-        boolean result = this.controlador.modificarEvento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado);
-        if(result){            
-            this.controlador.modificarEvento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado);
+        boolean result = this.controlador.modificarEvento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado);        
+        if(result){                                  
             for(Evento e : this.listaEventos){
                 if(e.getIdEvento() == idEvento){
                     e.setNombre(nombre);
@@ -64,7 +63,7 @@ public class GestionDeEvento {
                     e.setCapacidadMaximaDelEvento(diasMaximoDevolucion);
                     e.setFechaDeInicio(fechaDeInicio);
                     e.setFechaDeTermino(fechaDeTermino);
-                    e.setPlazoDevolucionEntrada(diasMaximoDevolucion);
+                    e.setPlazoDevolucionEntrada(diasMaximoDevolucion);                    
                     return true;
                 }
             }
@@ -127,4 +126,9 @@ public class GestionDeEvento {
                 return null;
         }        
     }
+    
+    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos(String rutPropietario){
+        return this.controlador.obtenerInformacionSolicitudesDeEventosPropietario(rutPropietario);
+    }
+    
 }
