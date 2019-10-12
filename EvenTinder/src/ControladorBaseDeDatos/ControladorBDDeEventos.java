@@ -806,12 +806,12 @@ public class ControladorBDDeEventos {
      * propiedades asiciadas..
      * @return lista de propietario, o null en caso de que no existan.
      */
-    public ArrayList<Propietario> obtenerListaDePropietarios(){
+    public ArrayList<Propiedad> obtenerListaDePropietarios(){
          
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
-
-        ArrayList<Propietario> listaPropietario = new ArrayList<>();
+        ArrayList<Propiedad>listaPropiedades= new ArrayList<>();
+        ArrayList<Propiedad>aux= new ArrayList<>();
         if (miConexion != null)// si hay conexion.
         {
 
@@ -822,22 +822,19 @@ public class ControladorBDDeEventos {
 
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    String nombreCompleto = resultado.getString("nombrecompleto");
                     String rutCliente = resultado.getString("rut");
-                    String correo = resultado.getString("correo");
-                    String contraseña = resultado.getString("contraseña");
-                    String telefono = resultado.getString("telefono");
-                    String cuentaCorriente = resultado.getString("cuentacorriente");
-                    Propietario propietario = new Propietario(nombreCompleto, rutCliente,contraseña,telefono,  correo,  cuentaCorriente);
                     
-                    ArrayList<Propiedad>listaPropiedades=this.propiedades.obtenerInformacionDePropiedades(rutCliente);
-                    propietario.setListaDePropiedades(listaPropiedades);
-                    listaPropietario.add(propietario);
-                    
+                    aux=this.propiedades.obtenerInformacionDePropiedades(rutCliente);
+                    if(aux!= null){
+                        for (int i = 0; i < aux.size(); i++) {
+                        Propiedad propiedad = aux.get(i);
+                        listaPropiedades.add(propiedad);
+                        }
+                    }
                 }
                 resultado.close();
                 st.close();
-                return listaPropietario;
+                return listaPropiedades;
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
