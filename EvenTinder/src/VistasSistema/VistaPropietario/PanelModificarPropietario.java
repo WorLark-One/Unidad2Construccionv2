@@ -194,24 +194,33 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             }
         }
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Nombre completo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el nombre sea solo letras \n"
+                    + "Ej: Daniel Moreno", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el rut tenga entre entre sea: nnn nnn nnn - nok \n" + 
+                    "Ej: 11111111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==3){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Numero Telefonico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la clave tenga minimo 8 digitos \n" + 
+                    "Ej: 12345678", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==4){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el numero telefonico tenga 9 digitos \n" + 
+                    "Ej: 987654321", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==5){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Cuenta Bancaria", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el correo electronico sea algo@gmail.com o sea algo@gmail.cl \n" + 
+                    "Ej: elmejorproyectodelmundo@gmail.cl", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
+        }
+        if(resp==6){
+            JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria algo \n" + 
+                    "Ej: no se como valido esto", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 

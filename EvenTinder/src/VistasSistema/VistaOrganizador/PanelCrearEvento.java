@@ -609,7 +609,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     }
     
     public Date parseFecha(String fecha){
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         Date fechaDate = null;
         try {
             fechaDate = formato.parse(fecha);
