@@ -90,13 +90,7 @@ public class Evento {
     public int getIdEvento() {
         return idEvento;
     }
-    /**
-     * Modifica el identificador del evento.
-     * @param idEvento 
-     */
-    public void setIdEvento(int idEvento) {
-        this.idEvento = idEvento;
-    }
+
     /**
      * se obtiene el nombre del evento.
      * @return String
