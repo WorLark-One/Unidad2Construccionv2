@@ -31,6 +31,7 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
         modeloLista= new DefaultListModel();
         lista.setModel(modeloLista);
         actualizarMenuOpciones();
+        actualizarMenuOpciones2();
     }
 
     /**
@@ -245,7 +246,7 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
             for(int i=0; i<this.eventos.size(); i++){
                 for(int j=0; j<this.propiedades.size(); j++){
                     System.out.println("evento: ");
-                    if(this.eventos.get(i).getIdPropiedad()==this.propiedades.get(j).getId()){
+                    if(this.eventos.get(i).getIdPropiedad()==id){
                         this.modeloLista.addElement(eventos.get(i).getNombre());
                         break;
                     }
