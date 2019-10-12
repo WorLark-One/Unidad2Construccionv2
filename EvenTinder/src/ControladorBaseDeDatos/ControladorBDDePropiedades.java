@@ -2,7 +2,6 @@ package ControladorBaseDeDatos;
 
 import ModuloGestionPropiedades.Propiedad;
 import ModuloGestionPropiedades.Sector;
-import ModuloGestionUsuario.Propietario;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
