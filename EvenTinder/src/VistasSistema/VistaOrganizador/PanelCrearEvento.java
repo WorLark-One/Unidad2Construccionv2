@@ -29,12 +29,16 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     private DefaultListModel modeloLista2;
     private ArrayList<Integer> precios;
     private boolean go;
+    private int contador;
     
     public PanelCrearEvento(VentanaPrincipalOrganizador papa){
         this.papa=papa;
         initComponents();
         this.modeloLista=new DefaultListModel();
         this.modeloLista2=new DefaultListModel();
+        capacidad.setText("0");
+        capacidad.setEnabled(false);
+        capacidad.setEditable(false);
         this.actualizarMenuOpciones();
         this.lista.setModel(modeloLista2);
         this.listaSectores.removeAllItems();
@@ -387,6 +391,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
 
     private void listaPropiedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaPropiedadesActionPerformed
         this.go=false;
+        this.contador=0;
         System.out.println(listaPropiedades.getSelectedIndex());
         if(listaPropiedades.getSelectedIndex()==0){
             this.detalles.removeAll();
@@ -488,6 +493,13 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         }
         go=true;
         this.precios.set(this.listaSectores.getSelectedIndex()-1, Integer.parseInt(precio.getText()));
+        contador=0;
+        for (int i = 0; i < this.precios.size(); i++) {
+            if(this.precios.get(i)!=-1){
+                contador+=this.precios.get(i);
+            }
+        }
+        this.capacidad.setText(Integer.toString(this.contador));
         this.precio.setText("");
         this.actualizarListaSectores();
     }//GEN-LAST:event_botonRegistrarPrecioActionPerformed

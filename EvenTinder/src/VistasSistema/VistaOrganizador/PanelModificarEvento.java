@@ -7,18 +7,13 @@ package VistasSistema.VistaOrganizador;
 
 import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
-import VistasSistema.VistaPrincipal.PanelCreacionUsuario;
-import java.sql.SQLException;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 
 /**
  *
@@ -36,6 +31,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
     private DefaultListModel modeloLista2;
     private ArrayList<Integer> precios;
     private ArrayList<Evento> eventos;
+    private int contador;
     
     public PanelModificarEvento(VentanaPrincipalOrganizador papa){
         this.papa=papa;
@@ -46,6 +42,9 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         this.lista.setModel(modeloLista2);
         this.listaSectores.removeAllItems();
         this.eventos=this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
+        capacidad.setText("0");
+        capacidad.setEnabled(false);
+        capacidad.setEditable(false);
         actualizarMenuEventos();
     }
 
@@ -390,6 +389,9 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 this.capacidad.setText("");
                 this.descripcion.setText("");
                 this.diasMaximosDevolucion.setText("");
+                this.listaEventos.setSelectedIndex(0);
+                this.actualizarListaSectores();
+                this.actualizarMenuEventos();
             }else{
                 JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
             }
@@ -455,7 +457,6 @@ public class PanelModificarEvento extends javax.swing.JPanel {
     }//GEN-LAST:event_botonRegistrarPrecioActionPerformed
 
     private void listaEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaEventosActionPerformed
-        // TODO add your handling code here:
         if(this.listaEventos.getSelectedIndex()<=0){
             return;
         }
