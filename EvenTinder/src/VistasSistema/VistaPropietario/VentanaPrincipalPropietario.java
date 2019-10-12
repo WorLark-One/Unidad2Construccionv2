@@ -192,7 +192,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     }
 
     public void SolicitudDeEventos() {
-        PanelAceptarYRechasarEventos eventos = new PanelAceptarYRechasarEventos();
+        PanelAceptarYRechasarEventos eventos = new PanelAceptarYRechasarEventos(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=eventos;
