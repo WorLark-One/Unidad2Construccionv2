@@ -219,7 +219,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }
     
-    public void derivarAVentanaPrincipalOrganizador() {
+    public void derivarAVentanaPrincipalOrganizador() throws SQLException {
         VentanaPrincipalOrganizador nuevaVentana = new VentanaPrincipalOrganizador();
         nuevaVentana.arranque();
         this.setVisible(false);

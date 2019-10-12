@@ -5,7 +5,17 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import ModuloGestionEventos.Evento;
+import ModuloGestionPropiedades.Propiedad;
+import VistasSistema.VistaPropietario.PanelModificarPropiedad;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,8 +27,17 @@ public class PanelModificarEvento extends javax.swing.JPanel {
     /**
      * Creates new form PanelModificarEvento
      */
-    public PanelModificarEvento() {
+    
+    private VentanaPrincipalOrganizador papa;
+    private ArrayList<Propiedad> propiedades;
+    private DefaultListModel modeloLista;
+    private ArrayList<Evento> eventos;
+    
+    public PanelModificarEvento(VentanaPrincipalOrganizador papa) {
+        this.papa=papa;
         initComponents();
+        this.modeloLista=new DefaultListModel();
+        this.actualizarlistaEventos();
     }
 
     /**
@@ -50,12 +69,6 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         fechaDeTermino = new javax.swing.JTextField();
         descripcion = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        listaPropiedades = new javax.swing.JComboBox<>();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -190,59 +203,6 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel20.setText("3. Seleccione la propiedad donde va a realizar el evento");
-
-        listaPropiedades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(listaPropiedades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel20)
-                .addGap(18, 18, 18)
-                .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -255,13 +215,12 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel18)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(305, 305, 305)
+                        .addGap(300, 300, 300)
                         .addComponent(botonModificarEvento)))
-                .addGap(373, 687, Short.MAX_VALUE))
+                .addGap(373, 695, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,16 +236,53 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(botonModificarEvento)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(424, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonModificarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarEventoActionPerformed
         // TODO add your handling code here:
-
+        int resp = this.validarDatos(this.nombre.getText(), this.descripcion.getText(), this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.capacidad.getText(),this.diasMaximosDevolucion.getText());
+        if(resp==0){
+            boolean respuesta = false;
+            respuesta = this.papa.getControladorOrganizador().modificarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false);
+            if(respuesta){
+                JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+                this.nombre.setText("");
+                this.fechaDeInicio.setText("");
+                this.fechaDeTermino.setText("");
+                this.capacidad.setText("");
+                this.descripcion.setText("");
+                this.diasMaximosDevolucion.setText("");
+            }else{
+                JOptionPane.showMessageDialog(null, "El nombre del evento ya se enceuntra regustrado en la base de datos");
+            }
+        }
+        if(resp==1){
+            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==2){
+            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==3){
+            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==4){
+            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==5){
+            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==6){
+            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_botonModificarEventoActionPerformed
 
     private void fechaDeTerminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaDeTerminoActionPerformed
@@ -314,18 +310,12 @@ public class PanelModificarEvento extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> listaEventos;
-    private javax.swing.JComboBox<String> listaPropiedades;
     private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
     //Aca abajo van a estar los metodos que se tienen que hacer 
@@ -336,8 +326,35 @@ public class PanelModificarEvento extends javax.swing.JPanel {
      * numeros mayores que 0 son errores
      */
     
-    public int validarDatos(String nombre, String fechaDeInicio, String fechaDeTermino, String capacidad, String descripcion, String diasMaximos){
+    public int validarDatos(String nombre, String descripcion, String fechaDeInicio, String fechaDeTermino, String capacidad, String diasMaximos){
         return 0;
     }
+    
+     //Aca abajo van a estar los metodos que se tienen que hacer 
+    
+    private void actualizarlistaEventos(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
+        listaEventos.removeAllItems();
+        listaEventos.addItem("");
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                listaEventos.addItem(eventos.get(i).getNombre());
+            }
+            this.repaint();
+            this.revalidate();
+        }
+    }
 
+    public Date parseFecha(String fecha){
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
 }

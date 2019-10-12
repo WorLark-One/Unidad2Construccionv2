@@ -5,6 +5,18 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import ModuloGestionPropiedades.Propiedad;
+import VistasSistema.VistaPrincipal.PanelCreacionUsuario;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author xebae
@@ -14,8 +26,16 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     /**
      * Creates new form PanelCrearEvento
      */
-    public PanelCrearEvento() {
+    
+    private VentanaPrincipalOrganizador papa;
+    private ArrayList<Propiedad> propiedades;
+    private DefaultListModel modeloLista;
+    
+    public PanelCrearEvento(VentanaPrincipalOrganizador papa){
+        this.papa=papa;
         initComponents();
+        this.modeloLista=new DefaultListModel();
+        this.actualizarMenuOpciones();
     }
 
     /**
@@ -30,10 +50,10 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        listaPropiedades = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        detalles = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
         diasMaximosDevolucion = new javax.swing.JTextField();
         fechaDeInicio = new javax.swing.JTextField();
@@ -59,14 +79,19 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel20.setText("2. Seleccione la propiedad donde va a realizar el evento");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaPropiedades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaPropiedades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaPropiedadesActionPerformed(evt);
+            }
+        });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        detalles.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(detalles);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,7 +119,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -103,7 +128,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel20)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -244,22 +269,84 @@ public class PanelCrearEvento extends javax.swing.JPanel {
 
     private void fechaDeTerminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaDeTerminoActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_fechaDeTerminoActionPerformed
 
     private void botonCrearEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearEventoActionPerformed
         // TODO add your handling code here:
-     
+        int resp = this.validarDatos(this.nombre.getText(), this.descripcion.getText(), this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.capacidad.getText(),this.diasMaximosDevolucion.getText());
+        if(this.listaPropiedades.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(null, "Por favor seleccione una propiedad", "Error al seleccionar una propiedad", JOptionPane.WARNING_MESSAGE);
+        }
+        if(resp==0){
+            boolean respuesta = false;
+            respuesta = this.papa.getControladorOrganizador().crearEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false, this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getId());
+            if(respuesta){
+                JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+                this.nombre.setText("");
+                this.fechaDeInicio.setText("");
+                this.fechaDeTermino.setText("");
+                this.capacidad.setText("");
+                this.descripcion.setText("");
+                this.diasMaximosDevolucion.setText("");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
+            }
+        }
+        if(resp==1){
+            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==2){
+            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==3){
+            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==4){
+            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==5){
+            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==6){
+            JOptionPane.showMessageDialog(null, "", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_botonCrearEventoActionPerformed
+
+    private void listaPropiedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaPropiedadesActionPerformed
+
+        System.out.println(listaPropiedades.getSelectedIndex());
+        if(listaPropiedades.getSelectedIndex()==0){
+            this.detalles.removeAll();
+        }
+        if(listaPropiedades.getSelectedIndex()>0){
+            this.detalles.removeAll();
+            this.modeloLista=new DefaultListModel();
+            this.modeloLista.addElement(("Nombre: " + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getNombre()));
+            this.modeloLista.addElement(("descripcion: " + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getDescripcion()));
+            this.modeloLista.addElement(("ubicacion: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getUbicacion()));
+            this.modeloLista.addElement(("capacidadTotal: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getCapacidadTotal()));
+            this.modeloLista.addElement(("cantidadDeSectores: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().size()));
+            this.modeloLista.addElement(("valorArriendo: "+ this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getValorArriendo()));
+            this.detalles.setModel(this.modeloLista);
+        }
+    }//GEN-LAST:event_listaPropiedadesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCrearEvento;
     private javax.swing.JTextField capacidad;
     private javax.swing.JTextField descripcion;
+    private javax.swing.JList<String> detalles;
     private javax.swing.JTextField diasMaximosDevolucion;
     private javax.swing.JTextField fechaDeInicio;
     private javax.swing.JTextField fechaDeTermino;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -270,11 +357,11 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> listaPropiedades;
     private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 
@@ -286,7 +373,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
      * numeros mayores que 0 son errores
      */
     
-    public int validarDatos(String nombre, String fechaDeInicio, String fechaDeTermino, String capacidad, String descripcion, String diasMaximos){
+    public int validarDatos(String nombre,String descripcion, String fechaDeInicio, String fechaDeTermino, String capacidad, String diasMaximos){
         return 0;
     }
     
@@ -311,5 +398,42 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             }
         }
         return resultado;
+    }
+    
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    
+    /**
+     * Este va a ser el formato de las consultas para ser luego testeadas en el junit
+     * 0 = Correcto
+     * numeros mayores que 0 son errores
+     */
+ 
+    // no se puede hacer tdd ya que necesita otro metodo
+    private void actualizarMenuOpciones(){
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        listaPropiedades.removeAllItems();
+        this.detalles.setModel(this.modeloLista);
+        this.detalles.removeAll();
+        listaPropiedades.addItem("");
+        if(this.propiedades!=null){
+            for(int i=0; i<this.propiedades.size(); i++){
+                listaPropiedades.addItem("id:" + this.propiedades.get(i).getId() + "  Nombre:" + this.propiedades.get(i).getNombre());
+            }
+            this.repaint();
+            this.revalidate();
+        }
+    }
+    
+    public Date parseFecha(String fecha){
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
     }
 }

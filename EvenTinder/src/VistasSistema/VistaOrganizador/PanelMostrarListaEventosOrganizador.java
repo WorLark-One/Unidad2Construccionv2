@@ -5,6 +5,10 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import ModuloGestionEventos.Evento;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author xebae
@@ -14,8 +18,13 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
     /**
      * Creates new form PanelMostrarListaEventosOrganizador
      */
-    public PanelMostrarListaEventosOrganizador() {
+    
+    private ArrayList<Evento> eventos;
+    private VentanaPrincipalOrganizador papa;
+    public PanelMostrarListaEventosOrganizador(VentanaPrincipalOrganizador papa) {
+        this.papa=papa;
         initComponents();
+        this.actualizarMenuOpciones();
     }
 
     /**
@@ -122,7 +131,23 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
 
     private void listaEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaEventosActionPerformed
         // TODO add your handling code here:
-        
+        if(this.listaEventos.getSelectedIndex()>0){
+            JOptionPane.showMessageDialog(null, "No a seleccionado ninguna opcion", "Error al opcion", JOptionPane.WARNING_MESSAGE);    
+            return;
+        }
+        if(this.listaEventos.getSelectedIndex()==1){
+            this.actualizarListaEventosTodos();
+        }
+        if(this.listaEventos.getSelectedIndex()==2){
+            this.actualizarListaEventosPublicados();
+        }
+        if(this.listaEventos.getSelectedIndex()==3){
+            this.actualizarListaEventosNoPublicados();
+        }
+        if(this.listaEventos.getSelectedIndex()==4){
+            this.actualizarListaEventosFinalizados();
+        }
+
     }//GEN-LAST:event_listaEventosActionPerformed
 
 
@@ -148,10 +173,66 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
     public void actualizarMenuOpciones(){
         this.listaEventos.addItem("Todos los eventos");
         this.listaEventos.addItem("Eventos Publicados");
-        this.listaEventos.addItem("Eventos No Publicadops");
+        this.listaEventos.addItem("Eventos No Publicados");
         this.listaEventos.addItem("Eventos Finalizados");
         this.repaint();
         this.revalidate();
+    }
+    
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    private void actualizarListaEventosTodos(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeTodosLosEventosDeUnOrganizador();
+        listaEventos.removeAllItems();
+        listaEventos.addItem("");
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                listaEventos.addItem(eventos.get(i).getNombre());
+            }
+            this.repaint();
+            this.revalidate();
+        }
+    }
+    
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    private void actualizarListaEventosPublicados(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosPublicadosDeUnOrganizador();
+        listaEventos.removeAllItems();
+        listaEventos.addItem("");
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                listaEventos.addItem(eventos.get(i).getNombre());
+            }
+            this.repaint();
+            this.revalidate();
+        }
+    }
+    
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    private void actualizarListaEventosNoPublicados(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
+        listaEventos.removeAllItems();
+        listaEventos.addItem("");
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                listaEventos.addItem(eventos.get(i).getNombre());
+            }
+            this.repaint();
+            this.revalidate();
+        }
+    }
+    //Aca abajo van a estar los metodos que se tienen que hacer 
+    // no se puede hacer tdd ya que necesita otro metodo
+    private void actualizarListaEventosFinalizados(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosFinalizadosDeUnOrganizador();
+        listaEventos.removeAllItems();
+        listaEventos.addItem("");
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                listaEventos.addItem(eventos.get(i).getNombre());
+            }
+            this.repaint();
+            this.revalidate();
+        }
     }
 
 }

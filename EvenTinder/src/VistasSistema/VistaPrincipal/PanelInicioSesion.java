@@ -185,7 +185,11 @@ public class PanelInicioSesion extends javax.swing.JPanel {
                     }
                 }
                 if("organizador".equals(this.tipoUsuario)){
-                    this.papa.derivarAVentanaPrincipalOrganizador();
+                    try {
+                        this.papa.derivarAVentanaPrincipalOrganizador();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(PanelInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "No se encuentra registrado en el sistema");
