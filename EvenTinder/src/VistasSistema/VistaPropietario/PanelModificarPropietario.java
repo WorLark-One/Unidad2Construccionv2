@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaPropietario;
 
+import ModuloGestionUsuario.Propietario;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,14 +23,10 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     
     private VentanaPrincipalPropietario papa;
     
-    public PanelModificarPropietario(VentanaPrincipalPropietario papa) {
+    public PanelModificarPropietario(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
         initComponents();
-        this.nombre.setText("");
-        this.clave.setText("");
-        this.numeroTelefonico.setText("");
-        this.correoElectronico.setText("");
-        this.cuentaBancaria.setText("");
+        this.actualizarInfomacion();
     }
 
     /**
@@ -189,6 +186,11 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                 this.numeroTelefonico.setText("");
                 this.correoElectronico.setText("");
                 this.cuentaBancaria.setText("");
+                try {
+                    this.actualizarInfomacion();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelModificarPropietario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
             }
@@ -287,6 +289,18 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             return 5;
         }
         return 0;
+    }
+    
+    public void actualizarInfomacion() throws SQLException{
+        Propietario usuario =(Propietario) this.papa.getControladorPrincipal().obtenerInformacionUsuario();
+        if(usuario==null){
+            return;
+        }
+        this.clave.setText("");
+        this.cuentaBancaria.setText("");
+        this.nombre.setText(usuario.getNombreCompleto());
+        this.numeroTelefonico.setText(usuario.getTelefono());
+        this.correoElectronico.setText(usuario.getCorreoElectronico());
     }
 
 }

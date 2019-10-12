@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaUsuario;
 
+import ModuloGestionUsuario.Cliente;
 import VistasSistema.VistaPropietario.PanelModificarPropietario;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -23,9 +24,10 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
     
     private VentanaPrincipalUsuario papa;
     
-    public PanelModificarUsuario(VentanaPrincipalUsuario papa) {
+    public PanelModificarUsuario(VentanaPrincipalUsuario papa) throws SQLException {
         this.papa=papa;
         initComponents();
+        this.actualizarInfomacion();
     }
 
     /**
@@ -184,6 +186,11 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
             }
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
+                try {
+                    this.actualizarInfomacion();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelModificarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
             }
@@ -283,4 +290,16 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
         return 0;
     }
 
+    
+    public void actualizarInfomacion() throws SQLException{
+        Cliente usuario =(Cliente) this.papa.getControladorPrincipal().obtenerInformacionUsuario();
+        if(usuario==null){
+            return;
+        }
+        this.clave.setText("");
+        this.tarjetaDeCredito.setText("");
+        this.nombre.setText(usuario.getNombreCompleto());
+        this.numeroTelefonico.setText(usuario.getTelefono());
+        this.correoElectronico.setText(usuario.getCorreoElectronico());
+    }
 }
