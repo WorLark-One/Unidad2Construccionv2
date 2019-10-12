@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistaSistemaVistaPrincipal;
+package VistaSistema.VistaPrincipal;
 
-import VistasSistemaVistaPrincipal.VentanaPrincipal;
-import VistasSistemaVistaPrincipal.VentanaPrincipal;
-import VistasSistemaVistaPrincipal.PanelCreacionUsuario;
+import VistasSistema.VistaPrincipal.VentanaPrincipal;
+import VistasSistema.VistaPrincipal.VentanaPrincipal;
+import VistasSistema.VistaPrincipal.PanelCreacionUsuario;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -78,6 +78,7 @@ public class TestPanelCreacionUsuario {
                 break;
             case 4: //4 falta numeroTelefonico
                 this.tipoUsuario = "Propietario";
+                this.nombre="critobal";
                 this.rut = "17586721k";
                 this.clave = "clave";
                 this.numeroTelefonico = "";
@@ -87,6 +88,7 @@ public class TestPanelCreacionUsuario {
                 break;
             case 5: // 5 falta numeroTelefonico
                 this.tipoUsuario = "Propietario";
+                this.nombre="critobal";
                 this.rut = "17586721k";
                 this.clave = "clave";
                 this.numeroTelefonico = "";
@@ -96,6 +98,7 @@ public class TestPanelCreacionUsuario {
                 break;
             case 6:  //6 falta correoElectronico
                 this.tipoUsuario = "Propietario";
+                this.nombre="critobal";
                 this.rut = "17586721k";
                 this.clave = "clave";
                 this.numeroTelefonico = "97815288";
@@ -106,6 +109,7 @@ public class TestPanelCreacionUsuario {
              case 7:  //7 falta tarjetaDeCredito
                 this.tipoUsuario = "organizador";
                 if("organizador".equals(this.tipoUsuario) || "cliente".equals(this.tipoUsuario)){
+                    this.nombre="critobal";
                     this.rut = "17586721k";
                     this.clave = "clave";
                     this.numeroTelefonico = "97815288";
@@ -116,6 +120,7 @@ public class TestPanelCreacionUsuario {
             case 8:  //0 ok
                 this.tipoUsuario = "organizador";
                 if("organizador".equals(this.tipoUsuario) || "cliente".equals(this.tipoUsuario)){
+                    this.nombre="critobal";
                     this.rut = "17586721k";
                     this.clave = "clave";
                     this.numeroTelefonico = "97815288";
@@ -126,6 +131,7 @@ public class TestPanelCreacionUsuario {
             case 9:  //8 falta CuentaBancaria
                 this.tipoUsuario = "organizador";
                 if("organizador".equals(this.tipoUsuario) || "cliente".equals(this.tipoUsuario)){
+                    this.nombre="critobal";
                     this.rut = "17586721k";
                     this.clave = "clave";
                     this.numeroTelefonico = "97815288";
@@ -136,6 +142,7 @@ public class TestPanelCreacionUsuario {
              case 10:  //0 ok
                 this.tipoUsuario = "organizador";
                 if("propietario".equals(this.tipoUsuario)){
+                    this.nombre="critobal";
                     this.rut = "17586721k";
                     this.clave = "clave";
                     this.numeroTelefonico = "97815288";
@@ -144,7 +151,7 @@ public class TestPanelCreacionUsuario {
                 }
                 break;
         }
-        aux = p.validarResgistro(this.tipoUsuario, this.rut, this.clave, this.numeroTelefonico, this.correoElectronico, this.tarjetaDeCredito,this.CuentaBancaria);
+        aux = this.p.validarResgistro(this.tipoUsuario,this.nombre ,this.rut, this.clave, this.numeroTelefonico, this.correoElectronico, this.tarjetaDeCredito,this.CuentaBancaria);
         switch (casos){
             case 0:  //1 falta tipiUsuario
                 System.out.println("caso 1.test");
