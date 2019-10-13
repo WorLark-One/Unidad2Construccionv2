@@ -292,7 +292,6 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         if(this.lista.getSelectedIndex()<0){
             return;
         }
-        System.out.println("evento a rechazar id: " +this.eventos.get(this.lista.getSelectedIndex()).getIdEvento());
         this.papa.getControladorPropietario().rechazarSolicitud(this.eventos.get(this.lista.getSelectedIndex()).getIdEvento());
         this.listaPropiedadesActionPerformed(evt);
         JOptionPane.showMessageDialog(null, "Se a rechazo correctamente");
@@ -303,7 +302,6 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         if(this.lista.getSelectedIndex()<0){
             return;
         }
-        System.out.println("evento a aceptar id: " +this.eventos.get(this.lista.getSelectedIndex()).getIdEvento());
         this.papa.getControladorPropietario().aceptarSolicitud(this.eventos.get(this.lista.getSelectedIndex()).getIdEvento());
         this.listaPropiedadesActionPerformed(evt);
         JOptionPane.showMessageDialog(null, "Se a aceptado correctamente");
@@ -316,14 +314,14 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
             this.descripcion.setText("Descripcion: ");
             this.capacidad.setText("Capacidad: ");
             this.fechaDeInicio.setText("Fecha de inicio: ");
-            this.fechaDeTermino.setText("Fecha de termino:");
+            this.fechaDeTermino.setText("Fecha de termino: ");
             return;
         }
         this.nombre.setText("Nombre: " + this.eventos.get(lista.getSelectedIndex()).getNombre());
         this.descripcion.setText("Descripcion: " + this.eventos.get(lista.getSelectedIndex()).getDescripcion());
         this.capacidad.setText("Capacidad: " +Integer.toString(this.eventos.get(lista.getSelectedIndex()).getCapacidadMaximaDelEvento()));
         this.fechaDeInicio.setText("Fecha de inicio: " + convertirFechaString(this.eventos.get(lista.getSelectedIndex()).getFechaDeInicio()));
-        this.fechaDeTermino.setText("Fecha de termino:" + convertirFechaString(this.eventos.get(lista.getSelectedIndex()).getFechaDeTermino()));
+        this.fechaDeTermino.setText("Fecha de termino: " + convertirFechaString(this.eventos.get(lista.getSelectedIndex()).getFechaDeTermino()));
     }//GEN-LAST:event_listaMouseClicked
 
 
@@ -366,7 +364,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         this.listaPropiedades.addItem("");
         this.listaPropiedades.addItem("Todas las propiedades");
         for(int i=0; i<this.propiedades.size(); i++){
-            this.listaPropiedades.addItem("nombre:" + this.propiedades.get(i).getNombre());
+            this.listaPropiedades.addItem(this.propiedades.get(i).getNombre());
         }
         this.repaint();
         this.revalidate();
