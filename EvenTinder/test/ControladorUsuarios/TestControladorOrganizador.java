@@ -46,14 +46,14 @@ public class TestControladorOrganizador {
         System.out.println("");
         System.out.println("modificarEvento");
         System.out.println("");
-        int idEvento = 5;
+        int idEvento = 8;
         String nuevoNombre = "Evento modificado dos";
         String nuevaDescripcion = "lol";
         Date nuevaFechaDeInicio = new Date(2010, 1, 1);
         Date nuevaFechaDeTermino = new Date(2012, 1, 1);
         int nuevaCapacidad= 200;
-        int nuevosDiasMaximoDevolucion = 3;
-        boolean nuevoPublicado = true;  
+        int nuevosDiasMaximoDevolucion = -3;
+        boolean nuevoPublicado = false;  
         
         boolean i = c.modificarEvento(idEvento, nuevoNombre, nuevaDescripcion, nuevaFechaDeInicio, nuevaFechaDeTermino, nuevaCapacidad, nuevosDiasMaximoDevolucion, nuevoPublicado);
         assertEquals(true, i);
