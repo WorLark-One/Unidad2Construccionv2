@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author braya
+ * @author Brayan Escobar
  */
 public class EventoTest {
     Evento evento;
@@ -28,9 +28,11 @@ public class EventoTest {
         System.out.println("a\u00f1adirSector");
         SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy"); 
         Date dt_1 = objSDF.parse("20-08-1981"); 
-        evento = new Evento(1, "mi evento", "un evento con grato ambiente", dt_1, dt_1, 100, 10, false);
+        evento = new Evento(1, "mi evento", "un evento con grato ambiente", dt_1, dt_1, 10, 10, false);
         Entrada entrada = new Entrada(2, 500);
+        Entrada entrada2 = new Entrada(3, 500);
         evento.AñadirEntrada(entrada);
+        evento.AñadirEntrada(entrada2);
         
     }
     
@@ -52,17 +54,22 @@ public class EventoTest {
     /**
      * Test of eliminarEntrada method, of class Evento.
      */
+    
     @Test
     public void testEliminarEntrada() {
         System.out.println("eliminarEntrada");
         int idEntrada = 2;
         boolean expResult = true;
         boolean result = evento.eliminarEntrada(idEntrada);
+        System.out.println("resultado:============"+result);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
 
+    
+    
+    
     /**
      * Test of verificarDisponibilidadDeEntrada method, of class Evento.
      */

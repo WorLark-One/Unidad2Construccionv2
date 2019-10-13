@@ -70,7 +70,7 @@ public class PanelCreacionUsuarioTest {
         
         System.out.println("clave (solo letras y numeros)");
         nombre = "matias";
-        rut = "11.111.111-1";
+        rut = "19.923.718-k";
         clave = "!#$%&/()=";
         result =instance.validarResgistro(tipoUsuario, nombre, rut, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito, CuentaBancaria);
         expResult = 4;
