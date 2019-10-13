@@ -385,14 +385,9 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         }
         //ubicacion
         if(resp==3){
-            JOptionPane.showMessageDialog(null, "Se espera que la descripcion tenga letras y/o numero: \n"
-                    + "Ej: Grado 6", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la ubicacion tenga letras y/o numero: \n"
+                    + "Ej: Aguas negras calle 14 pasaje 2", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;   
-        }
-        //numero de sectores
-        if(resp==4){
-            JOptionPane.showMessageDialog(null, "Error en la capacidad del sector", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
         }
         //valor de arriendo
         if(resp==5){
@@ -505,7 +500,16 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
      * @return 
      */
     public int validarEntradaPropiedad(String nombre, String descripcion, String ubicacion, String capacidadTotal, String valorArriendo, boolean finalizar) {
-        if(nombre.equals("")){
+        if(!nombre.equals("")){ 
+            char[] aux = nombre.toCharArray();
+            for(char c : aux){                
+                int ascii = (int) c;
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
+                    return 1;
+                }
+            } 
+        }
+        else{
             return 1;
         }
         if(descripcion.equals("")){
@@ -514,10 +518,26 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         if(ubicacion.equals("")){
             return 3;
         }
-        if(capacidadTotal.equals("") || !isNumero(capacidadTotal)){
+        if(!capacidadTotal.equals("") || !isNumero(capacidadTotal)){
+            try{
+                Integer.parseInt(valorArriendo);                
+            }
+            catch(NumberFormatException nfe){
+                return 4;
+            }
+        }
+        else{
             return 4;
         }
-        if(valorArriendo.equals("") || !isNumero(valorArriendo)){
+        if(!valorArriendo.equals("") || !isNumero(valorArriendo)){
+            try{
+                Integer.parseInt(valorArriendo);                
+            }
+            catch(NumberFormatException nfe){
+                return 5;
+            }
+        }
+        else{
             return 5;
         }
         if(!finalizar){

@@ -148,4 +148,11 @@ public class GestionDeEvento {
         return this.controlador.obtenerInformacionSolicitudesDeEventosPropietario(rutPropietario);
     }
     
+    public ArrayList<Evento> obtenerInformacionDeEventosActualesPropietario(String rutPropietario) {
+        return this.controlador.obtenerInformacionDeEventosActualesPropietario(rutPropietario);
+    }
+    
+    public ArrayList<Evento> obtenerInformacionDeEventosFinalizadosPropietario(String rutPropietario) {        
+        return this.controlador.obtenerInformacionDeEventosFinalizadosPropietario(rutPropietario);
+    }
 }

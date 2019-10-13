@@ -36,20 +36,15 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="botonModificarCuenta" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
-                          <Component id="botoSolicitudDeEventos" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
-                          <Component id="botoListaDePropiedades" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
-                          <Component id="botoEliminarPropiedad" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
-                          <Component id="botoModificarPropiedad" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
-                          <Component id="botoCrearPropiedad" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
-                          <Component id="botonHome1" min="-2" pref="250" max="-2" attributes="0"/>
-                          <Component id="botonEliminarCuenta" min="-2" pref="250" max="-2" attributes="0"/>
-                          <Component id="botoHistorialDeEventos" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="botonModificarCuenta" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
+                  <Component id="botoSolicitudDeEventos" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
+                  <Component id="botoListaDePropiedades" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
+                  <Component id="botoEliminarPropiedad" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
+                  <Component id="botoModificarPropiedad" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
+                  <Component id="botoCrearPropiedad" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
+                  <Component id="botonHome1" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
+                  <Component id="botonEliminarCuenta" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
+                  <Component id="botoHistorialDeEventos" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="botonCerrarSesion" min="-2" pref="100" max="-2" attributes="0"/>

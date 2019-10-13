@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaUsuario;
 
+import ModuloGestionUsuario.Cliente;
 import VistasSistema.VistaPropietario.PanelModificarPropietario;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -23,9 +24,10 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
     
     private VentanaPrincipalUsuario papa;
     
-    public PanelModificarUsuario(VentanaPrincipalUsuario papa) {
+    public PanelModificarUsuario(VentanaPrincipalUsuario papa) throws SQLException {
         this.papa=papa;
         initComponents();
+        this.actualizarInfomacion();
     }
 
     /**
@@ -184,6 +186,11 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
             }
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Se a modificado correctamente");
+                try {
+                    this.actualizarInfomacion();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelModificarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
             }
@@ -265,22 +272,122 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
      * @return 
      */
     public int validarModificarUsuario(String nombre, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito){                                               
-        if("".equals(nombre)){
+        if(!"".equals(nombre)){
+            char[] aux = nombre.toCharArray();
+            for(char c : aux){                
+                int ascii = (int) c;
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
+                    return 1;
+                }
+            }                                             
+        }
+        else{
             return 1;
         }
-        if("".equals(clave)){
+        if(!"".equals(clave)){
+            char[] aux = clave.toCharArray();
+            for(char c : aux){
+                int ascii = (int) c;
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) )){
+                    return 2;
+                }
+            }
+            if(aux.length <8){
+                return 2;
+            }
+        }
+        else{
             return 2;
         }
-        if("".equals(numeroTelefonico)){
+        if(!"".equals(numeroTelefonico)){
+            char[] aux = numeroTelefonico.toCharArray();
+            for(char c : aux){
+                int ascii = (int) c;
+                if( !((ascii >=48 && ascii <=57) )){
+                    return 3;
+                }
+            }
+            if(aux.length != 9){
+                return 3;
+            }
+        }
+        else{
             return 3;
         }
         if("".equals(correoElectronico)){
+            if(correoElectronico.contains("@")){
+                String[] arroba = correoElectronico.split("@");
+                if(arroba.length == 2 && !arroba[0].equals("")){
+                    char[] inicio= arroba[0].toCharArray();
+                    for(char c : inicio){
+                        int ascii = (int) c;
+                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)){
+                            return 4;
+                        }
+                    }                    
+                    String[] puntos = arroba[1].split("\\.");                    
+                    if((puntos.length == 2 || puntos.length == 3) && !puntos[0].equals("") && !puntos[1].equals("")){   
+                        if("cl".equals(puntos[puntos.length-1])){                            
+                            int i = 0;
+                            while(i < puntos.length-1){
+                                char[] dominio = puntos[i].toCharArray();
+                                for(char c : dominio){
+                                    int ascii = (int) c;
+                                    if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) )){
+                                        return 4;
+                                    }
+                                }
+                                i++;
+                            }
+                        }
+                        else{
+                            return 4;
+                        }
+                    }
+                    else{                        
+                        return 4;
+                    }
+                }       
+                else{
+                    return 4;
+                }
+            }
+            else{
+                return 4;
+            }  
+        }
+        else{
             return 4;
         }
         if("".equals(tarjetaDeCredito)){
+            tarjetaDeCredito = tarjetaDeCredito.replace(" ", "");
+            char[] aux = tarjetaDeCredito.toCharArray();                
+            for(char c : aux){
+                int ascii = (int) c;
+                if( !((ascii >=48 && ascii <=57) )){
+                    return 5;
+                }
+            }
+            if(aux.length !=16){
+                return 5;
+            }             
+        }
+        else{
             return 5;
         }
         return 0;
     }
 
+    
+    public void actualizarInfomacion() throws SQLException{
+        Cliente usuario =(Cliente) this.papa.getControladorPrincipal().obtenerInformacionUsuario();
+        if(usuario==null){
+            return;
+        }
+        this.clave.setText("");
+        this.tarjetaDeCredito.setText("");
+        this.nombre.setText(usuario.getNombreCompleto());
+        this.numeroTelefonico.setText(usuario.getTelefono());
+        this.correoElectronico.setText(usuario.getCorreoElectronico());
+    }
 }
