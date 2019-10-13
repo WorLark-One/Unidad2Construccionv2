@@ -675,7 +675,7 @@ public class ControladorBDDeEventos {
                         + "inner join propiedad on propietario.rut = propiedad.refpropietario\n"
                         + "inner join celebra on propiedad.id= celebra.refpropiedad\n"
                         + "inner join evento on evento.id= celebra.refevento\n"
-                        + "where propietario.rut='" + rutPropietario + "'";
+                        + "where propietario.rut='" + rutPropietario + "' and evento.publicado=false";
                 System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -979,6 +979,7 @@ public class ControladorBDDeEventos {
                 String sql = "insert into asociacion values(" + idEvento + "," + idEntradaPrueba + "," + precioEntrada + ",'" + nombreSector + "'," + idPropiedad + ")";
                 System.out.println(sql);
                 st.executeQuery(sql);
+                
                 st.close();
             } catch (SQLException e) {
                 //System.out.println("error conexion");
