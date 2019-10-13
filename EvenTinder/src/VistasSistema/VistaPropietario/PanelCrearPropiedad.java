@@ -333,7 +333,12 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             //realizar operacion
             java.util.Date fechaDePublicacion = new Date();
             int resultado = 0; 
-            ArrayList<Propiedad> propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+            ArrayList<Propiedad> propiedades = null;
+            try {
+                propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelCrearPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
             for (int i = 0; i < propiedades.size(); i++) {
                 if (propiedades.get(i).getNombre().equals(this.nombre.getText())){
                     JOptionPane.showMessageDialog(null, "El nombre de la propiedad ya se encuentra registrado", "Error en el ingreso de datos", JOptionPane.WARNING_MESSAGE);
@@ -512,12 +517,24 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 1;
         }
-        if(descripcion.equals("")){
+        if(!descripcion.equals("")){
+            char[] aux = descripcion.toCharArray();
+            if(aux.length <=500){
+                return 2;
+            }
+        }
+        else{
             return 2;
         }
-        if(ubicacion.equals("")){
-            return 3;
+        if(!ubicacion.equals("")){
+            char[] aux = ubicacion.toCharArray();
+            if(aux.length <=100){
+                return 3;
+            }
         }
+        else{
+            return 3;
+        }           
         if(!capacidadTotal.equals("") && isNumero(capacidadTotal)){
             try{
                 Integer.parseInt(valorArriendo);                

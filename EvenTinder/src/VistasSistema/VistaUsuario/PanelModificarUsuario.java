@@ -221,7 +221,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
             return;
         }
         if(resp==6){
-            JOptionPane.showMessageDialog(null, "Se espera que la tarjeta de credigo tenga 14 numeros \n" + 
+            JOptionPane.showMessageDialog(null, "Se espera que la tarjeta de credigo tenga 16 numeros \n" + 
                     "Ej: 12345678901234", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
@@ -279,7 +279,10 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
                 if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
                     return 1;
                 }
-            }                                             
+            }
+            if(aux.length <=100){
+                return 1;
+            }
         }
         else{
             return 1;
@@ -327,7 +330,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
                     }                    
                     String[] puntos = arroba[1].split("\\.");                    
                     if((puntos.length == 2 || puntos.length == 3) && !puntos[0].equals("") && !puntos[1].equals("")){   
-                        if("cl".equals(puntos[puntos.length-1])){                            
+                        if("cl".equals(puntos[puntos.length-1])  ||  "com".equals(puntos[puntos.length-1])   ){                            
                             int i = 0;
                             while(i < puntos.length-1){
                                 char[] dominio = puntos[i].toCharArray();

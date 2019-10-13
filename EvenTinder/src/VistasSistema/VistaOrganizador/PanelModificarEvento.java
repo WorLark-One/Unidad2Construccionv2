@@ -452,7 +452,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                     int a = this.papa.getControladorOrganizador().obtenerPrecioEntradaPorSector(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.propiedades.get(i).getListaSectores().get(j).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad());
                     System.out.println("el precio:"+a);
                     if(a!=-1){
-                        nuevoTotal+=a;
+                        nuevoTotal+=this.propiedades.get(i).getListaSectores().get(j).getCapacidadDelSector();
                     }
                 }
                 this.papa.getControladorOrganizador().modificarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getDescripcion(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getFechaDeInicio(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getFechaDeTermino(), nuevoTotal, this.eventos.get(this.listaEventos.getSelectedIndex()-1).getPlazoDevolucionEntrada(), false);
@@ -529,7 +529,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         return 0;
     }
     
-       /**
+    /**
      * MÃ©todo que se encarga de verificar que los numeros ingresados son numeros validos
      */
     private boolean isNumero(String cadena) {
@@ -553,7 +553,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
     }
     
     private void actualizarListaSectores(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionTodasLasPropiedades();
         this.lista.removeAll();
         this.modeloLista2=new DefaultListModel();
         this.listaSectores.removeAllItems();

@@ -324,13 +324,14 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             return;
         }
         if(resp==7){
-            JOptionPane.showMessageDialog(null, "Se espera que la tarjeta de credito tenga 14 digitos \n" + 
+            JOptionPane.showMessageDialog(null, "Se espera que la tarjeta de credito tenga 16 digitos \n" + 
                     "Ej: 12345678901234", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==8){
-            JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria algo \n" + 
-                    "Ej: no se como valido esto", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria tenga 20 digitos \n" + 
+                    "Ej: 12345678901234567890", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
@@ -443,7 +444,10 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
                     return 2;
                 }
-            }            
+            }    
+            if(aux.length <=100){
+                return 2;
+            }
         }
         else{
             return 2;
@@ -464,8 +468,11 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 }                
                 if( (guion[0].charAt(guion[0].length()-4 ) == '.')  && (guion[0].charAt(guion[0].length()-8 ) == '.') ){
                     String[] puntos = guion[0].split("\\.");
-                    if(puntos.length == 3){                                             
-                        char[] numeros = guion[0].replace(".","").toCharArray();                        
+                    char[] puntos1 = puntos[0].toCharArray();
+                    char[] puntos2 = puntos[1].toCharArray();
+                    char[] puntos3 = puntos[2].toCharArray();
+                    if(puntos.length == 3 && puntos2.length == 3 && puntos3.length ==3 && puntos1.length >=1 && puntos1.length <=3){                                  
+                        char[] numeros = guion[0].replace(".","").toCharArray();                           
                         if(numeros.length >=7 && numeros.length <=9 && !guion[0].startsWith("0") && !guion[0].startsWith("00") && !guion[0].startsWith("000")){
                             for(char c:numeros){                                
                                 if( !(c>=48 && c<=57) ){
@@ -540,7 +547,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                     }                    
                     String[] puntos = arroba[1].split("\\.");                    
                     if((puntos.length == 2 || puntos.length == 3) && !puntos[0].equals("") && !puntos[1].equals("")){   
-                        if("cl".equals(puntos[puntos.length-1])){                            
+                        if("cl".equals(puntos[puntos.length-1]) || "com".equals(puntos[puntos.length-1]) ){                            
                             int i = 0;
                             while(i < puntos.length-1){
                                 char[] dominio = puntos[i].toCharArray();

@@ -163,7 +163,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();
     }
 
-    public void ModificarPropiedad() {
+    public void ModificarPropiedad() throws SQLException {
         modificarPropiedad = new PanelModificarPropiedad(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(modificarPropiedad, java.awt.BorderLayout.CENTER);
@@ -172,7 +172,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();    
     }
 
-    public void EliminarPropiedad() {
+    public void EliminarPropiedad() throws SQLException {
         PanelEliminarPropiedad eliminarPropiedad = new PanelEliminarPropiedad(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eliminarPropiedad, java.awt.BorderLayout.CENTER);
@@ -181,7 +181,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();    
     }
 
-    public void ListaDePropiedades() {
+    public void ListaDePropiedades() throws SQLException {
         
         PanelListaDePropiedades listaPropiedades = new PanelListaDePropiedades(this);
         getContentPane().remove(this.componenteAnterior);
@@ -191,7 +191,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();    
     }
 
-    public void SolicitudDeEventos() {
+    public void SolicitudDeEventos() throws SQLException {
         PanelAceptarYRechasarEventos eventos = new PanelAceptarYRechasarEventos(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
@@ -241,7 +241,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();  
     }
 
-    void HistorialDeEventos() {
+    void HistorialDeEventos() throws SQLException {
         PanelHistorialDeEventos historial = new PanelHistorialDeEventos(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(historial, java.awt.BorderLayout.CENTER);
