@@ -461,13 +461,13 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 else{
                     System.out.println("largo digito verificador invalido");
                     return 3;
-                }
-                if( (guion[0].charAt(guion[0].length()-3 ) == '.')  && (guion[0].charAt(guion[0].length()-7 ) == '.') ){
+                }                
+                if( (guion[0].charAt(guion[0].length()-4 ) == '.')  && (guion[0].charAt(guion[0].length()-8 ) == '.') ){
                     String[] puntos = guion[0].split("\\.");
-                    if(puntos.length == 3){
-                        char[] numeros = guion[0].replace("\\.","").toCharArray();
-                        if(numeros.length >=7 && numeros.length <=9){
-                            for(char c:numeros){
+                    if(puntos.length == 3){                                             
+                        char[] numeros = guion[0].replace(".","").toCharArray();                        
+                        if(numeros.length >=7 && numeros.length <=9 && !guion[0].startsWith("0") && !guion[0].startsWith("00") && !guion[0].startsWith("000")){
+                            for(char c:numeros){                                
                                 if( !(c>=48 && c<=57) ){
                                     return 3;
                                 }
@@ -475,13 +475,17 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                         }
                         else{
                             System.out.println("numeros muy grandes");
+                            return 3;
                         }
                     }
                     else{
                         System.out.println("error de puntuacion");
                         return 3;
                     } 
-                }                                
+                }   
+                else{
+                    System.out.println("puntos mal ubicados");
+                }
             }
             else{
                 System.out.println("formato invalido");
