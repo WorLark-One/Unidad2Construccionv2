@@ -529,7 +529,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         return 0;
     }
     
-       /**
+    /**
      * MÃ©todo que se encarga de verificar que los numeros ingresados son numeros validos
      */
     private boolean isNumero(String cadena) {
@@ -553,7 +553,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
     }
     
     private void actualizarListaSectores(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionTodasLasPropiedades();
         this.lista.removeAll();
         this.modeloLista2=new DefaultListModel();
         this.listaSectores.removeAllItems();

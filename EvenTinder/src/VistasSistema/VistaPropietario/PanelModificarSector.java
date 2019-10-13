@@ -27,7 +27,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
     private ArrayList<Propiedad> propiedades;
             
             
-    public PanelModificarSector(VentanaPrincipalPropietario papa, int id) {
+    public PanelModificarSector(VentanaPrincipalPropietario papa, int id) throws SQLException {
         this.papa=papa;
         this.id=id;
         initComponents();
@@ -228,7 +228,11 @@ public class PanelModificarSector extends javax.swing.JPanel {
                 }
                 this.nombre.setText("");
                 this.capacidad.setText("");
-                this.actualizarMenuSectores();
+                try {
+                    this.actualizarMenuSectores();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelModificarSector.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 //no se pudo
                 JOptionPane.showMessageDialog(null, "No se a podido añadir el sector a la base de datos", "Error al guardar sector", JOptionPane.WARNING_MESSAGE);
@@ -347,8 +351,8 @@ public class PanelModificarSector extends javax.swing.JPanel {
     }
 
     //no se puede hacer tdd
-    private void actualizarMenuSectores(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    private void actualizarMenuSectores() throws SQLException{
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.listaSectores.removeAllItems();
         this.listaSectores.addItem("");
         if(this.propiedades!=null){

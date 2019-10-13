@@ -27,10 +27,15 @@ public class GestionDePropiedad {
 
     /**
      * Metodo que retorna la lista de todas las Propiedades que posee el Propietario hasta el momento.
+     * @param rut
      * @return La lista de las propiedades del Propietario que esta conectado al sistema.
+     * @throws java.sql.SQLException
      */
-    public ArrayList<Propiedad> mostrarListaDePropiedades() { 
-        
+    public ArrayList<Propiedad> mostrarListaDePropiedades(String rut) throws SQLException {         
+        return this.controlador.obtenerInformacionDePropiedades(rut);
+    }
+    
+    public ArrayList<Propiedad> obtenerInformacionDeTodasLasPropiedades(){
         return this.gestorEventos.obtenerInformacionPropiedades();
     }
 

@@ -28,7 +28,7 @@ public class TesteoControladorPropietario  {
    @Test
     public void mostrarInformacionDePropiedades() throws SQLException {
         ControladorPropietario p = new ControladorPropietario();
-        ArrayList<Propiedad> propiedades = p.mostrarInformacionDePropiedades();
+        ArrayList<Propiedad> propiedades = p.mostrarInformacionDePropiedadesDeUnPropietario();
         
         for (Propiedad po: propiedades) {
             System.out.println(po.getId() + " " + po.getNombre());
