@@ -979,7 +979,6 @@ public class ControladorBDDeEventos {
                 String sql = "insert into asociacion values(" + idEvento + "," + idEntradaPrueba + "," + precioEntrada + ",'" + nombreSector + "'," + idPropiedad + ")";
                 System.out.println(sql);
                 st.executeQuery(sql);
-                
                 st.close();
             } catch (SQLException e) {
                 //System.out.println("error conexion");
