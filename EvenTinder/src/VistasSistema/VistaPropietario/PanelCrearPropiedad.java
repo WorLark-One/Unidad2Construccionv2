@@ -518,7 +518,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         if(ubicacion.equals("")){
             return 3;
         }
-        if(!capacidadTotal.equals("") || !isNumero(capacidadTotal)){
+        if(!capacidadTotal.equals("") && isNumero(capacidadTotal)){
             try{
                 Integer.parseInt(valorArriendo);                
             }
@@ -529,7 +529,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 4;
         }
-        if(!valorArriendo.equals("") || !isNumero(valorArriendo)){
+        if(!valorArriendo.equals("") && isNumero(valorArriendo)){
             try{
                 Integer.parseInt(valorArriendo);                
             }

@@ -464,7 +464,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         if(ubicacion.equals("")){
             return 3;
         }
-        if(!valorArriendo.equals("") || !isNumero(valorArriendo)){
+        if(!valorArriendo.equals("") && isNumero(valorArriendo)){
             try{
                 Integer.parseInt(valorArriendo);                
             }
