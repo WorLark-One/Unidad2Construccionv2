@@ -223,6 +223,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
         if(resp==6){
             JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria algo \n" + 
                     "Ej: no se como valido esto", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
