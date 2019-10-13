@@ -6,11 +6,7 @@
 package VistasSistema.VistaOrganizador;
 
 import ModuloGestionEventos.Evento;
-import VistasSistema.VistaPropietario.PanelEliminarPropiedad;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -112,7 +108,7 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
 
     private void botonEliminarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarEventoActionPerformed
         // TODO add your handling code here:
-        if(this.listaEventos.getSelectedIndex()>0){
+        if(this.listaEventos.getSelectedIndex()<=0){
             JOptionPane.showMessageDialog(null, "No a seleccionado la propiedad a modificar", "Error al seleccionar propiedad", JOptionPane.WARNING_MESSAGE);    
             return;
         }

@@ -440,7 +440,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 )){
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
                     return 2;
                 }
             }            
@@ -449,32 +449,47 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             return 2;
         }
         if(!"".equals(rut)){
-            boolean validacion = false;
-            try {
-                rut =  rut.toUpperCase();
-                rut = rut.replace(".", "");
-                rut = rut.replace("-", "");
-                int rutAux = Integer.parseInt(rut.substring(0, rut.length() - 1));
-
-                char dv = rut.charAt(rut.length() - 1);
-
-                int m = 0, s = 1;
-                for (; rutAux != 0; rutAux /= 10) {
-                    s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
+            String[] guion = rut.split("-");
+            if(guion.length == 2){
+                char[] digVerificador = guion[1].toCharArray();
+                if(digVerificador.length == 1){
+                    if(!(( digVerificador[0] >=48 && digVerificador[0]<=57)  || digVerificador[0]==   107 || digVerificador[0] == 75 )){
+                        System.out.println("digito verificador invalido");
+                        return 3;
+                    }                                         
                 }
-                if (dv == (char) (s != 0 ? s + 47 : 75)) {
-                    validacion = true;
+                else{
+                    System.out.println("largo digito verificador invalido");
+                    return 3;
                 }
-            } 
-            catch (java.lang.NumberFormatException e) {
-            } 
-            catch (Exception e) {
+                if( (guion[0].charAt(guion[0].length()-3 ) == '.')  && (guion[0].charAt(guion[0].length()-7 ) == '.') ){
+                    String[] puntos = guion[0].split("\\.");
+                    if(puntos.length == 3){
+                        char[] numeros = guion[0].replace("\\.","").toCharArray();
+                        if(numeros.length >=7 && numeros.length <=9){
+                            for(char c:numeros){
+                                if( !(c>=48 && c<=57) ){
+                                    return 3;
+                                }
+                            }
+                        }
+                        else{
+                            System.out.println("numeros muy grandes");
+                        }
+                    }
+                    else{
+                        System.out.println("error de puntuacion");
+                        return 3;
+                    } 
+                }                                
             }
-            if(!validacion){
+            else{
+                System.out.println("formato invalido");
                 return 3;
-            }
+            }                
         }
         else{
+            System.out.println("rut vacio");
             return 3;
         }
         if(!"".equals(clave)){
@@ -514,7 +529,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                     char[] inicio= arroba[0].toCharArray();
                     for(char c : inicio){
                         int ascii = (int) c;
-                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) )){
+                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)){
                             return 6;
                         }
                     }                    
