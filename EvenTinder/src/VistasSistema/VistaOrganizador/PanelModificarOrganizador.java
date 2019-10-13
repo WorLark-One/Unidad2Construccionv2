@@ -220,7 +220,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
             return;
         }
         if(resp==6){
-            JOptionPane.showMessageDialog(null, "Se espera que la tarjeta de credigo tenga 14 numeros \n" + 
+            JOptionPane.showMessageDialog(null, "Se espera que la tarjeta de credigo tenga 16 numeros \n" + 
                     "Ej: 12345678901234", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
