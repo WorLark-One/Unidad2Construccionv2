@@ -150,7 +150,7 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
         this.listaPropiedades.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.size(); i++){
-                this.listaPropiedades.addItem("Nombre : " + this.propiedades.get(i).getNombre());
+                this.listaPropiedades.addItem(this.propiedades.get(i).getNombre());
             }
             this.repaint();
             this.revalidate();

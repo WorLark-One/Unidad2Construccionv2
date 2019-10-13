@@ -45,7 +45,7 @@ public class ConexionBD {
             conexion = DriverManager.getConnection(url, usuario, password);
 
             if (conexion != null) {
-                System.out.println("CONEXION EXITOSA: crearConexion().");
+                //System.out.println("CONEXION EXITOSA: crearConexion().");
                 return true;
             }
         } catch (SQLException ex) {

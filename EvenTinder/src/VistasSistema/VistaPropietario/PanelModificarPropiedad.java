@@ -369,7 +369,12 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             return;
         }
         if(this.listaOpciones.getSelectedIndex()==3){
-            PanelEliminarSector sector = new PanelEliminarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
+            PanelEliminarSector sector = null;
+            try {
+                sector = new PanelEliminarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelModificarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.papa.eliminarSector(sector);
             this.actualizarMenuOpcionesModificar();
             return;
@@ -434,7 +439,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         this.listaPropiedades.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.size(); i++){
-                this.listaPropiedades.addItem("Nombre : " + this.propiedades.get(i).getNombre());
+                this.listaPropiedades.addItem(this.propiedades.get(i).getNombre());
             }
             this.repaint();
             this.revalidate();

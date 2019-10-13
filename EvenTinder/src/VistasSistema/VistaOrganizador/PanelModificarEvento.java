@@ -450,7 +450,6 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 int nuevoTotal=0;
                 for (int j = 0; j < this.propiedades.get(i).getListaSectores().size(); j++) {
                     int a = this.papa.getControladorOrganizador().obtenerPrecioEntradaPorSector(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.propiedades.get(i).getListaSectores().get(j).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad());
-                    System.out.println("el precio:"+a);
                     if(a!=-1){
                         nuevoTotal+=this.propiedades.get(i).getListaSectores().get(j).getCapacidadDelSector();
                     }
@@ -568,10 +567,10 @@ public class PanelModificarEvento extends javax.swing.JPanel {
             }
             if(numero==-1){
                 System.out.println("cago");
+                return;
             }
             for(int i=0; i<this.propiedades.get(numero).getListaSectores().size(); i++){
                 listaSectores.addItem(this.propiedades.get(numero).getListaSectores().get(i).getNombre());
-                System.out.println("Id evento:"+this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento() + "  nombre sector:" + this.propiedades.get(numero).getListaSectores().get(i).getNombre() + "   Id propiedad:" +  this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad());
                 int a = this.papa.getControladorOrganizador().obtenerPrecioEntradaPorSector(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.propiedades.get(numero).getListaSectores().get(i).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad());
                 this.modeloLista2.addElement("Nombre:" + this.propiedades.get(numero).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(numero).getListaSectores().get(i).getCapacidadDelSector() + "  precio:" + a);
             }
