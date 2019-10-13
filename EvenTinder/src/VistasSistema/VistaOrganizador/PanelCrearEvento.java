@@ -615,7 +615,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().size(); i++){
                 this.precios.add(-1);
-                listaSectores.addItem("Nombre:" + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre());
+                listaSectores.addItem(this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre());
             }
             this.repaint();
             this.revalidate();

@@ -389,7 +389,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         opciones.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.size(); i++){
-                opciones.addItem("Nombre : " + this.propiedades.get(i).getNombre());
+                opciones.addItem(this.propiedades.get(i).getNombre());
             }
             this.repaint();
             this.revalidate();

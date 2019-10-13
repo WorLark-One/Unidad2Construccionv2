@@ -360,7 +360,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
         this.listaSectores.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.get(id).getListaSectores().size(); i++){
-                this.listaSectores.addItem("Nombre Sector: " + this.propiedades.get(id).getListaSectores().get(i).getNombre());
+                this.listaSectores.addItem(this.propiedades.get(id).getListaSectores().get(i).getNombre());
             }
             this.repaint();
             this.revalidate();
