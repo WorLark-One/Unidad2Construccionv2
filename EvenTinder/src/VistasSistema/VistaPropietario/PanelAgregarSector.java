@@ -311,7 +311,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
       * @return 
       */
     public int validarEntrada(String nombre, String capacidad) {
-        if(nombre.equals("")){
+        if(!nombre.equals("")){
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
@@ -323,7 +323,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
         else{
             return 1;
         }
-        if(capacidad.equals("") || !isNumero(capacidad)){
+        if(!capacidad.equals("") && isNumero(capacidad)){
             try{
                 Integer.parseInt(capacidad);                
             }
