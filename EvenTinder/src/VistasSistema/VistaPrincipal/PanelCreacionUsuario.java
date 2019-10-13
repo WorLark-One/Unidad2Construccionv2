@@ -528,6 +528,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         }
         if(!"".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
+                
                 String[] arroba = correoElectronico.split("@");
                 if(arroba.length == 2 && !arroba[0].equals("")){
                     char[] inicio= arroba[0].toCharArray();
