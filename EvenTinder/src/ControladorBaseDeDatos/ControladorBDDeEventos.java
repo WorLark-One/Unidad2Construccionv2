@@ -842,7 +842,7 @@ public class ControladorBDDeEventos {
      *
      * @return lista de propietario, o null en caso de que no existan.
      */
-    public ArrayList<Propiedad> obtenerListaDePropietarios() {
+    public ArrayList<Propiedad> obtenerListaDePrropiedades() {
 
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();

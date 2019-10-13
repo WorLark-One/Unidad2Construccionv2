@@ -6,10 +6,7 @@
 package ModuloGestionUsuario;
 
 import java.sql.SQLException;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -28,9 +25,9 @@ public class GestionDeUsuarioTest {
         String correoElectronico = "brayan.escobar@live.com";
         String telefono = "123456789";
         String tarjeta = "1111111111111111";
-        //Cliente cliente = new Cliente(nombreUsuario, tarjeta, contraseña, telefono, correoElectronico, tarjeta);
+        Cliente cliente = new Cliente(nombreUsuario, tarjeta, contraseña, telefono, correoElectronico, tarjeta);
         GestionDeUsuario instance = new GestionDeUsuario();
-        instance.crearUsuario(tipoUsuario, nombreUsuario, rutUsuario, contraseña, correoElectronico, telefono, tarjeta);
+        //instance.crearUsuario(tipoUsuario, nombreUsuario, rutUsuario, contraseña, correoElectronico, telefono, tarjeta);
 
     }
 
@@ -40,7 +37,7 @@ public class GestionDeUsuarioTest {
     @Test
     public void testCrearUsuario() throws Exception {
         System.out.println("crearUsuario");
-        String tipoUsuario = "organizador";
+        String tipoUsuario = "cliente";
         String rutUsuarioAModificar = "19363170-3";
         String nombreUsuario = "jhoany escobar";
         String contraseña = "123";
