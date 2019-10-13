@@ -46,7 +46,11 @@ public class Evento {
      */
     public boolean AñadirEntrada(Entrada entrada) {
 
-        return this.listaEntradas.add(entrada);
+        if(verificarDisponibilidadDeEntrada() == true)
+        {
+            return this.listaEntradas.add(entrada);
+        }
+        return false;
     }
 
     /**
@@ -54,8 +58,10 @@ public class Evento {
      * @param idEntrada
      * @return true si se elimina, false de lo contrario.
      */
+    
     public boolean eliminarEntrada(int idEntrada) {
         if (this.listaEntradas != null) {
+            System.out.println("el numero de entradas es:"+listaEntradas.size());
             for (int i = 0; i < listaEntradas.size(); i++) {
                 Entrada entrada = listaEntradas.get(i);
                 if (entrada.getIdEntrada() == idEntrada) {
