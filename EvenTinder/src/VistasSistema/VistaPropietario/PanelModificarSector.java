@@ -312,7 +312,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
         else{
             return 1;
         }
-        if(!capacidad.equals("") || !isNumero(capacidad)){
+        if(!capacidad.equals("") && isNumero(capacidad)){
             try{
                 Integer.parseInt(capacidad);                
             }

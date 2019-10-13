@@ -324,13 +324,14 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             return;
         }
         if(resp==7){
-            JOptionPane.showMessageDialog(null, "Se espera que la tarjeta de credito tenga 14 digitos \n" + 
+            JOptionPane.showMessageDialog(null, "Se espera que la tarjeta de credito tenga 16 digitos \n" + 
                     "Ej: 12345678901234", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==8){
-            JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria algo \n" + 
-                    "Ej: no se como valido esto", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria tenga 20 digitos \n" + 
+                    "Ej: 12345678901234567890", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 

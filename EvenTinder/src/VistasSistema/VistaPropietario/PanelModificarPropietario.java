@@ -221,8 +221,8 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             return;
         }
         if(resp==6){
-            JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria algo \n" + 
-                    "Ej: no se como valido esto", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria tenga 20 digitos \n" + 
+                    "Ej: 12345678901234567890", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
