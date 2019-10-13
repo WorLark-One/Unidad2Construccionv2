@@ -4,7 +4,6 @@ import ModuloAutenticacion.ControlDeAcceso;
 import ModuloGestionEventos.Evento;
 import ModuloGestionEventos.GestionDeEvento;
 import ModuloGestionPropiedades.Propiedad;
-import ModuloGestionUsuario.Propietario;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -116,6 +115,10 @@ public class ControladorOrganizador {
     public ArrayList<Propiedad> obtenerInformacionPropiedades(){
         return this.gestorEventos.obtenerInformacionPropiedades();
     }
+    
+    public int obtenerPrecioEntradaPorSector(int idEvento, String nombreSector, int idPropiedad){
+        return this.gestorEventos.obtenerPrecioEntradaPorSector(idEvento, nombreSector, idPropiedad);
+    }
 
     /**
      * Iteracion 4 
@@ -126,6 +129,5 @@ public class ControladorOrganizador {
     public ArrayList<String> obtenerInformacionDeEstadisticasDeVentasPorEventos(int id) {
         // TODO implement here
         return null;
-    }
-
+    }        
 }
