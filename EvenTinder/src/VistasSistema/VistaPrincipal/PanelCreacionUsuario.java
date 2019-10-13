@@ -445,7 +445,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                     return 2;
                 }
             }    
-            if(aux.length <=100){
+            if(aux.length >=100){
                 return 2;
             }
         }

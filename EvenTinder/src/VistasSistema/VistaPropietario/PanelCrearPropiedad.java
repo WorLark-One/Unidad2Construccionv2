@@ -484,11 +484,28 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
       * @return 
       */
     public int validarEntradaSector(String nombre, String capacidad) {
-        if(nombre.equals("")){
+        if(!nombre.equals("")){
+            char[] aux = nombre.toCharArray();
+            for(char c : aux){                
+                int ascii = (int) c;
+                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
+                    return 1;
+                }
+            }
+            if(aux.length >=100){
+                return 1;
+            }
+        }
+        else{
             return 1;
         }
-        if(capacidad.equals("")|| !isNumero(capacidad)){
-            return 2;
+        if(!capacidad.equals("") && isNumero(capacidad)){
+            try{
+                Integer.parseInt(capacidad);                
+            }
+            catch(NumberFormatException nfe){
+                return 2;
+            }
         }
         return 0;
     }
@@ -513,13 +530,16 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                     return 1;
                 }
             } 
+            if(aux.length>=100){
+                return 1;
+            }
         }
         else{
             return 1;
         }
         if(!descripcion.equals("")){
             char[] aux = descripcion.toCharArray();
-            if(aux.length <=500){
+            if(aux.length >=500){
                 return 2;
             }
         }
@@ -528,7 +548,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         }
         if(!ubicacion.equals("")){
             char[] aux = ubicacion.toCharArray();
-            if(aux.length <=100){
+            if(aux.length >=100){
                 return 3;
             }
         }
