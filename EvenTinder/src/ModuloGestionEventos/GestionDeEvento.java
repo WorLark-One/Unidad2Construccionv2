@@ -83,7 +83,7 @@ public class GestionDeEvento {
     }
     
     public ArrayList<Propiedad> obtenerInformacionPropiedades(){
-        return this.controlador.obtenerListaDePropietarios();
+        return this.controlador.obtenerListaDePropiedades();
     }
 
     /**

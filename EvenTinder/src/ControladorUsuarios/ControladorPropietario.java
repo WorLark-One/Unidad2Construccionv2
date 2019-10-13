@@ -30,9 +30,14 @@ public class ControladorPropietario {
     /**
      * Metodo que pide y retorna la lista de las Propiedades existentes.
      * @return El arreglo de Propiedades obtenidas.
+     * @throws java.sql.SQLException
      */
-    public ArrayList<Propiedad> mostrarInformacionDePropiedades() {
-        return this.gestorPropiedades.mostrarListaDePropiedades();
+    public ArrayList<Propiedad> mostrarInformacionDePropiedadesDeUnPropietario() throws SQLException {
+        return this.gestorPropiedades.mostrarListaDePropiedades(this.controlAcceso.getRut());
+    }
+    
+    public ArrayList<Propiedad> mostrarInformacionTodasLasPropiedades(){
+        return this.gestorPropiedades.obtenerInformacionDeTodasLasPropiedades();
     }
 
     /**
