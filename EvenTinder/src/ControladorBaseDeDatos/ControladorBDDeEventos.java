@@ -347,7 +347,7 @@ public class ControladorBDDeEventos {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select * from evento where evento.publicado=false or evento.publicado=true and evento.reforganizador='" + rutOrganizador + "'";
+                String sql = "select * from evento where evento.reforganizador='" + rutOrganizador + "'";
                // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -544,7 +544,7 @@ public class ControladorBDDeEventos {
 
                 String sql = "SELECT *\n"
                         + "FROM evento\n"
-                        + "WHERE evento.fechatermino <= '" + fecha + "'::date";
+                        + "WHERE evento.fechatermino <= '" + fecha + "'::date and evento.reforganizador='" + rutOrganizador + "'";
 
                 //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
