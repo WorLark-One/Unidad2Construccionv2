@@ -589,8 +589,19 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 return 7;
             }            
         }
-        if("propietario".equals(tipoUsuario)){
+        if("propietario".equals(tipoUsuario)){            
             if(!"".equals(CuentaBancaria)){
+                CuentaBancaria = CuentaBancaria.replace(" ", "");
+                char[] aux = CuentaBancaria.toCharArray();
+                for(char c : aux){
+                    int ascii = (int) c;
+                    if( !((ascii >=48 && ascii <=57) )){
+                        return 8;
+                    }
+                }
+                if(aux.length !=20){
+                    return 8;
+                }         
                 
             }
             else{
