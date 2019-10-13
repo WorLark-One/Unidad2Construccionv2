@@ -6,6 +6,7 @@
 package VistasSistema.VistaPropietario;
 
 import ModuloGestionPropiedades.Propiedad;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JScrollPane;
@@ -24,7 +25,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
     private ArrayList<Propiedad> propiedades;
     private DefaultListModel modeloLista;
     
-    public PanelListaDePropiedades(VentanaPrincipalPropietario papa) {
+    public PanelListaDePropiedades(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
         initComponents();
         
@@ -380,8 +381,8 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
      */
  
     // no se puede hacer tdd ya que necesita otro metodo
-    private void actualizarMenuOpciones(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    private void actualizarMenuOpciones() throws SQLException{
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         opciones.removeAllItems();
         this.listaSectores.setModel(this.modeloLista);
         this.listaSectores.removeAll();

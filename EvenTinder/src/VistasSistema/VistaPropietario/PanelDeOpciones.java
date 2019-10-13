@@ -365,28 +365,48 @@ public class PanelDeOpciones extends javax.swing.JPanel {
     }//GEN-LAST:event_botonHome1MouseClicked
 
     private void botoModificarPropiedadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoModificarPropiedadMouseClicked
-        // TODO add your handling code here:
-        this.papa.ModificarPropiedad();
+        try {
+            // TODO add your handling code here:
+            this.papa.ModificarPropiedad();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelDeOpciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botoModificarPropiedadMouseClicked
 
     private void botoEliminarPropiedadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoEliminarPropiedadMouseClicked
-        // TODO add your handling code here:
-        this.papa.EliminarPropiedad();
+        try {
+            // TODO add your handling code here:
+            this.papa.EliminarPropiedad();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelDeOpciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botoEliminarPropiedadMouseClicked
 
     private void botoListaDePropiedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoListaDePropiedadesMouseClicked
-        // TODO add your handling code here:
-        this.papa.ListaDePropiedades();
+        try {
+            // TODO add your handling code here:
+            this.papa.ListaDePropiedades();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelDeOpciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botoListaDePropiedadesMouseClicked
 
     private void botoSolicitudDeEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoSolicitudDeEventosMouseClicked
-        // TODO add your handling code here:
-        this.papa.SolicitudDeEventos();
+        try {
+            // TODO add your handling code here:
+            this.papa.SolicitudDeEventos();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelDeOpciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botoSolicitudDeEventosMouseClicked
 
     private void botoHistorialDeEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoHistorialDeEventosMouseClicked
-        // TODO add your handling code here:
-        this.papa.HistorialDeEventos();
+        try {
+            // TODO add your handling code here:
+            this.papa.HistorialDeEventos();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelDeOpciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botoHistorialDeEventosMouseClicked
 
 

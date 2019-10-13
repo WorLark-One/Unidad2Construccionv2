@@ -28,7 +28,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
     private int id;
     private ArrayList<Propiedad> propiedades;
     
-    public PanelModificarPropiedad(VentanaPrincipalPropietario papa) {
+    public PanelModificarPropiedad(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
         initComponents();
         this.actualizarMenuOpciones();
@@ -290,7 +290,11 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 this.descripcion.setText("");
                 this.ubicacion.setText("");
                 this.valorArriendo.setText("");
-                this.actualizarMenuOpciones();
+                try {
+                    this.actualizarMenuOpciones();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelModificarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 //fallo
                 JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  
@@ -343,19 +347,34 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             return;
         }
         if(this.listaOpciones.getSelectedIndex()==1){
-            PanelAgregarSector sector = new PanelAgregarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
+            PanelAgregarSector sector = null;
+            try {
+                sector = new PanelAgregarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelModificarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.papa.añadirSector(sector);
             this.actualizarMenuOpcionesModificar();
             return;
         }
         if(this.listaOpciones.getSelectedIndex()==2){
-            PanelModificarSector sector = new PanelModificarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
+            PanelModificarSector sector = null;
+            try {
+                sector = new PanelModificarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelModificarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.papa.modificarSector(sector);
             this.actualizarMenuOpcionesModificar();
             return;
         }
         if(this.listaOpciones.getSelectedIndex()==3){
-            PanelEliminarSector sector = new PanelEliminarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
+            PanelEliminarSector sector = null;
+            try {
+                sector = new PanelEliminarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelModificarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.papa.eliminarSector(sector);
             this.actualizarMenuOpcionesModificar();
             return;
@@ -414,8 +433,8 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
 
     //
     // no se puede hacer tdd ya que necesita otro metodo
-    public void actualizarMenuOpciones(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    public void actualizarMenuOpciones() throws SQLException{
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.listaPropiedades.removeAllItems();
         this.listaPropiedades.addItem("");
         if(this.propiedades!=null){
