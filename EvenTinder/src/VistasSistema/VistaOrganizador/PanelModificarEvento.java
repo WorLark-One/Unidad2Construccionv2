@@ -450,6 +450,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 int nuevoTotal=0;
                 for (int j = 0; j < this.propiedades.get(i).getListaSectores().size(); j++) {
                     int a = this.papa.getControladorOrganizador().obtenerPrecioEntradaPorSector(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.propiedades.get(i).getListaSectores().get(j).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad());
+                    System.out.println("el precio:"+a);
                     if(a!=-1){
                         nuevoTotal+=a;
                     }
