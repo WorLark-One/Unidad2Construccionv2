@@ -60,7 +60,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         aceptar = new javax.swing.JButton();
         rechazar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
         descripcion = new javax.swing.JLabel();
         capacidad = new javax.swing.JLabel();
@@ -104,7 +104,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -135,35 +135,46 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        nombre.setText("Nombre: ");
+
+        descripcion.setText("Descripcion: ");
+
+        capacidad.setText("Capacidad: ");
+
+        fechaDeInicio.setText("Fecha de inicio:");
+
+        fechaDeTermino.setText("Fecha de termino:");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nombre)
-                    .addComponent(descripcion)
-                    .addComponent(capacidad)
-                    .addComponent(fechaDeInicio)
-                    .addComponent(fechaDeTermino))
-                .addContainerGap(448, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(capacidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fechaDeInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(fechaDeTermino)
+                        .addGap(0, 353, Short.MAX_VALUE)))
+                .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(nombre)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(descripcion)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(capacidad)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fechaDeInicio)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fechaDeTermino)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -174,14 +185,14 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -197,16 +208,16 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(13, 13, 13)
-                            .addComponent(jLabel20))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(aceptar)
-                            .addGap(18, 18, 18)
-                            .addComponent(rechazar)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel20))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(aceptar)
+                        .addGap(18, 18, 18)
+                        .addComponent(rechazar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(jLabel21))
@@ -233,15 +244,15 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                 .addComponent(jLabel21)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addComponent(jLabel20)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aceptar)
                     .addComponent(rechazar))
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel20)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -254,19 +265,19 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         if(this.listaPropiedades.getSelectedIndex()==1){
             
             this.actualizarListaEventosTodos();
-            this.nombre.setText("");
-            this.descripcion.setText("");
-            this.capacidad.setText("");
-            this.fechaDeInicio.setText("");
-            this.fechaDeTermino.setText("");
+            this.nombre.setText("Nombre: ");
+            this.descripcion.setText("Descripcion: ");
+            this.capacidad.setText("Capacidad: ");
+            this.fechaDeInicio.setText("Fecha de inicio: ");
+            this.fechaDeTermino.setText("Fecha de termino:");
             return;
         }
         this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-2).getId());  
-        this.nombre.setText("");
-        this.descripcion.setText("");
-        this.capacidad.setText("");
-        this.fechaDeInicio.setText("");
-        this.fechaDeTermino.setText("");
+         this.nombre.setText("Nombre: ");
+        this.descripcion.setText("Descripcion: ");
+        this.capacidad.setText("Capacidad: ");
+        this.fechaDeInicio.setText("Fecha de inicio: ");
+        this.fechaDeTermino.setText("Fecha de termino:");
     }//GEN-LAST:event_listaPropiedadesActionPerformed
 
     private void rechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechazarActionPerformed
@@ -294,18 +305,18 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
     private void listaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaMouseClicked
         // TODO add your handling code here:
         if(this.lista.getSelectedIndex()<0){
-            this.nombre.setText("");
-            this.descripcion.setText("");
-            this.capacidad.setText("");
-            this.fechaDeInicio.setText("");
-            this.fechaDeTermino.setText("");
+            this.nombre.setText("Nombre: ");
+            this.descripcion.setText("Descripcion: ");
+            this.capacidad.setText("Capacidad: ");
+            this.fechaDeInicio.setText("Fecha de inicio: ");
+            this.fechaDeTermino.setText("Fecha de termino:");
             return;
         }
-        this.nombre.setText(this.eventos.get(lista.getSelectedIndex()).getNombre());
-        this.descripcion.setText(this.eventos.get(lista.getSelectedIndex()).getDescripcion());
-        this.capacidad.setText(Integer.toString(this.eventos.get(lista.getSelectedIndex()).getCapacidadMaximaDelEvento()));
-        this.fechaDeInicio.setText(convertirFechaString(this.eventos.get(lista.getSelectedIndex()).getFechaDeInicio()));
-        this.fechaDeTermino.setText(convertirFechaString(this.eventos.get(lista.getSelectedIndex()).getFechaDeTermino()));
+        this.nombre.setText("Nombre: " + this.eventos.get(lista.getSelectedIndex()).getNombre());
+        this.descripcion.setText("Descripcion: " + this.eventos.get(lista.getSelectedIndex()).getDescripcion());
+        this.capacidad.setText("Capacidad: " +Integer.toString(this.eventos.get(lista.getSelectedIndex()).getCapacidadMaximaDelEvento()));
+        this.fechaDeInicio.setText("Fecha de inicio: " + convertirFechaString(this.eventos.get(lista.getSelectedIndex()).getFechaDeInicio()));
+        this.fechaDeTermino.setText("Fecha de termino:" + convertirFechaString(this.eventos.get(lista.getSelectedIndex()).getFechaDeTermino()));
     }//GEN-LAST:event_listaMouseClicked
 
 
@@ -323,7 +334,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> lista;

@@ -529,7 +529,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         return 0;
     }
     
-       /**
+    /**
      * MÃ©todo que se encarga de verificar que los numeros ingresados son numeros validos
      */
     private boolean isNumero(String cadena) {
