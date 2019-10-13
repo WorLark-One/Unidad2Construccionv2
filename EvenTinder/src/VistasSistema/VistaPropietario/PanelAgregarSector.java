@@ -29,7 +29,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
     private DefaultListModel modeloLista;
     private ArrayList<Propiedad> propiedades;
     
-    public PanelAgregarSector(VentanaPrincipalPropietario papa, int id) {
+    public PanelAgregarSector(VentanaPrincipalPropietario papa, int id) throws SQLException {
         this.papa=papa;
         this.id=id;
         initComponents();
@@ -239,7 +239,11 @@ public class PanelAgregarSector extends javax.swing.JPanel {
                 }
                 this.nombre.setText("") ;
                 this.capacidad.setText("");
-                this.actualizarListaDeSectores();
+                try {
+                    this.actualizarListaDeSectores();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelAgregarSector.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 //no se pudo
                 JOptionPane.showMessageDialog(null, "No se a podido añadir el sector a la base de datos", "Error al guardar sector", JOptionPane.WARNING_MESSAGE);
@@ -294,9 +298,9 @@ public class PanelAgregarSector extends javax.swing.JPanel {
      * numeros mayores que 0 son errores
      */
     
-    public void actualizarListaDeSectores(){
+    public void actualizarListaDeSectores() throws SQLException{
         this.modeloLista=new DefaultListModel();
-        this.propiedades= this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.propiedades= this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         for(int i=0;i<this.propiedades.get(id).getListaSectores().size();i++){
                 this.modeloLista.addElement("Nombre sector: " + this.propiedades.get(id).getListaSectores().get(i).getNombre() + "  Capacidad: " + this.propiedades.get(id).getListaSectores().get(i).getCapacidadDelSector());
             }

@@ -7,10 +7,13 @@ package VistasSistema.VistaPropietario;
 
 import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
+import java.sql.SQLException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -29,7 +32,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
     private ArrayList<Propiedad> propiedades;
     private DefaultListModel modeloLista;
     
-    public PanelAceptarYRechasarEventos(VentanaPrincipalPropietario papa) {
+    public PanelAceptarYRechasarEventos(VentanaPrincipalPropietario papa) throws SQLException {
         modeloLista= new DefaultListModel();
         this.papa=papa;
         initComponents();
@@ -272,7 +275,11 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
             this.fechaDeTermino.setText("Fecha de termino:");
             return;
         }
-        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-2).getId());  
+        try {  
+            this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-2).getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelAceptarYRechasarEventos.class.getName()).log(Level.SEVERE, null, ex);
+        }
          this.nombre.setText("Nombre: ");
         this.descripcion.setText("Descripcion: ");
         this.capacidad.setText("Capacidad: ");
@@ -353,8 +360,8 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
      */
     
     // no se puede hacer tdd ya que necesita otro metodo
-    public void actualizarMenuOpciones(){
-        this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    public void actualizarMenuOpciones() throws SQLException{
+        this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.listaPropiedades.removeAllItems();
         this.listaPropiedades.addItem("");
         this.listaPropiedades.addItem("Todas las propiedades");
@@ -380,9 +387,9 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
     }
     
     //Aca abajo van a estar los metodos que se tienen que hacer 
-    private void actualizarListaEventosPorPropiedad(int id){
+    private void actualizarListaEventosPorPropiedad(int id) throws SQLException{
         this.eventos = papa.getControladorPropietario().obtenerInformacionSolicitudesDeEventos();
-        this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.modeloLista=new DefaultListModel();
         if(this.eventos!=null && this.propiedades!=null){
             for(int i=0; i<this.eventos.size(); i++){

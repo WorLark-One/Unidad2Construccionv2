@@ -590,7 +590,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
  
     // no se puede hacer tdd ya que necesita otro metodo
     private void actualizarMenuOpciones(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionTodasLasPropiedades();
         listaPropiedades.removeAllItems();
         this.detalles.setModel(this.modeloLista);
         this.detalles.removeAll();
@@ -623,7 +623,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     }
     
     private void actualizarListaSectores(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionTodasLasPropiedades();
         this.lista.removeAll();
         this.modeloLista2=new DefaultListModel();
         if(this.propiedades!=null){

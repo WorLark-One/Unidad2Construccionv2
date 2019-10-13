@@ -26,7 +26,7 @@ public class PanelEliminarSector extends javax.swing.JPanel {
     private int id;
     private ArrayList<Propiedad> propiedades;
     
-    public PanelEliminarSector(VentanaPrincipalPropietario papa, int id) {
+    public PanelEliminarSector(VentanaPrincipalPropietario papa, int id) throws SQLException {
         this.papa=papa;
         this.id=id;
         initComponents();
@@ -143,7 +143,11 @@ public class PanelEliminarSector extends javax.swing.JPanel {
                 } catch (SQLException ex) {
                     Logger.getLogger(PanelEliminarSector.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                this.actualizarMenuSectores();
+                try {
+                    this.actualizarMenuSectores();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelEliminarSector.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "No se a podido eliminar el sector de la base de datos", "Error al eliminar el sector", JOptionPane.WARNING_MESSAGE);
             }
@@ -175,8 +179,8 @@ public class PanelEliminarSector extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
 
-    private void actualizarMenuSectores(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    private void actualizarMenuSectores() throws SQLException{
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.listaSectores.removeAllItems();
         this.listaSectores.addItem("");
         if(this.propiedades!=null){
