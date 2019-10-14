@@ -306,7 +306,7 @@ public class ControladorBDDeEventos {
                     st.close();
                     return true;
                 } catch (SQLException e) {
-                    //      System.out.println("ERROR DE CONEXION: eliminar evento (desde la tabla de usuario)" + e);
+                          System.out.println("ERROR DE CONEXION: eliminar evento (desde la tabla de usuario)" + e);
                     return false;
                 } finally {
                     try {

@@ -462,6 +462,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 this.listaEventos.setSelectedIndex(this.listaEventos.getItemCount()-1);
                 this.listaSectores.setSelectedIndex(0);
                 this.actualizarListaSectores();
+                this.listaEventosActionPerformed(evt);
                 JOptionPane.showMessageDialog(null, "Se a modificado el valor de la entrada con exito");
                 return;
             }
