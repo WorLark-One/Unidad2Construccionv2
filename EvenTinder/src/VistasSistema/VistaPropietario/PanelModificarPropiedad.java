@@ -473,14 +473,29 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                     return 1;
                 }
             } 
+            if(aux.length >=100){
+                return 1;
+            }
         }
         else{
             return 1;
         }
-        if(descripcion.equals("")){
+        if(!descripcion.equals("")){
+            char[] aux = descripcion.toCharArray();
+            if(aux.length >=500){
+                return 2;
+            }
+        }
+        else{
             return 2;
         }
         if(ubicacion.equals("")){
+            char[] aux = ubicacion.toCharArray();
+            if(aux.length >=100){
+                return 3;
+            }
+        }
+        else{
             return 3;
         }
         if(!valorArriendo.equals("") && isNumero(valorArriendo)){

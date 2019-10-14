@@ -282,6 +282,9 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                     return 1;
                 }
             }
+            if(aux.length >=100){
+                return 1;
+            }
         }
         else{
             return 1;
@@ -329,7 +332,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                     }                    
                     String[] puntos = arroba[1].split("\\.");                    
                     if((puntos.length == 2 || puntos.length == 3) && !puntos[0].equals("") && !puntos[1].equals("")){   
-                        if("cl".equals(puntos[puntos.length-1])){                            
+                        if("cl".equals(puntos[puntos.length-1])  || "com".equals(puntos[puntos.length-1])  ){                            
                             int i = 0;
                             while(i < puntos.length-1){
                                 char[] dominio = puntos[i].toCharArray();

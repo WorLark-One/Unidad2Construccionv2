@@ -323,6 +323,9 @@ public class PanelAgregarSector extends javax.swing.JPanel {
                     return 1;
                 }
             }
+            if(aux.length >=100){
+                return 1;
+            }
         }
         else{
             return 1;

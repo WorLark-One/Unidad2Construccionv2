@@ -311,6 +311,9 @@ public class PanelModificarSector extends javax.swing.JPanel {
                 if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
                     return 1;
                 }
+            }            
+            if(aux.length >=100){
+                return 2;
             }
         }
         else{
