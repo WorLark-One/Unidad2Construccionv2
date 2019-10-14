@@ -41,7 +41,6 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         this.listaEventos.removeAllItems();
         this.lista.setModel(modeloLista2);
         this.listaSectores.removeAllItems();
-        this.eventos=this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
         capacidad.setText("0");
         capacidad.setEnabled(false);
         capacidad.setEditable(false);
@@ -86,7 +85,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         fechaDeTermino = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        botonCrearEvento = new javax.swing.JButton();
+        botonModificarEvento = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         listaEventos = new javax.swing.JComboBox<>();
@@ -221,10 +220,10 @@ public class PanelModificarEvento extends javax.swing.JPanel {
 
         jLabel5.setText("Nombre");
 
-        botonCrearEvento.setText("Modificar Evento");
-        botonCrearEvento.addActionListener(new java.awt.event.ActionListener() {
+        botonModificarEvento.setText("Modificar Evento");
+        botonModificarEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCrearEventoActionPerformed(evt);
+                botonModificarEventoActionPerformed(evt);
             }
         });
 
@@ -258,7 +257,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(botonCrearEvento)
+                                    .addComponent(botonModificarEvento)
                                     .addComponent(diasMaximosDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
@@ -292,7 +291,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                     .addComponent(jLabel16)
                     .addComponent(diasMaximosDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(botonCrearEvento)
+                .addComponent(botonModificarEvento)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -375,7 +374,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_fechaDeTerminoActionPerformed
 
-    private void botonCrearEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearEventoActionPerformed
+    private void botonModificarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarEventoActionPerformed
         // TODO add your handling code here:
         int resp = this.validarDatos(this.nombre.getText(), this.descripcion.getText(), this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.capacidad.getText(),this.diasMaximosDevolucion.getText());
         if(resp==0){
@@ -429,7 +428,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         }
         
         
-    }//GEN-LAST:event_botonCrearEventoActionPerformed
+    }//GEN-LAST:event_botonModificarEventoActionPerformed
 
     private void listaSectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaSectoresActionPerformed
         // TODO add your handling code here:
@@ -438,6 +437,8 @@ public class PanelModificarEvento extends javax.swing.JPanel {
 
     private void botonModificarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarPrecioActionPerformed
         // TODO add your handling code here:
+        this.eventos=this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionTodasLasPropiedades();
         if(this.listaSectores.getSelectedIndex()<=0){
             return;
         }
@@ -446,19 +447,22 @@ public class PanelModificarEvento extends javax.swing.JPanel {
             return;
         }
         for(int i=0; i< this.propiedades.size(); i++){
+            System.out.println("this.listaEventos.getSelectedIndex():" + this.listaEventos.getSelectedIndex());
             if(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()==this.propiedades.get(i).getId()){
                 this.papa.getControladorOrganizador().modificarPrecioSector(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), Integer.parseInt(this.precio.getText()),this.propiedades.get(i).getListaSectores().get(this.listaSectores.getSelectedIndex()-1).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad());
                 int nuevoTotal=0;
                 for (int j = 0; j < this.propiedades.get(i).getListaSectores().size(); j++) {
                     int a = this.papa.getControladorOrganizador().obtenerPrecioEntradaPorSector(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.propiedades.get(i).getListaSectores().get(j).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad());
-                    if(a!=-2 || a!=-1){
+                    if(a>-1){
                         nuevoTotal+=this.propiedades.get(i).getListaSectores().get(j).getCapacidadDelSector();
                     }
                 }
                 this.papa.getControladorOrganizador().modificarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getDescripcion(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getFechaDeInicio(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getFechaDeTermino(), nuevoTotal, this.eventos.get(this.listaEventos.getSelectedIndex()-1).getPlazoDevolucionEntrada(), false);
                 this.precio.setText("");
-                this.listaEventos.setSelectedIndex(0);
+                this.listaEventos.setSelectedIndex(this.listaEventos.getItemCount()-1);
                 this.listaSectores.setSelectedIndex(0);
+                this.actualizarListaSectores();
+                this.listaEventosActionPerformed(evt);
                 JOptionPane.showMessageDialog(null, "Se a modificado el valor de la entrada con exito");
                 return;
             }
@@ -481,7 +485,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonCrearEvento;
+    private javax.swing.JButton botonModificarEvento;
     private javax.swing.JButton botonModificarPrecio;
     private javax.swing.JTextField capacidad;
     private javax.swing.JTextField descripcion;
@@ -553,6 +557,7 @@ public class PanelModificarEvento extends javax.swing.JPanel {
     }
     
     private void actualizarListaSectores(){
+        this.eventos=this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
         if(this.listaEventos.getSelectedIndex()<=0){
             this.listaSectores.removeAllItems();
             this.modeloLista2=new DefaultListModel();

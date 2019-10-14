@@ -337,6 +337,8 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             catch(NumberFormatException nfe){
                 return 2;
             }
+        }else{
+            return 2;
         }
         return 0;
     }
