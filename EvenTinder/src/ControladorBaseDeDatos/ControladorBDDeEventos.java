@@ -23,7 +23,9 @@ public class ControladorBDDeEventos {
         this.propiedades = new ControladorBDDePropiedades();
         iniciarlizarBD();
     }
-
+    /**
+     * Inicializa las tablas de la base de datos.
+     */
     public void iniciarlizarBD() {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
@@ -173,7 +175,7 @@ public class ControladorBDDeEventos {
      */
     public boolean modificarEvento(int idEvento, String nuevoNombre, String nuevaDescripcion, Date nuevaFechaDeInicio, Date nuevaFechaDeTermino, int nuevaCapacidad, int nuevosDiasMaximoDevolucion, boolean nuevoPublicado) {
         this.conexion.crearConexion();
-        boolean aceptado;
+ //       boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
             boolean EstadoEvento = obtenerPublicadoDeEvento(miConexion, idEvento);
@@ -256,9 +258,9 @@ public class ControladorBDDeEventos {
     /**
      * Obtiene el atributo publicado de un evento.
      *
-     * @param conexion
-     * @param idEvento
-     * @return boolean.
+     * @param conexion: conexion con la base de datos
+     * @param idEvento: identificador de un evento
+     * @return true si el evento esta publicado,false de lo contrario.
      */
     private boolean obtenerPublicadoDeEvento(Connection conexion, int idEvento) {
         Connection miConexion = conexion;
@@ -285,7 +287,7 @@ public class ControladorBDDeEventos {
     }
 
     /**
-     * elimina un evento de la base de datos, ademas de borrar la asociacion de
+     * Elimina un evento de la base de datos, ademas de borrar la asociacion de
      * una propiedad con unn evento.
      *
      * @param idEvento
@@ -306,7 +308,7 @@ public class ControladorBDDeEventos {
                     st.close();
                     return true;
                 } catch (SQLException e) {
-                          System.out.println("ERROR DE CONEXION: eliminar evento (desde la tabla de usuario)" + e);
+        //                  System.out.println("ERROR DE CONEXION: eliminar evento (desde la tabla de usuario)" + e);
                     return false;
                 } finally {
                     try {
@@ -376,7 +378,12 @@ public class ControladorBDDeEventos {
         }
         return null;
     }
-
+/**
+ * Obtienen el identificador de una propiedad.
+ * @param conexion: conexion con la base de datos
+ * @param idEvento: identificador de un evento.
+ * @return identificador de la propiedad.
+ */
     public int obtenerIdDePropiedadDondeSeRealizaEvento(Connection conexion, int idEvento) {
         Connection miConexion = this.conexion.getConexion();
 
@@ -730,7 +737,6 @@ public class ControladorBDDeEventos {
                 //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    // obtengo la informacion del cliente.
                     int idEvento = Integer.parseInt(resultado.getString("id"));
                     String nombre = resultado.getString("nombre");
                     String descripcion = resultado.getString("descripcion");
@@ -791,7 +797,6 @@ public class ControladorBDDeEventos {
                // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    // obtengo la informacion del cliente.
                     int idEvento = Integer.parseInt(resultado.getString("id"));
                     String nombre = resultado.getString("nombre");
                     String descripcion = resultado.getString("descripcion");
