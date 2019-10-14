@@ -166,7 +166,7 @@ public class ConexionBD {
                         + "	correo varchar(50),\n"
                         + "	contraseña varchar(25),\n"
                         + "	telefono varchar(20),\n"
-                        + "	tarjetaCredito varchar(16) not null,\n"
+                        + "	tarjetaCredito varchar(20) not null,\n"
                         + "	PRIMARY KEY(rut)\n"
                         + ");";
                 st.executeUpdate(sql);
@@ -192,7 +192,7 @@ public class ConexionBD {
                         + "correo varchar(50),\n"
                         + "contraseña varchar(25),\n"
                         + "telefono varchar(20),\n"
-                        + "tarjetaCredito varchar(16) not null,\n"
+                        + "tarjetaCredito varchar(20) not null,\n"
                         + "PRIMARY KEY(rut)\n"
                         + ");";
                 st.executeUpdate(sql);
@@ -218,7 +218,7 @@ public class ConexionBD {
                         + "	correo varchar(50),\n"
                         + "	contraseña varchar(25),\n"
                         + "	telefono varchar(20),\n"
-                        + "	cuentaCorriente varchar(20) not null,\n"
+                        + "	cuentaCorriente varchar(25) not null,\n"
                         + "	PRIMARY KEY(rut)\n"
                         + ");";
                 st.executeUpdate(sql);

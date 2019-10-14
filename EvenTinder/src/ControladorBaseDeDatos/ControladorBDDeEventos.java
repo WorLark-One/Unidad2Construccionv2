@@ -306,7 +306,7 @@ public class ControladorBDDeEventos {
                     eliminarAsociacionEventoPropiedad(miConexion, idEvento);
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "delete from evento where evento.id=" + idEvento + "";
-                    //        System.out.println(sql);
+                            System.out.println(sql);
                     st.executeUpdate(sql);
                     st.close();
                     return true;
