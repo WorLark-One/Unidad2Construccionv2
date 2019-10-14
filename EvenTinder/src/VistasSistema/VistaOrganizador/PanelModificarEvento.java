@@ -380,16 +380,17 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         int resp = this.validarDatos(this.nombre.getText(), this.descripcion.getText(), this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.capacidad.getText(),this.diasMaximosDevolucion.getText());
         if(resp==0){
             boolean respuesta = false;
-            //respuesta = this.papa.getControladorOrganizador().modificarEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false);
+            respuesta=this.papa.getControladorOrganizador().modificarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.nombre.getText(), this.descripcion.getText(), this.parseFecha(this.fechaDeInicio.getText()),this.parseFecha(this.fechaDeTermino.getText()), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getCapacidadMaximaDelEvento(), Integer.parseInt(this.diasMaximosDevolucion.getText()), false);
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Operacion realizada correctamente");
                 this.nombre.setText("");
                 this.fechaDeInicio.setText("");
                 this.fechaDeTermino.setText("");
-                this.capacidad.setText("");
+                this.capacidad.setText("0");
                 this.descripcion.setText("");
                 this.diasMaximosDevolucion.setText("");
                 this.listaEventos.setSelectedIndex(0);
+                this.listaSectores.setSelectedIndex(0);
                 this.actualizarListaSectores();
                 this.actualizarMenuEventos();
             }else{
@@ -456,8 +457,8 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 }
                 this.papa.getControladorOrganizador().modificarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getDescripcion(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getFechaDeInicio(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getFechaDeTermino(), nuevoTotal, this.eventos.get(this.listaEventos.getSelectedIndex()-1).getPlazoDevolucionEntrada(), false);
                 this.precio.setText("");
+                this.listaEventos.setSelectedIndex(0);
                 this.listaSectores.setSelectedIndex(0);
-                this.actualizarListaSectores();
                 JOptionPane.showMessageDialog(null, "Se a modificado el valor de la entrada con exito");
                 return;
             }
@@ -552,6 +553,14 @@ public class PanelModificarEvento extends javax.swing.JPanel {
     }
     
     private void actualizarListaSectores(){
+        if(this.listaEventos.getSelectedIndex()<=0){
+            this.listaSectores.removeAllItems();
+            this.modeloLista2=new DefaultListModel();
+            this.lista.setModel(this.modeloLista2);
+            this.repaint();
+            this.revalidate();
+            return;
+        }
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionTodasLasPropiedades();
         this.lista.removeAll();
         this.modeloLista2=new DefaultListModel();
