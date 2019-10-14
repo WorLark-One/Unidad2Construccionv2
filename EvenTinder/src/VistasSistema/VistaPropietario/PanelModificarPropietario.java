@@ -278,11 +278,19 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
+<<<<<<< HEAD
                 if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
                     return 1;
                 }
             }
             if(aux.length <=100){
+=======
+                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
+                    return 1;
+                }
+            }
+            if(aux.length >=100){
+>>>>>>> MasterFinal
                 return 1;
             }
         }
@@ -294,6 +302,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             for(char c : aux){
                 int ascii = (int) c;
                 if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) )){
+<<<<<<< HEAD
                     return 2;
                 }
             }
@@ -360,16 +369,88 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             else{
                 return 4;
             }  
+=======
+                    return 3;
+                }
+            }
+            if(aux.length <8){
+                return 3;
+            }
+        }
+        else{
+            return 3;
+        }
+        if(!"".equals(numeroTelefonico)){
+            char[] aux = numeroTelefonico.toCharArray();
+            for(char c : aux){
+                int ascii = (int) c;
+                if( !((ascii >=48 && ascii <=57) )){
+                    return 4;
+                }
+            }
+            if(aux.length != 9){
+                return 4;
+            }            
+>>>>>>> MasterFinal
         }
         else{
             return 4;
         }
+<<<<<<< HEAD
+=======
+        if(!"".equals(correoElectronico)){
+            if(correoElectronico.contains("@")){
+                String[] arroba = correoElectronico.split("@");
+                if(arroba.length == 2 && !arroba[0].equals("")){
+                    char[] inicio= arroba[0].toCharArray();
+                    for(char c : inicio){
+                        int ascii = (int) c;
+                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)){
+                            return 5;
+                        }
+                    }                    
+                    String[] puntos = arroba[1].split("\\.");                    
+                    if((puntos.length == 2 || puntos.length == 3) && !puntos[0].equals("") && !puntos[1].equals("")){   
+                        if("cl".equals(puntos[puntos.length-1])  || "com".equals(puntos[puntos.length-1])){                            
+                            int i = 0;
+                            while(i < puntos.length-1){
+                                char[] dominio = puntos[i].toCharArray();
+                                for(char c : dominio){
+                                    int ascii = (int) c;
+                                    if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) )){
+                                        return 5;
+                                    }
+                                }
+                                i++;
+                            }
+                        }
+                        else{
+                            return 5;
+                        }
+                    }
+                    else{                        
+                        return 5;
+                    }
+                }       
+                else{
+                    return 5;
+                }
+            }
+            else{
+                return 5;
+            }    
+        }
+        else{
+            return 5 ;
+        }
+>>>>>>> MasterFinal
         if(!"".equals(cuentaBancaria)){
             cuentaBancaria = cuentaBancaria.replace(" ", "");
                 char[] aux = cuentaBancaria.toCharArray();
                 for(char c : aux){
                     int ascii = (int) c;
                     if( !((ascii >=48 && ascii <=57) )){
+<<<<<<< HEAD
                         return 5;
                     }
                 }
@@ -379,6 +460,17 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
         }
         else{
             return 5;
+=======
+                        return 6;
+                    }
+                }
+                if(aux.length !=20){
+                    return 6;
+                }         
+        }
+        else{
+            return 6;
+>>>>>>> MasterFinal
         }            
         return 0;
     }

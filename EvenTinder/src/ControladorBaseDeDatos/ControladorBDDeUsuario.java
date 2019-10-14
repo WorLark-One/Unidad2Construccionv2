@@ -240,14 +240,18 @@ public class ControladorBDDeUsuario {
                 try {
                     System.out.println("tarjeta:"+tarjeta);
                     java.sql.Statement st = miConexion.createStatement();
+<<<<<<< HEAD
                     String sql = "insert into " + tipoUsuario + " values('" + nombre + "','" + rut + "','" + correo + "','" + clave + "','" + telefono + "','" + tarjeta + "')";
+=======
+                    String sql = "insert into " + tipoUsuario + " values('" + nombre + "','" + rut + "','" + clave + "','" + correo + "','" + telefono + "','" + tarjeta + "')";
+>>>>>>> MasterFinal
                     System.out.println(sql);
                     st.executeUpdate(sql);
 
                     st.close();
 
                 } catch (SQLException e) {
-                    //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                    System.out.println("ERROR DE CONEXION: añadirCliente" + e);
                     return false;
                 } finally {
                     this.conexion.cerrarBaseDeDatos(miConexion);

@@ -342,7 +342,11 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             return;
         }
         if(this.listaPropiedades.getSelectedIndex()==0){
+<<<<<<< HEAD
             JOptionPane.showMessageDialog(null, "Primero debe elegir la propiedad a modificar", "Error al seleccionar la propiedad", JOptionPane.WARNING_MESSAGE);  
+=======
+            JOptionPane.showMessageDialog(null, "Primero debe elegir la propiedad", "Error al seleccionar la propiedad", JOptionPane.WARNING_MESSAGE);  
+>>>>>>> MasterFinal
             this.listaOpciones.setSelectedIndex(0);
             return;
         }
@@ -469,11 +473,19 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
+<<<<<<< HEAD
                 if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
                     return 1;
                 }
             } 
             if(aux.length <=100){
+=======
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
+                    return 1;
+                }
+            } 
+            if(aux.length >=100){
+>>>>>>> MasterFinal
                 return 1;
             }
         }
@@ -482,16 +494,26 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         }
         if(!descripcion.equals("")){
             char[] aux = descripcion.toCharArray();
+<<<<<<< HEAD
             if(aux.length <=500){
+=======
+            if(aux.length >=500){
+>>>>>>> MasterFinal
                 return 2;
             }
         }
         else{
             return 2;
         }
+<<<<<<< HEAD
         if(ubicacion.equals("")){
             char[] aux = ubicacion.toCharArray();
             if(aux.length <=100){
+=======
+        if(!ubicacion.equals("")){
+            char[] aux = ubicacion.toCharArray();
+            if(aux.length >=100){
+>>>>>>> MasterFinal
                 return 3;
             }
         }

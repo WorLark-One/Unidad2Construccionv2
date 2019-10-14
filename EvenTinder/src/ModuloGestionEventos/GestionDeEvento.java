@@ -36,6 +36,7 @@ public class GestionDeEvento {
      * @return
      */
     public int crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad, String rutOrganizador) {        
+<<<<<<< HEAD
         int idEvento = this.controlador.crearEvento(nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado, idPropiedad,rutOrganizador );
         if(idEvento != 0){                        
             Evento e = new Evento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado);
@@ -43,6 +44,9 @@ public class GestionDeEvento {
             return idEvento;
         }        
         return 0;
+=======
+        return this.controlador.crearEvento(nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado, idPropiedad,rutOrganizador );
+>>>>>>> MasterFinal
     }
     
     public boolean agregarPrecioSector(int idEvento, int nuevoPrecio, String nombreSector,int idPropiedad){
@@ -61,6 +65,7 @@ public class GestionDeEvento {
      * @return
      */
     public boolean modificarEvento(int idEvento, String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado) {
+<<<<<<< HEAD
         boolean result = this.controlador.modificarEvento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado);        
         if(result){                                  
             for(Evento e : this.listaEventos){
@@ -76,6 +81,17 @@ public class GestionDeEvento {
             }
         }                
         return result;
+=======
+        return this.controlador.modificarEvento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado);        
+    }
+    
+    public boolean modificarPrecioSector(int idEvento, int nuevoPrecio, String nombreSector,int idPropiedad){
+        return this.controlador.modificarPrecioEntradaPorSector(idEvento,nuevoPrecio,nombreSector,idPropiedad);
+    }
+    
+    public ArrayList<Propiedad> obtenerInformacionPropiedades(){
+        return this.controlador.obtenerListaDePropiedades();
+>>>>>>> MasterFinal
     }
     
     public boolean modificarPrecioSector(int idEvento, int nuevoPrecio, String nombreSector,int idPropiedad){
@@ -92,6 +108,7 @@ public class GestionDeEvento {
      * @return
      */
     public boolean eliminarEvento(int idEvento) {
+<<<<<<< HEAD
         boolean result = this.controlador.eliminarEvento(idEvento);
         if(result){
             for(Evento e:this.listaEventos){                
@@ -102,6 +119,9 @@ public class GestionDeEvento {
             }
         }
         return false;
+=======
+        return this.controlador.eliminarEvento(idEvento);
+>>>>>>> MasterFinal
     }
 
     /**

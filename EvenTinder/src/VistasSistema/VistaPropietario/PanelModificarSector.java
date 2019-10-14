@@ -308,11 +308,19 @@ public class PanelModificarSector extends javax.swing.JPanel {
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
+<<<<<<< HEAD
                 if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
                     return 1;
                 }
             }            
             if(aux.length <=100){
+=======
+                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
+                    return 1;
+                }
+            }            
+            if(aux.length >=100){
+>>>>>>> MasterFinal
                 return 2;
             }
         }
@@ -326,6 +334,11 @@ public class PanelModificarSector extends javax.swing.JPanel {
             catch(NumberFormatException nfe){
                 return 2;
             }
+<<<<<<< HEAD
+=======
+        }else{
+            return 2;
+>>>>>>> MasterFinal
         }
         return 0;
     }

@@ -329,6 +329,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         // TODO add your handling code here:
         int resp = validarEntradaPropiedad(this.nombre.getText(), this.descripcion.getText(), this.ubicacion.getText(), this.capacidadTotal.getText(), this.valorArriendo.getText(), this.finalizar);
+        System.out.println("respuesta:" + resp);
         if(resp==0){
             //realizar operacion
             java.util.Date fechaDePublicacion = new Date();
@@ -341,6 +342,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             }
             for (int i = 0; i < propiedades.size(); i++) {
                 if (propiedades.get(i).getNombre().equals(this.nombre.getText())){
+                    
                     JOptionPane.showMessageDialog(null, "El nombre de la propiedad ya se encuentra registrado", "Error en el ingreso de datos", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
@@ -411,6 +413,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         // TODO add your handling code here:
         // TODO add your handling code here:
         int resp = validarEntradaSector(this.nombreSector.getText(), this.capacidad.getText());
+        System.out.println("respuesta de sector:" + resp);
         if(resp==0){
             for (int i = 0; i < this.nombresSectores.size(); i++) {
                 if(this.nombresSectores.get(i).equals(this.nombreSector.getText())){
@@ -484,10 +487,31 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
       * @return 
       */
     public int validarEntradaSector(String nombre, String capacidad) {
-        if(nombre.equals("")){
+        if(!nombre.equals("")){
+            char[] aux = nombre.toCharArray();
+            for(char c : aux){                
+                int ascii = (int) c;
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
+                    return 1;
+                }
+            } 
+            if(aux.length >=100){
+                return 1;
+            }
+        }
+        else{
             return 1;
         }
-        if(capacidad.equals("")|| !isNumero(capacidad)){
+        if(!capacidad.equals("")){
+            try{
+                if (!isNumero(capacidad)) {
+                    return 2;
+                }
+            }
+            catch(NumberFormatException nfe){
+                return 2;
+            }
+        }else{
             return 2;
         }
         return 0;
@@ -504,22 +528,37 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
      * @param finalizar
      * @return 
      */
+    
     public int validarEntradaPropiedad(String nombre, String descripcion, String ubicacion, String capacidadTotal, String valorArriendo, boolean finalizar) {
         if(!nombre.equals("")){ 
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
+<<<<<<< HEAD
                 if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
                     return 1;
                 }
             } 
+=======
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
+                    return 1;
+                }
+            } 
+            if(aux.length>=100){
+                return 1;
+            }
+>>>>>>> MasterFinal
         }
         else{
             return 1;
         }
         if(!descripcion.equals("")){
             char[] aux = descripcion.toCharArray();
+<<<<<<< HEAD
             if(aux.length <=500){
+=======
+            if(aux.length >=500){
+>>>>>>> MasterFinal
                 return 2;
             }
         }
@@ -528,6 +567,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         }
         if(!ubicacion.equals("")){
             char[] aux = ubicacion.toCharArray();
+<<<<<<< HEAD
             if(aux.length <=100){
                 return 3;
             }
@@ -554,6 +594,25 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 return 5;
             }
         }
+=======
+            if(aux.length >=100){
+                return 3;
+            }
+        }
+        else{
+            return 3;
+        }           
+        if(!valorArriendo.equals("") ){
+            try{
+                if (!isNumero(valorArriendo)) {
+                    return 5;
+                }      
+            }
+            catch(NumberFormatException nfe){
+                return 5;
+            }
+        }
+>>>>>>> MasterFinal
         else{
             return 5;
         }
@@ -562,7 +621,6 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         }
         return 0;
     }
-    
         /**
      * Método que se encarga de verificar que los numeros ingresados son numeros validos
      */
