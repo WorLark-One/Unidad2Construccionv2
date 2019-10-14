@@ -342,7 +342,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             return;
         }
         if(this.listaPropiedades.getSelectedIndex()==0){
-            JOptionPane.showMessageDialog(null, "Primero debe elegir la propiedad a modificar", "Error al seleccionar la propiedad", JOptionPane.WARNING_MESSAGE);  
+            JOptionPane.showMessageDialog(null, "Primero debe elegir la propiedad", "Error al seleccionar la propiedad", JOptionPane.WARNING_MESSAGE);  
             this.listaOpciones.setSelectedIndex(0);
             return;
         }
@@ -469,7 +469,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                if( !(ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130) {
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
                     return 1;
                 }
             } 
