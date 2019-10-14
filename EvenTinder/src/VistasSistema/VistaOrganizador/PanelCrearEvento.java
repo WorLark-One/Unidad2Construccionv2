@@ -496,7 +496,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         contador=0;
         for (int i = 0; i < this.precios.size(); i++) {
             if(this.precios.get(i)!=-1){
-                contador+=this.precios.get(i);
+                contador+=this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getListaSectores().get(this.listaSectores.getSelectedIndex()-1).getCapacidadDelSector();
             }
         }
         this.capacidad.setText(Integer.toString(this.contador));
@@ -590,7 +590,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
  
     // no se puede hacer tdd ya que necesita otro metodo
     private void actualizarMenuOpciones(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionTodasLasPropiedades();
         listaPropiedades.removeAllItems();
         this.detalles.setModel(this.modeloLista);
         this.detalles.removeAll();
@@ -615,7 +615,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().size(); i++){
                 this.precios.add(-1);
-                listaSectores.addItem("Nombre:" + this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre());
+                listaSectores.addItem(this.propiedades.get(listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre());
             }
             this.repaint();
             this.revalidate();
@@ -623,7 +623,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     }
     
     private void actualizarListaSectores(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionTodasLasPropiedades();
         this.lista.removeAll();
         this.modeloLista2=new DefaultListModel();
         if(this.propiedades!=null){

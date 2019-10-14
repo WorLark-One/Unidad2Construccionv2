@@ -7,7 +7,10 @@ package VistasSistema.VistaPropietario;
 
 import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -25,7 +28,7 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
     private ArrayList<Propiedad> propiedades;
     private DefaultListModel modeloLista;
     
-    public PanelHistorialDeEventos(VentanaPrincipalPropietario papa) {
+    public PanelHistorialDeEventos(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
         initComponents();
         modeloLista= new DefaultListModel();
@@ -155,7 +158,11 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
             this.actualizarListaEventosTodos();
             return;
         }
-        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
+        try {
+            this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelHistorialDeEventos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_listaPropiedadesActionPerformed
 
     private void opcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionesActionPerformed
@@ -167,7 +174,11 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
             this.actualizarListaEventosTodos();
             return;
         }
-        this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
+        try {
+            this.actualizarListaEventosPorPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelHistorialDeEventos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_opcionesActionPerformed
 
 
@@ -185,8 +196,8 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     
-    public void actualizarMenuOpciones2(){
-        this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    public void actualizarMenuOpciones2() throws SQLException{
+        this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.opciones.removeAllItems();
         this.opciones.addItem("");
         this.opciones.addItem("Publicados");
@@ -195,12 +206,12 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
         this.revalidate();
     }
     
-    public void actualizarMenuOpciones(){
-        this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    public void actualizarMenuOpciones() throws SQLException{
+        this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.listaPropiedades.removeAllItems();
         this.listaPropiedades.addItem("Todas las propiedades");
         for(int i=0; i<this.propiedades.size(); i++){
-            this.listaPropiedades.addItem("nombre:" + this.propiedades.get(i).getNombre());
+            this.listaPropiedades.addItem(this.propiedades.get(i).getNombre());
         }
         this.repaint();
         this.revalidate();
@@ -226,18 +237,17 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
     
     
     //Aca abajo van a estar los metodos que se tienen que hacer 
-    private void actualizarListaEventosPorPropiedad(int id){
+    private void actualizarListaEventosPorPropiedad(int id) throws SQLException{
         if(this.opciones.getSelectedIndex()==1){
             eventos = papa.getControladorPropietario().obtenerInformacionDeEventosActuales();
         }else{
             eventos = papa.getControladorPropietario().obtenerInformacionDeEventosFinalizados();
         }
-        this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedades();
+        this.propiedades = papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.modeloLista=new DefaultListModel();
         if(this.eventos!=null && this.propiedades!=null){
             for(int i=0; i<this.eventos.size(); i++){
                 for(int j=0; j<this.propiedades.size(); j++){
-                    System.out.println("evento: ");
                     if(this.eventos.get(i).getIdPropiedad()==id){
                         this.modeloLista.addElement(eventos.get(i).getNombre());
                         break;

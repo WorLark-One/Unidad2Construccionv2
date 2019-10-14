@@ -1,9 +1,7 @@
 package ModuloGestionEventos;
 
 import ControladorBaseDeDatos.ControladorBDDeEventos;
-import ModuloAutenticacion.ControlDeAcceso;
 import ModuloGestionPropiedades.Propiedad;
-import ModuloGestionUsuario.Propietario;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -85,7 +83,7 @@ public class GestionDeEvento {
     }
     
     public ArrayList<Propiedad> obtenerInformacionPropiedades(){
-        return this.controlador.obtenerListaDePropietarios();
+        return this.controlador.obtenerListaDePropiedades();
     }
 
     /**
@@ -154,5 +152,9 @@ public class GestionDeEvento {
     
     public ArrayList<Evento> obtenerInformacionDeEventosFinalizadosPropietario(String rutPropietario) {        
         return this.controlador.obtenerInformacionDeEventosFinalizadosPropietario(rutPropietario);
+    }
+    
+    public int obtenerPrecioEntradaPorSector(int idEvento, String nombreSector, int idPropiedad){
+        return this.controlador.obtenerPrecioEntradaPorSector(idEvento, nombreSector, idPropiedad);
     }
 }

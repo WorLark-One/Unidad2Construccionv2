@@ -333,7 +333,12 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             //realizar operacion
             java.util.Date fechaDePublicacion = new Date();
             int resultado = 0; 
-            ArrayList<Propiedad> propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+            ArrayList<Propiedad> propiedades = null;
+            try {
+                propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelCrearPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
             for (int i = 0; i < propiedades.size(); i++) {
                 if (propiedades.get(i).getNombre().equals(this.nombre.getText())){
                     JOptionPane.showMessageDialog(null, "El nombre de la propiedad ya se encuentra registrado", "Error en el ingreso de datos", JOptionPane.WARNING_MESSAGE);
@@ -479,11 +484,28 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
       * @return 
       */
     public int validarEntradaSector(String nombre, String capacidad) {
-        if(nombre.equals("")){
+        if(!nombre.equals("")){
+            char[] aux = nombre.toCharArray();
+            for(char c : aux){                
+                int ascii = (int) c;
+                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
+                    return 1;
+                }
+            }
+            if(aux.length >=100){
+                return 1;
+            }
+        }
+        else{
             return 1;
         }
-        if(capacidad.equals("")|| !isNumero(capacidad)){
-            return 2;
+        if(!capacidad.equals("") && isNumero(capacidad)){
+            try{
+                Integer.parseInt(capacidad);                
+            }
+            catch(NumberFormatException nfe){
+                return 2;
+            }
         }
         return 0;
     }
@@ -508,17 +530,32 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                     return 1;
                 }
             } 
+            if(aux.length>=100){
+                return 1;
+            }
         }
         else{
             return 1;
         }
-        if(descripcion.equals("")){
+        if(!descripcion.equals("")){
+            char[] aux = descripcion.toCharArray();
+            if(aux.length >=500){
+                return 2;
+            }
+        }
+        else{
             return 2;
         }
-        if(ubicacion.equals("")){
-            return 3;
+        if(!ubicacion.equals("")){
+            char[] aux = ubicacion.toCharArray();
+            if(aux.length >=100){
+                return 3;
+            }
         }
-        if(!capacidadTotal.equals("") || !isNumero(capacidadTotal)){
+        else{
+            return 3;
+        }           
+        if(!capacidadTotal.equals("") && isNumero(capacidadTotal)){
             try{
                 Integer.parseInt(valorArriendo);                
             }
@@ -529,7 +566,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 4;
         }
-        if(!valorArriendo.equals("") || !isNumero(valorArriendo)){
+        if(!valorArriendo.equals("") && isNumero(valorArriendo)){
             try{
                 Integer.parseInt(valorArriendo);                
             }

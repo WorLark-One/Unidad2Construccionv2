@@ -40,6 +40,7 @@ public class PanelCreacionUsuarioTest {
     /**
      * Test of validarResgistro method, of class PanelCreacionUsuario.
      */
+    
     @Test
     public void testValidarResgistro() {
         System.out.println("validarResgistro");
@@ -70,7 +71,7 @@ public class PanelCreacionUsuarioTest {
         
         System.out.println("clave (solo letras y numeros)");
         nombre = "matias";
-        rut = "11.111.111-1";
+        rut = "19.923.718-k";
         clave = "!#$%&/()=";
         result =instance.validarResgistro(tipoUsuario, nombre, rut, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito, CuentaBancaria);
         expResult = 4;
@@ -107,10 +108,49 @@ public class PanelCreacionUsuarioTest {
         expResult = 7;
         assertEquals(expResult, result);      
     }
+    
+    @Test
+    public void testValidarResgistroCliente()
+    {
+       System.out.println("validarResgistro");
+        String tipoUsuario = "cliente";
+        String nombre = "";
+        String rut = "";
+        String clave = "";
+        String numeroTelefonico = "";
+        String correoElectronico = "";
+        String tarjetaDeCredito = "";
+        String CuentaBancaria = "";
+        PanelCreacionUsuario instance = new PanelCreacionUsuario(null);
+        int expResult = 1;        
+        
+        System.out.println("nombre (solo con letras)");
+        nombre = "123&&/";
+        int result = instance.validarResgistro(tipoUsuario, nombre, rut, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito, CuentaBancaria);        
+        expResult = 2;
+        assertEquals(expResult, result);
+        
+        System.out.println("Brayan Escobar");
+        nombre = "Brayan Escobar";
+        rut = "19.363.170-3";
+        clave = "12345678";
+        numeroTelefonico = "123456789";
+        correoElectronico = "bescobar14@alumnos.utalca.cl";
+        tarjetaDeCredito = "1234567834121134";
+        result =instance.validarResgistro(tipoUsuario, nombre, rut, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito, CuentaBancaria);
+        expResult = 0;
+        System.out.println("resultado esperado:"+result);
+        assertEquals(expResult, result);
+       
+        
+    }
 
+    
     /**
      * Test of actualizarMenuOpciones method, of class PanelCreacionUsuario.
      */
+    
+    /*
     @Test
     public void testActualizarMenuOpciones() {
         System.out.println("actualizarMenuOpciones");
@@ -119,5 +159,5 @@ public class PanelCreacionUsuarioTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+    */
 }

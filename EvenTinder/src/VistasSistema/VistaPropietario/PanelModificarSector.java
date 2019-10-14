@@ -27,7 +27,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
     private ArrayList<Propiedad> propiedades;
             
             
-    public PanelModificarSector(VentanaPrincipalPropietario papa, int id) {
+    public PanelModificarSector(VentanaPrincipalPropietario papa, int id) throws SQLException {
         this.papa=papa;
         this.id=id;
         initComponents();
@@ -228,7 +228,11 @@ public class PanelModificarSector extends javax.swing.JPanel {
                 }
                 this.nombre.setText("");
                 this.capacidad.setText("");
-                this.actualizarMenuSectores();
+                try {
+                    this.actualizarMenuSectores();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelModificarSector.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 //no se pudo
                 JOptionPane.showMessageDialog(null, "No se a podido añadir el sector a la base de datos", "Error al guardar sector", JOptionPane.WARNING_MESSAGE);
@@ -300,11 +304,28 @@ public class PanelModificarSector extends javax.swing.JPanel {
       * @return 
       */
     public int validarEntrada(String nombre, String capacidad) {
-        if(nombre.equals("")){
+        if(!nombre.equals("")){
+            char[] aux = nombre.toCharArray();
+            for(char c : aux){                
+                int ascii = (int) c;
+                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
+                    return 1;
+                }
+            }            
+            if(aux.length >=100){
+                return 2;
+            }
+        }
+        else{
             return 1;
         }
-        if(capacidad.equals("") || !isNumero(capacidad)){
-            return 2;
+        if(!capacidad.equals("") && isNumero(capacidad)){
+            try{
+                Integer.parseInt(capacidad);                
+            }
+            catch(NumberFormatException nfe){
+                return 2;
+            }
         }
         return 0;
     }
@@ -333,13 +354,13 @@ public class PanelModificarSector extends javax.swing.JPanel {
     }
 
     //no se puede hacer tdd
-    private void actualizarMenuSectores(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    private void actualizarMenuSectores() throws SQLException{
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.listaSectores.removeAllItems();
         this.listaSectores.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.get(id).getListaSectores().size(); i++){
-                this.listaSectores.addItem("Nombre Sector: " + this.propiedades.get(id).getListaSectores().get(i).getNombre());
+                this.listaSectores.addItem(this.propiedades.get(id).getListaSectores().get(i).getNombre());
             }
             this.repaint();
             this.revalidate();

@@ -25,7 +25,7 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
     private ArrayList<Propiedad> propiedades;
     private VentanaPrincipalPropietario papa;
     
-    public PanelEliminarPropiedad(VentanaPrincipalPropietario papa) {
+    public PanelEliminarPropiedad(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
         initComponents();
         this.actualizarMenuOpciones();
@@ -114,7 +114,11 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
         if(resultado){
             //agregando sectores
             JOptionPane.showMessageDialog(null, "Se a eliminado correctamente");
-            this.actualizarMenuOpciones();
+            try {
+                this.actualizarMenuOpciones();
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelEliminarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
             //fallo
             JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  
@@ -140,13 +144,13 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
     
     //no existen validaciones posibles en este panel
     // no se puede hacer tdd ya que necesita otro metodo
-    private void actualizarMenuOpciones(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    private void actualizarMenuOpciones() throws SQLException{
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.listaPropiedades.removeAllItems();
         this.listaPropiedades.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.size(); i++){
-                this.listaPropiedades.addItem("Nombre : " + this.propiedades.get(i).getNombre());
+                this.listaPropiedades.addItem(this.propiedades.get(i).getNombre());
             }
             this.repaint();
             this.revalidate();
