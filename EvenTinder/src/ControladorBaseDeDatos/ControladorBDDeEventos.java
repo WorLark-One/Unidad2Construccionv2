@@ -900,7 +900,7 @@ public class ControladorBDDeEventos {
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
             int nombreRepetido = estaCreadaEntradaPrueba(conexion);
-            System.out.println("repetido:" + nombreRepetido);
+            System.out.println("repetido: ==============" + nombreRepetido);
             if (nombreRepetido == 0) {
                 try {
 
@@ -948,7 +948,7 @@ public class ControladorBDDeEventos {
                 while (resultado.next()) {
                     int idEvento = Integer.parseInt(resultado.getString("id"));
                     st.close();
-                    //System.out.println("el numero de la entrada es :"+idEvento);
+                    System.out.println("el numero de la entrada es :"+idEvento);
                     return idEvento;//esta creada la entrada
                 }
 
@@ -1040,9 +1040,9 @@ public class ControladorBDDeEventos {
         {
             try {
                 java.sql.Statement st = miConexion.createStatement();
-                int idEntrada = obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
+                int idEntrada = crearEntradaPrueba(miConexion);
                 String sql = "select asociacion.precio from asociacion where asociacion.refevento=" + idEvento + " and asociacion.refentrada=" + idEntrada + " and asociacion.refsector='" + nombreSector + "' and asociacion.refpropiedad=" + idPropiedad + "";
-                //System.out.println(sql);
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
 
