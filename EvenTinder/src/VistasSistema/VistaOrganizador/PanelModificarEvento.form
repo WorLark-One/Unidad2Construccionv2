@@ -307,7 +307,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="botonCrearEvento" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="botonModificarEvento" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="diasMaximosDevolucion" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -354,7 +354,7 @@
                               <Component id="diasMaximosDevolucion" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="botonCrearEvento" min="-2" max="-2" attributes="0"/>
+                          <Component id="botonModificarEvento" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -414,12 +414,12 @@
                     <Property name="text" type="java.lang.String" value="Nombre"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="botonCrearEvento">
+                <Component class="javax.swing.JButton" name="botonModificarEvento">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Modificar Evento"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCrearEventoActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonModificarEventoActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
