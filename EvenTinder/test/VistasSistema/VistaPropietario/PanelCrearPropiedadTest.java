@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaPropietario;
 
+import java.sql.SQLException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -41,36 +42,40 @@ public class PanelCrearPropiedadTest {
      * Test of validarEntradaSector method, of class PanelCrearPropiedad.
      */
     @Test
-    public void testValidarEntradaSector() {
+    public void testValidarEntradaSector() throws SQLException {
         System.out.println("validarEntradaSector");
-        String nombre = "";
-        String capacidad = "";
-        PanelCrearPropiedad instance = null;
+        String nombre = "222";
+        String capacidad = "1";
+        VentanaPrincipalPropietario papa= new VentanaPrincipalPropietario();
+        PanelCrearPropiedad instance = new PanelCrearPropiedad(papa);
         int expResult = 0;
         int result = instance.validarEntradaSector(nombre, capacidad);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
      * Test of validarEntradaPropiedad method, of class PanelCrearPropiedad.
+     * 
      */
+   
     @Test
-    public void testValidarEntradaPropiedad() {
+    public void testValidarEntradaPropiedad() throws SQLException {
         System.out.println("validarEntradaPropiedad");
-        String nombre = "";
-        String descripcion = "";
-        String ubicacion = "";
-        String nSectores = "";
-        String valorArriendo = "";
-        boolean finalizar = false;
-        PanelCrearPropiedad instance = null;
+        String nombre = "evento";
+        String descripcion = "un grato lugar";
+        String ubicacion = "en mi casa";
+        String nSectores = "1";
+        String valorArriendo = "10000";
+        boolean finalizar = true;
+        VentanaPrincipalPropietario papa = new VentanaPrincipalPropietario();
+        PanelCrearPropiedad instance = new PanelCrearPropiedad(papa);
         int expResult = 0;
         int result = instance.validarEntradaPropiedad(nombre, descripcion, ubicacion, nSectores, valorArriendo, finalizar);
+        System.out.println("resultado esperado:"+result);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }

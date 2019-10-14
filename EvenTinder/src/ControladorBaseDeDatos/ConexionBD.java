@@ -45,7 +45,7 @@ public class ConexionBD {
             conexion = DriverManager.getConnection(url, usuario, password);
 
             if (conexion != null) {
-                System.out.println("CONEXION EXITOSA: crearConexion().");
+                //System.out.println("CONEXION EXITOSA: crearConexion().");
                 return true;
             }
         } catch (SQLException ex) {
@@ -162,11 +162,11 @@ public class ConexionBD {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = " CREATE TABLE IF NOT EXISTS Cliente(\n"
                         + "	nombreCompleto varchar(100),\n"
-                        + "	rut  varchar(10) not null,\n"
+                        + "	rut  varchar(20) not null,\n"
                         + "	correo varchar(50),\n"
                         + "	contraseña varchar(25),\n"
                         + "	telefono varchar(20),\n"
-                        + "	tarjetaCredito varchar(16) not null,\n"
+                        + "	tarjetaCredito varchar(20) not null,\n"
                         + "	PRIMARY KEY(rut)\n"
                         + ");";
                 st.executeUpdate(sql);
@@ -188,11 +188,11 @@ public class ConexionBD {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "CREATE TABLE IF NOT EXISTS Organizador(\n"
                         + "nombreCompleto varchar(100),\n"
-                        + "rut  varchar(10) not null,\n"
+                        + "rut  varchar(20) not null,\n"
                         + "correo varchar(50),\n"
                         + "contraseña varchar(25),\n"
                         + "telefono varchar(20),\n"
-                        + "tarjetaCredito varchar(16) not null,\n"
+                        + "tarjetaCredito varchar(20) not null,\n"
                         + "PRIMARY KEY(rut)\n"
                         + ");";
                 st.executeUpdate(sql);
@@ -214,11 +214,11 @@ public class ConexionBD {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "CREATE TABLE IF NOT EXISTS Propietario(\n"
                         + "	nombreCompleto varchar(100),\n"
-                        + "	rut  varchar(10) not null,\n"
+                        + "	rut  varchar(20) not null,\n"
                         + "	correo varchar(50),\n"
                         + "	contraseña varchar(25),\n"
                         + "	telefono varchar(20),\n"
-                        + "	cuentaCorriente varchar(20) not null,\n"
+                        + "	cuentaCorriente varchar(25) not null,\n"
                         + "	PRIMARY KEY(rut)\n"
                         + ");";
                 st.executeUpdate(sql);

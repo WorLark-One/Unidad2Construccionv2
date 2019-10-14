@@ -211,7 +211,7 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
         this.listaPropiedades.removeAllItems();
         this.listaPropiedades.addItem("Todas las propiedades");
         for(int i=0; i<this.propiedades.size(); i++){
-            this.listaPropiedades.addItem("nombre:" + this.propiedades.get(i).getNombre());
+            this.listaPropiedades.addItem(this.propiedades.get(i).getNombre());
         }
         this.repaint();
         this.revalidate();
@@ -248,7 +248,6 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
         if(this.eventos!=null && this.propiedades!=null){
             for(int i=0; i<this.eventos.size(); i++){
                 for(int j=0; j<this.propiedades.size(); j++){
-                    System.out.println("evento: ");
                     if(this.eventos.get(i).getIdPropiedad()==id){
                         this.modeloLista.addElement(eventos.get(i).getNombre());
                         break;

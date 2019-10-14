@@ -272,10 +272,10 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             boolean respuesta = false;
             try {
                 if("cliente".equals(this.tipoUsuario) || "organizador".equals(this.tipoUsuario)){
-                    respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(),this.tarjetaDeCredito.getText());
+                    respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.correoElectronico.getText(), this.clave.getText(), this.numeroTelefonico.getText(),this.tarjetaDeCredito.getText());
                 }
                 if("propietario".equals(this.tipoUsuario)){
-                    respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(),this.CuentaBancaria.getText());
+                    respuesta = this.papa.getControlador().crearUsuario(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.correoElectronico.getText(), this.clave.getText(), this.numeroTelefonico.getText(),this.CuentaBancaria.getText());
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(PanelCreacionUsuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -353,6 +353,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             this.numeroTelefonico.setEnabled(true);
             this.tarjetaDeCredito.setEnabled(true);
             this.CuentaBancaria.setEnabled(false);
+            this.CuentaBancaria.setText("");
         }
         if(this.listaTipoUsuario.getSelectedIndex()==1){
             this.tipoUsuario="organizador";
@@ -363,6 +364,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             this.numeroTelefonico.setEnabled(true);
             this.tarjetaDeCredito.setEnabled(true);
             this.CuentaBancaria.setEnabled(false);
+            this.CuentaBancaria.setText("");
         }
         if(this.listaTipoUsuario.getSelectedIndex()==2){
             this.tipoUsuario="propietario";
@@ -373,6 +375,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             this.numeroTelefonico.setEnabled(true);
             this.tarjetaDeCredito.setEnabled(false);
             this.CuentaBancaria.setEnabled(true);
+            this.tarjetaDeCredito.setText("");
         }
         
     }//GEN-LAST:event_listaTipoUsuarioActionPerformed
@@ -535,6 +538,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         }
         if(!"".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
+                
                 String[] arroba = correoElectronico.split("@");
                 if(arroba.length == 2 && !arroba[0].equals("")){
                     char[] inicio= arroba[0].toCharArray();

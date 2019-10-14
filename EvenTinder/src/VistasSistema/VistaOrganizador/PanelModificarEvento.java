@@ -380,16 +380,17 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         int resp = this.validarDatos(this.nombre.getText(), this.descripcion.getText(), this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.capacidad.getText(),this.diasMaximosDevolucion.getText());
         if(resp==0){
             boolean respuesta = false;
-            //respuesta = this.papa.getControladorOrganizador().modificarEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false);
+            respuesta=this.papa.getControladorOrganizador().modificarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.nombre.getText(), this.descripcion.getText(), this.parseFecha(this.fechaDeInicio.getText()),this.parseFecha(this.fechaDeTermino.getText()), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getCapacidadMaximaDelEvento(), Integer.parseInt(this.diasMaximosDevolucion.getText()), false);
             if(respuesta){
                 JOptionPane.showMessageDialog(null, "Operacion realizada correctamente");
                 this.nombre.setText("");
                 this.fechaDeInicio.setText("");
                 this.fechaDeTermino.setText("");
-                this.capacidad.setText("");
+                this.capacidad.setText("0");
                 this.descripcion.setText("");
                 this.diasMaximosDevolucion.setText("");
                 this.listaEventos.setSelectedIndex(0);
+                this.listaSectores.setSelectedIndex(0);
                 this.actualizarListaSectores();
                 this.actualizarMenuEventos();
             }else{
@@ -450,15 +451,14 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 int nuevoTotal=0;
                 for (int j = 0; j < this.propiedades.get(i).getListaSectores().size(); j++) {
                     int a = this.papa.getControladorOrganizador().obtenerPrecioEntradaPorSector(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.propiedades.get(i).getListaSectores().get(j).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad());
-                    System.out.println("el precio:"+a);
-                    if(a!=-1){
+                    if(a!=-2 || a!=-1){
                         nuevoTotal+=this.propiedades.get(i).getListaSectores().get(j).getCapacidadDelSector();
                     }
                 }
                 this.papa.getControladorOrganizador().modificarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getDescripcion(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getFechaDeInicio(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getFechaDeTermino(), nuevoTotal, this.eventos.get(this.listaEventos.getSelectedIndex()-1).getPlazoDevolucionEntrada(), false);
                 this.precio.setText("");
+                this.listaEventos.setSelectedIndex(0);
                 this.listaSectores.setSelectedIndex(0);
-                this.actualizarListaSectores();
                 JOptionPane.showMessageDialog(null, "Se a modificado el valor de la entrada con exito");
                 return;
             }
@@ -553,6 +553,14 @@ public class PanelModificarEvento extends javax.swing.JPanel {
     }
     
     private void actualizarListaSectores(){
+        if(this.listaEventos.getSelectedIndex()<=0){
+            this.listaSectores.removeAllItems();
+            this.modeloLista2=new DefaultListModel();
+            this.lista.setModel(this.modeloLista2);
+            this.repaint();
+            this.revalidate();
+            return;
+        }
         this.propiedades = this.papa.getControladorPropietario().mostrarInformacionTodasLasPropiedades();
         this.lista.removeAll();
         this.modeloLista2=new DefaultListModel();
@@ -568,10 +576,10 @@ public class PanelModificarEvento extends javax.swing.JPanel {
             }
             if(numero==-1){
                 System.out.println("cago");
+                return;
             }
             for(int i=0; i<this.propiedades.get(numero).getListaSectores().size(); i++){
                 listaSectores.addItem(this.propiedades.get(numero).getListaSectores().get(i).getNombre());
-                System.out.println("Id evento:"+this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento() + "  nombre sector:" + this.propiedades.get(numero).getListaSectores().get(i).getNombre() + "   Id propiedad:" +  this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad());
                 int a = this.papa.getControladorOrganizador().obtenerPrecioEntradaPorSector(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.propiedades.get(numero).getListaSectores().get(i).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad());
                 this.modeloLista2.addElement("Nombre:" + this.propiedades.get(numero).getListaSectores().get(i).getNombre() + "  Capacidad:" +  this.propiedades.get(numero).getListaSectores().get(i).getCapacidadDelSector() + "  precio:" + a);
             }

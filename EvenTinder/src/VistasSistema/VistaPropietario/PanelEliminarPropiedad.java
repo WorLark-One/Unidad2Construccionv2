@@ -101,7 +101,7 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarCuentaActionPerformed
-        if(this.listaPropiedades.getSelectedIndex()>0){
+        if(this.listaPropiedades.getSelectedIndex()<=0){
             JOptionPane.showMessageDialog(null, "No a seleccionado la propiedad a modificar", "Error al seleccionar propiedad", JOptionPane.WARNING_MESSAGE);    
             return;
         }
@@ -150,7 +150,7 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
         this.listaPropiedades.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.size(); i++){
-                this.listaPropiedades.addItem("Nombre : " + this.propiedades.get(i).getNombre());
+                this.listaPropiedades.addItem(this.propiedades.get(i).getNombre());
             }
             this.repaint();
             this.revalidate();
