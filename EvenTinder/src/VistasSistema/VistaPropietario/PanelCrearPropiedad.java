@@ -514,10 +514,6 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         }else{
             return 2;
         }
-        else{
-            return 2;
-        }
-            
         return 0;
     }
 
