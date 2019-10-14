@@ -353,6 +353,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             this.numeroTelefonico.setEnabled(true);
             this.tarjetaDeCredito.setEnabled(true);
             this.CuentaBancaria.setEnabled(false);
+            this.CuentaBancaria.setText("");
         }
         if(this.listaTipoUsuario.getSelectedIndex()==1){
             this.tipoUsuario="organizador";
@@ -363,6 +364,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             this.numeroTelefonico.setEnabled(true);
             this.tarjetaDeCredito.setEnabled(true);
             this.CuentaBancaria.setEnabled(false);
+            this.CuentaBancaria.setText("");
         }
         if(this.listaTipoUsuario.getSelectedIndex()==2){
             this.tipoUsuario="propietario";
@@ -373,6 +375,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             this.numeroTelefonico.setEnabled(true);
             this.tarjetaDeCredito.setEnabled(false);
             this.CuentaBancaria.setEnabled(true);
+            this.tarjetaDeCredito.setText("");
         }
         
     }//GEN-LAST:event_listaTipoUsuarioActionPerformed
