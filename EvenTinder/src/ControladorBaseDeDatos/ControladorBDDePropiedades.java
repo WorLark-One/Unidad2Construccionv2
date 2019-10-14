@@ -177,7 +177,7 @@ public class ControladorBDDePropiedades {
             }
 
         }
-        System.out.println("wololoooo");
+        //System.out.println("wololoooo");
         return 0;
     }
     
