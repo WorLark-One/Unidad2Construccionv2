@@ -25,7 +25,7 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
     private ArrayList<Propiedad> propiedades;
     private VentanaPrincipalPropietario papa;
     
-    public PanelEliminarPropiedad(VentanaPrincipalPropietario papa) {
+    public PanelEliminarPropiedad(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
         initComponents();
         this.actualizarMenuOpciones();
@@ -53,7 +53,7 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
         jLabel18.setText("Menú Eliminar propiedad");
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel19.setText("1. Seleccione la propiedad");
+        jLabel19.setText("Seleccione la propiedad");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
@@ -63,8 +63,6 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
                 botonEliminarCuentaActionPerformed(evt);
             }
         });
-
-        listaPropiedades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -103,20 +101,24 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarCuentaActionPerformed
-        if(this.listaPropiedades.getSelectedIndex()==-1){
+        if(this.listaPropiedades.getSelectedIndex()>0){
             JOptionPane.showMessageDialog(null, "No a seleccionado la propiedad a modificar", "Error al seleccionar propiedad", JOptionPane.WARNING_MESSAGE);    
             return;
         }
         boolean resultado = false;
         try {
-            resultado = this.papa.getControladorPropietario().eliminarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getId());
+            resultado = this.papa.getControladorPropietario().eliminarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
         } catch (SQLException ex) {
             Logger.getLogger(PanelEliminarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(resultado){
             //agregando sectores
             JOptionPane.showMessageDialog(null, "Se a eliminado correctamente");
-            this.actualizarMenuOpciones();
+            try {
+                this.actualizarMenuOpciones();
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelEliminarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
             //fallo
             JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  
@@ -142,12 +144,13 @@ public class PanelEliminarPropiedad extends javax.swing.JPanel {
     
     //no existen validaciones posibles en este panel
     // no se puede hacer tdd ya que necesita otro metodo
-    private void actualizarMenuOpciones(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    private void actualizarMenuOpciones() throws SQLException{
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.listaPropiedades.removeAllItems();
+        this.listaPropiedades.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.size(); i++){
-                this.listaPropiedades.addItem("Nombre : " + this.propiedades.get(i).getNombre());
+                this.listaPropiedades.addItem(this.propiedades.get(i).getNombre());
             }
             this.repaint();
             this.revalidate();

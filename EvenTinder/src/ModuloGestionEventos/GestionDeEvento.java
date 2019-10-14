@@ -1,6 +1,7 @@
 package ModuloGestionEventos;
 
 import ControladorBaseDeDatos.ControladorBDDeEventos;
+import ModuloGestionPropiedades.Propiedad;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,12 +13,14 @@ public class GestionDeEvento {
     
     private ControladorBDDeEventos controlador;
     private ArrayList<Evento> listaEventos;
+   //ControlDeAcceso controlAcceso;
 
     /**
      * Default constructor
      */
     public GestionDeEvento() {
         this.controlador = new ControladorBDDeEventos();
+        this.listaEventos = new ArrayList();
     }
 
     /**
@@ -29,17 +32,21 @@ public class GestionDeEvento {
      * @param diasMaximoDevolucion 
      * @param publicado 
      * @param idPropiedad 
+     * @param rutOrganizador 
      * @return
      */
-    public boolean crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad) {
-        boolean result = this.controlador.crearEvento(nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado, idPropiedad, descripcion);
-        if(result){
-            
-            //crear evento cuando este implementada la clase evento.
-            //Evento e = new Evento();
-            //this.listaEventos.add(e);            
+    public int crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad, String rutOrganizador) {        
+        int idEvento = this.controlador.crearEvento(nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado, idPropiedad,rutOrganizador );
+        if(idEvento != 0){                        
+            Evento e = new Evento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado);
+            this.listaEventos.add(e);  
+            return idEvento;
         }        
-        return result;
+        return 0;
+    }
+    
+    public boolean agregarPrecioSector(int idEvento, int nuevoPrecio, String nombreSector,int idPropiedad){
+        return this.controlador.añadirPrecioEntradaPorSector(idEvento, nuevoPrecio, nombreSector, idPropiedad);
     }
 
     /**
@@ -50,16 +57,33 @@ public class GestionDeEvento {
      * @param fechaDeTermino 
      * @param capacidad 
      * @param diasMaximoDevolucion 
-     * @param publicado 
-     * @param idPropiedad 
+     * @param publicado      
      * @return
      */
-    public boolean modificarEvento(int idEvento, String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad) {
-        boolean result = this.controlador.modificarEvento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado, idPropiedad);
-        if(result){
-            //modificar evento cuando este implementada la clase evento
+    public boolean modificarEvento(int idEvento, String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado) {
+        boolean result = this.controlador.modificarEvento(idEvento, nombre, descripcion, fechaDeInicio, fechaDeTermino, capacidad, diasMaximoDevolucion, publicado);        
+        if(result){                                  
+            for(Evento e : this.listaEventos){
+                if(e.getIdEvento() == idEvento){
+                    e.setNombre(nombre);
+                    e.setDescripcion(descripcion);
+                    e.setCapacidadMaximaDelEvento(diasMaximoDevolucion);
+                    e.setFechaDeInicio(fechaDeInicio);
+                    e.setFechaDeTermino(fechaDeTermino);
+                    e.setPlazoDevolucionEntrada(diasMaximoDevolucion);                    
+                    return true;
+                }
+            }
         }                
         return result;
+    }
+    
+    public boolean modificarPrecioSector(int idEvento, int nuevoPrecio, String nombreSector,int idPropiedad){
+        return this.controlador.modificarPrecioEntradaPorSector(idEvento,nuevoPrecio,nombreSector,idPropiedad);
+    }
+    
+    public ArrayList<Propiedad> obtenerInformacionPropiedades(){
+        return this.controlador.obtenerListaDePropiedades();
     }
 
     /**
@@ -70,8 +94,11 @@ public class GestionDeEvento {
     public boolean eliminarEvento(int idEvento) {
         boolean result = this.controlador.eliminarEvento(idEvento);
         if(result){
-            for(Evento e:this.listaEventos){
-                //buscar el id, despues eliminar evento.
+            for(Evento e:this.listaEventos){                
+                if(e.getIdEvento() == idEvento){
+                    this.listaEventos.remove(e);
+                    return true;
+                }
             }
         }
         return false;
@@ -82,10 +109,7 @@ public class GestionDeEvento {
      * @return
      */
     public boolean aceptarSolicitud(int idEvento) {
-        this.controlador.aceptarSolicitudPropietario(idEvento);
-        
-        
-        return false;
+        return this.controlador.aceptarSolicitudPropietario(idEvento);
     }
 
     /**
@@ -103,8 +127,34 @@ public class GestionDeEvento {
      * @param opcion 
      * @return
      */
-    public ArrayList<Evento> obtenerInformacion(String rut, String opcion) {
-        // TODO implement here
-        return null;
+    public ArrayList<Evento> obtenerInformacion(String rut, String opcion) {        
+        switch(opcion){
+            case "Todos":
+                return this.controlador.obtenerInformacionDeTodosLosEventosDeUnOrganizador(rut);
+            case "Publicados":
+                return this.controlador.obtenerInformacionDeEventosPublicadosDeUnOrganizador(rut);
+            case "No Publicados":
+                return this.controlador.obtenerInformacionDeEventosNoPublicadosDeUnOrganizador(rut);
+            case "Finalizados":
+                return this.controlador.obtenerInformacionDeEventosFinalizadosDeUnOrganizador(rut);
+            default:
+                return null;
+        }        
+    }
+    
+    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos(String rutPropietario){
+        return this.controlador.obtenerInformacionSolicitudesDeEventosPropietario(rutPropietario);
+    }
+    
+    public ArrayList<Evento> obtenerInformacionDeEventosActualesPropietario(String rutPropietario) {
+        return this.controlador.obtenerInformacionDeEventosActualesPropietario(rutPropietario);
+    }
+    
+    public ArrayList<Evento> obtenerInformacionDeEventosFinalizadosPropietario(String rutPropietario) {        
+        return this.controlador.obtenerInformacionDeEventosFinalizadosPropietario(rutPropietario);
+    }
+    
+    public int obtenerPrecioEntradaPorSector(int idEvento, String nombreSector, int idPropiedad){
+        return this.controlador.obtenerPrecioEntradaPorSector(idEvento, nombreSector, idPropiedad);
     }
 }

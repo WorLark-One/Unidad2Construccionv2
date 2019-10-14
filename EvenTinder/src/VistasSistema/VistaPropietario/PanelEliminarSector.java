@@ -26,7 +26,7 @@ public class PanelEliminarSector extends javax.swing.JPanel {
     private int id;
     private ArrayList<Propiedad> propiedades;
     
-    public PanelEliminarSector(VentanaPrincipalPropietario papa, int id) {
+    public PanelEliminarSector(VentanaPrincipalPropietario papa, int id) throws SQLException {
         this.papa=papa;
         this.id=id;
         initComponents();
@@ -70,11 +70,10 @@ public class PanelEliminarSector extends javax.swing.JPanel {
         jLabel18.setText("Menú Eliminar sector");
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("1. Seleccione un sector");
+        jLabel3.setText("Seleccione un sector");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
-        listaSectores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listaSectores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaSectoresActionPerformed(evt);
@@ -125,15 +124,15 @@ public class PanelEliminarSector extends javax.swing.JPanel {
     private void eliminarSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarSectorActionPerformed
         // TODO add your handling code here:
         int capacidad=0;
-        if(listaSectores.getSelectedIndex()!=-1){
-            if(this.propiedades.get(id).getListaSectores().size()==1){
+        if(listaSectores.getSelectedIndex()>0){
+            if(this.propiedades.get(id).getListaSectores().size()==1 ){
                 JOptionPane.showMessageDialog(null, "No se puede eliminar el sector dado que es el ultimo", "Error al eliminar el sector", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             boolean bandera = false;
             try {
-                capacidad=this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getCapacidadDelSector();
-                bandera = this.papa.getControladorPropietario().eliminarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()).getNombre());
+                capacidad=this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()-1).getCapacidadDelSector();
+                bandera = this.papa.getControladorPropietario().eliminarSector(this.propiedades.get(id).getId(), this.propiedades.get(id).getListaSectores().get(listaSectores.getSelectedIndex()-1).getNombre());
             } catch (SQLException ex) {
                 Logger.getLogger(PanelEliminarSector.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -144,7 +143,11 @@ public class PanelEliminarSector extends javax.swing.JPanel {
                 } catch (SQLException ex) {
                     Logger.getLogger(PanelEliminarSector.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                this.actualizarMenuSectores();
+                try {
+                    this.actualizarMenuSectores();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelEliminarSector.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "No se a podido eliminar el sector de la base de datos", "Error al eliminar el sector", JOptionPane.WARNING_MESSAGE);
             }
@@ -176,12 +179,13 @@ public class PanelEliminarSector extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
 
-    private void actualizarMenuSectores(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    private void actualizarMenuSectores() throws SQLException{
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.listaSectores.removeAllItems();
+        this.listaSectores.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.get(id).getListaSectores().size(); i++){
-                this.listaSectores.addItem("Nombre Sector: " + this.propiedades.get(id).getListaSectores().get(i).getNombre());
+                this.listaSectores.addItem(this.propiedades.get(id).getListaSectores().get(i).getNombre());
             }
             this.repaint();
             this.revalidate();

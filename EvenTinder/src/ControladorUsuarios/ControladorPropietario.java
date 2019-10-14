@@ -28,25 +28,16 @@ public class ControladorPropietario {
     }
 
     /**
-     * Implementacion en proximo incremento
-     */
-    public void aceptarSolicitud() {
-        // TODO implement here
-    }
-
-    /**
-     * Implementacion en proximo incremento
-     */
-    public void rechazarSolicitud() {
-        // TODO implement here
-    }
-
-    /**
      * Metodo que pide y retorna la lista de las Propiedades existentes.
      * @return El arreglo de Propiedades obtenidas.
+     * @throws java.sql.SQLException
      */
-    public ArrayList<Propiedad> mostrarInformacionDePropiedades() {
-        return this.gestorPropiedades.mostrarListaDePropiedades();
+    public ArrayList<Propiedad> mostrarInformacionDePropiedadesDeUnPropietario() throws SQLException {
+        return this.gestorPropiedades.mostrarListaDePropiedades(this.controlAcceso.getRut());
+    }
+    
+    public ArrayList<Propiedad> mostrarInformacionTodasLasPropiedades(){
+        return this.gestorPropiedades.obtenerInformacionDeTodasLasPropiedades();
     }
 
     /**
@@ -135,47 +126,41 @@ public class ControladorPropietario {
         return this.gestorPropiedades.eliminarSector(id, nombreActual);
     }
 
-
     /**
-     * @param int idEvento 
+     * @param idEvento 
      * @return
      */
     public boolean aceptarSolicitud(int idEvento) {
-        // TODO implement here
-        return false;
+        return this.gestorPropiedades.aceptarSolicitud(idEvento);
     }
 
     /**
-     * @param int idEvento 
+     * @param idEvento 
      * @return
      */
     public boolean rechazarSolicitud( int idEvento) {
-        // TODO implement here
-        return false;
+        return this.gestorPropiedades.rechazarSolicitud(idEvento);
     }
 
     /**
      * @return
      */
-    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos() {
-        // TODO implement here
-        return null;
+    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos() {        
+        return this.gestorPropiedades.obtenerInformacionSolicitudesDeEventos(this.controlAcceso.getRut());
     }
-
+    
+    
     /**
      * @return
      */
     public ArrayList<Evento> obtenerInformacionDeEventosActuales() {
-        // TODO implement here
-        return null;
+        return this.gestorPropiedades.obtenerInformacionDeEventosActuales(this.controlAcceso.getRut());
     }
 
     /**
      * @return
      */
     public ArrayList<Evento> obtenerInformacionDeEventosFinalizados() {
-        // TODO implement here
-        return null;
+        return this.gestorPropiedades.obtenerInformacionDeEventosFinalizados(this.controlAcceso.getRut());
     }
-
 }

@@ -115,7 +115,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
     
     
     
-    public void modificarCuenta() {
+    public void modificarCuenta() throws SQLException {
         PanelModificarPropietario modificar = new PanelModificarPropietario(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(modificar, java.awt.BorderLayout.CENTER);
@@ -163,7 +163,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();
     }
 
-    public void ModificarPropiedad() {
+    public void ModificarPropiedad() throws SQLException {
         modificarPropiedad = new PanelModificarPropiedad(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(modificarPropiedad, java.awt.BorderLayout.CENTER);
@@ -172,7 +172,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();    
     }
 
-    public void EliminarPropiedad() {
+    public void EliminarPropiedad() throws SQLException {
         PanelEliminarPropiedad eliminarPropiedad = new PanelEliminarPropiedad(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eliminarPropiedad, java.awt.BorderLayout.CENTER);
@@ -181,7 +181,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();    
     }
 
-    public void ListaDePropiedades() {
+    public void ListaDePropiedades() throws SQLException {
         
         PanelListaDePropiedades listaPropiedades = new PanelListaDePropiedades(this);
         getContentPane().remove(this.componenteAnterior);
@@ -191,8 +191,8 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();    
     }
 
-    public void SolicitudDeEventos() {
-        PanelAceptarYRechasarEventos eventos = new PanelAceptarYRechasarEventos();
+    public void SolicitudDeEventos() throws SQLException {
+        PanelAceptarYRechasarEventos eventos = new PanelAceptarYRechasarEventos(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=eventos;
@@ -237,6 +237,15 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(modificarPropiedad, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=modificarPropiedad;
+        this.repaint();
+        this.revalidate();  
+    }
+
+    void HistorialDeEventos() throws SQLException {
+        PanelHistorialDeEventos historial = new PanelHistorialDeEventos(this);
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(historial, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=historial;
         this.repaint();
         this.revalidate();  
     }

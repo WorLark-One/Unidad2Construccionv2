@@ -5,6 +5,10 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -307,8 +311,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonModificarCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarCuentaMouseClicked
-        // TODO add your handling code here:
-        this.papa.modificarCuenta();
+        try {
+            // TODO add your handling code here:
+            this.papa.modificarCuenta();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelDeOpciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonModificarCuentaMouseClicked
 
     private void botonCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarSesionMouseClicked

@@ -28,7 +28,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
     private int id;
     private ArrayList<Propiedad> propiedades;
     
-    public PanelModificarPropiedad(VentanaPrincipalPropietario papa) {
+    public PanelModificarPropiedad(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
         initComponents();
         this.actualizarMenuOpciones();
@@ -65,15 +65,6 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         listaPropiedades = new javax.swing.JComboBox<>();
-<<<<<<< HEAD
-=======
-        jLabel2 = new javax.swing.JLabel();
-        agregarSector = new javax.swing.JButton();
-        modificarSector = new javax.swing.JButton();
-        eliminarSector = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        nombre = new javax.swing.JTextField();
->>>>>>> Testing-v2
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -165,7 +156,6 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("3. Agregar, modificar y/o eliminar sector");
 
-        listaOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listaOpciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaOpcionesActionPerformed(evt);
@@ -198,14 +188,12 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("1. Seleccione la propiedad");
 
-        listaPropiedades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listaPropiedades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaPropiedadesActionPerformed(evt);
             }
         });
 
-<<<<<<< HEAD
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -226,9 +214,6 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-=======
-        jLabel3.setText("Nombre");
->>>>>>> Testing-v2
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -240,42 +225,11 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-<<<<<<< HEAD
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(719, Short.MAX_VALUE))
-=======
-                        .addComponent(jLabel12)
-                        .addComponent(botonRegistrar, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addComponent(jLabel3))
-                            .addGap(33, 33, 33)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(ubicacion)
-                                .addComponent(capacidadTotal)
-                                .addComponent(valorArriendo)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                .addComponent(nombre))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(agregarSector)
-                        .addGap(18, 18, 18)
-                        .addComponent(modificarSector)
-                        .addGap(18, 18, 18)
-                        .addComponent(eliminarSector))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel19)
-                        .addComponent(jLabel18)
-                        .addComponent(jLabel1)
-                        .addComponent(listaPropiedades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(739, Short.MAX_VALUE))
->>>>>>> Testing-v2
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,18 +246,8 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-<<<<<<< HEAD
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(222, Short.MAX_VALUE))
-=======
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(agregarSector)
-                    .addComponent(modificarSector)
-                    .addComponent(eliminarSector))
-                .addGap(60, 60, 60)
-                .addComponent(botonRegistrar)
-                .addContainerGap(217, Short.MAX_VALUE))
->>>>>>> Testing-v2
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -317,7 +261,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             //realizar operacion
             java.util.Date fechaDePublicacion = new Date();
             //falta id
-            if(this.listaPropiedades.getSelectedIndex()==-1){
+            if(this.listaPropiedades.getSelectedIndex()==0){
                 JOptionPane.showMessageDialog(null, "No a seleccionado la propiedad a modificar", "Error al seleccionar propiedad", JOptionPane.WARNING_MESSAGE);    
                 return;
             }
@@ -333,7 +277,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             boolean resultado = false;
             try {
                 System.out.println("Entre a modificar");
-                resultado = this.papa.getControladorPropietario().modifcarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getId() ,this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getCapacidadTotal(), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
+                resultado = this.papa.getControladorPropietario().modifcarPropiedad(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId() ,this.nombre.getText(), this.ubicacion.getText(),fechaDePublicacion, this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getCapacidadTotal(), Integer.parseInt(this.valorArriendo.getText()), this.descripcion.getText());
                 System.out.println(resultado);
             } catch (SQLException ex) {
                 System.out.println("Cayo");
@@ -346,7 +290,11 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 this.descripcion.setText("");
                 this.ubicacion.setText("");
                 this.valorArriendo.setText("");
-                this.actualizarMenuOpciones();
+                try {
+                    this.actualizarMenuOpciones();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelModificarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 //fallo
                 JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  
@@ -355,27 +303,32 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         
         //nombre
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);    
+            JOptionPane.showMessageDialog(null, "Se espera que el nombre tenga letras y/o numero \n"
+                    + "Ej: Grado 6", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         //descripcion
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: descripcion", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            JOptionPane.showMessageDialog(null, "Se espera que la descripcion tenga letras y/o numero \n"
+                    + "Ej: Tiene 7 sectores y es muy grande, se puede fumar pero no tomar", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         //ubicacion
         if(resp==3){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: ubicacion", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            JOptionPane.showMessageDialog(null, "Se espera que la ubicacion tenga letras y/o numero \n"
+                    + "Ej: Aguas negras calle 14", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         //numero de sectores
         if(resp==4){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: numero de sectores", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            JOptionPane.showMessageDialog(null, "Se espera que numero de sectores sea solo numero \n"
+                    + "Ej: 8", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         //valor de arriendo
         if(resp==5){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: valor de arriendo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);            
+            JOptionPane.showMessageDialog(null, "Se espera que el valor del arriendo sea un numero \n"
+                    + "Ej: 500000", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
@@ -388,20 +341,40 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         if(this.listaOpciones.getSelectedIndex()==0){
             return;
         }
+        if(this.listaPropiedades.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(null, "Primero debe elegir la propiedad a modificar", "Error al seleccionar la propiedad", JOptionPane.WARNING_MESSAGE);  
+            this.listaOpciones.setSelectedIndex(0);
+            return;
+        }
         if(this.listaOpciones.getSelectedIndex()==1){
-            PanelAgregarSector sector = new PanelAgregarSector(this.papa, this.listaPropiedades.getSelectedIndex());
+            PanelAgregarSector sector = null;
+            try {
+                sector = new PanelAgregarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelModificarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.papa.añadirSector(sector);
             this.actualizarMenuOpcionesModificar();
             return;
         }
         if(this.listaOpciones.getSelectedIndex()==2){
-            PanelModificarSector sector = new PanelModificarSector(this.papa, this.listaPropiedades.getSelectedIndex());
+            PanelModificarSector sector = null;
+            try {
+                sector = new PanelModificarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelModificarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.papa.modificarSector(sector);
             this.actualizarMenuOpcionesModificar();
             return;
         }
         if(this.listaOpciones.getSelectedIndex()==3){
-            PanelEliminarSector sector = new PanelEliminarSector(this.papa, this.listaPropiedades.getSelectedIndex());
+            PanelEliminarSector sector = null;
+            try {
+                sector = new PanelEliminarSector(this.papa, this.listaPropiedades.getSelectedIndex()-1);
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelModificarPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.papa.eliminarSector(sector);
             this.actualizarMenuOpcionesModificar();
             return;
@@ -413,19 +386,22 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         if(this.listaPropiedades.getSelectedIndex()==-1){
             return;
         }
-        this.nombre.setText(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getNombre());
-        this.descripcion.setText(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getDescripcion());
-        this.ubicacion.setText(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getUbicacion());
-        this.valorArriendo.setText(Integer.toString(this.propiedades.get(this.listaPropiedades.getSelectedIndex()).getValorArriendo()));
+        if(this.listaPropiedades.getSelectedIndex()==0){
+            this.nombre.setText("");
+            this.descripcion.setText("");
+            this.ubicacion.setText("");
+            this.valorArriendo.setText("");
+            return;
+        }
+        this.nombre.setText(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getNombre());
+        this.descripcion.setText(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getDescripcion());
+        this.ubicacion.setText(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getUbicacion());
+        this.valorArriendo.setText(Integer.toString(this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getValorArriendo()));
     }//GEN-LAST:event_listaPropiedadesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonRegistrar;
-<<<<<<< HEAD
-=======
-    private javax.swing.JTextField capacidadTotal;
->>>>>>> Testing-v2
     private javax.swing.JTextArea descripcion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
@@ -457,12 +433,13 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
 
     //
     // no se puede hacer tdd ya que necesita otro metodo
-    public void actualizarMenuOpciones(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    public void actualizarMenuOpciones() throws SQLException{
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         this.listaPropiedades.removeAllItems();
+        this.listaPropiedades.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.size(); i++){
-                this.listaPropiedades.addItem("Nombre : " + this.propiedades.get(i).getNombre());
+                this.listaPropiedades.addItem(this.propiedades.get(i).getNombre());
             }
             this.repaint();
             this.revalidate();
@@ -488,16 +465,48 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
      * @return 
      */
     public int validarEntrada(String nombre, String descripcion, String ubicacion, String valorArriendo) {
-        if(nombre.equals("")){
+        if(!nombre.equals("")){
+            char[] aux = nombre.toCharArray();
+            for(char c : aux){                
+                int ascii = (int) c;
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
+                    return 1;
+                }
+            } 
+            if(aux.length <=100){
+                return 1;
+            }
+        }
+        else{
             return 1;
         }
-        if(descripcion.equals("")){
+        if(!descripcion.equals("")){
+            char[] aux = descripcion.toCharArray();
+            if(aux.length <=500){
+                return 2;
+            }
+        }
+        else{
             return 2;
         }
         if(ubicacion.equals("")){
+            char[] aux = ubicacion.toCharArray();
+            if(aux.length <=100){
+                return 3;
+            }
+        }
+        else{
             return 3;
         }
-        if(valorArriendo.equals("") || !isNumero(valorArriendo)){
+        if(!valorArriendo.equals("") && isNumero(valorArriendo)){
+            try{
+                Integer.parseInt(valorArriendo);                
+            }
+            catch(NumberFormatException nfe){
+                return 5;
+            }
+        }
+        else{
             return 5;
         }
         return 0;
