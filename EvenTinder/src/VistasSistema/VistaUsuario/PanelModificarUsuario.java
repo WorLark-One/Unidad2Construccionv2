@@ -292,30 +292,30 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
             for(char c : aux){
                 int ascii = (int) c;
                 if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) )){
-                    return 2;
+                    return 3;
                 }
             }
             if(aux.length <8){
-                return 2;
+                return 3;
             }
         }
         else{
-            return 2;
+            return 3;
         }
         if(!"".equals(numeroTelefonico)){
             char[] aux = numeroTelefonico.toCharArray();
             for(char c : aux){
                 int ascii = (int) c;
                 if( !((ascii >=48 && ascii <=57) )){
-                    return 3;
+                    return 4;
                 }
             }
             if(aux.length != 9){
-                return 3;
+                return 4;
             }
         }
         else{
-            return 3;
+            return 4;
         }
         if("".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
@@ -325,7 +325,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
                     for(char c : inicio){
                         int ascii = (int) c;
                         if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)){
-                            return 4;
+                            return 5;
                         }
                     }                    
                     String[] puntos = arroba[1].split("\\.");                    
@@ -337,30 +337,30 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
                                 for(char c : dominio){
                                     int ascii = (int) c;
                                     if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) )){
-                                        return 4;
+                                        return 5;
                                     }
                                 }
                                 i++;
                             }
                         }
                         else{
-                            return 4;
+                            return 5;
                         }
                     }
                     else{                        
-                        return 4;
+                        return 5;
                     }
                 }       
                 else{
-                    return 4;
+                    return 5;
                 }
             }
             else{
-                return 4;
+                return 5;
             }  
         }
         else{
-            return 4;
+            return 5;
         }
         if("".equals(tarjetaDeCredito)){
             tarjetaDeCredito = tarjetaDeCredito.replace(" ", "");
@@ -368,15 +368,15 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
             for(char c : aux){
                 int ascii = (int) c;
                 if( !((ascii >=48 && ascii <=57) )){
-                    return 5;
+                    return 6;
                 }
             }
             if(aux.length !=16){
-                return 5;
+                return 6;
             }             
         }
         else{
-            return 5;
+            return 6;
         }
         return 0;
     }
