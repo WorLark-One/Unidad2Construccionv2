@@ -473,7 +473,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                     return 1;
                 }
             } 
-            if(aux.length <=100){
+            if(aux.length >=100){
                 return 1;
             }
         }
@@ -482,7 +482,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         }
         if(!descripcion.equals("")){
             char[] aux = descripcion.toCharArray();
-            if(aux.length <=500){
+            if(aux.length >=500){
                 return 2;
             }
         }
@@ -491,7 +491,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         }
         if(ubicacion.equals("")){
             char[] aux = ubicacion.toCharArray();
-            if(aux.length <=100){
+            if(aux.length >=100){
                 return 3;
             }
         }
