@@ -35,6 +35,7 @@ public class GestionDeUsuario {
      *          False si el Usuario ya existe o los datos son erroneos.
      * @throws java.sql.SQLException
      */
+    //posible error capa 8
     public boolean crearUsuario(String tipoUsuario, String nombreUsuario, 
             String rutUsuario,String contraseña, String correoElectronico,
             String telefono,String tarjeta) throws SQLException {

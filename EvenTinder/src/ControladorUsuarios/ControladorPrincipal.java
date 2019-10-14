@@ -51,6 +51,7 @@ public class ControladorPrincipal {
      *          False si el usuario no pudo ser creado.
      * @throws java.sql.SQLException 
      */
+    //posible error capa 8
     public boolean crearUsuario(String tipoUsuario, String nombreUsuario, 
             String rutUsuario,String contraseña, String correoElectronico,
             String telefono,String tarjeta)
