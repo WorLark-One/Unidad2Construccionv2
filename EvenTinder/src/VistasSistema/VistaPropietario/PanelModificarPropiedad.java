@@ -469,7 +469,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
+                if( !(ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130) {
                     return 1;
                 }
             } 
@@ -489,7 +489,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         else{
             return 2;
         }
-        if(ubicacion.equals("")){
+        if(!ubicacion.equals("")){
             char[] aux = ubicacion.toCharArray();
             if(aux.length >=100){
                 return 3;
