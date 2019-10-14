@@ -488,10 +488,10 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
                     return 1;
                 }
-            }
+            } 
             if(aux.length >=100){
                 return 1;
             }
@@ -499,14 +499,20 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 1;
         }
-        if(!capacidad.equals("") && isNumero(capacidad)){
+        if(!capacidad.equals("")){
             try{
-                Integer.parseInt(capacidad);                
+                if (!isNumero(capacidad)) {
+                    return 2;
+                }
             }
             catch(NumberFormatException nfe){
                 return 2;
             }
         }
+        else{
+            return 2;
+        }
+            
         return 0;
     }
 
@@ -521,6 +527,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
      * @param finalizar
      * @return 
      */
+    
     public int validarEntradaPropiedad(String nombre, String descripcion, String ubicacion, String capacidadTotal, String valorArriendo, boolean finalizar) {
         if(!nombre.equals("")){ 
             char[] aux = nombre.toCharArray();
@@ -555,20 +562,11 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 3;
         }           
-        if(!capacidadTotal.equals("") && isNumero(capacidadTotal)){
+        if(!valorArriendo.equals("") ){
             try{
-                Integer.parseInt(valorArriendo);                
-            }
-            catch(NumberFormatException nfe){
-                return 4;
-            }
-        }
-        else{
-            return 4;
-        }
-        if(!valorArriendo.equals("") && isNumero(valorArriendo)){
-            try{
-                Integer.parseInt(valorArriendo);                
+                if (!isNumero(valorArriendo)) {
+                    return 5;
+                }      
             }
             catch(NumberFormatException nfe){
                 return 5;
@@ -582,7 +580,6 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         }
         return 0;
     }
-    
         /**
      * Método que se encarga de verificar que los numeros ingresados son numeros validos
      */

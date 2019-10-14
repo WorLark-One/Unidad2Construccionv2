@@ -43,7 +43,7 @@ public class PanelCreacionUsuarioTest {
     @Test
     public void testValidarResgistro() {
         System.out.println("validarResgistro");
-        String tipoUsuario = "cliente";
+        String tipoUsuario = "propietario";
         String nombre = "";
         String rut = "";
         String clave = "";
@@ -62,7 +62,7 @@ public class PanelCreacionUsuarioTest {
         
         //PENDIENTE VALIDAR PUNTOS Y GUIONES.
         System.out.println("rut");
-        nombre = "aaaaaaa";
+        nombre = "Matias";
         rut = "asdasdasdasda";
         result = instance.validarResgistro(tipoUsuario, nombre, rut, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito, CuentaBancaria);
         expResult = 3;
@@ -70,7 +70,7 @@ public class PanelCreacionUsuarioTest {
         
         System.out.println("clave (solo letras y numeros)");
         nombre = "matias";
-        rut = "19.923.718-k";
+        rut = "19.923.718-7";
         clave = "!#$%&/()=";
         result =instance.validarResgistro(tipoUsuario, nombre, rut, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito, CuentaBancaria);
         expResult = 4;
@@ -90,7 +90,7 @@ public class PanelCreacionUsuarioTest {
         nombre = "matias";
         rut = "11.111.111-1";
         clave = "12345678";
-        numeroTelefonico = "123456789";
+        numeroTelefonico = "988830050";
         correoElectronico = "mpizarro16@12.ut%%alca.com";
         result =instance.validarResgistro(tipoUsuario, nombre, rut, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito, CuentaBancaria);
         expResult = 6;
@@ -104,7 +104,7 @@ public class PanelCreacionUsuarioTest {
         correoElectronico = "mpizarro16@alumnos.utalca.cl";
         tarjetaDeCredito = "1234 5678 3412";
         result =instance.validarResgistro(tipoUsuario, nombre, rut, clave, numeroTelefonico, correoElectronico, tarjetaDeCredito, CuentaBancaria);
-        expResult = 7;
+        expResult = 8;
         assertEquals(expResult, result);      
     }
 
