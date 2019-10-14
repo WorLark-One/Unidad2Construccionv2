@@ -113,11 +113,14 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
             return;
         }
         boolean resultado = false;
+        System.out.println("this.eventos.get(this.listaEventos.getSelectedIndex()-1" + this.eventos.get(this.listaEventos.getSelectedIndex()-1));
         resultado = this.papa.getControladorOrganizador().eliminarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento());
+        System.out.println("resultado:" + resultado);
         if(resultado){
             //agregando sectores
             JOptionPane.showMessageDialog(null, "Se a eliminado correctamente");
             this.actualizarMenuOpciones();
+            return;
         }else{
             //fallo
             JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  
