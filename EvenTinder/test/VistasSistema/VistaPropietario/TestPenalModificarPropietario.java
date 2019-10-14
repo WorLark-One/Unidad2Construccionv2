@@ -11,17 +11,14 @@ import java.sql.SQLException;
  *
  * @author crist
  */
+// en PanelModificarPropietario se debe hacer static el metodo validarEntrada
 public class TestPenalModificarPropietario {
-    VentanaPrincipalPropietario papa;
-    
-    
     public TestPenalModificarPropietario(){
     }
     
      @Test
     public void testValidarModificarUsuario()throws SQLException{
-        this.papa = new VentanaPrincipalPropietario();
-        PanelModificarPropietario pmp = new PanelModificarPropietario(papa);
+        PanelModificarPropietario pmp = null;
         String nombre = "";
         String clave = "";
         String numeroTelefonico = "";
