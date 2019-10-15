@@ -482,7 +482,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || caracteres.contains(ascii))) {
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) ||(ascii >=48 && ascii <=57)|| caracteres.contains(ascii))) {
                     return 1;
                 }
             } 
