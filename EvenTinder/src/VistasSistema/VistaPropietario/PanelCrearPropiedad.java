@@ -487,14 +487,29 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
       * @return 
       */
     public int validarEntradaSector(String nombre, String capacidad) {
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32);
+        //nombre con letras, numeros, tildes, mayusculas y minusculas.
         if(!nombre.equals("")){
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
+                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57)||caracteres.contains(ascii))) {
                     return 1;
                 }
-            } 
+            }
             if(aux.length >=100){
                 return 1;
             }
@@ -502,11 +517,10 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 1;
         }
-        if(!capacidad.equals("")){
+        // capacidad que puede ser cualquier numero aceptado por una variable tipo int  (2,147,483,647)
+        if(!capacidad.equals("") && isNumero(capacidad)){
             try{
-                if (!isNumero(capacidad)) {
-                    return 2;
-                }
+                Integer.parseInt(capacidad);                
             }
             catch(NumberFormatException nfe){
                 return 2;
@@ -531,11 +545,25 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
     
     public int validarEntradaPropiedad(String nombre, String descripcion, String ubicacion, String capacidadTotal, String valorArriendo, boolean finalizar) {
         //nombre con letras mayusculas, minusculas, numeros, tildes.
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32);
         if(!nombre.equals("")){ 
-            char[] aux = nombre.toCharArray();
+            char[] aux = nombre.toCharArray();            
             for(char c : aux){                
-                int ascii = (int) c;
-                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
+                int ascii = (int) c;                
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57)|| caracteres.contains(ascii))) {                    
                     return 1;
                 }
             } 
