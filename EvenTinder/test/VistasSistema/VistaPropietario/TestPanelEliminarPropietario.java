@@ -25,21 +25,21 @@ public class TestPanelEliminarPropietario{
     public void testValidarDatosEliminarPropietario1(){
         String rut = "";
         String clave = "";
-        int esperado = pep.validarDatosEliminarUsuario(rut, clave);
+        int esperado = pep.validarEntrada(rut, clave);
         assertEquals(1,esperado); // falta el rut
     }
     @Test
     public void testValidarDatosEliminarPropietario2(){
         String rut = "17586721k";
         String clave = "";
-        int esperado = pep.validarDatosEliminarUsuario(rut, clave);
+        int esperado = pep.validarEntrada(rut, clave);
         assertEquals(2,esperado); // falta la clave
     }
     @Test
     public void testValidarDatosEliminarPropietario3(){
         String rut = "17586721k";
         String clave = "123654";
-        int esperado = pep.validarDatosEliminarUsuario(rut, clave);
+        int esperado = pep.validarEntrada(rut, clave);
         assertEquals(0,esperado); // esta bien 
     }    
     
