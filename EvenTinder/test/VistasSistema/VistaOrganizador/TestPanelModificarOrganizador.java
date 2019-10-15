@@ -10,9 +10,9 @@ import static org.junit.Assert.*;
  *
  * @author crist
  */
+// en PanelModificarOrganizador se debe hacer static validarModificarOrganizador
 public class TestPanelModificarOrganizador {
-    VentanaPrincipalOrganizador papa = new VentanaPrincipalOrganizador();
-    PanelModificarOrganizador pmo = new PanelModificarOrganizador(papa);
+    PanelModificarOrganizador pmo = null;
     
     public TestPanelModificarOrganizador(){}
     
