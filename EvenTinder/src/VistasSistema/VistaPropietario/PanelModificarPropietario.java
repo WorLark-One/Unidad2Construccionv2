@@ -265,15 +265,16 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     */
     
     /**
-     * 
-     * @param nombre
-     * @param clave
-     * @param numeroTelefonico
-     * @param correoElectronico
-     * @param cuentaBancaria
-     * @return 
+     * Metodo que verifica la correctitud de los datos ingresados en el sistema por el usuario para modificar una cuenta propietario.
+     * @param nombre el nombre ingresado.
+     * @param clave La clave ingresada.
+     * @param numeroTelefonico El numero telefonico ingresado.
+     * @param correoElectronico El correo electronico ingresado.
+     * @param cuentaBancaria La cuenta bancaria ingresada.
+     * @return Un numero que indica cual de los datos ingresados esta erroneo.
      */
     public int validarEntrada(String nombre, String clave, String numeroTelefonico, String correoElectronico, String cuentaBancaria){                                               
+        //Nombre con letras mayusculas, minusculas, tildes, y n con colita.
         if(!"".equals(nombre)){
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
@@ -289,6 +290,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
         else{
             return 1;
         }
+        //clave con letras y numeros, minimo 8 caracteres
         if(!"".equals(clave)){
             char[] aux = clave.toCharArray();
             for(char c : aux){
@@ -304,6 +306,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
         else{
             return 3;
         }
+        //numero telefonico con 9 numeros.
         if(!"".equals(numeroTelefonico)){
             char[] aux = numeroTelefonico.toCharArray();
             for(char c : aux){
@@ -319,6 +322,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
         else{
             return 4;
         }
+        //correo electronico. prefijo con letras, numeros. acepta 2 dominio, que pueden ser letras y numeros de cualquier largo, tambien acepta solo ".cl" y ".com"
         if(!"".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
                 String[] arroba = correoElectronico.split("@");
@@ -364,6 +368,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
         else{
             return 5 ;
         }
+        //cuenta bancaria de 20 digitos.
         if(!"".equals(cuentaBancaria)){
             cuentaBancaria = cuentaBancaria.replace(" ", "");
                 char[] aux = cuentaBancaria.toCharArray();

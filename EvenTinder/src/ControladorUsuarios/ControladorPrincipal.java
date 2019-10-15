@@ -109,6 +109,13 @@ public class ControladorPrincipal {
         }
     }
     
+    
+    /**
+     * Metodo que permite obtener la informacion de un usuario especifico, mediante su RUT.
+     * 
+     * @return La informacion asociada a un usuario especifico.
+     * @throws SQLException 
+     */
     public Usuario obtenerInformacionUsuario() throws SQLException{
         if(this.controlAcceso.getTipoUsuario().equals("cliente")){
             return this.gestorUsuarios.obtenerInformacionCliente(this.controlAcceso.getRut());

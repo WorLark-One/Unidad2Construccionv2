@@ -263,14 +263,16 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
     */
     
     /**
-     * 
-     * @param clave
-     * @param numeroTelefonico
-     * @param correoElectronico
-     * @param tarjetaDeCredito
-     * @return 
+     * Metodo que verifica la correctitud de los datos ingresados en el sistema por el usuario para modificar una cuenta organizador.
+     * @param nombre el nombre ingresado.
+     * @param clave La clave ingresada.
+     * @param numeroTelefonico El numero telefonico ingresado.
+     * @param correoElectronico El correo electronico ingresado.
+     * @param tarjetaDeCredito La tarjetra de credito ingresada.
+     * @return Un numero que indica cual de los datos ingresados esta erroneo.
      */
     public int validarModificarOrganizador (String nombre, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito){                                               
+        //Nombre con letras mayusculas, minusculas, tildes, y n con colita.
         if(!"".equals(nombre)){
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
@@ -283,6 +285,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 1;
         }
+        //clave con letras y numeros, minimo 8 caracteres
         if(!"".equals(clave)){
             char[] aux = clave.toCharArray();
             for(char c : aux){
@@ -298,6 +301,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 3;
         }
+        //numero telefonico con 9 numeros.
         if(!"".equals(numeroTelefonico)){
             char[] aux = numeroTelefonico.toCharArray();
             for(char c : aux){
@@ -313,6 +317,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 4;
         }
+        //correo electronico. prefijo con letras, numeros. acepta 2 dominio, que pueden ser letras y numeros de cualquier largo, tambien acepta solo ".cl" y ".com"
         if(!"".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
                 String[] arroba = correoElectronico.split("@");
@@ -358,6 +363,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 5;
         }
+        // tarjeta de credito de 16 numero
         if(!"".equals(tarjetaDeCredito)){
             tarjetaDeCredito = tarjetaDeCredito.replace(" ", "");
             char[] aux = tarjetaDeCredito.toCharArray();                
