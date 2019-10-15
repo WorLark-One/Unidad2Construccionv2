@@ -12,9 +12,9 @@ import org.junit.Test;
  *
  * @author crist
  */
+// En PanelModificarUsuario se debe volver static validarModificarUsuario
 public class TestPanelModificarUsuario {
-    VentanaPrincipalUsuario papa = new VentanaPrincipalUsuario();
-    PanelModificarUsuario pmu = new PanelModificarUsuario(papa);
+    PanelModificarUsuario pmu = null;
     public TestPanelModificarUsuario(){}
     @Test
     public void testValidarModificarUsuario(){

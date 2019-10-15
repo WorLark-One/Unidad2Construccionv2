@@ -11,14 +11,12 @@ import java.sql.SQLException;
  *
  * @author crist
  */
-// para las pruebas se paso a public las funciones en la clase
+// en PanelAgregarSector se debe hacer static validarEntrada y isNumero (esta se debe pasar a public)
 public class TestPanelAgregarSector {
-    VentanaPrincipalPropietario papa;
     PanelAgregarSector pas;
     String cadena = "";
     public TestPanelAgregarSector () throws SQLException{
-        this.papa = new VentanaPrincipalPropietario();
-        this.pas = new PanelAgregarSector(papa, 1);
+        this.pas = null;
     }
     @Test
     public void testValidarDatosAgregarSector1(){

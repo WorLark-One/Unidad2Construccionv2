@@ -299,11 +299,14 @@ public class PanelModificarSector extends javax.swing.JPanel {
      */
     
 
-     /**
-      * 
-      * @return 
-      */
+    /**
+     * Metodo que verifica los datos ingresados al modificar un sector. 
+     * @param nombre nombre del sector ingresado.
+     * @param capacidad capacidad del sector ingresado.
+     * @return un numero que indica el campo que se ingreso de manera erronea.
+     */
     public int validarEntrada(String nombre, String capacidad) {
+        //nombre con letras, numeros, tildes, mayusculas y minusculas.
         if(!nombre.equals("")){
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
@@ -319,6 +322,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
         else{
             return 1;
         }
+        // capacidad que puede ser cualquier numero aceptado por una variable tipo int  (2,147,483,647)
         if(!capacidad.equals("") && isNumero(capacidad)){
             try{
                 Integer.parseInt(capacidad);                
@@ -328,6 +332,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
             }
         }else{
             return 2;
+>>>>>>> MasterFinal
         }
         return 0;
     }

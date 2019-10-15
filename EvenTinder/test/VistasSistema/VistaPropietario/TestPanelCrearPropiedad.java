@@ -11,12 +11,11 @@ import static org.junit.Assert.*;
  *
  * @author crist
  */
+// en PanelCrearPropiedad se debe hacer static  validarEntradaPropiedad
 public class TestPanelCrearPropiedad {
-    VentanaPrincipalPropietario papa;
     PanelCrearPropiedad pcp;
     public TestPanelCrearPropiedad()throws SQLException{
-        papa = new VentanaPrincipalPropietario();
-        pcp = new PanelCrearPropiedad(papa);
+        pcp = null;
     }
     
     @Test

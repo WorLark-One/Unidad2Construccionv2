@@ -101,7 +101,12 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú modificacion de evento");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
+        botonModificarPrecio.setText("Modificar precio sector");
+        botonModificarPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarPrecioActionPerformed(evt);
+            }
+        });
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel21.setText("3. modifique precio de la entrada por sector");
@@ -485,6 +490,9 @@ public class PanelModificarEvento extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
+    private javax.swing.JButton botonCrearEvento;
+=======
     private javax.swing.JButton botonModificarEvento;
     private javax.swing.JButton botonModificarPrecio;
     private javax.swing.JTextField capacidad;
