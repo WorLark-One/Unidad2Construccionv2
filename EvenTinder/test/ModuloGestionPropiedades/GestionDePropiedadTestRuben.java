@@ -36,10 +36,11 @@ public class GestionDePropiedadTestRuben {
     }
     
     @Test
-    public void mostrarListaDePropiedades() { 
+    public void mostrarListaDePropiedades() throws SQLException { 
         GestionDePropiedad instance = new GestionDePropiedad();
         
-       ArrayList<Propiedad> p= instance.mostrarListaDePropiedades();
+        String rut = "";
+       ArrayList<Propiedad> p= instance.mostrarListaDePropiedades(rut);
        
        for (Propiedad pro: p) {
            System.out.println(pro.getNombre() + " " + pro.getId() + " " + pro.getDescripcion());
