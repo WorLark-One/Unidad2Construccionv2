@@ -49,7 +49,7 @@ public class PanelCrearEventoTest {
         String capacidad = "";
         String descripcion = "";
         String diasMaximos = "";
-        PanelCrearEvento instance = new PanelCrearEvento();
+        PanelCrearEvento instance = new PanelCrearEvento(null);
         //fallo con nombre
         int expResult = 1;
         int result = instance.validarDatos(nombre, fechaDeInicio, fechaDeTermino, capacidad, descripcion, diasMaximos);

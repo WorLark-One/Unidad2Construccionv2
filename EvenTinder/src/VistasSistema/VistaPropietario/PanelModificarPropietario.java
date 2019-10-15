@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaPropietario;
 
+import ModuloGestionUsuario.Propietario;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,9 +23,10 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     
     private VentanaPrincipalPropietario papa;
     
-    public PanelModificarPropietario(VentanaPrincipalPropietario papa) {
+    public PanelModificarPropietario(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
         initComponents();
+        this.actualizarInfomacion();
     }
 
     /**
@@ -96,27 +98,24 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel16))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel16))
+                                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(botonRegistrar)
-                                .addGap(140, 140, 140)))
+                                    .addComponent(botonRegistrar)
+                                    .addComponent(cuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,28 +186,43 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                 this.numeroTelefonico.setText("");
                 this.correoElectronico.setText("");
                 this.cuentaBancaria.setText("");
+                try {
+                    this.actualizarInfomacion();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelModificarPropietario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
             }
         }
         if(resp==1){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Nombre completo", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el nombre sea solo letras \n"
+                    + "Ej: Daniel Moreno", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==2){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Clave", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el rut tenga entre entre sea: nnn nnn nnn - nok \n" + 
+                    "Ej: 11111111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==3){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Numero Telefonico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que la clave tenga minimo 8 digitos \n" + 
+                    "Ej: 12345678", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==4){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Correo Electronico", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el numero telefonico tenga 9 digitos \n" + 
+                    "Ej: 987654321", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==5){
-            JOptionPane.showMessageDialog(null, "Error al rellenar el campo: Cuenta Bancaria", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se espera que el correo electronico sea algo@gmail.com o sea algo@gmail.cl \n" + 
+                    "Ej: elmejorproyectodelmundo@gmail.cl", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(resp==6){
+            JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria tenga 20 digitos \n" + 
+                    "Ej: 12345678901234567890", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
@@ -251,31 +265,139 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     */
     
     /**
-     * 
-     * @param nombre
-     * @param clave
-     * @param numeroTelefonico
-     * @param correoElectronico
-     * @param cuentaBancaria
-     * @return 
+     * Metodo que verifica la correctitud de los datos ingresados en el sistema por el usuario para modificar una cuenta propietario.
+     * @param nombre el nombre ingresado.
+     * @param clave La clave ingresada.
+     * @param numeroTelefonico El numero telefonico ingresado.
+     * @param correoElectronico El correo electronico ingresado.
+     * @param cuentaBancaria La cuenta bancaria ingresada.
+     * @return Un numero que indica cual de los datos ingresados esta erroneo.
      */
     public int validarEntrada(String nombre, String clave, String numeroTelefonico, String correoElectronico, String cuentaBancaria){                                               
-        if("".equals(nombre)){
+        //Nombre con letras mayusculas, minusculas, tildes, y n con colita.
+        if(!"".equals(nombre)){
+            char[] aux = nombre.toCharArray();
+            for(char c : aux){                
+                int ascii = (int) c;
+                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
+                    return 1;
+                }
+            }
+            if(aux.length >=100){
+                return 1;
+            }
+        }
+        else{
             return 1;
         }
-        if("".equals(clave)){
-            return 2;
+        //clave con letras y numeros, minimo 8 caracteres
+        if(!"".equals(clave)){
+            char[] aux = clave.toCharArray();
+            for(char c : aux){
+                int ascii = (int) c;
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) )){
+                    return 3;
+                }
+            }
+            if(aux.length <8){
+                return 3;
+            }
         }
-        if("".equals(numeroTelefonico)){
+        else{
             return 3;
         }
-        if("".equals(correoElectronico)){
+        //numero telefonico con 9 numeros.
+        if(!"".equals(numeroTelefonico)){
+            char[] aux = numeroTelefonico.toCharArray();
+            for(char c : aux){
+                int ascii = (int) c;
+                if( !((ascii >=48 && ascii <=57) )){
+                    return 4;
+                }
+            }
+            if(aux.length != 9){
+                return 4;
+            }            
+        }
+        else{
             return 4;
         }
-        if("".equals(cuentaBancaria)){
-            return 5;
+        //correo electronico. prefijo con letras, numeros. acepta 2 dominio, que pueden ser letras y numeros de cualquier largo, tambien acepta solo ".cl" y ".com"
+        if(!"".equals(correoElectronico)){
+            if(correoElectronico.contains("@")){
+                String[] arroba = correoElectronico.split("@");
+                if(arroba.length == 2 && !arroba[0].equals("")){
+                    char[] inicio= arroba[0].toCharArray();
+                    for(char c : inicio){
+                        int ascii = (int) c;
+                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)){
+                            return 5;
+                        }
+                    }                    
+                    String[] puntos = arroba[1].split("\\.");                    
+                    if((puntos.length == 2 || puntos.length == 3) && !puntos[0].equals("") && !puntos[1].equals("")){   
+                        if("cl".equals(puntos[puntos.length-1])  || "com".equals(puntos[puntos.length-1])){                            
+                            int i = 0;
+                            while(i < puntos.length-1){
+                                char[] dominio = puntos[i].toCharArray();
+                                for(char c : dominio){
+                                    int ascii = (int) c;
+                                    if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) )){
+                                        return 5;
+                                    }
+                                }
+                                i++;
+                            }
+                        }
+                        else{
+                            return 5;
+                        }
+                    }
+                    else{                        
+                        return 5;
+                    }
+                }       
+                else{
+                    return 5;
+                }
+            }
+            else{
+                return 5;
+            }    
         }
+        else{
+            return 5 ;
+        }
+        //cuenta bancaria de 20 digitos.
+        if(!"".equals(cuentaBancaria)){
+            cuentaBancaria = cuentaBancaria.replace(" ", "");
+                char[] aux = cuentaBancaria.toCharArray();
+                for(char c : aux){
+                    int ascii = (int) c;
+                    if( !((ascii >=48 && ascii <=57) )){
+                        return 6;
+                    }
+                }
+                if(aux.length !=20){
+                    return 6;
+                }         
+        }
+        else{
+            return 6;
+        }            
         return 0;
+    }
+    
+    public void actualizarInfomacion() throws SQLException{
+        Propietario usuario =(Propietario) this.papa.getControladorPrincipal().obtenerInformacionUsuario();
+        if(usuario==null){
+            return;
+        }
+        this.clave.setText("");
+        this.cuentaBancaria.setText("");
+        this.nombre.setText(usuario.getNombreCompleto());
+        this.numeroTelefonico.setText(usuario.getTelefono());
+        this.correoElectronico.setText(usuario.getCorreoElectronico());
     }
 
 }

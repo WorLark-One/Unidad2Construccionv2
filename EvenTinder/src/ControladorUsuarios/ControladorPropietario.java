@@ -1,6 +1,7 @@
 package ControladorUsuarios;
 
 import ModuloAutenticacion.ControlDeAcceso;
+import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.GestionDePropiedad;
 import ModuloGestionPropiedades.Propiedad;
 import java.sql.SQLException;
@@ -27,25 +28,20 @@ public class ControladorPropietario {
     }
 
     /**
-     * Implementacion en proximo incremento
-     */
-    public void aceptarSolicitud() {
-        // TODO implement here
-    }
-
-    /**
-     * Implementacion en proximo incremento
-     */
-    public void rechazarSolicitud() {
-        // TODO implement here
-    }
-
-    /**
-     * Metodo que pide y retorna la lista de las Propiedades existentes.
+     * Metodo que pide y retorna la lista de las Propiedades existentes de un Propietario.
      * @return El arreglo de Propiedades obtenidas.
+     * @throws java.sql.SQLException
      */
-    public ArrayList<Propiedad> mostrarInformacionDePropiedades() {
-        return this.gestorPropiedades.mostrarListaDePropiedades();
+    public ArrayList<Propiedad> mostrarInformacionDePropiedadesDeUnPropietario() throws SQLException {
+        return this.gestorPropiedades.mostrarListaDePropiedades(this.controlAcceso.getRut());
+    }
+    
+    /**
+     * Metodo que permite retornar todas las propiedades existentes en el sistema.
+     * @return Un arreglo con todas las propiedades registradas en el sistema.
+     */
+    public ArrayList<Propiedad> mostrarInformacionTodasLasPropiedades(){
+        return this.gestorPropiedades.obtenerInformacionDeTodasLasPropiedades();
     }
 
     /**
@@ -134,4 +130,46 @@ public class ControladorPropietario {
         return this.gestorPropiedades.eliminarSector(id, nombreActual);
     }
 
+    /**
+     * Metodo que permite aceptar una solicitud de propiedad asociada a un evento.
+     * @param idEvento El id del evento del cual se desea aceptar una solicitud.
+     * @return True si se acepto la solicitud con exito. False si no se pudo aceptar la solicitud.
+     */
+    public boolean aceptarSolicitud(int idEvento) {
+        return this.gestorPropiedades.aceptarSolicitud(idEvento);
+    }
+
+    /**
+     * Metodo que permite rechazar una solicitud de propiedad asociada a un evento, y por lo tanto, eliminarla del sistema.
+     * @param idEvento 
+     * @return True si se rechaza la solicitud con exito. False si no se pudo rechazar la solicitud.
+     */
+    public boolean rechazarSolicitud( int idEvento) {
+        return this.gestorPropiedades.rechazarSolicitud(idEvento);
+    }
+
+    /**
+     * Metodo que permite obtener todas las solicitudes de propiedad asociadas a un Propietario.
+     * @return Un arreglo con los eventos que tienen solicitudes a propiedades pertenecientes al propietario actualmente ingresado en el sistema.
+     */
+    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos() {        
+        return this.gestorPropiedades.obtenerInformacionSolicitudesDeEventos(this.controlAcceso.getRut());
+    }
+    
+    
+    /**
+     * Metodo que permite obtener la informacion de los eventos actuales asociados al propietario actual.
+     * @return Un arreglo con los eventos actuales asociados al propietario actual.
+     */
+    public ArrayList<Evento> obtenerInformacionDeEventosActuales() {
+        return this.gestorPropiedades.obtenerInformacionDeEventosActuales(this.controlAcceso.getRut());
+    }
+
+    /**
+     * Metodo que permite obtener la informacion de los eventos finalizados asociados al propietario actual.
+     * @return Un arreglo con los eventos finalizados asociados al propietario actual.
+     */
+    public ArrayList<Evento> obtenerInformacionDeEventosFinalizados() {
+        return this.gestorPropiedades.obtenerInformacionDeEventosFinalizados(this.controlAcceso.getRut());
+    }
 }

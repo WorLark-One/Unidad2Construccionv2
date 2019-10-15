@@ -6,6 +6,7 @@
 package VistasSistema.VistaPropietario;
 
 import ModuloGestionPropiedades.Propiedad;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JScrollPane;
@@ -24,7 +25,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
     private ArrayList<Propiedad> propiedades;
     private DefaultListModel modeloLista;
     
-    public PanelListaDePropiedades(VentanaPrincipalPropietario papa) {
+    public PanelListaDePropiedades(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
         initComponents();
         
@@ -68,7 +69,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         cantidadDeSectores = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setLayout(new java.awt.GridLayout());
+        setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -77,24 +78,21 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        opciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         opciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opcionesActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("1. Seleccione la propiedad");
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel5.setText("1. Seleccione una propiedad");
 
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Descripcion de la propiedad");
 
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Lista de sectores");
 
-        listaSectores.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(listaSectores);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -318,17 +316,27 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
     private void opcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionesActionPerformed
         // TODO add your handling code here:
         System.out.println(opciones.getSelectedIndex());
-        if(opciones.getSelectedIndex()!=-1){
+        if(opciones.getSelectedIndex()==0){
+            this.nombre.setText("Nombre: " );
+            this.descripcion.setText("descripcion: ");
+            this.ubicacion.setText("ubicacion: ");
+            this.capacidadTotal.setText("capacidadTotal: ");
+            this.cantidadDeSectores.setText("cantidadDeSectores: ");
+            this.valorArriendo.setText("valorArriendo: ");
+            this.listaSectores.removeAll();
+            return;
+        }
+        if(opciones.getSelectedIndex()>0){
             this.listaSectores.removeAll();
             this.modeloLista=new DefaultListModel();
-            this.nombre.setText("Nombre: " + this.propiedades.get(opciones.getSelectedIndex()).getNombre());
-            this.descripcion.setText("descripcion: " + this.propiedades.get(opciones.getSelectedIndex()).getDescripcion());
-            this.ubicacion.setText("ubicacion: "+ this.propiedades.get(opciones.getSelectedIndex()).getUbicacion());
-            this.capacidadTotal.setText("capacidadTotal: "+ this.propiedades.get(opciones.getSelectedIndex()).getCapacidadTotal());
-            this.cantidadDeSectores.setText("cantidadDeSectores: "+ this.propiedades.get(opciones.getSelectedIndex()).getListaSectores().size());
-            this.valorArriendo.setText("valorArriendo: "+ this.propiedades.get(opciones.getSelectedIndex()).getValorArriendo());
-            for(int i=0;i<this.propiedades.get(opciones.getSelectedIndex()).getListaSectores().size();i++){
-                this.modeloLista.addElement("Nombre sector: " + this.propiedades.get(opciones.getSelectedIndex()).getListaSectores().get(i).getNombre() + "  Capacidad: " + this.propiedades.get(opciones.getSelectedIndex()).getListaSectores().get(i).getCapacidadDelSector());
+            this.nombre.setText("Nombre: " + this.propiedades.get(opciones.getSelectedIndex()-1).getNombre());
+            this.descripcion.setText("descripcion: " + this.propiedades.get(opciones.getSelectedIndex()-1).getDescripcion());
+            this.ubicacion.setText("ubicacion: "+ this.propiedades.get(opciones.getSelectedIndex()-1).getUbicacion());
+            this.capacidadTotal.setText("capacidadTotal: "+ this.propiedades.get(opciones.getSelectedIndex()-1).getCapacidadTotal());
+            this.cantidadDeSectores.setText("cantidadDeSectores: "+ this.propiedades.get(opciones.getSelectedIndex()-1).getListaSectores().size());
+            this.valorArriendo.setText("valorArriendo: "+ this.propiedades.get(opciones.getSelectedIndex()-1).getValorArriendo());
+            for(int i=0;i<this.propiedades.get(opciones.getSelectedIndex()-1).getListaSectores().size();i++){
+                this.modeloLista.addElement("Nombre sector: " + this.propiedades.get(opciones.getSelectedIndex()-1).getListaSectores().get(i).getNombre() + "  Capacidad: " + this.propiedades.get(opciones.getSelectedIndex()-1).getListaSectores().get(i).getCapacidadDelSector());
             }
             this.listaSectores.setModel(this.modeloLista);
         }
@@ -373,14 +381,15 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
      */
  
     // no se puede hacer tdd ya que necesita otro metodo
-    private void actualizarMenuOpciones(){
-        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedades();
+    private void actualizarMenuOpciones() throws SQLException{
+        this.propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
         opciones.removeAllItems();
         this.listaSectores.setModel(this.modeloLista);
         this.listaSectores.removeAll();
+        opciones.addItem("");
         if(this.propiedades!=null){
             for(int i=0; i<this.propiedades.size(); i++){
-                opciones.addItem("Nombre : " + this.propiedades.get(i).getNombre());
+                opciones.addItem(this.propiedades.get(i).getNombre());
             }
             this.repaint();
             this.revalidate();

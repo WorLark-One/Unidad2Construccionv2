@@ -35,6 +35,7 @@ public class GestionDeUsuario {
      *          False si el Usuario ya existe o los datos son erroneos.
      * @throws java.sql.SQLException
      */
+    //posible error capa 8
     public boolean crearUsuario(String tipoUsuario, String nombreUsuario, 
             String rutUsuario,String contraseña, String correoElectronico,
             String telefono,String tarjeta) throws SQLException {
@@ -86,5 +87,34 @@ public class GestionDeUsuario {
         
         return this.controlador.eliminarUsuario(tipoUsuario,rutUsuario);
     }
-
+    
+    /**
+     * Metodo que permie obtener la informacion de un Usuario Cliente.
+     * @param rut El rut del cliente del cual se desea consultar su informacion.
+     * @return La informacion del cliente consultado.
+     * @throws SQLException 
+     */
+    public Cliente obtenerInformacionCliente(String rut) throws SQLException{
+        return this.controlador.obtenerInformacionCliente(rut);
+    }
+    
+    /**
+     * Metodo que permie obtener la informacion de un Usuario Propietario.
+     * @param rut El rut del Propietario del cual se desea consultar su informacion.
+     * @return La informacion del Propietario consultado.
+     * @throws SQLException 
+     */
+    public Propietario obtenerInformacionPropietario(String rut) throws SQLException{
+        return this.controlador.obtenerInformacionPropietario(rut);
+    }
+    
+    /**
+     * Metodo que permie obtener la informacion de un Usuario Organizador.
+     * @param rut El rut del Organizador del cual se desea consultar su informacion.
+     * @return La informacion del Organizador consultado.
+     * @throws SQLException 
+     */
+    public Organizador obtenerInformacionOrganizador(String rut) throws SQLException{
+        return this.controlador.obtenerInformacionOrganizador(rut);
+    }
 }

@@ -11,6 +11,7 @@ import org.junit.Test;
  *
  * @author crist
  */
+// control de acceso esta como privado
 public class TestControlDeAcceso {
     ControlDeAcceso c = new ControlDeAcceso();
     int contador = 0;
@@ -27,8 +28,7 @@ public class TestControlDeAcceso {
         }
         assertEquals(1, contador);
     }
-  //  @Test
-    /*
+    @Test  
     public void probarObtencioDeCredencial(){
         String tipoUsuario = "organizador";
         String rut = "17586721k";
@@ -45,5 +45,5 @@ public class TestControlDeAcceso {
             seteado = true;
         }
         assertEquals(false, seteado);
-    }*/
+    }
 }

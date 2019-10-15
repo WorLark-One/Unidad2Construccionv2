@@ -2,6 +2,7 @@ package ControladorUsuarios;
 
 import ModuloAutenticacion.ControlDeAcceso;
 import ModuloGestionUsuario.GestionDeUsuario;
+import ModuloGestionUsuario.Usuario;
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -50,6 +51,7 @@ public class ControladorPrincipal {
      *          False si el usuario no pudo ser creado.
      * @throws java.sql.SQLException 
      */
+    //posible error capa 8
     public boolean crearUsuario(String tipoUsuario, String nombreUsuario, 
             String rutUsuario,String contraseña, String correoElectronico,
             String telefono,String tarjeta)
@@ -105,6 +107,26 @@ public class ControladorPrincipal {
                     + "actualmente ingresado en el sistema ");
             return false;
         }
+    }
+    
+    
+    /**
+     * Metodo que permite obtener la informacion de un usuario especifico, mediante su RUT.
+     * 
+     * @return La informacion asociada a un usuario especifico.
+     * @throws SQLException 
+     */
+    public Usuario obtenerInformacionUsuario() throws SQLException{
+        if(this.controlAcceso.getTipoUsuario().equals("cliente")){
+            return this.gestorUsuarios.obtenerInformacionCliente(this.controlAcceso.getRut());
+        }
+        if(this.controlAcceso.getTipoUsuario().equals("propietario")){
+            return this.gestorUsuarios.obtenerInformacionPropietario(this.controlAcceso.getRut());
+        }
+        if(this.controlAcceso.getTipoUsuario().equals("organizador")){
+            return this.gestorUsuarios.obtenerInformacionOrganizador(this.controlAcceso.getRut());
+        }
+        return null;
     }
 
     
