@@ -27,7 +27,8 @@ public class GestionDePropiedad {
 
     /**
      * Metodo que retorna la lista de todas las Propiedades que posee el Propietario hasta el momento.
-     * @param rut
+     * 
+     * @param rut El rut del propietario del cual se necesitan las propiedades.
      * @return La lista de las propiedades del Propietario que esta conectado al sistema.
      * @throws java.sql.SQLException
      */
@@ -35,6 +36,10 @@ public class GestionDePropiedad {
         return this.controlador.obtenerInformacionDePropiedades(rut);
     }
     
+    /**
+     * Metodo que permite obtener la informacion de todas las propiedades registradas en el sistema.
+     * @return Un arreglo con todas las propiedades que existan en el sistema.
+     */
     public ArrayList<Propiedad> obtenerInformacionDeTodasLasPropiedades(){
         return this.gestorEventos.obtenerInformacionPropiedades();
     }
@@ -215,33 +220,48 @@ public class GestionDePropiedad {
         this.listaPropiedades = listaPropiedades;
     }
     
-        /**
-     * @param idEvento 
-     * @return
+    /**
+     * Metodo que permite aceptar una solicitud de propiedad de un evento.
+     * @param idEvento El id del evento que se desea aceptar.
+     * @return True si se acepto la solicitud con exito. False si no se pudo aceptar la solicitud.
      */
     public boolean aceptarSolicitud(int idEvento) {
         return this.gestorEventos.aceptarSolicitud(idEvento);
     }
 
-    /**
-     * @param idEvento 
-     * @return
+    /** 
+     * Metodo que permite rechazar una solicitud, y por lo tanto, eliminarla del sistema
+     * @param idEvento El id del evento al cual se desea rechazar la solicitud.
+     * @return True si se rechazo la solicitud con exito. False si no se pudo rechazar la solicitud.
      */
     public boolean rechazarSolicitud(int idEvento) {
         return this.gestorEventos.eliminarEvento(idEvento);
     }
 
     /**
-     * @param rut
-     * @return
+     * Metodo que retorna todas las solicitudes de eventos asociadas a un propietario especifico.
+     * 
+     * @param rut El rut del propietario.
+     * @return Un arreglo con los eventos que tienen solicitudes hacia el propietario.
      */
     public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos(String rut) {
         return this.gestorEventos.obtenerInformacionSolicitudesDeEventos(rut);
     }
-            
+     
+    /**
+     * Metodo que retorna la informacion de los eventos actuales asociados a un propietario.
+     * @param rutPropietario El rut del propietario consultado.
+     * @return Un arreglo con los eventos actuales asociados al propietario.
+     */
     public ArrayList<Evento> obtenerInformacionDeEventosActuales(String rutPropietario) {
         return this.gestorEventos.obtenerInformacionDeEventosActualesPropietario(rutPropietario);
     }
+    
+    /**
+     * Metodo que retorna la informacion de los eventos finalizados asociados a un propietario.
+     * @param rutPropietario El rut del propietario consultado.
+     * @return Un arreglo con los eventos finalizados asociados a un propietario.
+     */
     public ArrayList<Evento> obtenerInformacionDeEventosFinalizados(String rutPropietario) {        
         return this.gestorEventos.obtenerInformacionDeEventosFinalizadosPropietario(rutPropietario);
     }

@@ -9,6 +9,7 @@ import ModuloGestionUsuario.Organizador;
 import ModuloGestionUsuario.Usuario;
 import VistasSistema.VistaPropietario.PanelModificarPropietario;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -263,19 +264,35 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
     */
     
     /**
-     * 
-     * @param clave
-     * @param numeroTelefonico
-     * @param correoElectronico
-     * @param tarjetaDeCredito
-     * @return 
+     * Metodo que verifica la correctitud de los datos ingresados en el sistema por el usuario para modificar una cuenta organizador.
+     * @param nombre el nombre ingresado.
+     * @param clave La clave ingresada.
+     * @param numeroTelefonico El numero telefonico ingresado.
+     * @param correoElectronico El correo electronico ingresado.
+     * @param tarjetaDeCredito La tarjetra de credito ingresada.
+     * @return Un numero que indica cual de los datos ingresados esta erroneo.
      */
     public int validarModificarOrganizador (String nombre, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito){                                               
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32);
+        //Nombre con letras mayusculas, minusculas, tildes, y n con colita.
         if(!"".equals(nombre)){
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
+                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || caracteres.contains(ascii))) {
                     return 1;
                 }
             }  
@@ -283,6 +300,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 1;
         }
+        //clave con letras y numeros, minimo 8 caracteres
         if(!"".equals(clave)){
             char[] aux = clave.toCharArray();
             for(char c : aux){
@@ -298,6 +316,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 3;
         }
+        //numero telefonico con 9 numeros.
         if(!"".equals(numeroTelefonico)){
             char[] aux = numeroTelefonico.toCharArray();
             for(char c : aux){
@@ -313,6 +332,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 4;
         }
+        //correo electronico. prefijo con letras, numeros. acepta 2 dominio, que pueden ser letras y numeros de cualquier largo, tambien acepta solo ".cl" y ".com"
         if(!"".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
                 String[] arroba = correoElectronico.split("@");
@@ -320,7 +340,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
                     char[] inicio= arroba[0].toCharArray();
                     for(char c : inicio){
                         int ascii = (int) c;
-                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)){
+                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || caracteres.contains(ascii))){
                             return 5;
                         }
                     }                    
@@ -358,6 +378,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 5;
         }
+        // tarjeta de credito de 16 numero
         if(!"".equals(tarjetaDeCredito)){
             tarjetaDeCredito = tarjetaDeCredito.replace(" ", "");
             char[] aux = tarjetaDeCredito.toCharArray();                

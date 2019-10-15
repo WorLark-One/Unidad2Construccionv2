@@ -36,17 +36,18 @@ public class GestionDePropiedadTestRuben {
     }
     
     @Test
-    public void mostrarListaDePropiedades() { 
+    public void mostrarListaDePropiedades() throws SQLException { 
         GestionDePropiedad instance = new GestionDePropiedad();
         
-       ArrayList<Propiedad> p= instance.mostrarListaDePropiedades();
+        String rut = "";
+       ArrayList<Propiedad> p= instance.mostrarListaDePropiedades(rut);
        
        for (Propiedad pro: p) {
            System.out.println(pro.getNombre() + " " + pro.getId() + " " + pro.getDescripcion());
        }
 
     }
-/*
+
     @Test
     public void mostrarPropiedad() {
         GestionDePropiedad instance = new GestionDePropiedad();
@@ -55,7 +56,7 @@ public class GestionDePropiedadTestRuben {
        
         System.out.println(p.getId() + " " + p.getNombre());
     }
-*/
+
 
     @Test
     public void obtenerInformacionDePropiedades() throws SQLException {
@@ -68,7 +69,7 @@ public class GestionDePropiedadTestRuben {
      * Test of registrarPropiedad method, of class GestionDePropiedad.
      */
     
-    /*
+    
     @Test
     public void testRegistrarPropiedad() throws SQLException {
         System.out.println("registrarPropiedad");
@@ -116,7 +117,7 @@ public class GestionDePropiedadTestRuben {
      * Test of eliminarPropiedad method, of class GestionDePropiedad.
      */
     
-    /*
+    
     @Test
     public void testEliminarPropiedad() throws SQLException {
         System.out.println("eliminarPropiedad");
@@ -131,11 +132,11 @@ public class GestionDePropiedadTestRuben {
         assertNull(instance.mostrarPropiedad(id));
         
     }
-*/
+
     /**
      * Test of añadirSector method, of class GestionDePropiedad.
      */
-    /*
+    
     @Test
     public void testAñadirSector() throws SQLException {
         System.out.println("añadirSector");               
@@ -154,8 +155,7 @@ public class GestionDePropiedadTestRuben {
     /**
      * Test of modificarSector method, of class GestionDePropiedad.
      */
-
-    /*
+    
     @Test
     public void testModificarSector() throws SQLException {
         System.out.println("modificarSector");
@@ -177,7 +177,7 @@ public class GestionDePropiedadTestRuben {
     
      //* Test of eliminarSector method, of class GestionDePropiedad.
      
-    /*
+    
     @Test
     public void testEliminarSector() throws SQLException {
         System.out.println("eliminarSector");
@@ -191,7 +191,7 @@ public class GestionDePropiedadTestRuben {
         boolean result = instance.eliminarSector(id,nombreActual);
         assertEquals(expResult, result);
     }
-    */
+    
     
 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistasSistemaVistaPropietario;
+package VistasSistema.VistaPropietario;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import VistasSistema.VistaPropietario.PanelModificarSector;
@@ -12,9 +12,9 @@ import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
  *
  * @author crist
  */
+// en PanelModificarSector se debe hacer static validarEntrada
 public class TestPanelModificarSector {
-    VentanaPrincipalPropietario papa = new VentanaPrincipalPropietario();;
-    PanelModificarSector msector = new PanelModificarSector(papa, 1); // para las pruebas
+    PanelModificarSector msector = null;// para las pruebas
     
     public TestPanelModificarSector(){
     }

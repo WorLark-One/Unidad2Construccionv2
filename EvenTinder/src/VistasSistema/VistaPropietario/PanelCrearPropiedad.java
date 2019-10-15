@@ -487,11 +487,26 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
       * @return 
       */
     public int validarEntradaSector(String nombre, String capacidad) {
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32);
+        //nombre con letras, numeros, tildes, mayusculas y minusculas.
         if(!nombre.equals("")){
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
+                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57)||caracteres.contains(ascii))) {
                     return 1;
                 }
             }
@@ -502,6 +517,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 1;
         }
+        // capacidad que puede ser cualquier numero aceptado por una variable tipo int  (2,147,483,647)
         if(!capacidad.equals("") && isNumero(capacidad)){
             try{
                 Integer.parseInt(capacidad);                
@@ -515,23 +531,39 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         return 0;
     }
 
+
     /**
-     * 
-     * @param nombre
-     * @param descripcion
-     * @param ubicacion
-     * @param capacidadTotal
-     * @param nSectores
-     * @param valorArriendo
-     * @param finalizar
-     * @return 
+     * Metodo que valida los datos ingresados al registrar una propiedad.
+     * @param nombre el nombre ingresado.
+     * @param descripcion la descripcion ingresada.
+     * @param ubicacion la ubicacion ingresada.
+     * @param capacidadTotal La capacidad total calculada.
+     * @param valorArriendo el valor de arriendo ingresado.
+     * @param finalizar si el evento esta finalizado o no (siempre false).
+     * @return Un numero que indica el campo que se ingreso de manera incorrecta.
      */
+    
     public int validarEntradaPropiedad(String nombre, String descripcion, String ubicacion, String capacidadTotal, String valorArriendo, boolean finalizar) {
+        //nombre con letras mayusculas, minusculas, numeros, tildes.
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32);
         if(!nombre.equals("")){ 
-            char[] aux = nombre.toCharArray();
+            char[] aux = nombre.toCharArray();            
             for(char c : aux){                
-                int ascii = (int) c;
-                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
+                int ascii = (int) c;                
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57)|| caracteres.contains(ascii))) {                    
                     return 1;
                 }
             } 
@@ -542,6 +574,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 1;
         }
+        //descripcion que acepta cualquier caracter. no puede superar los 500 caracteres.
         if(!descripcion.equals("")){
             char[] aux = descripcion.toCharArray();
             if(aux.length >=500){
@@ -551,6 +584,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 2;
         }
+        //ubicacion que acepta cualquier caracter. no puede superar los 500 caracteres.
         if(!ubicacion.equals("")){
             char[] aux = ubicacion.toCharArray();
             if(aux.length >=100){
@@ -560,9 +594,12 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 3;
         }           
-        if(!valorArriendo.equals("") && isNumero(valorArriendo)){
+        //valor de arriendo, que acepta cualquier valor que acepte una variable de tipo int (2,147,483,647).
+        if(!valorArriendo.equals("") ){
             try{
-                Integer.parseInt(valorArriendo);                
+                if (!isNumero(valorArriendo)) {
+                    return 5;
+                }      
             }
             catch(NumberFormatException nfe){
                 return 5;
@@ -576,7 +613,6 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         }
         return 0;
     }
-    
         /**
      * Método que se encarga de verificar que los numeros ingresados son numeros validos
      */

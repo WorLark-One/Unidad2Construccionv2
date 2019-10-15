@@ -23,7 +23,9 @@ public class ControladorBDDeEventos {
         this.propiedades = new ControladorBDDePropiedades();
         iniciarlizarBD();
     }
-
+    /**
+     * Inicializa las tablas de la base de datos.
+     */
     public void iniciarlizarBD() {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
@@ -63,9 +65,7 @@ public class ControladorBDDeEventos {
                     String sql = "insert into evento values(DEFAULT,'" + nombre + "','" + descripcion + "','" + fechaDeInicio + "','" + fechaDeTermino + "',\n"
                             + " " + capacidad + ", " + diasMaximoDevolucion + " ," + publicado + ",'" + rutOrganizador + "')"
                             + " RETURNING id";
-                    //             System.out.println(sql);
                     ResultSet resultado = st.executeQuery(sql);
-                    System.out.println("hola");
                     while (resultado.next()) {
                         int idEvento = Integer.parseInt(resultado.getString("id"));
                         boolean Celebra = tablaCelebra(miConexion, idEvento, idPropiedad);
@@ -175,7 +175,7 @@ public class ControladorBDDeEventos {
      */
     public boolean modificarEvento(int idEvento, String nuevoNombre, String nuevaDescripcion, Date nuevaFechaDeInicio, Date nuevaFechaDeTermino, int nuevaCapacidad, int nuevosDiasMaximoDevolucion, boolean nuevoPublicado) {
         this.conexion.crearConexion();
-        boolean aceptado;
+ //       boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
             boolean EstadoEvento = obtenerPublicadoDeEvento(miConexion, idEvento);
@@ -258,9 +258,9 @@ public class ControladorBDDeEventos {
     /**
      * Obtiene el atributo publicado de un evento.
      *
-     * @param conexion
-     * @param idEvento
-     * @return boolean.
+     * @param conexion: conexion con la base de datos
+     * @param idEvento: identificador de un evento
+     * @return true si el evento esta publicado,false de lo contrario.
      */
     private boolean obtenerPublicadoDeEvento(Connection conexion, int idEvento) {
         Connection miConexion = conexion;
@@ -269,7 +269,6 @@ public class ControladorBDDeEventos {
 
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "select * from evento where evento.id=" + idEvento + "";
-                //      System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     boolean publicado = resultado.getBoolean("publicado");
@@ -278,7 +277,6 @@ public class ControladorBDDeEventos {
                 st.close();
 
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
                 //System.out.println("error conexion");
 
                 return false;
@@ -289,7 +287,7 @@ public class ControladorBDDeEventos {
     }
 
     /**
-     * elimina un evento de la base de datos, ademas de borrar la asociacion de
+     * Elimina un evento de la base de datos, ademas de borrar la asociacion de
      * una propiedad con unn evento.
      *
      * @param idEvento
@@ -306,18 +304,16 @@ public class ControladorBDDeEventos {
                     eliminarAsociacionEventoPropiedad(miConexion, idEvento);
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "delete from evento where evento.id=" + idEvento + "";
-                            System.out.println(sql);
                     st.executeUpdate(sql);
                     st.close();
                     return true;
                 } catch (SQLException e) {
-                          System.out.println("ERROR DE CONEXION: eliminar evento (desde la tabla de usuario)" + e);
+        //                  System.out.println("ERROR DE CONEXION: eliminar evento (desde la tabla de usuario)" + e);
                     return false;
                 } finally {
                     try {
                         this.conexion.cerrarBaseDeDatos(miConexion);
                     } catch (SQLException ex) {
-                        //Logger.getLogger(ControladorBDDeEventos.class.getName()).log(Level.SEVERE, null, ex);
                         //        System.out.println("No se cerro satisfactoriamente la base de datos.");
                     }
                 }
@@ -375,7 +371,6 @@ public class ControladorBDDeEventos {
                 try {
                     this.conexion.cerrarBaseDeDatos(miConexion);
                 } catch (SQLException ex) {
-                    //Logger.getLogger(ControladorBDDeEventos.class.getName()).log(Level.SEVERE, null, ex);
                     //System.out.println("No se cerro la base de datos satisfactoriamente");
                 }
             }
@@ -383,7 +378,12 @@ public class ControladorBDDeEventos {
         }
         return null;
     }
-
+/**
+ * Obtienen el identificador de una propiedad.
+ * @param conexion: conexion con la base de datos
+ * @param idEvento: identificador de un evento.
+ * @return identificador de la propiedad.
+ */
     public int obtenerIdDePropiedadDondeSeRealizaEvento(Connection conexion, int idEvento) {
         Connection miConexion = this.conexion.getConexion();
 
@@ -394,7 +394,6 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
 
                 String sql = "select * from  celebra where celebra.refevento=" + idEvento + "";
-                //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int id = Integer.parseInt(resultado.getString("refpropiedad"));
@@ -428,10 +427,8 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
 
                 String sql = "select * from evento where evento.publicado=true and evento.reforganizador='" + rutOrganizador + "'";
-                //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    // obtengo la informacion del cliente.
                     int idEvento = Integer.parseInt(resultado.getString("id"));
                     String nombre = resultado.getString("nombre");
                     String descripcion = resultado.getString("descripcion");
@@ -674,11 +671,11 @@ public class ControladorBDDeEventos {
                         + "inner join celebra on propiedad.id= celebra.refpropiedad\n"
                         + "inner join evento on evento.id= celebra.refevento\n"
                         + "where propietario.rut='" + rutPropietario + "' and evento.publicado=false";
-                System.out.println(sql);
+                //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idEvento = Integer.parseInt(resultado.getString("id"));
-                    System.out.println("ide evento:" + idEvento);
+                    //System.out.println("ide evento:" + idEvento);
                     String nombre = resultado.getString("nombre");
                     String descripcion = resultado.getString("descripcion");
                     Date fechaInicio = resultado.getDate("fechainicio");
@@ -688,7 +685,7 @@ public class ControladorBDDeEventos {
                     boolean publicado = resultado.getBoolean("publicado");
 
                     int idPropiedad = obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
-                    System.out.println("nombre del evento:" + nombre + " id propiedad: " + idPropiedad);
+                   // System.out.println("nombre del evento:" + nombre + " id propiedad: " + idPropiedad);
                     Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
                     miEvento.setIdPropiedad(idPropiedad);
                     eventos.add(miEvento);
@@ -737,10 +734,9 @@ public class ControladorBDDeEventos {
                         + "inner join celebra on propiedad.id= celebra.refpropiedad\n"
                         + "inner join evento on evento.id= celebra.refevento\n"
                         + "where propietario.rut='" + rutPropietario + "' and evento.publicado=true";
-                System.out.println(sql);
+                //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    // obtengo la informacion del cliente.
                     int idEvento = Integer.parseInt(resultado.getString("id"));
                     String nombre = resultado.getString("nombre");
                     String descripcion = resultado.getString("descripcion");
@@ -798,10 +794,9 @@ public class ControladorBDDeEventos {
                         + "inner join celebra on propiedad.id= celebra.refpropiedad\n"
                         + "inner join evento on evento.id= celebra.refevento\n"
                         + "where propietario.rut='" + rutPropietario + "' and evento.fechatermino <= '" + fecha + "'::date";
-                System.out.println(sql);
+               // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    // obtengo la informacion del cliente.
                     int idEvento = Integer.parseInt(resultado.getString("id"));
                     String nombre = resultado.getString("nombre");
                     String descripcion = resultado.getString("descripcion");
@@ -857,7 +852,7 @@ public class ControladorBDDeEventos {
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     String rutCliente = resultado.getString("rut");
-                    System.out.println("rut propietario: " + rutCliente);
+                   // System.out.println("rut propietario: " + rutCliente);
 
                     aux = this.propiedades.obtenerInformacionDePropiedades(rutCliente);
                     if (aux != null) {
@@ -900,7 +895,7 @@ public class ControladorBDDeEventos {
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
             int nombreRepetido = estaCreadaEntradaPrueba(conexion);
-            System.out.println("repetido: ==============" + nombreRepetido);
+            //System.out.println("repetido: ==============" + nombreRepetido);
             if (nombreRepetido == 0) {
                 try {
 
@@ -943,12 +938,12 @@ public class ControladorBDDeEventos {
 
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "select * from entrada where  entrada.vendida=false";
-                System.out.println(sql);
+               // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idEvento = Integer.parseInt(resultado.getString("id"));
                     st.close();
-                    System.out.println("el numero de la entrada es :"+idEvento);
+                 //   System.out.println("el numero de la entrada es :"+idEvento);
                     return idEvento;//esta creada la entrada
                 }
 
@@ -1014,7 +1009,7 @@ public class ControladorBDDeEventos {
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "update  asociacion set precio="+nuevoPrecioEntrada+" where asociacion.refevento="+idEvento+" and\n"
                             + "asociacion.refsector='"+nombreSector+"' and asociacion.refpropiedad="+idPropiedad+"";
-                    System.out.println(sql);
+                    //System.out.println(sql);
                     st.executeUpdate(sql);
                     st.close();
                 } catch (SQLException e) {
@@ -1042,12 +1037,12 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
                 int idEntrada = crearEntradaPrueba(miConexion);
                 String sql = "select asociacion.precio from asociacion where asociacion.refevento=" + idEvento + " and asociacion.refentrada=" + idEntrada + " and asociacion.refsector='" + nombreSector + "' and asociacion.refpropiedad=" + idPropiedad + "";
-                System.out.println(sql);
+               // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
 
                     int precio = resultado.getInt("precio");
-                    System.out.println("precio:" + precio);
+                    //System.out.println("precio:" + precio);
                     resultado.close();
                     st.close();
                     return precio;
