@@ -207,12 +207,12 @@ public class ControladorBDDePropiedades {
                         + "valorarriendo='"+nuevoValorDeArriendo+"',descripcion='"+nuevaDescripcion+"'"
                         + "where propiedad.id="+id+" ";
                 st.executeUpdate(sql);
-                System.out.println(sql);
+                //System.out.println(sql);
                 st.close();
                 return true;
 
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                System.out.println("ERROR AL MODIFICAR LA INFORMACION DE UNA PROPIEDAD" + e);
                 return false;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
@@ -272,27 +272,21 @@ public class ControladorBDDePropiedades {
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
-
             try {
 
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "insert into sector values('" + nombreSector + "'," + capacidad + "," + idPropiedad + ")";
-                System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
                 return true;
 
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
-                
-                System.out.println("error");
+                System.out.println("Error al añadir un sector.");
                 return false;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
-
             }
         }
-        System.out.println("esta la caga");
         return false;
     }
 
@@ -320,7 +314,7 @@ public class ControladorBDDePropiedades {
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: eliminar cliente (desde la tabla de usuario)" + e);
+                System.out.println("ERROR AL ELIMINAR UN SECTOR: )" + e);
                 return false;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
@@ -351,12 +345,11 @@ public class ControladorBDDePropiedades {
                 String sql = " UPDATE sector SET nombre='" + nuevoNombre + "',capacidad=" + nuevaCapacidad + " \n"
                         + "where nombre ='" + nombreSector + "' and sector.refpropiedad=" + idPropiedad + " ";
                 st.executeUpdate(sql);
-
                 st.close();
                 return true;
 
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                System.out.println("ERROR MODIFICAR SECTOR" + e);
                 return false;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
@@ -402,7 +395,7 @@ public class ControladorBDDePropiedades {
                 st.close();
 
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                System.out.println("ERROR AL OBTENER INFORMACION DE UN SECTOR");
                 return null;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
@@ -445,7 +438,7 @@ public class ControladorBDDePropiedades {
                 st.close();
 
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                System.out.println("ERROR AL OBTENER INFORMACION DE SECTORES.");
                 return null;
             } finally {
                 this.conexion.cerrarBaseDeDatos(miConexion);
