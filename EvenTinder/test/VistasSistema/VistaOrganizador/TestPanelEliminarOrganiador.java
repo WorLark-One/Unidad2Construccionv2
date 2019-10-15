@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VistaSistemaVistaOrganizador;
+package VistasSistema.VistaOrganizador;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import VistasSistema.VistaOrganizador.VentanaPrincipalOrganizador;
@@ -12,9 +12,9 @@ import VistasSistema.VistaOrganizador.PanelEliminarOrganizador;
  *
  * @author crist
  */
+//en PanelEliminarOrganizador se debe hacer static validarDatosEliminarOrganizador
 public class TestPanelEliminarOrganiador {
-    VentanaPrincipalOrganizador papa = new VentanaPrincipalOrganizador();
-    PanelEliminarOrganizador peo = new PanelEliminarOrganizador(papa);
+    PanelEliminarOrganizador peo = null;
     
     public TestPanelEliminarOrganiador(){}
     
