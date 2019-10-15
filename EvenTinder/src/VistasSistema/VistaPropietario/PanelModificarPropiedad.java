@@ -454,17 +454,16 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         this.listaOpciones.addItem("Eliminar Sector");
     }
     
-    /**
-     * 
-     * @param nombre
-     * @param descripcion
-     * @param ubicacion
-     * @param nSectores
-     * @param valorArriendo
-     * @param finalizar
-     * @return 
+ /**
+     * Metodo que valida los datos ingresados al modificar una propiedad.
+     * @param nombre el nombre ingresado.
+     * @param descripcion la descripcion ingresada.
+     * @param ubicacion la ubicacion ingresada.
+     * @param valorArriendo el valor de arriendo ingresado.
+     * @return Un numero que indica el campo que se ingreso de manera incorrecta.
      */
     public int validarEntrada(String nombre, String descripcion, String ubicacion, String valorArriendo) {
+        //nombre con letras mayusculas, minusculas, numeros, tildes.
         if(!nombre.equals("")){
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
@@ -480,6 +479,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         else{
             return 1;
         }
+        //descripcion que acepta cualquier caracter. no puede superar los 500 caracteres.
         if(!descripcion.equals("")){
             char[] aux = descripcion.toCharArray();
             if(aux.length >=500){
@@ -489,6 +489,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         else{
             return 2;
         }
+        //ubicacion que acepta cualquier caracter. no puede superar los 500 caracteres.
         if(!ubicacion.equals("")){
             char[] aux = ubicacion.toCharArray();
             if(aux.length >=100){
@@ -498,6 +499,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         else{
             return 3;
         }
+        //valor de arriendo, que acepta cualquier valor que acepte una variable de tipo int (2,147,483,647).
         if(!valorArriendo.equals("") && isNumero(valorArriendo)){
             try{
                 Integer.parseInt(valorArriendo);                
