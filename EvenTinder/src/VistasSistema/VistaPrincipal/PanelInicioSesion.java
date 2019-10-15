@@ -197,7 +197,7 @@ public class PanelInicioSesion extends javax.swing.JPanel {
         }
         if(resp==2){
             JOptionPane.showMessageDialog(null, "Se espera que el rut tenga entre entre sea: nnn nnn nnn - nok \n" + 
-                    "Ej: 11111111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+                    "Ej: 11.111.111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if(resp==3){
