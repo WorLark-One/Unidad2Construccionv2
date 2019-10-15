@@ -6,6 +6,7 @@
 package VistasSistema.VistaPrincipal;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -439,13 +440,27 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
      * @return Un numero que indica cual de los datos ingresados esta erroneo.
      */
     public int validarResgistro(String tipoUsuario, String nombre, String rut, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito, String CuentaBancaria) {                                               
-        
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32);
         //Nombre con letras mayusculas, minusculas, tildes, y n con colita.
         if(!"".equals(nombre)){
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
+                System.out.println(ascii);
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || caracteres.contains(ascii)  )   ){
                     return 2;
                 }
             }    
@@ -497,6 +512,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 }   
                 else{
                     System.out.println("puntos mal ubicados");
+                    return 3;
                 }
             }
             else{
@@ -549,7 +565,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                     char[] inicio= arroba[0].toCharArray();
                     for(char c : inicio){
                         int ascii = (int) c;
-                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)){
+                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || caracteres.contains(ascii))){
                             return 6;
                         }
                     }                    
