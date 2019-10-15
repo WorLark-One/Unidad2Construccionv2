@@ -12,9 +12,9 @@ import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
  *
  * @author crist
  */
+// en PanelModificarSector se debe hacer static validarEntrada
 public class TestPanelModificarSector {
-    VentanaPrincipalPropietario papa = new VentanaPrincipalPropietario();;
-    PanelModificarSector msector = new PanelModificarSector(papa, 1); // para las pruebas
+    PanelModificarSector msector = null;// para las pruebas
     
     public TestPanelModificarSector(){
     }
