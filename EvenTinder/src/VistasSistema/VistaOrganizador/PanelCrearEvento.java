@@ -432,14 +432,9 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             idEvento = this.papa.getControladorOrganizador().crearEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false, this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
             if(idEvento>0){
                 for(int i=0; i< this.modeloLista2.getSize(); i++){
-<<<<<<< HEAD
-                    if(this.precios.get(i)!=-1){
-                        this.papa.getControladorOrganizador().agregarPrecioSector(idEvento, this.precios.get(i), this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre(), this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
-=======
                     boolean bandera =this.papa.getControladorOrganizador().agregarPrecioSector(idEvento, this.precios.get(i), this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getListaSectores().get(i).getNombre(), this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
                     if(!bandera){
                         System.out.println("cago al añadir sector, no deberia pasar");
->>>>>>> MasterFinal
                     }
                 }
                 JOptionPane.showMessageDialog(null, "Operación realizada correctamente");

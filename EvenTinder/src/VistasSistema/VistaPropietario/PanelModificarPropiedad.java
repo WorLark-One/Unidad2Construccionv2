@@ -342,11 +342,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             return;
         }
         if(this.listaPropiedades.getSelectedIndex()==0){
-<<<<<<< HEAD
-            JOptionPane.showMessageDialog(null, "Primero debe elegir la propiedad a modificar", "Error al seleccionar la propiedad", JOptionPane.WARNING_MESSAGE);  
-=======
             JOptionPane.showMessageDialog(null, "Primero debe elegir la propiedad", "Error al seleccionar la propiedad", JOptionPane.WARNING_MESSAGE);  
->>>>>>> MasterFinal
             this.listaOpciones.setSelectedIndex(0);
             return;
         }
@@ -458,68 +454,52 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         this.listaOpciones.addItem("Eliminar Sector");
     }
     
-    /**
-     * 
-     * @param nombre
-     * @param descripcion
-     * @param ubicacion
-     * @param nSectores
-     * @param valorArriendo
-     * @param finalizar
-     * @return 
+ /**
+     * Metodo que valida los datos ingresados al modificar una propiedad.
+     * @param nombre el nombre ingresado.
+     * @param descripcion la descripcion ingresada.
+     * @param ubicacion la ubicacion ingresada.
+     * @param valorArriendo el valor de arriendo ingresado.
+     * @return Un numero que indica el campo que se ingreso de manera incorrecta.
      */
     public int validarEntrada(String nombre, String descripcion, String ubicacion, String valorArriendo) {
+        //nombre con letras mayusculas, minusculas, numeros, tildes.
         if(!nombre.equals("")){
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-<<<<<<< HEAD
-                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
-                    return 1;
-                }
-            } 
-            if(aux.length <=100){
-=======
                 if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
                     return 1;
                 }
             } 
             if(aux.length >=100){
->>>>>>> MasterFinal
                 return 1;
             }
         }
         else{
             return 1;
         }
+        //descripcion que acepta cualquier caracter. no puede superar los 500 caracteres.
         if(!descripcion.equals("")){
             char[] aux = descripcion.toCharArray();
-<<<<<<< HEAD
-            if(aux.length <=500){
-=======
             if(aux.length >=500){
->>>>>>> MasterFinal
                 return 2;
             }
         }
         else{
             return 2;
         }
-<<<<<<< HEAD
-        if(ubicacion.equals("")){
-            char[] aux = ubicacion.toCharArray();
-            if(aux.length <=100){
-=======
+        //ubicacion que acepta cualquier caracter. no puede superar los 500 caracteres.
         if(!ubicacion.equals("")){
             char[] aux = ubicacion.toCharArray();
             if(aux.length >=100){
->>>>>>> MasterFinal
                 return 3;
             }
         }
         else{
             return 3;
         }
+        //valor de arriendo, que acepta cualquier valor que acepte una variable de tipo int (2,147,483,647).
         if(!valorArriendo.equals("") && isNumero(valorArriendo)){
             try{
                 Integer.parseInt(valorArriendo);                

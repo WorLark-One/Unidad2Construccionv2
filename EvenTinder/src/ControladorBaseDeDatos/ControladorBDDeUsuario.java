@@ -240,11 +240,7 @@ public class ControladorBDDeUsuario {
                 try {
                     System.out.println("tarjeta:"+tarjeta);
                     java.sql.Statement st = miConexion.createStatement();
-<<<<<<< HEAD
-                    String sql = "insert into " + tipoUsuario + " values('" + nombre + "','" + rut + "','" + correo + "','" + clave + "','" + telefono + "','" + tarjeta + "')";
-=======
                     String sql = "insert into " + tipoUsuario + " values('" + nombre + "','" + rut + "','" + clave + "','" + correo + "','" + telefono + "','" + tarjeta + "')";
->>>>>>> MasterFinal
                     System.out.println(sql);
                     st.executeUpdate(sql);
 

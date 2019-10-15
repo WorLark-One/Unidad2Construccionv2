@@ -29,7 +29,7 @@ public class TestControladorBDDePropiedades {
     // The methods must be annotated with annotation @Test. For example:
     //
     
-    /*
+    
     @Test
     public void obtenerInformaciónDePropiedades() throws SQLException {
         String rut = "0101";
@@ -40,8 +40,8 @@ public class TestControladorBDDePropiedades {
         }
     }
     
-    */
-    /*
+    
+    
     @Test
     public void registrarPropiedad() throws SQLException, ParseException {
         int esperado = 0;
@@ -69,7 +69,7 @@ public class TestControladorBDDePropiedades {
     
     
     
-    /*
+    
     @Test
     public void modifcarPropiedad() throws SQLException, ParseException {
         boolean esperado = false;
@@ -92,9 +92,9 @@ public class TestControladorBDDePropiedades {
         else {
             System.out.println("Se modificó correctamente la propiedad en la base de datos");
         }
-    }*/
+    }
     
-    /*
+    
     @Test
     public void eliminarPropiedad() throws SQLException {
         boolean esperado = false;
@@ -111,9 +111,9 @@ public class TestControladorBDDePropiedades {
             System.out.println("Se eliminó correctamente la propiedad de la base de datos");
         }
         
-    }*/
+    }
     
-    /*
+    
     @Test
     public void registrarSector() throws SQLException {
         boolean esperado = true;
@@ -131,8 +131,8 @@ public class TestControladorBDDePropiedades {
         else {
             System.out.println("Se añadió correctaemente el sector a la Base de datos");
         }
-    }*/
-    /*
+    }
+    
     @Test
     public void modificarSector() throws SQLException {
         boolean esperado = true;
@@ -153,7 +153,7 @@ public class TestControladorBDDePropiedades {
         }
         
     }
-    */
+    
     
     @Test
     public void eliminarSector() throws SQLException {

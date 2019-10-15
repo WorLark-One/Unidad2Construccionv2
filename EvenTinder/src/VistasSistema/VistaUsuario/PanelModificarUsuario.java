@@ -264,110 +264,37 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
     */
     
     /**
-     * 
-     * @param clave
-     * @param numeroTelefonico
-     * @param correoElectronico
-     * @param tarjetaDeCredito
-     * @return 
+     * Metodo que verifica la correctitud de los datos ingresados en el sistema por el usuario para modificar una cuenta cliente..
+     * @param nombre el nombre ingresado.
+     * @param clave La clave ingresada.
+     * @param numeroTelefonico El numero telefonico ingresado.
+     * @param correoElectronico El correo electronico ingresado.
+     * @param tarjetaDeCredito La tarjetra de credito ingresada.
+     * @return Un numero que indica cual de los datos ingresados esta erroneo.
      */
     public int validarModificarUsuario(String nombre, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito){                                               
+        //Nombre con letras mayusculas, minusculas, tildes, y n con colita.
         if(!"".equals(nombre)){
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-<<<<<<< HEAD
-                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32 ) || (ascii >=160 && ascii <=165) || ascii==130) {
-                    return 1;
-                }
-            }
-            if(aux.length <=100){
-=======
                 if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
                     return 1;
                 }
             }
             if(aux.length >=100){
->>>>>>> MasterFinal
                 return 1;
             }
         }
         else{
             return 1;
         }
+        //clave con letras y numeros, minimo 8 caracteres
         if(!"".equals(clave)){
             char[] aux = clave.toCharArray();
             for(char c : aux){
                 int ascii = (int) c;
                 if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) )){
-<<<<<<< HEAD
-                    return 2;
-                }
-            }
-            if(aux.length <8){
-                return 2;
-            }
-        }
-        else{
-            return 2;
-        }
-        if(!"".equals(numeroTelefonico)){
-            char[] aux = numeroTelefonico.toCharArray();
-            for(char c : aux){
-                int ascii = (int) c;
-                if( !((ascii >=48 && ascii <=57) )){
-                    return 3;
-                }
-            }
-            if(aux.length != 9){
-                return 3;
-            }
-        }
-        else{
-            return 3;
-        }
-        if("".equals(correoElectronico)){
-            if(correoElectronico.contains("@")){
-                String[] arroba = correoElectronico.split("@");
-                if(arroba.length == 2 && !arroba[0].equals("")){
-                    char[] inicio= arroba[0].toCharArray();
-                    for(char c : inicio){
-                        int ascii = (int) c;
-                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)){
-                            return 4;
-                        }
-                    }                    
-                    String[] puntos = arroba[1].split("\\.");                    
-                    if((puntos.length == 2 || puntos.length == 3) && !puntos[0].equals("") && !puntos[1].equals("")){   
-                        if("cl".equals(puntos[puntos.length-1])  ||  "com".equals(puntos[puntos.length-1])   ){                            
-                            int i = 0;
-                            while(i < puntos.length-1){
-                                char[] dominio = puntos[i].toCharArray();
-                                for(char c : dominio){
-                                    int ascii = (int) c;
-                                    if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) )){
-                                        return 4;
-                                    }
-                                }
-                                i++;
-                            }
-                        }
-                        else{
-                            return 4;
-                        }
-                    }
-                    else{                        
-                        return 4;
-                    }
-                }       
-                else{
-                    return 4;
-                }
-            }
-            else{
-                return 4;
-            }  
-=======
                     return 3;
                 }
             }
@@ -378,6 +305,7 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
         else{
             return 3;
         }
+        //numero telefonico con 9 numeros.
         if(!"".equals(numeroTelefonico)){
             char[] aux = numeroTelefonico.toCharArray();
             for(char c : aux){
@@ -389,25 +317,11 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
             if(aux.length != 9){
                 return 4;
             }
->>>>>>> MasterFinal
         }
         else{
             return 4;
         }
-<<<<<<< HEAD
-        if("".equals(tarjetaDeCredito)){
-            tarjetaDeCredito = tarjetaDeCredito.replace(" ", "");
-            char[] aux = tarjetaDeCredito.toCharArray();                
-            for(char c : aux){
-                int ascii = (int) c;
-                if( !((ascii >=48 && ascii <=57) )){
-                    return 5;
-                }
-            }
-            if(aux.length !=16){
-                return 5;
-            }             
-=======
+        //correo electronico. prefijo con letras, numeros. acepta 2 dominio, que pueden ser letras y numeros de cualquier largo, tambien acepta solo ".cl" y ".com"
         if("".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
                 String[] arroba = correoElectronico.split("@");
@@ -449,11 +363,11 @@ public class PanelModificarUsuario extends javax.swing.JPanel {
             else{
                 return 5;
             }    
->>>>>>> MasterFinal
         }
         else{
             return 5;
         }
+        // tarjeta de credito de 16 numero
         if("".equals(tarjetaDeCredito)){
             tarjetaDeCredito = tarjetaDeCredito.replace(" ", "");
             char[] aux = tarjetaDeCredito.toCharArray();                
