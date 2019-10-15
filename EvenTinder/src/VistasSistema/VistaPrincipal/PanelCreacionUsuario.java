@@ -6,6 +6,7 @@
 package VistasSistema.VistaPrincipal;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -428,23 +429,38 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
     */
     
     /**
-     * 
-     * @param tipoUsuario
-     * @param rut
-     * @param clave
-     * @param numeroTelefonico
-     * @param correoElectronico
-     * @param tarjetaDeCredito
-     * @param CuentaBancaria
-     * @return 
+     * Metodo que verifica la correctitud de los datos ingresados en el sistema por el usuario para crear una cuenta.
+     * @param tipoUsuario El tipo de usuario que se desea crear.
+     * @param rut El rut ingresado.
+     * @param clave La clave ingresada.
+     * @param numeroTelefonico El numero telefonico ingresado.
+     * @param correoElectronico El correo electronico ingresado.
+     * @param tarjetaDeCredito La tarjetra de credito ingresada.
+     * @param CuentaBancaria La cuenta bancaria ingresada.
+     * @return Un numero que indica cual de los datos ingresados esta erroneo.
      */
     public int validarResgistro(String tipoUsuario, String nombre, String rut, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito, String CuentaBancaria) {                                               
-        
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32);
+        //Nombre con letras mayusculas, minusculas, tildes, y n con colita.
         if(!"".equals(nombre)){
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)) {
+                System.out.println(ascii);
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || caracteres.contains(ascii)  )   ){
                     return 2;
                 }
             }    
@@ -455,6 +471,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         else{
             return 2;
         }
+        //rut con el formato 12.345.678-9, acepta k y 0 en el digito verificador.
         if(!"".equals(rut)){
             String[] guion = rut.split("-");
             if(guion.length == 2){
@@ -495,6 +512,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 }   
                 else{
                     System.out.println("puntos mal ubicados");
+                    return 3;
                 }
             }
             else{
@@ -506,6 +524,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             System.out.println("rut vacio");
             return 3;
         }
+        //clave con letras y numeros, minimo 8 caracteres
         if(!"".equals(clave)){
             char[] aux = clave.toCharArray();
             for(char c : aux){
@@ -521,6 +540,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         else{
             return 4;
         }
+        //numero telefonico con 9 numeros.
         if(!"".equals(numeroTelefonico)){
             char[] aux = numeroTelefonico.toCharArray();
             for(char c : aux){
@@ -536,6 +556,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         else{
             return 5;
         }
+        //correo electronico. prefijo con letras, numeros. acepta 2 dominio, que pueden ser letras y numeros de cualquier largo, tambien acepta solo ".cl" y ".com"
         if(!"".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
                 
@@ -544,7 +565,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                     char[] inicio= arroba[0].toCharArray();
                     for(char c : inicio){
                         int ascii = (int) c;
-                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || ascii == 32  || (ascii >=160 && ascii <=165) || ascii==130)){
+                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || caracteres.contains(ascii))){
                             return 6;
                         }
                     }                    
@@ -582,6 +603,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         else{
             return 6;
         }
+        // tarjeta de credito de 16 numero
         if("organizador".equals(tipoUsuario) || "cliente".equals(tipoUsuario)){
             if(!"".equals(tarjetaDeCredito)){
                 tarjetaDeCredito = tarjetaDeCredito.replace(" ", "");
@@ -600,6 +622,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 return 7;
             }            
         }
+        //cuenta bancaria de 20 digitos.
         if("propietario".equals(tipoUsuario)){            
             if(!"".equals(CuentaBancaria)){
                 CuentaBancaria = CuentaBancaria.replace(" ", "");
