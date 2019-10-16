@@ -362,7 +362,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
     /**
      * Método que se encarga de verificar que los numeros ingresados son numeros validos
      */
-    private boolean isNumero(String cadena) {
+    public boolean isNumero(String cadena) {
         boolean resultado;
         try {
             Integer.parseInt(cadena);
