@@ -21,8 +21,8 @@ public class ConexionBD {
 
     public ConexionBD() {
         conexion = null;
-        this.nombreBD = "EventTinder";
-        this.contraseñaBD = "12345";
+        this.nombreBD = "EvenTinder";
+        this.contraseñaBD = "1";
     }
 
     public Connection getConexion() {

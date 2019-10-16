@@ -243,9 +243,7 @@ public class ControladorBDDeUsuario {
                     String sql = "insert into " + tipoUsuario + " values('" + nombre + "','" + rut + "','" + clave + "','" + correo + "','" + telefono + "','" + tarjeta + "')";
                     System.out.println(sql);
                     st.executeUpdate(sql);
-
                     st.close();
-
                 } catch (SQLException e) {
                     System.out.println("ERROR DE CONEXION: añadirCliente" + e);
                     return false;
