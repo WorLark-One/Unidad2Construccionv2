@@ -281,7 +281,6 @@ public class ControladorBDDePropiedades {
                 st.executeUpdate(sql);
                 st.close();
                 return true;
-
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
                 
