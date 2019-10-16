@@ -247,7 +247,7 @@ public class ConexionBD {
                         + "	capacidad integer,\n"
                         + "	PlazoDevolucionEntradas integer,\n"
                         + "	publicado boolean,\n"
-                        + "	refOrganizador varchar(10),\n"
+                        + "	refOrganizador varchar(20),\n"
                         + "	PRIMARY KEY(id) \n"
                         + ");";
                 st.executeUpdate(sql);
@@ -276,7 +276,7 @@ public class ConexionBD {
                         + "	valorArriendo integer,\n"
                         + "	descripcion varchar(100),\n"
                         + "	numeroDeSectores integer,\n"
-                        + "	refPropietario varchar(10),\n"
+                        + "	refPropietario varchar(20),\n"
                         + "	PRIMARY KEY(id),\n"
                         + "	FOREIGN KEY (refPropietario) references Propietario(rut) ON DELETE CASCADE\n"
                         + ");";
@@ -368,7 +368,7 @@ public class ConexionBD {
             try {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "CREATE TABLE IF NOT EXISTS Compra(\n"
-                        + "	refCliente varchar(10) not null,\n"
+                        + "	refCliente varchar(20) not null,\n"
                         + "	refEntrada integer not null,\n"
                         + "	PRIMARY KEY(refCliente,refEntrada),\n"
                         + "	FOREIGN KEY (refEntrada) references Entrada(id)ON DELETE CASCADE,\n"
