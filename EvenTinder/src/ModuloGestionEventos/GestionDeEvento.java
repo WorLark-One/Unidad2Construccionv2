@@ -128,4 +128,5 @@ public class GestionDeEvento {
     public int obtenerPrecioEntradaPorSector(int idEvento, String nombreSector, int idPropiedad){
         return this.controlador.obtenerPrecioEntradaPorSector(idEvento, nombreSector, idPropiedad);
     }
+    
 }
