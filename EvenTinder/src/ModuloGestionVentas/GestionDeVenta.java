@@ -1,6 +1,7 @@
 package ModuloGestionVentas;
 
-import java.util.Date;
+import ModuloGestionEventos.Evento;
+import java.util.ArrayList;
 
 /**
  * 
@@ -13,39 +14,64 @@ public class GestionDeVenta {
     public GestionDeVenta() {
     }
 
+
+
     /**
-     * @param Date fecha
+     * @return
      */
-    public void mostrarCalendario(Date fecha) {
+    public ArrayList<Evento> obtenerTodosLosEventos() {
         // TODO implement here
+        return null;
     }
 
     /**
-     * 
+     * @param String rutCliente 
+     * @param int idEvento 
+     * @param String nombreSector 
+     * @param int cantidadDeEntradas 
+     * @return
      */
-    public void venderEntrada() {
+    public boolean registrarCompra(String rutCliente, int idEvento, String nombreSector, int cantidadDeEntradas) {
         // TODO implement here
+        return false;
     }
 
     /**
-     * 
+     * @param int idCompra 
+     * @return
      */
-    public void devolverDineroEntrada() {
+    public boolean eliminarCompra(int idCompra) {
         // TODO implement here
+        return false;
     }
 
     /**
-     * 
+     * @param int idEvento 
+     * @param String nombreSector 
+     * @param int idPropiedad 
+     * @return
      */
-    public void mostrarHistorialDeCompra() {
+    public int obtenerInformacionDePrecioDeUnSector(int idEvento, String nombreSector, int idPropiedad) {
         // TODO implement here
+        return 0;
     }
 
     /**
-     * 
+     * @param String rutUsuario 
+     * @return
      */
-    public void estadisticasDeVentasPorEvento() {
+    public ArrayList<Compra> obtenerInformacionDelHistorialDeCompraDeUnUsuario(String rutUsuario) {
         // TODO implement here
+        return null;
+    }
+
+    /**
+     * @param int idEvento 
+     * @return
+     */
+    public ArrayList<Compra> obtenerInformacionDelHistorialDeCompraDeUnEvento(int idEvento) {
+        // TODO implement here
+        return null;
     }
 
 }
