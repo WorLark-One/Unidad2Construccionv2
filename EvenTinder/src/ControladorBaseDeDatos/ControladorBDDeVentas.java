@@ -9,6 +9,7 @@ import java.util.*;
 /**
  *
  */
+
 public class ControladorBDDeVentas {
 
     ConexionBD conexion;
@@ -91,7 +92,11 @@ public class ControladorBDDeVentas {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "";
+                String sql = "select DISTINCT  compra.id, compra.numeroentradas, compra.fechacompra, compra.preciototal \n"
+                        + "from entrada\n"
+                        + "inner join compra on entrada.refcompra=compra.id\n"
+                        + "inner join evento on evento.id=entrada.refevento\n"
+                        + "where evento.id="+idEvento+" ";
                 // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -321,5 +326,4 @@ public class ControladorBDDeVentas {
         return 0;
     }
 
-    
 }
