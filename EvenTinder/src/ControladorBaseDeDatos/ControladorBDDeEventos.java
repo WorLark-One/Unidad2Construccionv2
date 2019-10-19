@@ -21,12 +21,12 @@ public class ControladorBDDeEventos {
     public ControladorBDDeEventos() {
         this.conexion = new ConexionBD();
         this.propiedades = new ControladorBDDePropiedades();
-        iniciarlizarBD();
+        inicializarBD();
     }
     /**
      * Inicializa las tablas de la base de datos.
      */
-    public void iniciarlizarBD() {
+    public void inicializarBD() {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         this.conexion.crearTablas(miConexion);
