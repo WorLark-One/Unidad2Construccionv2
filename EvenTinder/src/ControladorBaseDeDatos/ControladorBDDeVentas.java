@@ -15,7 +15,7 @@ public class ControladorBDDeVentas {
     }
 
     /**
-     * @param String rutUsuario 
+     * @param rutUsuario 
      * @return
      */
     public ArrayList<Compra> obtenerInformacionDeHistorialDeCompraDeUnUsuario( String rutUsuario) {
@@ -23,8 +23,7 @@ public class ControladorBDDeVentas {
         return null;
     }
 
-    /**
-     * @param int idEvento 
+    /** 
      * @return
      */
     public ArrayList<Compra> obtenerInformacionDeHistorrialDeCompraDeUnEvento( int idEvento) {
@@ -32,22 +31,13 @@ public class ControladorBDDeVentas {
         return null;
     }
 
-    /**
-     * @param String rutCliente 
-     * @param int idEvento 
-     * @param String nombreSector 
-     * @param int cantidadDeEntradas 
-     * @return
-     */
+ 
     public boolean registrarCompra( String rutCliente,  int idEvento,  String nombreSector,  int cantidadDeEntradas) {
         // TODO implement here
         return false;
     }
 
-    /**
-     * @param int idCompra 
-     * @return
-     */
+
     public boolean cancelarCompra( int idCompra) {
         // TODO implement here
         return false;
