@@ -2,6 +2,7 @@ package ControladorUsuarios;
 
 import ModuloAutenticacion.ControlDeAcceso;
 import ModuloGestionEventos.Evento;
+import ModuloGestionPropiedades.Propiedad;
 import ModuloGestionVentas.Compra;
 import ModuloGestionVentas.GestionDeVenta;
 import java.util.ArrayList;
@@ -72,6 +73,10 @@ public class ControladorCliente {
      */
     public ArrayList<Compra> obtenerInformacionDelHistorialDeCompraDeUnUsuario(){
         return this.gestorVentas.obtenerInformacionDelHistorialDeCompraDeUnUsuario(this.controlAcceso.getRut());
+    }
+    
+    public ArrayList<Propiedad> obtenerListaDePropiedades(){
+        return this.gestorVentas.obtenerListaDePropiedades();
     }
             
 }
