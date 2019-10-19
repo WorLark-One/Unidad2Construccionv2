@@ -62,7 +62,7 @@ public class GestionDeVenta {
      * @return El precio del sector consultado.
      */
     public int obtenerInformacionDePrecioDeUnSector(int idEvento, String nombreSector, int idPropiedad) {
-        return this.controladorEventos.obtenerPrecioEntradaPorSector(idEvento, nombreSector, idPropiedad);
+        return this.controladorEventos.obtenerPrecioEventoPorSector(idEvento, nombreSector, idPropiedad);
     }
 
      /**

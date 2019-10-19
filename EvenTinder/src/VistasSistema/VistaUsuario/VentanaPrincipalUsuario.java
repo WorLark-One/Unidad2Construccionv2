@@ -8,6 +8,7 @@ package VistasSistema.VistaUsuario;
 
 import ControladorUsuarios.ControladorCliente;
 import ControladorUsuarios.ControladorPrincipal;
+import ModuloGestionEventos.Evento;
 import VistasSistema.VistaPrincipal.PanelListaDeEventos;
 import VistasSistema.VistaPrincipal.PanelNosotros;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
@@ -31,10 +32,12 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
     private Component componenteAnterior= null;
     private ControladorCliente controladorUsuario;
     private ControladorPrincipal controladorPrincipal;
-
+    private PanelMostrarEventos mostrarEventos;
+    
     public VentanaPrincipalUsuario() {
         this.controladorUsuario= new ControladorCliente();
         this.controladorPrincipal= new ControladorPrincipal();
+        this.mostrarEventos= new PanelMostrarEventos(this);
         PanelDeOpciones panelDeOpciones=new PanelDeOpciones(this);
         initComponents();
         PanelHome home= new PanelHome();
@@ -135,7 +138,7 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
         return controladorPrincipal;
     }
 
-    void ventanaHome() {
+    public void ventanaHome() {
         PanelHome home = new PanelHome();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(home, java.awt.BorderLayout.CENTER);
@@ -147,16 +150,16 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
     /**
      * Metodo que cambia el panel a PanelListaDeEventos
      */
-    void listaDeEventos() {
-        PanelListaDeEventos lista = new PanelListaDeEventos();
+    public void listaDeEventos() {
+        mostrarEventos = new PanelMostrarEventos(this);
         getContentPane().remove(this.componenteAnterior);
-        getContentPane().add(lista, java.awt.BorderLayout.CENTER);
-        this.componenteAnterior=lista;
+        getContentPane().add(mostrarEventos, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=mostrarEventos;
         this.repaint();
         this.revalidate();
     }
 
-    void ventanaContactenos() {
+    public void ventanaContactenos() {
         PanelNosotros nosotros = new PanelNosotros();
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(nosotros, java.awt.BorderLayout.CENTER);
@@ -164,5 +167,22 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();
     }   
+    
+    public void comprarEntrada(Evento evento) {
+        PanelComprarEntrada compra = new PanelComprarEntrada(this, evento);
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(compra, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=compra;
+        this.repaint();
+        this.revalidate();
+    }
+    
+    public void volverMostrarEventos(){
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(mostrarEventos, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=mostrarEventos;
+        this.repaint();
+        this.revalidate();
+    }
      
 }
