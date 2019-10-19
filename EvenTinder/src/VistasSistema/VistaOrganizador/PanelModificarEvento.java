@@ -533,6 +533,25 @@ public class PanelModificarEvento extends javax.swing.JPanel {
         return 0;
     }
     
+    public int validarNombre(String nombre){
+        return 0;
+    }
+    public int validarDescripcion(String descripcion){
+        return 0;
+    }
+    public int validarFechaInicio(String fechaDeInicio){
+        return 0;
+    }
+    public int validarFechaTermino(String fechaDeTermino){
+        return 0;        
+    }
+    public int validarCapacidad(String capacidad){
+        return 0;
+    }
+    public int validarDiasMaximos(String diasMaximos){
+        return 0;
+    }
+    
     /**
      * MÃ©todo que se encarga de verificar que los numeros ingresados son numeros validos
      */
