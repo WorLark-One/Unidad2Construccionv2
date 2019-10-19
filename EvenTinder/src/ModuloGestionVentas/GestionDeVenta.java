@@ -3,6 +3,7 @@ package ModuloGestionVentas;
 import ControladorBaseDeDatos.ControladorBDDeEventos;
 import ControladorBaseDeDatos.ControladorBDDeVentas;
 import ModuloGestionEventos.Evento;
+import ModuloGestionPropiedades.Propiedad;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +27,7 @@ public class GestionDeVenta {
      * 
      * @return Un arreglo con todos los eventos existentes.
      */
-    public ArrayList<Evento> obtenerTodosLosEventos() {
+    public ArrayList<Evento> obtenerTodosLosEventos() {        
         return null;      
     }
 
@@ -84,5 +85,8 @@ public class GestionDeVenta {
     public ArrayList<Compra> obtenerInformacionDelHistorialDeCompraDeUnEvento(int idEvento) {
         return this.controladorVentas.obtenerInformacionDeHistorrialDeCompraDeUnEvento(idEvento);
     }
-
+    
+    public ArrayList<Propiedad> obtenerListaDePropiedades(){
+        return this.controladorEventos.obtenerListaDePropiedades();
+    }
 }
