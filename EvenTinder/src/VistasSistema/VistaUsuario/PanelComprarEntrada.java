@@ -250,7 +250,7 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
                         .addComponent(botonVolverAtras)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel18)))
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
