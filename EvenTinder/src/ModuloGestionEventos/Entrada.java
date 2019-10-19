@@ -6,6 +6,7 @@ package ModuloGestionEventos;
 public class Entrada {
     private int idEntrada;
     private int precio;
+    //private boolean vendida;
 
     public Entrada(int idEntrada, int precio) {
         this.idEntrada = idEntrada;

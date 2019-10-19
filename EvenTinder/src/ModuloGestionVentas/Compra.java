@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author xebae
+ * @author Brayan Escobar
  */
 public class Compra {
 
