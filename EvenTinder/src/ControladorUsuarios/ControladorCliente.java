@@ -31,8 +31,8 @@ public class ControladorCliente {
      * @param cantidadDeEntradas La cantidad de entradas que se compraron.
      * @return True si se pudo efectuar la compra. False si NO se realizo la compra con exito.
      */
-    public boolean registrarCompra(int idEvento, String nombreSector, int cantidadDeEntradas){
-        return this.gestorVentas.registrarCompra(this.controlAcceso.getRut(), idEvento, nombreSector, cantidadDeEntradas);
+    public boolean registrarCompra(int idEvento, String nombreSector, int cantidadDeEntradas, int idPropiedad){
+        return this.gestorVentas.registrarCompra(this.controlAcceso.getRut(), idEvento, nombreSector, cantidadDeEntradas,idPropiedad);
     }
     
     /**
