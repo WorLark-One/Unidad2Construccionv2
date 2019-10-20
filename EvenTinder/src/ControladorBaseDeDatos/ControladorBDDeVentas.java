@@ -54,8 +54,8 @@ public class ControladorBDDeVentas {
                     int nombre = resultado.getInt("numeroentradas");
                     Date fecha = resultado.getDate("fechacompra");
                     int precioTotal = resultado.getInt("preciototal");
-                    Compra compra = new Compra(idCompra, nombre, fecha, precioTotal);
-                    compras.add(compra);
+                    //Compra compra = new Compra(idCompra, nombre, fecha, precioTotal);
+                   // compras.add(compra);
 
                 }
                 resultado.close();
@@ -105,8 +105,8 @@ public class ControladorBDDeVentas {
                     int nombre = resultado.getInt("numeroentradas");
                     Date fecha = resultado.getDate("fechacompra");
                     int precioTotal = resultado.getInt("preciototal");
-                    Compra compra = new Compra(idCompra, nombre, fecha, precioTotal);
-                    compras.add(compra);
+                    //Compra compra = new Compra(idCompra, nombre, fecha, precioTotal);
+                    //compras.add(compra);
 
                 }
                 resultado.close();
@@ -146,6 +146,7 @@ public class ControladorBDDeVentas {
                     int precioTotalCompra = precioCompra * cantidadDeEntradas;
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "insert into compra values(default," + cantidadDeEntradas + ",'" + fecha + "'," + precioTotalCompra + ")RETURNING id";
+                    System.out.println(sql);
                     ResultSet resultado = st.executeQuery(sql);
                     while (resultado.next()) {
                         int idCompra = Integer.parseInt(resultado.getString("id"));

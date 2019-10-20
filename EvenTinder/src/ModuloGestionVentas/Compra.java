@@ -24,6 +24,7 @@ public class Compra implements Comparable<Compra>{
     String nombreSector;
     private ArrayList<Entrada>listaEntradas;
 
+    
     public Compra(int id, int numeroDeEntrada, Date fechaDeCompra, int precioTotalDeLaCompra, int idEvento, String nombreEvento, String nombreSector, ArrayList<Entrada> listaEntradas) {
         this.id = id;
         this.numeroDeEntrada = numeroDeEntrada;
