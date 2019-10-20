@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -66,6 +67,7 @@ public class ControladorBDDePropiedades {
                 }
                 resultado.close();
                 st.close();
+                Collections.sort(propiedades);
                 return propiedades;
 
             } catch (SQLException e) {
@@ -445,6 +447,7 @@ public class ControladorBDDePropiedades {
             }
 
         }
+        Collections.sort(sectores);
         return sectores;
     }
 
