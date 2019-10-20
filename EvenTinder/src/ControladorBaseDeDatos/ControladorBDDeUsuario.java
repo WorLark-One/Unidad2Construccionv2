@@ -21,11 +21,11 @@ public class ControladorBDDeUsuario {
      */
     public ControladorBDDeUsuario() {
         this.conexion = new ConexionBD();
-        iniciarlizarBD();
+        inicializarBD();
     }
     
     
-    public void iniciarlizarBD(){
+    public void inicializarBD(){
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         this.conexion.crearTablas(miConexion);

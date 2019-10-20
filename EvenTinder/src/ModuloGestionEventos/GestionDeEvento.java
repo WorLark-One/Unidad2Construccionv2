@@ -40,7 +40,7 @@ public class GestionDeEvento {
     }
     
     public boolean agregarPrecioSector(int idEvento, int nuevoPrecio, String nombreSector,int idPropiedad){
-        return this.controlador.añadirPrecioEntradaPorSector(idEvento, nuevoPrecio, nombreSector, idPropiedad);
+        return this.controlador.añadirPrecioEventoPorSector(idEvento, nuevoPrecio, nombreSector, idPropiedad);
     }
 
     /**
@@ -59,7 +59,7 @@ public class GestionDeEvento {
     }
     
     public boolean modificarPrecioSector(int idEvento, int nuevoPrecio, String nombreSector,int idPropiedad){
-        return this.controlador.modificarPrecioEntradaPorSector(idEvento,nuevoPrecio,nombreSector,idPropiedad);
+        return this.controlador.modificarPrecioEventoPorSector(idEvento,nuevoPrecio,nombreSector,idPropiedad);
     }
     
     public ArrayList<Propiedad> obtenerInformacionPropiedades(){
@@ -126,6 +126,7 @@ public class GestionDeEvento {
     }
     
     public int obtenerPrecioEntradaPorSector(int idEvento, String nombreSector, int idPropiedad){
-        return this.controlador.obtenerPrecioEntradaPorSector(idEvento, nombreSector, idPropiedad);
+        return this.controlador.obtenerPrecioEventoPorSector(idEvento, nombreSector, idPropiedad);
     }
+    
 }
