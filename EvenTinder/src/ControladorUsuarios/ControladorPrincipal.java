@@ -4,7 +4,6 @@ import ModuloAutenticacion.ControlDeAcceso;
 import ModuloGestionUsuario.GestionDeUsuario;
 import ModuloGestionUsuario.Usuario;
 import java.sql.SQLException;
-import java.util.Date;
 
 /**
  * 
@@ -129,12 +128,8 @@ public class ControladorPrincipal {
         return null;
     }
 
-    
-    /**
-     * @param  fecha
-     */
-    public void mostrarListaDeEventos(Date fecha) {
-        // TODO implement here
+    public boolean isIniciado(){
+        return controlAcceso.getRut().equals("");
     }
 
 }
