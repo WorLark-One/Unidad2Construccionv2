@@ -9,13 +9,8 @@ package VistasSistema.VistaUsuario;
 import ControladorUsuarios.ControladorCliente;
 import ControladorUsuarios.ControladorPrincipal;
 import ModuloGestionEventos.Evento;
-import VistasSistema.VistaPrincipal.PanelListaDeEventos;
 import VistasSistema.VistaPrincipal.PanelNosotros;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
-import VistasSistema.VistaPropietario.PanelAgregarSector;
-import VistasSistema.VistaPropietario.PanelEliminarSector;
-import VistasSistema.VistaPropietario.PanelHistorialDeEventos;
-import VistasSistema.VistaPropietario.PanelModificarSector;
 import java.awt.Component;
 import java.sql.SQLException;
 

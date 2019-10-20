@@ -185,7 +185,7 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
         this.modeloLista2=new DefaultListModel();
         if(this.eventos!=null){
             for(int i=0; i<this.eventos.size(); i++){
-                this.modeloLista2.addElement(eventos.get(i).getNombre());
+                this.modeloLista2.addElement("Id evento: " + eventos.get(i).getIdEvento() + "   Nombre evento" + eventos.get(i).getNombre());
             }
         }
         this.lista.setModel(this.modeloLista2);
@@ -199,7 +199,7 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
         this.modeloLista2=new DefaultListModel();
         if(this.eventos!=null){
             for(int i=0; i<this.eventos.size(); i++){
-                this.modeloLista2.addElement(eventos.get(i).getNombre());
+                this.modeloLista2.addElement("Id evento: " + eventos.get(i).getIdEvento() + "   Nombre evento" + eventos.get(i).getNombre());
             }
         }
         this.lista.setModel(this.modeloLista2);
@@ -213,7 +213,7 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
         this.modeloLista2=new DefaultListModel();
         if(this.eventos!=null){
             for(int i=0; i<this.eventos.size(); i++){
-                this.modeloLista2.addElement(eventos.get(i).getNombre());
+                this.modeloLista2.addElement("Id evento: " + eventos.get(i).getIdEvento() + "   Nombre evento" + eventos.get(i).getNombre());
             }
         }
         this.lista.setModel(this.modeloLista2);
@@ -227,7 +227,7 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
         this.modeloLista2=new DefaultListModel();
         if(this.eventos!=null){
             for(int i=0; i<this.eventos.size(); i++){
-                this.modeloLista2.addElement(eventos.get(i).getNombre());
+                this.modeloLista2.addElement("Id evento: " + eventos.get(i).getIdEvento() + "   Nombre evento" + eventos.get(i).getNombre());
             }
         }
         this.lista.setModel(this.modeloLista2);
