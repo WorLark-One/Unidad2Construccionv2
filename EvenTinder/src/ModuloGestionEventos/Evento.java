@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 
  */
-public class Evento {
+public class Evento implements Comparable<Evento>{
 
     
 
@@ -202,6 +202,18 @@ public class Evento {
     public void setListaEntradas(ArrayList<Entrada> listaEntradas) {
         this.listaEntradas = listaEntradas;
     }
+
+    @Override
+    public int compareTo(Evento o) {
+        if(this.idEvento<o.idEvento){
+            return -1;
+        }
+        if( this.idEvento > o.idEvento ){
+            return 1;
+        }
+        return 0;
+    }
+
     
     
 }

@@ -60,6 +60,7 @@ public class ControladorBDDeVentas {
                 }
                 resultado.close();
                 st.close();
+                Collections.sort(compras);
                 return compras;
 
             } catch (SQLException e) {
@@ -110,6 +111,7 @@ public class ControladorBDDeVentas {
                 }
                 resultado.close();
                 st.close();
+                Collections.sort(compras);
                 return compras;
 
             } catch (SQLException e) {

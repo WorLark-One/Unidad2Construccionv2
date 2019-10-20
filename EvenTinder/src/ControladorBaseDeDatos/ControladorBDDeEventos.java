@@ -362,6 +362,7 @@ public class ControladorBDDeEventos {
                 }
                 resultado.close();
                 st.close();
+                Collections.sort(eventos);
                 return eventos;
 
             } catch (SQLException e) {
@@ -445,6 +446,7 @@ public class ControladorBDDeEventos {
                 }
                 resultado.close();
                 st.close();
+                Collections.sort(eventos);
                 return eventos;
 
             } catch (SQLException e) {
@@ -501,6 +503,7 @@ public class ControladorBDDeEventos {
                 }
                 resultado.close();
                 st.close();
+                Collections.sort(eventos);
                 return eventos;
 
             } catch (SQLException e) {
@@ -562,6 +565,7 @@ public class ControladorBDDeEventos {
                 }
                 resultado.close();
                 st.close();
+                Collections.sort(eventos);
                 return eventos;
 
             } catch (SQLException e) {
@@ -692,6 +696,7 @@ public class ControladorBDDeEventos {
                 }
                 resultado.close();
                 st.close();
+                Collections.sort(eventos);
                 return eventos;
 
             } catch (SQLException e) {
@@ -752,6 +757,7 @@ public class ControladorBDDeEventos {
                 }
                 resultado.close();
                 st.close();
+                Collections.sort(eventos);
                 return eventos;
 
             } catch (SQLException e) {
@@ -812,6 +818,7 @@ public class ControladorBDDeEventos {
                 }
                 resultado.close();
                 st.close();
+                Collections.sort(eventos);
                 return eventos;
 
             } catch (SQLException e) {
@@ -864,6 +871,7 @@ public class ControladorBDDeEventos {
                 }
                 resultado.close();
                 st.close();
+                Collections.sort(listaPropiedades);
                 return listaPropiedades;
 
             } catch (SQLException e) {
@@ -993,4 +1001,53 @@ public class ControladorBDDeEventos {
 
     }
 
+    
+    public ArrayList<Evento> obtenerTodosLosEventos()
+    {
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+        java.util.Date fecha = new Date();
+        ArrayList<Evento> eventos = new ArrayList<>();
+        if (miConexion != null)// si hay conexion.
+        {
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select * from evento";
+               // System.out.println(sql);
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    int idEvento = Integer.parseInt(resultado.getString("id"));
+                    String nombre = resultado.getString("nombre");
+                    String descripcion = resultado.getString("descripcion");
+                    Date fechaInicio = resultado.getDate("fechainicio");
+                    Date fechaTermino = resultado.getDate("fechatermino");
+                    int capacidad = Integer.parseInt(resultado.getString("capacidad"));
+                    int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
+                    boolean publicado = resultado.getBoolean("publicado");
+                    int ipPropiedad = obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
+                    Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
+                    miEvento.setIdPropiedad(ipPropiedad);
+                    eventos.add(miEvento);
+                }
+                resultado.close();
+                st.close();
+                Collections.sort(eventos);
+                return eventos;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return null;
+            } finally {
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    //Logger.getLogger(ControladorBDDeEventos.class.getName()).log(Level.SEVERE, null, ex);
+                    //System.out.println("No se cerro la base de datos satisfactoriamente");
+                }
+            }
+        }
+        return null;
+    }
+    
 }
