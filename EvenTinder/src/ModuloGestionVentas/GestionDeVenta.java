@@ -28,7 +28,7 @@ public class GestionDeVenta {
      * @return Un arreglo con todos los eventos existentes.
      */
     public ArrayList<Evento> obtenerTodosLosEventos() {        
-        return null;      
+        return this.controladorEventos.obtenerTodosLosEventos();
     }
 
     /**
@@ -40,8 +40,8 @@ public class GestionDeVenta {
      * @param cantidadDeEntradas La cantidad de entradas que se compraron.
      * @return True si se pudo efectuar la compra. False si NO se realizo la compra con exito.
      */
-    public boolean registrarCompra(String rutCliente, int idEvento, String nombreSector, int cantidadDeEntradas) {
-        return this.controladorVentas.registrarCompra(rutCliente, idEvento, nombreSector, cantidadDeEntradas);
+    public boolean registrarCompra(String rutCliente, int idEvento, String nombreSector, int cantidadDeEntradas,int idPropiedad) {
+        return this.controladorVentas.registrarCompra(rutCliente, idEvento, nombreSector, cantidadDeEntradas, idPropiedad);
     }
 
     /**
@@ -63,7 +63,7 @@ public class GestionDeVenta {
      * @return El precio del sector consultado.
      */
     public int obtenerInformacionDePrecioDeUnSector(int idEvento, String nombreSector, int idPropiedad) {
-        return this.controladorEventos.obtenerPrecioEntradaPorSector(idEvento, nombreSector, idPropiedad);
+        return this.controladorEventos.obtenerPrecioEventoPorSector(idEvento, nombreSector, idPropiedad);
     }
 
      /**
