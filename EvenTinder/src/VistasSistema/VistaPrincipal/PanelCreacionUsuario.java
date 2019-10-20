@@ -565,7 +565,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                     char[] inicio= arroba[0].toCharArray();
                     for(char c : inicio){
                         int ascii = (int) c;
-                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || caracteres.contains(ascii)   || c == '.')  ){
+                        if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57) || caracteres.contains(ascii))){
                             return 6;
                         }
                     }                    
