@@ -1,77 +1,92 @@
 package ModuloGestionVentas;
 
+import ControladorBaseDeDatos.ControladorBDDeEventos;
+import ControladorBaseDeDatos.ControladorBDDeVentas;
 import ModuloGestionEventos.Evento;
+import ModuloGestionPropiedades.Propiedad;
 import java.util.ArrayList;
 
 /**
  * 
  */
 public class GestionDeVenta {
+    
+    private ControladorBDDeVentas controladorVentas;
+    private ControladorBDDeEventos controladorEventos;
 
     /**
-     * Default constructor
+     * Constructor del Gestor de Ventas.
      */
     public GestionDeVenta() {
+        this.controladorVentas = new ControladorBDDeVentas();
+        this.controladorEventos = new ControladorBDDeEventos();
     }
 
-
-
     /**
-     * @return
+     * Metodo que retorna todos los eventos publicados en el sistema.
+     * 
+     * @return Un arreglo con todos los eventos existentes.
      */
-    public ArrayList<Evento> obtenerTodosLosEventos() {
-        // TODO implement here
-        return null;
+    public ArrayList<Evento> obtenerTodosLosEventos() {        
+        return this.controladorEventos.obtenerTodosLosEventos();
     }
 
     /**
-     * @param String rutCliente 
-     * @param int idEvento 
-     * @param String nombreSector 
-     * @param int cantidadDeEntradas 
-     * @return
+     * Metodo que permite realizar una Compra en el sistema.
+     * 
+     * @param rutCliente El rut del Cliente que realiza la compra.
+     * @param idEvento El id del Evento al cual esta asociada la compra.
+     * @param nombreSector El nombre del sector al cual esta asociada la compra.
+     * @param cantidadDeEntradas La cantidad de entradas que se compraron.
+     * @return True si se pudo efectuar la compra. False si NO se realizo la compra con exito.
      */
-    public boolean registrarCompra(String rutCliente, int idEvento, String nombreSector, int cantidadDeEntradas) {
-        // TODO implement here
-        return false;
+    public boolean registrarCompra(String rutCliente, int idEvento, String nombreSector, int cantidadDeEntradas,int idPropiedad) {
+        return this.controladorVentas.registrarCompra(rutCliente, idEvento, nombreSector, cantidadDeEntradas, idPropiedad);
     }
 
     /**
-     * @param int idCompra 
-     * @return
+     * Metodo que permite eliminar o cancelar una compra realizada por el usuario.
+     * 
+     * @param idCompra El id de la Compra que se desea cancelar/eliminar.
+     * @return True si se pudo realizar la cancelacion. False si no se pudo cancelar.
      */
     public boolean eliminarCompra(int idCompra) {
-        // TODO implement here
-        return false;
+        return this.controladorVentas.cancelarCompra(idCompra);
     }
 
     /**
-     * @param int idEvento 
-     * @param String nombreSector 
-     * @param int idPropiedad 
-     * @return
+     * Metodo que permite obtener el precio de un Sector especifico asociado a una Propiedad y Evento especificos.
+     * 
+     * @param idEvento El id del evento al que esta asociado el sector.
+     * @param nombreSector El nombre del sector del cual se desea saber el precio.
+     * @param idPropiedad El id de la Propiedad a la cual esta asociada el sector.
+     * @return El precio del sector consultado.
      */
     public int obtenerInformacionDePrecioDeUnSector(int idEvento, String nombreSector, int idPropiedad) {
-        // TODO implement here
-        return 0;
+        return this.controladorEventos.obtenerPrecioEventoPorSector(idEvento, nombreSector, idPropiedad);
     }
 
-    /**
-     * @param String rutUsuario 
-     * @return
+     /**
+     * Metodo que retorna la informacion de todas las Compras realizadas por un Usuario.
+     * 
+     * @param rutUsuario El rut del usuario actualmente ingresado en el sistema.
+     * @return Un arreglo con la compras realizadas por el Usuario.
      */
-    public ArrayList<Compra> obtenerInformacionDelHistorialDeCompraDeUnUsuario(String rutUsuario) {
-        // TODO implement here
-        return null;
+    public ArrayList<Compra> obtenerInformacionDelHistorialDeCompraDeUnUsuario(String rutUsuario) {        
+        return this.controladorVentas.obtenerInformacionDeHistorialDeCompraDeUnUsuario(rutUsuario);
     }
 
     /**
-     * @param int idEvento 
-     * @return
+     * Metodo que retorna todas las compras realizadas asociadas a un eventos.
+     * 
+     * @param idEvento El id del Eventos del cual se desean obtener los datos.
+     * @return Un arreglo con todas las compras asociadas al Evento.
      */
     public ArrayList<Compra> obtenerInformacionDelHistorialDeCompraDeUnEvento(int idEvento) {
-        // TODO implement here
-        return null;
+        return this.controladorVentas.obtenerInformacionDeHistorrialDeCompraDeUnEvento(idEvento);
     }
-
+    
+    public ArrayList<Propiedad> obtenerListaDePropiedades(){
+        return this.controladorEventos.obtenerListaDePropiedades();
+    }
 }

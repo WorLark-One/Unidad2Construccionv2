@@ -34,13 +34,10 @@ public class Compra implements Comparable<Compra>{
         this.nombreSector = nombreSector;
         this.listaEntradas = listaEntradas;
     }
-
-    
-
+  
     public int getId() {
         return id;
     }
-
 
     public int getNumeroDeEntrada() {
         return numeroDeEntrada;
@@ -97,12 +94,7 @@ public class Compra implements Comparable<Compra>{
     public void setListaEntradas(ArrayList<Entrada> listaEntradas) {
         this.listaEntradas = listaEntradas;
     }
-    
-    
-    
-    
-    
-
+                    
     @Override
     public int compareTo(Compra o) {
         if(this.id<o.id){
@@ -113,9 +105,5 @@ public class Compra implements Comparable<Compra>{
         }
         return 0;
     }
-    
-    
-
-
-
+        
 }

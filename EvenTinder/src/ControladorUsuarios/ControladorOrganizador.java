@@ -4,6 +4,8 @@ import ModuloAutenticacion.ControlDeAcceso;
 import ModuloGestionEventos.Evento;
 import ModuloGestionEventos.GestionDeEvento;
 import ModuloGestionPropiedades.Propiedad;
+import ModuloGestionVentas.Compra;
+import ModuloGestionVentas.GestionDeVenta;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,13 +16,15 @@ public class ControladorOrganizador {
     
     private ControlDeAcceso controlAcceso;
     private GestionDeEvento gestorEventos;
+    private GestionDeVenta gestorVentas;
 
     /**
      * Default constructor
      */
     public ControladorOrganizador() {
         this.controlAcceso = ControlDeAcceso.getIntancia();
-        this.gestorEventos = new GestionDeEvento();        
+        this.gestorEventos = new GestionDeEvento();      
+        this.gestorVentas = new GestionDeVenta();
     }
 
     /**
@@ -148,15 +152,14 @@ public class ControladorOrganizador {
     public int obtenerPrecioEntradaPorSector(int idEvento, String nombreSector, int idPropiedad){
         return this.gestorEventos.obtenerPrecioEntradaPorSector(idEvento, nombreSector, idPropiedad);
     }
-
+    
     /**
-     * Iteracion 4 
-     * Proximamente
-     * @param id 
-     * @return
+     * Metodo que retorna todas las compras realizadas asociadas a un eventos.
+     * 
+     * @param idEvento El id del Eventos del cual se desean obtener los datos.
+     * @return Un arreglo con todas las compras asociadas al Evento.
      */
-    public ArrayList<String> obtenerInformacionDeEstadisticasDeVentasPorEventos(int id) {
-        // TODO implement here
-        return null;
-    }        
+    public ArrayList<Compra> obtenerInformacionDelHistorialDeCompraDeUnEvento(int idEvento){
+        return this.gestorVentas.obtenerInformacionDelHistorialDeCompraDeUnEvento(idEvento);
+    }
 }

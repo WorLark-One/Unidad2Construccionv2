@@ -554,8 +554,106 @@ public class PanelCrearEvento extends javax.swing.JPanel {
      */
     
     public int validarDatos(String nombre,String descripcion, String fechaDeInicio, String fechaDeTermino, String capacidad, String diasMaximos){
-        
         return 0;
+    }
+    
+    public int validarNombre(String nombre){
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32);
+        if(!nombre.equals("")){
+            char[] aux = nombre.toCharArray();
+            for(char c : aux){                
+                int ascii = (int) c;
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122)|| (ascii >=48 && ascii <=57) || caracteres.contains(ascii)  )   ){
+                    return 1;
+                }
+            }  
+        }
+        else{
+            return 1;
+        }
+        return 0;
+    }
+    
+    public int validarDescripcion(String descripcion){
+        if(!descripcion.equals("")){
+            char[] d = descripcion.toCharArray();
+            if(d.length<=500){
+                return 0;
+            }
+            else{
+                return 2;
+            }
+        }
+        else{
+            return 2;
+        }
+    }
+    
+    /**
+     * 
+     * Retorna 0 si esta bien.
+     * Retorna 3 si algo esta vacio.
+     * Retorna 4 si el formato de fecha esta mal (tiene que ser dd/MM/yyyy.
+     * Retorna 5 si el inicio es mayor que el termino, o los dias maximos no son numeros.
+     * Retorna 6 si los dias ingresados no calzan con el inicio del evento y la fecha actual.
+     * 
+     * 
+     * @param fechaDeInicio
+     * @param fechaDeTermino
+     * @param diasMaximosDevolucion
+     * @return
+     * @throws ParseException 
+     */
+    public int validarFechas(String fechaDeInicio, String fechaDeTermino, String diasMaximosDevolucion) throws ParseException{
+        if(!fechaDeInicio.equals("") && !fechaDeTermino.equals("") && !diasMaximosDevolucion.equals("")  ){  
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                sdf.setLenient(false);
+                
+                Date inicio = sdf.parse(fechaDeInicio);               
+                Date termino = sdf.parse(fechaDeTermino);
+                Date actual = new Date();
+                                
+                if(inicio.after(actual) && inicio.before(termino) && isNumero(diasMaximosDevolucion) ){
+                    int dias=(int) ((inicio.getTime()-actual.getTime())/86400000);                    
+                    if(Integer.parseInt(diasMaximosDevolucion) <= dias){
+                        return 0;
+                    }
+                    else{
+                        return 6;
+                    }
+                }            
+                else{
+                    return 5;
+                }
+
+            }catch (ParseException e) {
+                return 4;
+            }            
+        }
+        return 3;
+    }
+    
+    public int validarCapacidad(String capacidad){
+        if(!capacidad.equals("") && isNumero(capacidad)){
+            return 0;
+        }
+        else{
+            return 7;
+        }
     }
     
        /**
