@@ -265,4 +265,12 @@ public class GestionDePropiedad {
     public ArrayList<Evento> obtenerInformacionDeEventosFinalizados(String rutPropietario) {        
         return this.gestorEventos.obtenerInformacionDeEventosFinalizadosPropietario(rutPropietario);
     }
+    
+    /**
+     * @return
+     */
+    public ArrayList<Evento> obtenerInformacionSolicitudesDeEventos() {
+        // TODO implement here
+        return null;
+    }
 }

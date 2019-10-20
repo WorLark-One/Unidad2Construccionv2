@@ -5,7 +5,7 @@ package ModuloGestionPropiedades;
 /**
  * 
  */
-public class Sector {
+public class Sector implements Comparable<Sector>{
     private int idPropiedad;
     private String nombre;
     private int capacidadDelSector;
@@ -40,6 +40,17 @@ public class Sector {
 
     public void setCapacidadDelSector(int capacidadDelSector) {
         this.capacidadDelSector = capacidadDelSector;
+    }
+
+    @Override
+    public int compareTo(Sector o) {
+        if(this.idPropiedad<o.idPropiedad){
+            return -1;
+        }
+        if( this.idPropiedad > o.idPropiedad ){
+            return 1;
+        }
+        return 0;
     }
 
   
