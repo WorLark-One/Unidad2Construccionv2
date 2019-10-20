@@ -1,12 +1,13 @@
 package ModuloGestionPropiedades;
 
+import ModuloGestionEventos.Evento;
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
  *
  */
-public class Propiedad {
+public class Propiedad implements Comparable<Propiedad>{
 
     private int id;
     private String nombre;
@@ -154,4 +155,18 @@ public class Propiedad {
         this.listaSectores = listaSectores;
     }
 
+    @Override
+    public int compareTo(Propiedad o) {
+        if(this.id<o.id){
+            return -1;
+        }
+        if( this.id > o.id ){
+            return 1;
+        }
+        return 0;
+    }
+
+    
+    
+  
 }

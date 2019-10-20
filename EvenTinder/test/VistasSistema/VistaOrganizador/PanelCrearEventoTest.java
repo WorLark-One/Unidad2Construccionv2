@@ -5,6 +5,8 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import VistasSistema.VistaPrincipal.VentanaPrincipal;
+import java.sql.SQLException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -83,6 +85,20 @@ public class PanelCrearEventoTest {
         diasMaximos = "13";
         expResult = 0;
         result = instance.validarDatos(nombre, fechaDeInicio, fechaDeTermino, capacidad, descripcion, diasMaximos);
+        assertEquals(expResult, result);
+    }
+    
+    
+    @Test
+    public void testValidarNombre() throws SQLException{       
+        VentanaPrincipalOrganizador v  = new VentanaPrincipalOrganizador();
+        PanelCrearEvento instance = new PanelCrearEvento(v);
+        String nombre = "";
+        int expResult = 0;
+        
+        //validar nombre vacio
+        int result = instance.validarNombre(nombre);
+        
         assertEquals(expResult, result);
     }
     

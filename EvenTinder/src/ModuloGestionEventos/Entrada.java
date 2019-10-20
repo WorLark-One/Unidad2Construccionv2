@@ -3,10 +3,9 @@ package ModuloGestionEventos;
 /**
  * 
  */
-public class Entrada {
+public class Entrada implements Comparable<Entrada>{
     private int idEntrada;
     private int precio;
-    //private boolean vendida;
 
     public Entrada(int idEntrada, int precio) {
         this.idEntrada = idEntrada;
@@ -39,6 +38,17 @@ public class Entrada {
      */
     public void setPrecio(int precio) {
         this.precio = precio;
+    }
+
+    @Override
+    public int compareTo(Entrada o) {
+        if(this.idEntrada<o.idEntrada){
+            return -1;
+        }
+        if( this.idEntrada > o.idEntrada ){
+            return 1;
+        }
+        return 0;
     }
 
     

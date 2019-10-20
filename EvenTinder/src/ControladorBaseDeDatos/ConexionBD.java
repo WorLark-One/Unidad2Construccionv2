@@ -146,18 +146,18 @@ public class ConexionBD {
      * @param conexion
      */
     public void crearTablas(Connection conexion) {
-            crearTablaCliente(conexion);
-            crearTablaOrganizador(conexion);
-            crearTablaPropietario(conexion);
-            crearTablaEvento(conexion);
-            crearTablaPropiedad(conexion);
-            crearTablaSector(conexion);
-            crearTablaCompra(conexion);
-            crearTablaEntrada(conexion);
-            crearTablaCelebra(conexion);
-            crearTablaRealizaCompra(conexion);
-            crearTablaeventoTieneSector(conexion);
-       
+        crearTablaCliente(conexion);
+        crearTablaOrganizador(conexion);
+        crearTablaPropietario(conexion);
+        crearTablaEvento(conexion);
+        crearTablaPropiedad(conexion);
+        crearTablaSector(conexion);
+        crearTablaCompra(conexion);
+        crearTablaEntrada(conexion);
+        crearTablaCelebra(conexion);
+        crearTablaRealizaCompra(conexion);
+        crearTablaeventoTieneSector(conexion);
+
     }
 
     // creacion de tablas
@@ -329,8 +329,10 @@ public class ConexionBD {
                 String sql = "CREATE table entrada(\n"
                         + "	id serial not null,\n"
                         + "	refEvento integer not null,\n"
+                        + "	refCompra integer not null,\n"
                         + "	PRIMARY KEY(id),\n"
-                        + "	FOREIGN KEY(refEvento) references Evento(id) ON DELETE CASCADE\n"
+                        + "	FOREIGN KEY(refEvento) references Evento(id) ON DELETE CASCADE,\n"
+                        + "	FOREIGN KEY(refCompra) references compra(id) ON DELETE CASCADE\n"
                         + ");";
                 st.executeUpdate(sql);
                 st.close();
