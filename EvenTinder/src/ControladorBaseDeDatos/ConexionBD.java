@@ -152,11 +152,13 @@ public class ConexionBD {
         crearTablaEvento(conexion);
         crearTablaPropiedad(conexion);
         crearTablaSector(conexion);
+        crearTablaCelebra(conexion);
         crearTablaCompra(conexion);
         crearTablaEntrada(conexion);
-        crearTablaCelebra(conexion);
+        crearTablaIntanciaEntrada(conexion);
+        crearTablaAsociarEventoEntradaSector(conexion);
         crearTablaRealizaCompra(conexion);
-        crearTablaeventoTieneSector(conexion);
+
 
     }
 
@@ -166,7 +168,7 @@ public class ConexionBD {
         if (miConexion != null) {
             try {
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = " CREATE TABLE Cliente(\n"
+                String sql = "CREATE TABLE Cliente(\n"
                         + "	nombreCompleto varchar(100),\n"
                         + "	rut  varchar(12) not null,\n"
                         + "	correo varchar(50),\n"
@@ -326,13 +328,9 @@ public class ConexionBD {
         if (miConexion != null) {
             try {
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = "CREATE table entrada(\n"
-                        + "	id serial not null,\n"
-                        + "	refEvento integer not null,\n"
-                        + "	refCompra integer not null,\n"
-                        + "	PRIMARY KEY(id),\n"
-                        + "	FOREIGN KEY(refEvento) references Evento(id) ON DELETE CASCADE,\n"
-                        + "	FOREIGN KEY(refCompra) references compra(id) ON DELETE CASCADE\n"
+                String sql = "CREATE TABLE entrada(\n"
+                        + "	id serial NOT NULL,\n"
+                        + "	PRIMARY KEY(id)\n"
                         + ");";
                 st.executeUpdate(sql);
                 st.close();
@@ -368,17 +366,18 @@ public class ConexionBD {
         return false;
     }
 
-    public boolean crearTablaRealizaCompra(Connection conexion) {
+    public boolean crearTablaIntanciaEntrada(Connection conexion) {
         Connection miConexion = conexion;
         if (miConexion != null) {
             try {
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = "CREATE TABLE realizaCompra(\n"
-                        + "	refCliente varchar(12),\n"
-                        + "	refCompra integer,\n"
-                        + "	PRIMARY KEY(refCliente,refCompra),\n"
-                        + "	FOREIGN KEY (refCliente) references Cliente(rut)ON DELETE CASCADE,\n"
-                        + "	FOREIGN KEY (refCompra) references compra(id)ON DELETE CASCADE\n"
+                String sql = "CREATE TABLE instanciaEntrada(\n"
+                        + "	id serial NOT NULL,\n"
+                        + "	refcompra integer NOT NULL,\n"
+                        + "	refentrada integer NOT NULL,\n"
+                        + "	PRIMARY KEY(id),\n"
+                        + "	FOREIGN KEY(refEntrada)references entrada(id),\n"
+                        + "	FOREIGN KEY(refcompra)references compra(id)\n"
                         + ");";
                 st.executeUpdate(sql);
                 st.close();
@@ -397,10 +396,10 @@ public class ConexionBD {
             try {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "CREATE TABLE compra(\n"
-                        + "	id serial NOT null,\n"
+                        + "	id serial NOT NULL,\n"
                         + "	numeroentradas integer,\n"
-                        + "	fechaCompra date,\n"
-                        + "	precioTotal integer,\n"
+                        + "	fechacompra date,\n"
+                        + "	preciototal integer,\n"
                         + "	PRIMARY KEY(id)\n"
                         + ");";
                 st.executeUpdate(sql);
@@ -414,21 +413,43 @@ public class ConexionBD {
         return false;
     }
 
-    public boolean crearTablaeventoTieneSector(Connection conexion) {
+    public boolean crearTablaAsociarEventoEntradaSector(Connection conexion) {
         Connection miConexion = conexion;
         if (miConexion != null) {
             try {
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = "CREATE TABLE eventoTieneSector(\n"
+                String sql = "CREATE TABLE asociacionEventoEntradaSector(\n"
+                        + "	refEntrada integer,\n"
                         + "	refEvento integer,\n"
                         + "	refSector varchar(100),\n"
                         + "	refPropiedad integer,\n"
-                        + "	 precio integer not null,\n"
-                        + "	PRIMARY KEY(refEvento,refSector,refPropiedad),\n"
-                        + "	FOREIGN KEY (refEvento) references Evento(id)ON DELETE CASCADE,\n"
-                        + "	FOREIGN KEY (refPropiedad) references Propiedad(id)ON DELETE CASCADE,\n"
-                        + "	FOREIGN KEY (refSector,refPropiedad) references Sector(nombre,refPropiedad)ON DELETE CASCADE\n"
-                        + "\n"
+                        + "	precio integer,\n"
+                        + "	PRIMARY KEY(refEntrada,refEvento,refSector),\n"
+                        + "	FOREIGN KEY(refEntrada)references entrada(id),\n"
+                        + "	FOREIGN KEY(refEvento)references evento(id),\n"
+                        + "	FOREIGN KEY(refSector,refPropiedad)references sector(nombre,refPropiedad)\n"
+                        + ");";
+                st.executeUpdate(sql);
+                st.close();
+                return true;
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE crear tabla celebra");
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public boolean crearTablaRealizaCompra(Connection conexion) {
+        Connection miConexion = conexion;
+        if (miConexion != null) {
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+                String sql = "CREATE TABLE realizaCompra(\n"
+                        + "	refCliente varchar(12),\n"
+                        + "	refcompra integer,\n"
+                        + "	FOREIGN KEY (refCliente) references Cliente(rut),\n"
+                        + "	FOREIGN KEY(refcompra) references compra(id)\n"
                         + ");";
                 st.executeUpdate(sql);
                 st.close();
