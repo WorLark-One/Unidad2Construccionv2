@@ -21,11 +21,11 @@ public class Compra implements Comparable<Compra>{
     private int precioTotalDeLaCompra;
     private int idEvento;
     private String nombreEvento;
-    String nombreSector;
+    private String nombreSector;
+    private int idPropiedad;
     private ArrayList<Entrada>listaEntradas;
 
-    
-    public Compra(int id, int numeroDeEntrada, Date fechaDeCompra, int precioTotalDeLaCompra, int idEvento, String nombreEvento, String nombreSector, ArrayList<Entrada> listaEntradas) {
+    public Compra(int id, int numeroDeEntrada, Date fechaDeCompra, int precioTotalDeLaCompra, int idEvento, String nombreEvento, String nombreSector, int idPropiedad, ArrayList<Entrada> listaEntradas) {
         this.id = id;
         this.numeroDeEntrada = numeroDeEntrada;
         this.fechaDeCompra = fechaDeCompra;
@@ -33,12 +33,18 @@ public class Compra implements Comparable<Compra>{
         this.idEvento = idEvento;
         this.nombreEvento = nombreEvento;
         this.nombreSector = nombreSector;
+        this.idPropiedad = idPropiedad;
         this.listaEntradas = listaEntradas;
     }
-  
+
+    
+
+    
+
     public int getId() {
         return id;
     }
+
 
     public int getNumeroDeEntrada() {
         return numeroDeEntrada;
@@ -95,7 +101,12 @@ public class Compra implements Comparable<Compra>{
     public void setListaEntradas(ArrayList<Entrada> listaEntradas) {
         this.listaEntradas = listaEntradas;
     }
-                    
+    
+    
+    
+    
+    
+
     @Override
     public int compareTo(Compra o) {
         if(this.id<o.id){
@@ -106,5 +117,9 @@ public class Compra implements Comparable<Compra>{
         }
         return 0;
     }
-        
+    
+    
+
+
+
 }
