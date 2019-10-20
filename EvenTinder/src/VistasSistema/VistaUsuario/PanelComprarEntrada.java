@@ -6,6 +6,8 @@
 package VistasSistema.VistaUsuario;
 
 import ModuloGestionEventos.Evento;
+import ModuloGestionPropiedades.Propiedad;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -22,6 +24,8 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
     private VentanaPrincipalUsuario papa;
     private Evento evento;
     private DefaultListModel modeloLista;
+    private ArrayList<Propiedad> propiedades;
+    private int punteroPropiedad=-1;
     
     public PanelComprarEntrada(VentanaPrincipalUsuario papa, Evento evento) {
         this.papa=papa;
@@ -191,6 +195,11 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        listaDeSectores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaDeSectoresMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(listaDeSectores);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -297,6 +306,17 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_botonCompraActionPerformed
 
+    private void listaDeSectoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaDeSectoresMouseClicked
+        // TODO add your handling code here:
+        if(this.listaDeSectores.getSelectedIndex()<0){
+            return;
+        }
+        this.nombreSector.setText("Nombre del sector: " + this.propiedades.get(this.punteroPropiedad).getListaSectores().get(this.listaDeSectores.getSelectedIndex()).getNombre());
+        this.capacidadDisponioble.setText("Capacidad disponible: " + this.propiedades.get(this.punteroPropiedad).getListaSectores().get(this.listaDeSectores.getSelectedIndex()).getCapacidadDelSector());
+        this.precioEntrada.setText("Precio de la entrada: " + this.papa.getControladorUsuario().obtenerInformacionDePrecioDeUnSector(this.evento.getIdEvento(), this.propiedades.get(this.punteroPropiedad).getListaSectores().get(this.listaDeSectores.getSelectedIndex()).getNombre(), this.evento.getIdPropiedad()));
+        
+    }//GEN-LAST:event_listaDeSectoresMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCompra;
@@ -337,10 +357,15 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
         this.fechaDeTermino.setText("Fecha De Termino: " + this.evento.getFechaDeTermino());
         this.dias.setText("Dias maximos de devolucion: " + this.evento.getPlazoDevolucionEntrada());
         this.modeloLista.removeAllElements();
-        /**
-        for (int i = 0; i < this.evento.getListaSectores; i++) {
-            this.modeloLista.addElement(i);
+        this.propiedades=this.papa.getControladorUsuario().obtenerListaDePropiedades();
+        for (int j = 0; j < this.propiedades.size(); j++) {
+            if(this.propiedades.get(j).getId()==this.evento.getIdEvento()){
+                this.punteroPropiedad=j;
+                for (int i = 0; i <this.propiedades.get(j).getListaSectores().size(); i++) {
+                    this.modeloLista.addElement(this.propiedades.get(i).getListaSectores().get(i).getNombre());
+                }
+                return;
+            }
         }
-        * */
     }
 }
