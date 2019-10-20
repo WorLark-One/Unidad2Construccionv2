@@ -164,4 +164,5 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
         this.repaint();
         this.revalidate();
     }
+    
 }

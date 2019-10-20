@@ -201,7 +201,7 @@ public class VentanaPrincipalOrganizador extends javax.swing.JFrame {
     }
 
     public  void estadisticasDeVentasPorEvento() {
-        PanelMostrarEstadisticasDeVentasPorEvento evento = new PanelMostrarEstadisticasDeVentasPorEvento();
+        PanelMostrarEstadisticasDeVentasPorEvento evento = new PanelMostrarEstadisticasDeVentasPorEvento(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(evento, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=evento;
