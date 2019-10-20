@@ -21,10 +21,11 @@ public class Compra implements Comparable<Compra>{
     private int precioTotalDeLaCompra;
     private int idEvento;
     private String nombreEvento;
-    String nombreSector;
+    private String nombreSector;
+    private int idPropiedad;
     private ArrayList<Entrada>listaEntradas;
 
-    public Compra(int id, int numeroDeEntrada, Date fechaDeCompra, int precioTotalDeLaCompra, int idEvento, String nombreEvento, String nombreSector, ArrayList<Entrada> listaEntradas) {
+    public Compra(int id, int numeroDeEntrada, Date fechaDeCompra, int precioTotalDeLaCompra, int idEvento, String nombreEvento, String nombreSector, int idPropiedad, ArrayList<Entrada> listaEntradas) {
         this.id = id;
         this.numeroDeEntrada = numeroDeEntrada;
         this.fechaDeCompra = fechaDeCompra;
@@ -32,8 +33,11 @@ public class Compra implements Comparable<Compra>{
         this.idEvento = idEvento;
         this.nombreEvento = nombreEvento;
         this.nombreSector = nombreSector;
+        this.idPropiedad = idPropiedad;
         this.listaEntradas = listaEntradas;
     }
+
+    
 
     
 
@@ -116,42 +120,6 @@ public class Compra implements Comparable<Compra>{
     
     
 
-    public Compra(int id, int numeroDeEntrada, Date fechaDeCompra, int precioTotalDeLaCompra) {
-        this.id = id;
-        this.numeroDeEntrada = numeroDeEntrada;
-        this.fechaDeCompra = fechaDeCompra;
-        this.precioTotalDeLaCompra = precioTotalDeLaCompra;
-    }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getNumeroDeEntrada() {
-        return numeroDeEntrada;
-    }
-
-    public void setNumeroDeEntrada(int numeroDeEntrada) {
-        this.numeroDeEntrada = numeroDeEntrada;
-    }
-
-    public Date getFechaDeCompra() {
-        return fechaDeCompra;
-    }
-
-    public void setFechaDeCompra(Date fechaDeCompra) {
-        this.fechaDeCompra = fechaDeCompra;
-    }
-
-    public int getPrecioTotalDeLaCompra() {
-        return precioTotalDeLaCompra;
-    }
-
-    public void setPrecioTotalDeLaCompra(int precioTotalDeLaCompra) {
-        this.precioTotalDeLaCompra = precioTotalDeLaCompra;
-    }       
 }

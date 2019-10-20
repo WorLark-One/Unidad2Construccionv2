@@ -29,6 +29,7 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
     
     public PanelComprarEntrada(VentanaPrincipalUsuario papa, Evento evento) {
         this.papa=papa;
+        this.evento=evento;
         this.modeloLista= new DefaultListModel();
         initComponents();
         this.actualizarDatosDelEvento();
@@ -295,14 +296,21 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
 
     private void botonCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCompraActionPerformed
         // TODO add your handling code here:
+        if(this.listaDeSectores.getSelectedIndex()<0){
+            return;
+        }
         int resp = this.validadCantidad();
         if(resp!=0){
             JOptionPane.showMessageDialog(null, "Se espera que la cantidad de entradas sea un numero entero positivo \n" + 
                     "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }else{
-            //donde esta el nombre hay que colocar el nombre del sector
-            this.papa.getControladorUsuario().registrarCompra(this.evento.getIdEvento(), "nombre", Integer.parseInt(this.cantidadDeEntradas.getText()));
+            boolean bandera = this.papa.getControladorUsuario().registrarCompra(this.evento.getIdEvento(), this.propiedades.get(punteroPropiedad).getListaSectores().get(this.listaDeSectores.getSelectedIndex()).getNombre(), Integer.parseInt(this.cantidadDeEntradas.getText()), this.evento.getIdPropiedad());
+            if(bandera){
+                JOptionPane.showMessageDialog(null, "Se a registrado su compra con exito");
+            }else{
+                JOptionPane.showMessageDialog(null, "No quedan entradas disponibles", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_botonCompraActionPerformed
 
@@ -362,8 +370,11 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
             if(this.propiedades.get(j).getId()==this.evento.getIdEvento()){
                 this.punteroPropiedad=j;
                 for (int i = 0; i <this.propiedades.get(j).getListaSectores().size(); i++) {
-                    this.modeloLista.addElement(this.propiedades.get(i).getListaSectores().get(i).getNombre());
+                    this.modeloLista.addElement(this.propiedades.get(j).getListaSectores().get(i).getNombre());
                 }
+                this.listaDeSectores.setModel(modeloLista);
+                this.repaint();
+                this.revalidate();
                 return;
             }
         }

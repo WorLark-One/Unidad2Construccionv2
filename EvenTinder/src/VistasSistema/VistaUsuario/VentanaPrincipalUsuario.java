@@ -14,6 +14,7 @@ import VistasSistema.VistaPrincipal.PanelNosotros;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
 import VistasSistema.VistaPropietario.PanelAgregarSector;
 import VistasSistema.VistaPropietario.PanelEliminarSector;
+import VistasSistema.VistaPropietario.PanelHistorialDeEventos;
 import VistasSistema.VistaPropietario.PanelModificarSector;
 import java.awt.Component;
 import java.sql.SQLException;
@@ -173,6 +174,15 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(compra, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=compra;
+        this.repaint();
+        this.revalidate();
+    }
+    
+     public void historialEventos() {
+        PanelHistorialDeCompra historial = new PanelHistorialDeCompra(this);
+        getContentPane().remove(this.componenteAnterior);
+        getContentPane().add(historial, java.awt.BorderLayout.CENTER);
+        this.componenteAnterior=historial;
         this.repaint();
         this.revalidate();
     }

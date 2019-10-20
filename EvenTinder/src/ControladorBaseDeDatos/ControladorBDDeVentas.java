@@ -1,14 +1,17 @@
 package ControladorBaseDeDatos;
 
+import ModuloGestionEventos.Entrada;
 import ModuloGestionVentas.Compra;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-
-/**
- *
- */
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 public class ControladorBDDeVentas {
 
@@ -43,24 +46,32 @@ public class ControladorBDDeVentas {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select compra.id, compra.numeroentradas, compra.fechacompra, compra.preciototal\n"
-                        + "from realizacompra\n"
-                        + "inner join compra on realizacompra.refcompra = compra.id\n"
+                String sql = "select DISTINCT compra.id,compra.numeroentradas,compra.fechacompra,compra.preciototal,\n"
+                        + "asociacioneventoentradasector.refevento,evento.nombre,asociacioneventoentradasector.refsector\n"
+                        + "from compra\n"
+                        + "inner join instanciaentrada ON instanciaentrada.refcompra = compra.id\n"
+                        + "inner join entrada ON entrada.id = instanciaentrada.refentrada\n"
+                        + "inner join asociacioneventoentradasector ON asociacioneventoentradasector.refentrada = entrada.id\n"
+                        + "inner join evento ON evento.id = asociacioneventoentradasector.refevento\n"
+                        + "inner join realizacompra ON realizacompra.refcompra = compra.id\n"
                         + "where realizacompra.refcliente='" + rutUsuario + "'";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    // obtengo la informacion del cliente.
                     int idCompra = Integer.parseInt(resultado.getString("id"));
-                    int nombre = resultado.getInt("numeroentradas");
+                    int numeroEntradas = resultado.getInt("numeroentradas");
                     Date fecha = resultado.getDate("fechacompra");
                     int precioTotal = resultado.getInt("preciototal");
-                    Compra compra = new Compra(idCompra, nombre, fecha, precioTotal);
+                    int refEvento = resultado.getInt("refevento");
+                    String nombreEvento = resultado.getString("nombre");
+                    String nombreSector = resultado.getString("refsector");
+                    ArrayList<Entrada> lista = obtenerListaEntradas(miConexion, idCompra);
+                    Compra compra = new Compra(idCompra, numeroEntradas, fecha, precioTotal, refEvento, nombreEvento, nombreSector, idCompra, lista);
                     compras.add(compra);
 
                 }
                 resultado.close();
                 st.close();
-                Collections.sort(compras);
+                //Collections.sort(compras);
                 return compras;
 
             } catch (SQLException e) {
@@ -93,25 +104,32 @@ public class ControladorBDDeVentas {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select DISTINCT  compra.id, compra.numeroentradas, compra.fechacompra, compra.preciototal \n"
-                        + "from entrada\n"
-                        + "inner join compra on entrada.refcompra=compra.id\n"
-                        + "inner join evento on evento.id=entrada.refevento\n"
-                        + "where evento.id="+idEvento+" ";
+                String sql = "select DISTINCT compra.id,compra.numeroentradas,compra.fechacompra,compra.preciototal,\n"
+                        + "asociacioneventoentradasector.refevento,evento.nombre,asociacioneventoentradasector.refsector\n"
+                        + "from compra\n"
+                        + "inner join instanciaentrada ON instanciaentrada.refcompra = compra.id\n"
+                        + "inner join entrada ON entrada.id = instanciaentrada.refentrada\n"
+                        + "inner join asociacioneventoentradasector ON asociacioneventoentradasector.refentrada = entrada.id\n"
+                        + "inner join evento ON evento.id = asociacioneventoentradasector.refevento\n"
+                        + "where evento.id="+idEvento+"";
                 // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idCompra = Integer.parseInt(resultado.getString("id"));
-                    int nombre = resultado.getInt("numeroentradas");
+                    int numeroEntradas = resultado.getInt("numeroentradas");
                     Date fecha = resultado.getDate("fechacompra");
                     int precioTotal = resultado.getInt("preciototal");
-                    Compra compra = new Compra(idCompra, nombre, fecha, precioTotal);
+                    int refEvento = resultado.getInt("refevento");
+                    String nombreEvento = resultado.getString("nombre");
+                    String nombreSector = resultado.getString("refsector");
+                    ArrayList<Entrada> lista = obtenerListaEntradas(miConexion, idCompra);
+                    Compra compra = new Compra(idCompra, numeroEntradas, fecha, precioTotal, refEvento, nombreEvento, nombreSector, idCompra, lista);
                     compras.add(compra);
 
                 }
                 resultado.close();
                 st.close();
-                Collections.sort(compras);
+                //Collections.sort(compras);
                 return compras;
 
             } catch (SQLException e) {
@@ -138,21 +156,27 @@ public class ControladorBDDeVentas {
         if (miConexion != null) {
             int capacidadMaximaEvento = obtenerCapacidMaximaEvento(miConexion, idEvento);
             int numeroEntradasVendidas = obtenerNumeroDeEntradasVendidasDeEvento(miConexion, idEvento);
+            //System.out.println("capacidad maxima del evento:"+capacidadMaximaEvento);
+            //System.out.println("numero de entradas vendidas:"+numeroEntradasVendidas);
             int entradas = numeroEntradasVendidas + cantidadDeEntradas;
             if (entradas <= capacidadMaximaEvento) {
                 try {
                     java.util.Date fecha = new Date();
-                    int precioCompra = ObtenerPrecioAsociadoAlSector(conexion, idEvento, nombreSector, idPropiedad);
+                    int precioCompra = obtenerPrecioEventoPorSector(miConexion, idEvento, nombreSector, idPropiedad);
+                    //System.out.println("precio compra:"+precioCompra);
                     int precioTotalCompra = precioCompra * cantidadDeEntradas;
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "insert into compra values(default," + cantidadDeEntradas + ",'" + fecha + "'," + precioTotalCompra + ")RETURNING id";
+                    //      System.out.println(sql);
                     ResultSet resultado = st.executeQuery(sql);
                     while (resultado.next()) {
                         int idCompra = Integer.parseInt(resultado.getString("id"));
-                        boolean relacionarCompraCliente = relacionCompraCliente(conexion, rutCliente, idCompra);
-                        for (int i = 0; i < cantidadDeEntradas; i++) {
-                            generarEntrada(miConexion, idEvento, idCompra);
-                        }
+                        // obtengo el identificador de la entrada asociada a un evento,sector y propiedad.
+                        int idEntrada = obtenerIdentificarEntrada(miConexion, idEvento, nombreSector, idPropiedad);
+                        //relaciono la compra con el cliente
+                        boolean relacionarCompraCliente = relacionCompraCliente(miConexion, rutCliente, idCompra);
+                        // genero la instancia de entrada
+                        generarInstanciaEntrada(miConexion, idCompra, idEntrada, cantidadDeEntradas);
                     }
                     st.close();
                     return true;
@@ -182,44 +206,42 @@ public class ControladorBDDeVentas {
         if (miConexion != null) {
 
             try {
+                borrarInstanciasEntradas(miConexion, idCompra);
+                borrarRealizaCompra(miConexion, idCompra);
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "delete from compra where compra.id=" + idCompra + "";
+                //System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: eliminar evento (desde la tabla de usuario)" + e);
                 return false;
-            } finally {
-                try {
-                    this.conexion.cerrarBaseDeDatos(miConexion);
-                } catch (SQLException ex) {
-                    // System.out.println("No se cerro satisfactoriamente la base de datos.");
-                }
             }
 
         }
         return false;
     }
 
-    private int ObtenerPrecioAsociadoAlSector(ConexionBD conexion, int idEvento, String nombreSector, int idPropiedad) {
-        Connection miConexion = conexion.getConexion();
+    private int obtenerPrecioEventoPorSector(Connection conexion, int idEvento, String nombreSector, int idPropiedad) {
+
+        Connection miConexion = conexion;
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
-                String sql = "select * from eventotienesector where refevento=" + idEvento + " and refsector='" + nombreSector + "' and refpropiedad=" + idPropiedad + "";
+                String sql = "select asociacioneventoentradasector.precio from asociacioneventoentradasector \n"
+                        + "where asociacioneventoentradasector.refevento=" + idEvento + " and asociacioneventoentradasector.refsector='" + nombreSector + "'\n"
+                        + "and asociacioneventoentradasector.refpropiedad=" + idPropiedad + "";
                 //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    int precioSector = resultado.getInt("precio");
-                    return precioSector;
+
+                    int precio = resultado.getInt("precio");
+                    //System.out.println("precio:" + precio);
+                    resultado.close();
+                    st.close();
+                    return precio;
                 }
-                resultado.close();
-                st.close();
-                return 0;
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
@@ -228,12 +250,12 @@ public class ControladorBDDeVentas {
 
         }
         return 0;
+
     }
 
-    private boolean relacionCompraCliente(ConexionBD conexion, String rutCliente, int idCompra) {
-        this.conexion.crearConexion();
-        boolean aceptado;
-        Connection miConexion = this.conexion.getConexion();
+    private boolean relacionCompraCliente(Connection conexion, String rutCliente, int idCompra) {
+
+        Connection miConexion = conexion;
         if (miConexion != null) {
             try {
                 java.sql.Statement st = miConexion.createStatement();
@@ -250,28 +272,6 @@ public class ControladorBDDeVentas {
 
         }
         return false;
-    }
-
-    private boolean generarEntrada(Connection conexion, int idEvento, int idCompra) {
-
-        Connection miConexion = conexion;
-        if (miConexion != null) {
-            try {
-                java.sql.Statement st = miConexion.createStatement();
-                String sql = "insert into entrada values(default," + idEvento + "," + idCompra + ")";
-                st.executeUpdate(sql);
-                st.close();
-                return true;
-
-            } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
-
-                return false;
-            }
-
-        }
-        return false;
-
     }
 
     private int obtenerCapacidMaximaEvento(Connection conexion, int idEvento) {
@@ -306,13 +306,16 @@ public class ControladorBDDeVentas {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select count(entrada.refevento)as numeroentras\n"
-                        + "from entrada\n"
-                        + "where entrada.refevento=1";
+                String sql = "select count(instanciaentrada.id)as numeroentrada\n"
+                        + "from instanciaentrada\n"
+                        + "inner join entrada on instanciaentrada.refentrada = entrada.id\n"
+                        + "inner join asociacioneventoentradasector on entrada.id = asociacioneventoentradasector.refentrada\n"
+                        + "inner join evento on asociacioneventoentradasector.refevento = evento.id\n"
+                        + "where evento.id=" + idEvento + "";
                 //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    int numeroEntradas = resultado.getInt("numeroentras");
+                    int numeroEntradas = resultado.getInt("numeroentrada");
                     return numeroEntradas;
                 }
                 resultado.close();
@@ -328,4 +331,125 @@ public class ControladorBDDeVentas {
         return 0;
     }
 
+    private int obtenerIdentificarEntrada(Connection conexion, int idEvento, String nombreSector, int idPropiedad) {
+        Connection miConexion = conexion;
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select asociacioneventoentradasector.refentrada from asociacioneventoentradasector \n"
+                        + "where asociacioneventoentradasector.refevento=" + idEvento + " and asociacioneventoentradasector.refsector='" + nombreSector + "'\n"
+                        + "and asociacioneventoentradasector.refpropiedad=" + idPropiedad + "";
+                //System.out.println(sql);
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    int numeroEntrada = resultado.getInt("refentrada");
+                    return numeroEntrada;
+                }
+                resultado.close();
+                st.close();
+                return 0;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return 0;
+            }
+
+        }
+        return 0;
+    }
+
+    private boolean generarInstanciaEntrada(Connection miConexion, int idCompra, int idEntrada, int cantidad) {
+
+        if (miConexion != null) {
+            for (int i = 0; i < cantidad; i++) {
+                try {
+                    java.sql.Statement st = miConexion.createStatement();
+                    String sql = "insert into instanciaentrada values(default," + idCompra + "," + idEntrada + ")";
+                    st.executeUpdate(sql);
+                    st.close();
+
+                } catch (SQLException e) {
+                    return false;
+                }
+            }
+            return true;
+
+        }
+        return false;
+    }
+
+    private boolean borrarInstanciasEntradas(Connection miConexion, int idCompra) {
+        if (miConexion != null) {
+
+            try {
+                borrarRealizaCompra(miConexion, idCompra);
+                java.sql.Statement st = miConexion.createStatement();
+                String sql = "delete from instanciaentrada where instanciaentrada.refcompra=" + idCompra + "";
+                //System.out.println(sql);
+                st.executeUpdate(sql);
+                st.close();
+                return true;
+            } catch (SQLException e) {
+                return false;
+            }
+
+        }
+        return false;
+    }
+
+    private boolean borrarRealizaCompra(Connection miConexion, int idCompra) {
+        if (miConexion != null) {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+                String sql = "delete from realizacompra where realizacompra.refcompra=" + idCompra + "";
+                //System.out.println(sql);
+                st.executeUpdate(sql);
+                st.close();
+                return true;
+            } catch (SQLException e) {
+                return false;
+            }
+
+        }
+        return false;
+    }
+
+    private ArrayList<Entrada> obtenerListaEntradas(Connection miConexion, int idCompra) {
+
+        ArrayList<Entrada> entradas = new ArrayList<>();
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select entrada.id, asociacioneventoentradasector.precio\n"
+                        + "from instanciaentrada\n"
+                        + "inner join entrada on instanciaentrada.refentrada=entrada.id\n"
+                        + "inner join asociacioneventoentradasector on entrada.id=asociacioneventoentradasector.refentrada";
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    // obtengo la informacion del cliente.
+                    int idEntrada = Integer.parseInt(resultado.getString("id"));
+                    int precio = resultado.getInt("precio");
+                    Entrada entrada = new Entrada(idEntrada, precio);
+                    entradas.add(entrada);
+                }
+                resultado.close();
+                st.close();
+                //Collections.sort(compras);
+                return entradas;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return null;
+            }
+
+        }
+        return null;
+    }
 }
