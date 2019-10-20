@@ -266,7 +266,6 @@ public class ControladorBDDeVentas {
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
-
                 return false;
             }
 
@@ -448,7 +447,6 @@ public class ControladorBDDeVentas {
                 //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return null;
             }
-
         }
         return null;
     }

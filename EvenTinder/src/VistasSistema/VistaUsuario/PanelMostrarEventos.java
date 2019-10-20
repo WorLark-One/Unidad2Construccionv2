@@ -74,14 +74,14 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -97,13 +97,13 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
                         .addGap(50, 50, 50)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
+                        .addGap(99, 99, 99)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)))
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(318, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +120,7 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
                             .addComponent(jButton2))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
