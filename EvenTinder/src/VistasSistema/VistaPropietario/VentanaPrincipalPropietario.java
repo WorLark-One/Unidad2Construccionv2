@@ -241,7 +241,7 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.revalidate();  
     }
 
-    void HistorialDeEventos() throws SQLException {
+    public void HistorialDeEventos() throws SQLException {
         PanelHistorialDeEventos historial = new PanelHistorialDeEventos(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(historial, java.awt.BorderLayout.CENTER);
@@ -249,7 +249,5 @@ public class VentanaPrincipalPropietario extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();  
     }
-
-
 
 }
