@@ -452,7 +452,7 @@ public class ControladorBDDeVentas {
         return null;
     }
 
-    public int obtenrEntradasQueQuedanPorVender(int idEvento){
+    public int obtenerEntradasQueQuedanPorEvento(int idEvento){
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         int entradas=0;
