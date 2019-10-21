@@ -1,6 +1,5 @@
 package ControladorBaseDeDatos;
 
-
 import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
 import java.sql.Connection;
@@ -401,6 +400,65 @@ public class ControladorBDDeEventos {
 
         }
         return null;
+    }
+
+    /**
+     * No esta listo
+     *
+     * @param fechaInicioa
+     * @param fechaTermino
+     * @return
+     */
+    public ArrayList<Evento> obtenerEventoPublicados(Date fechaInicioa, Date fechaTermino) {
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+
+        ArrayList<Evento> eventos = new ArrayList<>();
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select * from evento where evento.fechainicio >= '"+fechaInicioa+"' and \n"
+                        + "evento.fechainicio <= '"+fechaTermino+"'";
+                // System.out.println(sql);
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    // obtengo la informacion del cliente.
+                    int idEvento = Integer.parseInt(resultado.getString("id"));
+                    String nombre = resultado.getString("nombre");
+                    String descripcion = resultado.getString("descripcion");
+                    Date fechaIni = resultado.getDate("fechainicio");
+                    Date fechaTer = resultado.getDate("fechatermino");
+                    int capacidad = Integer.parseInt(resultado.getString("capacidad"));
+                    int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
+                    boolean publicado = resultado.getBoolean("publicado");
+                    int idPropiedad = obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
+
+                    Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaIni, fechaTer, capacidad, plazoDeVolucion, publicado);
+                    miEvento.setIdPropiedad(idPropiedad);
+                    eventos.add(miEvento);
+                }
+                resultado.close();
+                st.close();
+                //Collections.sort(eventos);
+                return eventos;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return null;
+            } finally {
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    //System.out.println("No se cerro la base de datos satisfactoriamente");
+                }
+            }
+
+        }
+        return null;
+
     }
 
     /**
@@ -1024,8 +1082,8 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
                 //int idEntrada = crearEntradaPrueba(miConexion);
                 String sql = "select asociacioneventoentradasector.precio from asociacioneventoentradasector  \n"
-                        + "where asociacioneventoentradasector.refevento="+idEvento+" and asociacioneventoentradasector.refsector='"+nombreSector+"'\n"
-                        + "and asociacioneventoentradasector.refpropiedad="+idPropiedad+"";
+                        + "where asociacioneventoentradasector.refevento=" + idEvento + " and asociacioneventoentradasector.refsector='" + nombreSector + "'\n"
+                        + "and asociacioneventoentradasector.refpropiedad=" + idPropiedad + "";
                 //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {

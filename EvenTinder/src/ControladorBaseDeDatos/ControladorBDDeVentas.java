@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ControladorBDDeVentas {
 
@@ -448,5 +450,26 @@ public class ControladorBDDeVentas {
             }
         }
         return null;
+    }
+
+    public int obtenerEntradasQueQuedanPorEvento(int idEvento){
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+        int entradas=0;
+        if (miConexion != null)// si hay conexion.
+        {
+            int capacidaEvento=obtenerCapacidMaximaEvento(miConexion, idEvento);
+            int entradasVendidas=obtenerNumeroDeEntradasVendidasDeEvento(miConexion, idEvento);
+            entradas=capacidaEvento-entradasVendidas;
+            try {
+                this.conexion.cerrarBaseDeDatos(miConexion);
+            } catch (SQLException ex) {
+                //Logger.getLogger(ControladorBDDeVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return entradas;
+
+        }
+        return entradas;
+       
     }
 }
