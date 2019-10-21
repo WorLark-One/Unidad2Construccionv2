@@ -6,6 +6,7 @@ import ModuloGestionPropiedades.Propiedad;
 import ModuloGestionVentas.Compra;
 import ModuloGestionVentas.GestionDeVenta;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * 
@@ -47,12 +48,14 @@ public class ControladorCliente {
     }
     
     /**
-     * Metodo que retorna todos los eventos publicados en el sistema.
+     * Metodo que retorna todos los eventos publicados en el sistema, de un intervalo de tiempo especifico.
      * 
-     * @return Un arreglo con todos los eventos existentes.
+     * @param fechaInicio La fecha de inicio del intervalo de los Eventos.
+     * @param fechaTermino La fecha de termino del intervalo de los Eventos.
+     * @return Un arreglo con todos los eventos existentes en ese intervalo de tiempo.
      */
-    public ArrayList<Evento> obtenerTodosLosEventos(){
-        return this.gestorVentas.obtenerTodosLosEventos();
+    public ArrayList<Evento> obtenerTodosLosEventos(Date fechaInicio, Date fechaTermino){
+        return this.gestorVentas.obtenerTodosLosEventos(fechaInicio,fechaTermino);
     }
     
     /**
@@ -79,5 +82,15 @@ public class ControladorCliente {
     public ArrayList<Propiedad> obtenerListaDePropiedades(){
         return this.gestorVentas.obtenerListaDePropiedades();
     }
+    
+    /**
+     * Metodo que retorna el numero de entradas restantes de un evento.
+     * @param idEvento El ID del evento que se desea consultar.
+     * @return EL numero de entradas restantes que tiene un Evento especifico.
+     */
+    public int obtenerEntradasRestantes(int idEvento){
+        return this.gestorVentas.obtenerEntradasRestantes(idEvento);
+    }
+        
             
 }
