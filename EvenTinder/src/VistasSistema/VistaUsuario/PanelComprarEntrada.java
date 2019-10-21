@@ -299,7 +299,7 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
         if(this.listaDeSectores.getSelectedIndex()<0){
             return;
         }
-        int resp = this.validadCantidad();
+        int resp = this.validadCantidad();        
         if(resp!=0){
             JOptionPane.showMessageDialog(null, "Se espera que la cantidad de entradas sea un numero entero positivo \n" + 
                     "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
@@ -354,8 +354,38 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
     private javax.swing.JLabel precioEntrada;
     // End of variables declaration//GEN-END:variables
 
-    private int validadCantidad() {
-        return 0;
+    private int validadCantidad(String cantidad) {
+        if(!cantidad.equals("") && isNumero(cantidad)){
+            return 0;
+        }        
+        else{
+            return 1;
+        }
+    }
+    
+    /**
+     * Método que se encarga de verificar que los numeros ingresados son numeros validos
+     * @param cadena
+     * @return 
+     */
+    public boolean isNumero(String cadena) {
+        boolean resultado;
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+        if (resultado==true) {
+            int a = Integer.parseInt(cadena);
+            if (a>0) {
+                resultado = true;
+            }
+            else{
+                resultado = false;
+            }
+        }
+        return resultado;
     }
 
     private void actualizarDatosDelEvento() {
