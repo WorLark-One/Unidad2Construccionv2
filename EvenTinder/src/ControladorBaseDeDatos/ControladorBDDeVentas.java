@@ -334,7 +334,6 @@ public class ControladorBDDeVentas {
         Connection miConexion = conexion;
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
 

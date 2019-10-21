@@ -305,7 +305,13 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
                     "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
         }else{
-            boolean bandera = this.papa.getControladorUsuario().registrarCompra(this.evento.getIdEvento(), this.propiedades.get(punteroPropiedad).getListaSectores().get(this.listaDeSectores.getSelectedIndex()).getNombre(), Integer.parseInt(this.cantidadDeEntradas.getText()), this.evento.getIdPropiedad());
+            boolean bandera=false;
+            for (int i = 0; i <this.propiedades.get(punteroPropiedad).getListaSectores().size(); i++) {
+                if(this.propiedades.get(punteroPropiedad).getListaSectores().get(i).getNombre().equals(this.listaDeSectores.getSelectedValue())){
+                   bandera = this.papa.getControladorUsuario().registrarCompra(this.evento.getIdEvento(), this.propiedades.get(punteroPropiedad).getListaSectores().get(this.listaDeSectores.getSelectedIndex()).getNombre(), Integer.parseInt(this.cantidadDeEntradas.getText()), this.evento.getIdPropiedad());
+                   break;
+                }
+            }
             if(bandera){
                 JOptionPane.showMessageDialog(null, "Se a registrado su compra con exito");
             }else{
@@ -319,10 +325,16 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
         if(this.listaDeSectores.getSelectedIndex()<0){
             return;
         }
-        this.nombreSector.setText("Nombre del sector: " + this.propiedades.get(this.punteroPropiedad).getListaSectores().get(this.listaDeSectores.getSelectedIndex()).getNombre());
-        this.capacidadDisponioble.setText("Capacidad disponible: " + this.propiedades.get(this.punteroPropiedad).getListaSectores().get(this.listaDeSectores.getSelectedIndex()).getCapacidadDelSector());
-        this.precioEntrada.setText("Precio de la entrada: " + this.papa.getControladorUsuario().obtenerInformacionDePrecioDeUnSector(this.evento.getIdEvento(), this.propiedades.get(this.punteroPropiedad).getListaSectores().get(this.listaDeSectores.getSelectedIndex()).getNombre(), this.evento.getIdPropiedad()));
         
+        for (int i = 0; i <this.propiedades.get(punteroPropiedad).getListaSectores().size(); i++) {
+            System.out.println(this.propiedades.get(punteroPropiedad).getListaSectores().get(i).getNombre() + "   " + this.listaDeSectores.getSelectedValue());
+            if(this.propiedades.get(punteroPropiedad).getListaSectores().get(i).getNombre().equals(this.listaDeSectores.getSelectedValue())){
+                this.nombreSector.setText("Nombre del sector: " + this.propiedades.get(this.punteroPropiedad).getListaSectores().get(i).getNombre());
+                this.capacidadDisponioble.setText("Capacidad disponible: " + this.propiedades.get(this.punteroPropiedad).getListaSectores().get(i).getCapacidadDelSector());
+                this.precioEntrada.setText("Precio de la entrada: " + this.papa.getControladorUsuario().obtenerInformacionDePrecioDeUnSector(this.evento.getIdEvento(), this.propiedades.get(this.punteroPropiedad).getListaSectores().get(i).getNombre(), this.evento.getIdPropiedad()));
+                return;
+            }
+        }
     }//GEN-LAST:event_listaDeSectoresMouseClicked
 
 
@@ -367,10 +379,12 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
         this.modeloLista.removeAllElements();
         this.propiedades=this.papa.getControladorUsuario().obtenerListaDePropiedades();
         for (int j = 0; j < this.propiedades.size(); j++) {
-            if(this.propiedades.get(j).getId()==this.evento.getIdEvento()){
+            if(this.propiedades.get(j).getId()==this.evento.getIdPropiedad()){
                 this.punteroPropiedad=j;
                 for (int i = 0; i <this.propiedades.get(j).getListaSectores().size(); i++) {
-                    this.modeloLista.addElement(this.propiedades.get(j).getListaSectores().get(i).getNombre());
+                    if(-1<this.papa.getControladorUsuario().obtenerInformacionDePrecioDeUnSector(this.evento.getIdEvento(), this.propiedades.get(this.punteroPropiedad).getListaSectores().get(i).getNombre(), this.evento.getIdPropiedad())){
+                        this.modeloLista.addElement(this.propiedades.get(j).getListaSectores().get(i).getNombre());
+                    }
                 }
                 this.listaDeSectores.setModel(modeloLista);
                 this.repaint();
