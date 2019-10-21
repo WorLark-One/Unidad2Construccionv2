@@ -403,6 +403,12 @@ public class ControladorBDDeEventos {
         return null;
     }
 
+    /**
+     * No esta listo
+     * @param fechaInicioa
+     * @param fechaTerminoa
+     * @return 
+     */
     public ArrayList<Evento>obtenerEventoPublicados(Date fechaInicioa, Date fechaTerminoa){
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
