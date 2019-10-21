@@ -327,12 +327,11 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
         if(this.listaDeSectores.getSelectedIndex()<0){
             return;
         }
-        
         for (int i = 0; i <this.propiedades.get(punteroPropiedad).getListaSectores().size(); i++) {
             System.out.println(this.propiedades.get(punteroPropiedad).getListaSectores().get(i).getNombre() + "   " + this.listaDeSectores.getSelectedValue());
             if(this.propiedades.get(punteroPropiedad).getListaSectores().get(i).getNombre().equals(this.listaDeSectores.getSelectedValue())){
                 this.nombreSector.setText("Nombre del sector: " + this.propiedades.get(this.punteroPropiedad).getListaSectores().get(i).getNombre());
-                this.capacidadDisponioble.setText("Capacidad disponible: " + this.propiedades.get(this.punteroPropiedad).getListaSectores().get(i).getCapacidadDelSector());
+                this.capacidadDisponioble.setText("Capacidad disponible: " + this.papa.getControladorUsuario().obtenerEntradasRestantes(this.evento.getIdEvento()));
                 this.precioEntrada.setText("Precio de la entrada: " + this.papa.getControladorUsuario().obtenerInformacionDePrecioDeUnSector(this.evento.getIdEvento(), this.propiedades.get(this.punteroPropiedad).getListaSectores().get(i).getNombre(), this.evento.getIdPropiedad()));
                 return;
             }
