@@ -1,6 +1,5 @@
 package ControladorBaseDeDatos;
 
-
 import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
 import java.sql.Connection;
@@ -405,11 +404,12 @@ public class ControladorBDDeEventos {
 
     /**
      * No esta listo
+     *
      * @param fechaInicioa
-     * @param fechaTerminoa
-     * @return 
+     * @param fechaTermino
+     * @return
      */
-    public ArrayList<Evento>obtenerEventoPublicados(Date fechaInicioa, Date fechaTerminoa){
+    public ArrayList<Evento> obtenerEventoPublicados(Date fechaInicioa, Date fechaTermino) {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
@@ -420,7 +420,8 @@ public class ControladorBDDeEventos {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select * from evento where evento.publicado= true";
+                String sql = "select * from evento where evento.fechainicio >= '"+fechaInicioa+"' and \n"
+                        + "evento.fechainicio <= '"+fechaTermino+"'";
                 // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -428,14 +429,14 @@ public class ControladorBDDeEventos {
                     int idEvento = Integer.parseInt(resultado.getString("id"));
                     String nombre = resultado.getString("nombre");
                     String descripcion = resultado.getString("descripcion");
-                    Date fechaInicio = resultado.getDate("fechainicio");
-                    Date fechaTermino = resultado.getDate("fechatermino");
+                    Date fechaIni = resultado.getDate("fechainicio");
+                    Date fechaTer = resultado.getDate("fechatermino");
                     int capacidad = Integer.parseInt(resultado.getString("capacidad"));
                     int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
                     boolean publicado = resultado.getBoolean("publicado");
                     int idPropiedad = obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
 
-                    Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
+                    Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaIni, fechaTer, capacidad, plazoDeVolucion, publicado);
                     miEvento.setIdPropiedad(idPropiedad);
                     eventos.add(miEvento);
                 }
@@ -457,12 +458,9 @@ public class ControladorBDDeEventos {
 
         }
         return null;
-    
+
     }
-    
-    
-    
-    
+
     /**
      * Obtienen el identificador de una propiedad.
      *
@@ -1084,8 +1082,8 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
                 //int idEntrada = crearEntradaPrueba(miConexion);
                 String sql = "select asociacioneventoentradasector.precio from asociacioneventoentradasector  \n"
-                        + "where asociacioneventoentradasector.refevento="+idEvento+" and asociacioneventoentradasector.refsector='"+nombreSector+"'\n"
-                        + "and asociacioneventoentradasector.refpropiedad="+idPropiedad+"";
+                        + "where asociacioneventoentradasector.refevento=" + idEvento + " and asociacioneventoentradasector.refsector='" + nombreSector + "'\n"
+                        + "and asociacioneventoentradasector.refpropiedad=" + idPropiedad + "";
                 //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
