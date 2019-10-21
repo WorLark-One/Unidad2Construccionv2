@@ -6,6 +6,7 @@
 package VistasSistema.VistaPrincipal;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -174,7 +175,11 @@ public class PanelInicioSesion extends javax.swing.JPanel {
             }
             if(respuesta){
                 if("cliente".equals(this.tipoUsuario)){
-                    this.papa.derivarAVentanaPrincipalUsuario();
+                    try {
+                        this.papa.derivarAVentanaPrincipalUsuario();
+                    } catch (ParseException ex) {
+                        Logger.getLogger(PanelInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 if("propietario".equals(this.tipoUsuario)){
                     try {
