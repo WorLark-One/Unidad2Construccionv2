@@ -308,14 +308,16 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
             boolean bandera=false;
             for (int i = 0; i <this.propiedades.get(punteroPropiedad).getListaSectores().size(); i++) {
                 if(this.propiedades.get(punteroPropiedad).getListaSectores().get(i).getNombre().equals(this.listaDeSectores.getSelectedValue())){
-                   bandera = this.papa.getControladorUsuario().registrarCompra(this.evento.getIdEvento(), this.propiedades.get(punteroPropiedad).getListaSectores().get(this.listaDeSectores.getSelectedIndex()).getNombre(), Integer.parseInt(this.cantidadDeEntradas.getText()), this.evento.getIdPropiedad());
+                   bandera = this.papa.getControladorUsuario().registrarCompra(this.evento.getIdEvento(), this.propiedades.get(punteroPropiedad).getListaSectores().get(i).getNombre(), Integer.parseInt(this.cantidadDeEntradas.getText()), this.evento.getIdPropiedad());
                    break;
                 }
             }
             if(bandera){
+                actualizarDatosDelEvento();
+                this.cantidadDeEntradas.setText("");
                 JOptionPane.showMessageDialog(null, "Se a registrado su compra con exito");
             }else{
-                JOptionPane.showMessageDialog(null, "No quedan entradas disponibles", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No quedan entradas disponibles", "Error comprar entrada", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_botonCompraActionPerformed
