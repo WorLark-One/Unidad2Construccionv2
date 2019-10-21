@@ -404,6 +404,66 @@ public class ControladorBDDeEventos {
     }
 
     /**
+     * No esta listo
+     * @param fechaInicioa
+     * @param fechaTerminoa
+     * @return 
+     */
+    public ArrayList<Evento>obtenerEventoPublicados(Date fechaInicioa, Date fechaTerminoa){
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+
+        ArrayList<Evento> eventos = new ArrayList<>();
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select * from evento where evento.publicado= true";
+                // System.out.println(sql);
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    // obtengo la informacion del cliente.
+                    int idEvento = Integer.parseInt(resultado.getString("id"));
+                    String nombre = resultado.getString("nombre");
+                    String descripcion = resultado.getString("descripcion");
+                    Date fechaInicio = resultado.getDate("fechainicio");
+                    Date fechaTermino = resultado.getDate("fechatermino");
+                    int capacidad = Integer.parseInt(resultado.getString("capacidad"));
+                    int plazoDeVolucion = Integer.parseInt(resultado.getString("plazodevolucionentradas"));
+                    boolean publicado = resultado.getBoolean("publicado");
+                    int idPropiedad = obtenerIdDePropiedadDondeSeRealizaEvento(miConexion, idEvento);
+
+                    Evento miEvento = new Evento(idEvento, nombre, descripcion, fechaInicio, fechaTermino, capacidad, plazoDeVolucion, publicado);
+                    miEvento.setIdPropiedad(idPropiedad);
+                    eventos.add(miEvento);
+                }
+                resultado.close();
+                st.close();
+                //Collections.sort(eventos);
+                return eventos;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return null;
+            } finally {
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    //System.out.println("No se cerro la base de datos satisfactoriamente");
+                }
+            }
+
+        }
+        return null;
+    
+    }
+    
+    
+    
+    
+    /**
      * Obtienen el identificador de una propiedad.
      *
      * @param conexion: conexion con la base de datos
@@ -620,9 +680,7 @@ public class ControladorBDDeEventos {
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
-
             try {
-
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = " UPDATE evento set publicado=true where evento.id=" + idEvento + "";
                 //System.out.println(sql);
@@ -639,9 +697,7 @@ public class ControladorBDDeEventos {
                 } catch (SQLException ex) {
                     //System.out.println("Error al cerrar la conexion de la base de datos.");
                 }
-
             }
-
         }
         return false;
     }
@@ -963,6 +1019,7 @@ public class ControladorBDDeEventos {
                 //System.out.println(sql);
                 st.executeQuery(sql);
                 st.close();
+                return true;
             } catch (SQLException e) {
                 //System.out.println("error conexion");
                 return false;

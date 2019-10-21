@@ -240,6 +240,9 @@ public class PanelHistorialDeCompra extends javax.swing.JPanel {
         for (int i = 0; i < this.compras.size(); i++) {
             this.modeloLista.addElement("Id compra: " + this.compras.get(i).getId());
         }
+        this.listaDeCompras.setModel(modeloLista);
+        this.repaint();
+        this.revalidate();
     }
     
     public String convertirFechaString(Date date){
