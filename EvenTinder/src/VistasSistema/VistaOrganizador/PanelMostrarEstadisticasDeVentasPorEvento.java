@@ -171,7 +171,7 @@ public class PanelMostrarEstadisticasDeVentasPorEvento extends javax.swing.JPane
         this.modeloLista2=new DefaultListModel();
         if(this.eventos!=null){
             for(int i=0; i<this.eventos.size(); i++){
-                ArrayList<Compra> compras = this.papa.getControladorOrganizador().obtenerInformacionDelHistorialDeCompraDeUnEvento(i);
+                ArrayList<Compra> compras = this.papa.getControladorOrganizador().obtenerInformacionDelHistorialDeCompraDeUnEvento(this.eventos.get(i).getIdEvento());
                 int recaudado=0;
                 int entradasVendidas=0;
                 if(compras!=null){
@@ -194,7 +194,7 @@ public class PanelMostrarEstadisticasDeVentasPorEvento extends javax.swing.JPane
         this.modeloLista2=new DefaultListModel();
         if(this.eventos!=null){
             for(int i=0; i<this.eventos.size(); i++){
-                ArrayList<Compra> compras = this.papa.getControladorOrganizador().obtenerInformacionDelHistorialDeCompraDeUnEvento(i);
+                ArrayList<Compra> compras = this.papa.getControladorOrganizador().obtenerInformacionDelHistorialDeCompraDeUnEvento(this.eventos.get(i).getIdEvento());
                 int recaudado=0;
                 int entradasVendidas=0;
                 if(compras!=null){
@@ -218,7 +218,7 @@ public class PanelMostrarEstadisticasDeVentasPorEvento extends javax.swing.JPane
         this.modeloLista2=new DefaultListModel();
         if(this.eventos!=null){
             for(int i=0; i<this.eventos.size(); i++){
-                ArrayList<Compra> compras = this.papa.getControladorOrganizador().obtenerInformacionDelHistorialDeCompraDeUnEvento(i);
+                ArrayList<Compra> compras = this.papa.getControladorOrganizador().obtenerInformacionDelHistorialDeCompraDeUnEvento(this.eventos.get(i).getIdEvento());
                 int recaudado=0;
                 int entradasVendidas=0;
                 if(compras!=null){
