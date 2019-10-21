@@ -452,4 +452,8 @@ public class ControladorBDDeVentas {
         }
         return null;
     }
+
+    public void obtenrEntradasQueQuedanPorVender(){
+       
+    }
 }
