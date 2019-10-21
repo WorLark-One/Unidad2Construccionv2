@@ -22,7 +22,7 @@ public class ConexionBD {
     public ConexionBD() {
         conexion = null;
         this.nombreBD = "EvenTinder";
-        this.contraseñaBD = "1";
+        this.contraseñaBD = "12345";
     }
 
     public Connection getConexion() {
