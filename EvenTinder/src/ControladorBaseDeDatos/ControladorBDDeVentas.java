@@ -266,7 +266,6 @@ public class ControladorBDDeVentas {
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
-
                 return false;
             }
 
@@ -335,7 +334,6 @@ public class ControladorBDDeVentas {
         Connection miConexion = conexion;
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
@@ -448,7 +446,6 @@ public class ControladorBDDeVentas {
                 //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return null;
             }
-
         }
         return null;
     }

@@ -89,7 +89,6 @@ public class PanelInicioSesion extends javax.swing.JPanel {
 
         labelTipoUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        listaTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listaTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaTipoUsuarioActionPerformed(evt);

@@ -674,9 +674,7 @@ public class ControladorBDDeEventos {
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
-
             try {
-
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = " UPDATE evento set publicado=true where evento.id=" + idEvento + "";
                 //System.out.println(sql);
@@ -693,9 +691,7 @@ public class ControladorBDDeEventos {
                 } catch (SQLException ex) {
                     //System.out.println("Error al cerrar la conexion de la base de datos.");
                 }
-
             }
-
         }
         return false;
     }
@@ -1017,6 +1013,7 @@ public class ControladorBDDeEventos {
                 //System.out.println(sql);
                 st.executeQuery(sql);
                 st.close();
+                return true;
             } catch (SQLException e) {
                 //System.out.println("error conexion");
                 return false;

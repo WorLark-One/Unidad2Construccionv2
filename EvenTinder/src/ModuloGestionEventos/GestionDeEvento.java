@@ -5,7 +5,6 @@ import ModuloGestionPropiedades.Propiedad;
 import java.util.ArrayList;
 import java.util.Date;
 
-
 /**
  * 
  */
@@ -71,7 +70,7 @@ public class GestionDeEvento {
      * @param idEvento 
      * @return
      */
-    public boolean eliminarEvento(int idEvento) {
+    public boolean eliminarEvento(int idEvento){
         return this.controlador.eliminarEvento(idEvento);
     }
 
@@ -79,7 +78,7 @@ public class GestionDeEvento {
      * @param idEvento 
      * @return
      */
-    public boolean aceptarSolicitud(int idEvento) {
+    public boolean aceptarSolicitud(int idEvento){
         return this.controlador.aceptarSolicitudPropietario(idEvento);
     }
 
@@ -87,7 +86,7 @@ public class GestionDeEvento {
      * @param idEvento 
      * @return
      */
-    public boolean rechazarSolicitud(int idEvento) {
+    public boolean rechazarSolicitud(int idEvento){
         return this.controlador.eliminarEvento(idEvento);                                
     }
 

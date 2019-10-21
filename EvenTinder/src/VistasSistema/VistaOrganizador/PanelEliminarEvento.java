@@ -156,7 +156,7 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
         listaEventos.addItem("");
         if(this.eventos!=null){
             for(int i=0; i<this.eventos.size(); i++){
-                listaEventos.addItem(eventos.get(i).getNombre());
+                listaEventos.addItem("Id evento: " + eventos.get(i).getIdEvento() + "   Nombre evento: " + eventos.get(i).getNombre());
             }
             this.repaint();
             this.revalidate();
