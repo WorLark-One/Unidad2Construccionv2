@@ -299,7 +299,7 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
         if(this.listaDeSectores.getSelectedIndex()<0){
             return;
         }
-        int resp = this.validadCantidad();        
+        int resp = this.validadCantidad(this.cantidadDeEntradas.getText());        
         if(resp!=0){
             JOptionPane.showMessageDialog(null, "Se espera que la cantidad de entradas sea un numero entero positivo \n" + 
                     "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
