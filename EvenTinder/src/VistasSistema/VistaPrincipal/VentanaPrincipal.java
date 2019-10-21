@@ -14,6 +14,7 @@ import VistasSistema.VistaUsuario.PanelMostrarEventos;
 import VistasSistema.VistaUsuario.VentanaPrincipalUsuario;
 import java.awt.Component;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 
 /**
@@ -167,7 +168,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 
-    void ventanaListaEventos() {
+    void ventanaListaEventos() throws ParseException {
         PanelMostrarEventos eventos=new PanelMostrarEventos(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
@@ -218,7 +219,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.revalidate();
     }
 
-    public void derivarAVentanaPrincipalUsuario(){
+    public void derivarAVentanaPrincipalUsuario() throws ParseException{
         VentanaPrincipalUsuario nuevaVentana = new VentanaPrincipalUsuario();
         nuevaVentana.arranque();
         this.setVisible(false);

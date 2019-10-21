@@ -5,6 +5,10 @@
  */
 package VistasSistema.VistaPrincipal;
 
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author xebae
@@ -208,8 +212,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
     }//GEN-LAST:event_botonIniciarSesionMouseClicked
 
     private void botonListaEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonListaEventosMouseClicked
-        // TODO add your handling code here:
-        this.papa.ventanaListaEventos();
+        try {
+            // TODO add your handling code here:
+            this.papa.ventanaListaEventos();
+        } catch (ParseException ex) {
+            Logger.getLogger(PanelDeOpciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonListaEventosMouseClicked
 
 
