@@ -3,6 +3,7 @@ package ModuloGestionPropiedades;
 import ControladorBaseDeDatos.ControladorBDDePropiedades;
 import ModuloGestionEventos.Evento;
 import ModuloGestionEventos.GestionDeEvento;
+import ModuloSeguridadExterna.Guardian;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +16,7 @@ public class GestionDePropiedad {
     private ArrayList<Propiedad> listaPropiedades;
     private ControladorBDDePropiedades controlador;
     private GestionDeEvento gestorEventos;
+    
     
     /**
      * Constructor de un Gestor de Propiedades.
@@ -227,6 +229,8 @@ public class GestionDePropiedad {
      */
     public boolean aceptarSolicitud(int idEvento) {
         return this.gestorEventos.aceptarSolicitud(idEvento);
+
+        
     }
 
     /** 

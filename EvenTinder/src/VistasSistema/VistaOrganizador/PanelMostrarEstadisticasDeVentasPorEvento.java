@@ -26,6 +26,7 @@ public class PanelMostrarEstadisticasDeVentasPorEvento extends javax.swing.JPane
     
     public PanelMostrarEstadisticasDeVentasPorEvento(VentanaPrincipalOrganizador papa) {
         initComponents();
+        this.papa=papa;
         modeloLista2 = new DefaultListModel();
         this.lista.setModel(this.modeloLista2);
         this.actualizarMenuOpciones();

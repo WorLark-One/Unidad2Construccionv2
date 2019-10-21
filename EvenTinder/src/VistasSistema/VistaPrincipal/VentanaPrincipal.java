@@ -5,9 +5,12 @@
  */
 package VistasSistema.VistaPrincipal;
 
+import ControladorBaseDeDatos.ControladorBDDeUsuario;
+import ControladorUsuarios.ControladorCliente;
 import ControladorUsuarios.ControladorPrincipal;
 import VistasSistema.VistaOrganizador.VentanaPrincipalOrganizador;
 import VistasSistema.VistaPropietario.VentanaPrincipalPropietario;
+import VistasSistema.VistaUsuario.PanelMostrarEventos;
 import VistasSistema.VistaUsuario.VentanaPrincipalUsuario;
 import java.awt.Component;
 import java.sql.SQLException;
@@ -26,10 +29,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
  
     private Component componenteAnterior= null;
     private ControladorPrincipal controlador;
+    private ControladorCliente controladorUsuario;
     
     public VentanaPrincipal() {
         PanelHome home = new PanelHome(this);
         this.controlador= new ControladorPrincipal();
+        this.controladorUsuario = new ControladorCliente();
         initComponents();
         PanelDeOpciones panelDeOpciones=new PanelDeOpciones(this);
         getContentPane().add(panelDeOpciones, java.awt.BorderLayout.EAST);
@@ -163,7 +168,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     void ventanaListaEventos() {
-        PanelListaDeEventos eventos=new PanelListaDeEventos();
+        PanelMostrarEventos eventos=new PanelMostrarEventos(this);
         getContentPane().remove(this.componenteAnterior);
         getContentPane().add(eventos, java.awt.BorderLayout.CENTER);
         this.componenteAnterior=eventos;
@@ -264,5 +269,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
     }
 
-    
+    public ControladorCliente getControladorUsuario() {
+        return controladorUsuario;
+    }
 }

@@ -6,6 +6,7 @@
 package VistasSistema.VistaUsuario;
 
 import ModuloGestionEventos.Evento;
+import VistasSistema.VistaPrincipal.VentanaPrincipal;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
@@ -15,13 +16,15 @@ import javax.swing.DefaultListModel;
  */
 public class PanelMostrarEventos extends javax.swing.JPanel {
 
-    /**
+        /**
      * Creates new form PanelMostrarEventos
      */
     
     private VentanaPrincipalUsuario papa;
+    private VentanaPrincipal papaAdoptado;
     private DefaultListModel modeloLista;
     private ArrayList<Evento> eventos;
+    private boolean bandera = true;
     
     public PanelMostrarEventos(VentanaPrincipalUsuario papa) {
         this.papa=papa;
@@ -29,6 +32,15 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
         initComponents();
         this.actualizarListaDeEventos();
     }
+    
+    public PanelMostrarEventos(VentanaPrincipal papa) {
+        this.papaAdoptado=papa;
+        this.bandera = false;
+        this.modeloLista= new DefaultListModel();
+        initComponents();
+        this.actualizarListaDeEventos();
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,13 +51,12 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
         jLabel18 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         listaDeEventos = new javax.swing.JList<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -60,28 +71,27 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
 
         jButton2.setText(">");
 
-        listaDeEventos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         listaDeEventos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaDeEventosMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(listaDeEventos);
+        jScrollPane1.setViewportView(listaDeEventos);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -89,21 +99,21 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
+                        .addGap(138, 138, 138)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)))
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,18 +129,17 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
                             .addComponent(jButton1)
                             .addComponent(jButton2))
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(231, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void listaDeEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaDeEventosMouseClicked
-        // TODO add your handling code here:
         if(this.listaDeEventos.getSelectedIndex()<0 || this.eventos==null){
             return;
         }
         //aca pregunto si es cliente pasa ni no no
-        if(true){
+        if(this.bandera){
             papa.comprarEntrada(this.eventos.get(this.listaDeEventos.getSelectedIndex()));
         }
     }//GEN-LAST:event_listaDeEventosMouseClicked
@@ -141,14 +150,17 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> listaDeEventos;
     // End of variables declaration//GEN-END:variables
 
     private void actualizarListaDeEventos() {
-        this.eventos = this.papa.getControladorUsuario().obtenerTodosLosEventos();
+        if(this.bandera){
+            this.eventos = this.papa.getControladorUsuario().obtenerTodosLosEventos();
+        }else{
+            this.eventos = this.papaAdoptado.getControladorUsuario().obtenerTodosLosEventos();
+        }
         this.modeloLista.removeAllElements();
         if(eventos==null){
             this.modeloLista.addElement("No se encuentrar eventos en estas fechas");
@@ -164,5 +176,4 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
         this.repaint();
         this.revalidate();
     }
-    
 }

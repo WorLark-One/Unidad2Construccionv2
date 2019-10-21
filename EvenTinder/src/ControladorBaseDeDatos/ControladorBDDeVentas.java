@@ -167,7 +167,7 @@ public class ControladorBDDeVentas {
                     int precioTotalCompra = precioCompra * cantidadDeEntradas;
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "insert into compra values(default," + cantidadDeEntradas + ",'" + fecha + "'," + precioTotalCompra + ")RETURNING id";
-                    //      System.out.println(sql);
+                    System.out.println(sql);
                     ResultSet resultado = st.executeQuery(sql);
                     while (resultado.next()) {
                         int idCompra = Integer.parseInt(resultado.getString("id"));
@@ -334,7 +334,6 @@ public class ControladorBDDeVentas {
         Connection miConexion = conexion;
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
 

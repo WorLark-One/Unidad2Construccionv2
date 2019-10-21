@@ -10,7 +10,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
 /**
  * 
  */
@@ -251,7 +250,17 @@ public class Guardian {
         }
     }
     
-   
+    /**
+    * 
+    * @param organizador
+    * @param idEvento
+    * @param nombreEvento
+    * @param fechaDeInicio
+    * @param fechaDeTermino
+    * @param tarjetaCredito
+    * @param idPropiedad
+    * @param nombrePropiedad 
+    */
     
     public void eventoAceptado(String organizador,int idEvento, String nombreEvento, String fechaDeInicio, String fechaDeTermino, String tarjetaCredito, int idPropiedad, String nombrePropiedad){
         Properties props = new Properties();
