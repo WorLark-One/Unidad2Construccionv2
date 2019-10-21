@@ -2,6 +2,7 @@ package ControladorBaseDeDatos;
 
 import ModuloGestionEventos.Entrada;
 import ModuloGestionVentas.Compra;
+import ModuloSeguridadExterna.Guardian;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,11 +10,11 @@ import java.util.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ControladorBDDeVentas {
 
@@ -113,7 +114,7 @@ public class ControladorBDDeVentas {
                         + "inner join entrada ON entrada.id = instanciaentrada.refentrada\n"
                         + "inner join asociacioneventoentradasector ON asociacioneventoentradasector.refentrada = entrada.id\n"
                         + "inner join evento ON evento.id = asociacioneventoentradasector.refevento\n"
-                        + "where evento.id="+idEvento+"";
+                        + "where evento.id=" + idEvento + "";
                 // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -179,6 +180,13 @@ public class ControladorBDDeVentas {
                         boolean relacionarCompraCliente = relacionCompraCliente(miConexion, rutCliente, idCompra);
                         // genero la instancia de entrada
                         generarInstanciaEntrada(miConexion, idCompra, idEntrada, cantidadDeEntradas);
+                        ArrayList<Entrada> listaEntradas = obtenerListaEntradas(miConexion, idCompra);
+                        Guardian guardian = new Guardian();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                        String fechaComoCadena = sdf.format(fecha);
+                        String tarjeta = obtenerTarjetaCreditoCliente(miConexion, rutCliente);
+                        String nombreEvento = obtenerNombreEvento(miConexion, idEvento);
+                        guardian.compraEntradas(rutCliente, idCompra, cantidadDeEntradas, fechaComoCadena, precioTotalCompra, listaEntradas, tarjeta, nombreEvento);
                     }
                     st.close();
                     return true;
@@ -452,15 +460,15 @@ public class ControladorBDDeVentas {
         return null;
     }
 
-    public int obtenerEntradasQueQuedanPorEvento(int idEvento){
+    public int obtenerEntradasQueQuedanPorEvento(int idEvento) {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
-        int entradas=0;
+        int entradas = 0;
         if (miConexion != null)// si hay conexion.
         {
-            int capacidaEvento=obtenerCapacidMaximaEvento(miConexion, idEvento);
-            int entradasVendidas=obtenerNumeroDeEntradasVendidasDeEvento(miConexion, idEvento);
-            entradas=capacidaEvento-entradasVendidas;
+            int capacidaEvento = obtenerCapacidMaximaEvento(miConexion, idEvento);
+            int entradasVendidas = obtenerNumeroDeEntradasVendidasDeEvento(miConexion, idEvento);
+            entradas = capacidaEvento - entradasVendidas;
             try {
                 this.conexion.cerrarBaseDeDatos(miConexion);
             } catch (SQLException ex) {
@@ -470,6 +478,57 @@ public class ControladorBDDeVentas {
 
         }
         return entradas;
-       
+
     }
+
+    private String obtenerTarjetaCreditoCliente(Connection miConexion, String rutCliente) {
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select* from cliente where cliente.rut='" + rutCliente + "'";
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    String tarjeta = resultado.getString("tarjetacredito");
+                    resultado.close();
+                    st.close();
+                    return tarjeta;
+
+                }
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return null;
+            }
+
+        }
+        return null;
+    }
+
+    private String obtenerNombreEvento(Connection miConexion, int idEvento) {
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select* from evento where evento.id=" + idEvento + "";
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    String nombre = resultado.getString("nombre");
+                    resultado.close();
+                    st.close();
+                    return nombre;
+
+                }
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return null;
+            }
+
+        }
+        return null;
+    }
+
 }

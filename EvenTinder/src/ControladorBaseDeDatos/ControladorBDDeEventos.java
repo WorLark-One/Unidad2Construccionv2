@@ -2,6 +2,7 @@ package ControladorBaseDeDatos;
 
 import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
+import ModuloSeguridadExterna.Guardian;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ public class ControladorBDDeEventos {
 
     ConexionBD conexion;
     ControladorBDDePropiedades propiedades;
+    Guardian guardian;
 
     /**
      * Default constructor
@@ -21,6 +23,7 @@ public class ControladorBDDeEventos {
     public ControladorBDDeEventos() {
         this.conexion = new ConexionBD();
         this.propiedades = new ControladorBDDePropiedades();
+        this.guardian=new Guardian();
         inicializarBD();
     }
 
@@ -301,7 +304,7 @@ public class ControladorBDDeEventos {
         if (miConexion != null) {
             boolean eliminar = obtenerPublicadoDeEvento(miConexion, idEvento);
             if (eliminar == false) {
-                try {
+                try {                    
                     eliminarAsociacionEventoPropiedad(miConexion, idEvento);
                     borrarAsociacionEventoSectorEntrada(miConexion, idEvento);
                     java.sql.Statement st = miConexion.createStatement();
@@ -367,7 +370,6 @@ public class ControladorBDDeEventos {
                 // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    // obtengo la informacion del cliente.
                     int idEvento = Integer.parseInt(resultado.getString("id"));
                     String nombre = resultado.getString("nombre");
                     String descripcion = resultado.getString("descripcion");
@@ -681,6 +683,35 @@ public class ControladorBDDeEventos {
             try {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = " UPDATE evento set publicado=true where evento.id=" + idEvento + "";
+                //System.out.println(sql);
+                st.executeUpdate(sql);
+                st.close();
+                return true;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                return false;
+            } finally {
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    //System.out.println("Error al cerrar la conexion de la base de datos.");
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean rechazarSolicitudPropietario(int idEvento) {
+        this.conexion.crearConexion();
+        boolean aceptado;
+        Connection miConexion = this.conexion.getConexion();
+        if (miConexion != null) {
+            try {
+                //this.guardian.eventoCancelado(cliente, idEvento, idEvento, fecha, idEvento, tc, nombreEvento);
+                
+                java.sql.Statement st = miConexion.createStatement();
+                String sql = " UPDATE evento set publicado=false where evento.id=" + idEvento + "";
                 //System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
