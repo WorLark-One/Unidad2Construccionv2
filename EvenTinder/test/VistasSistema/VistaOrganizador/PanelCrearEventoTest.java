@@ -40,9 +40,9 @@ public class PanelCrearEventoTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of validarDatos method, of class PanelCrearEvento.
-     */
+    /*
+    
+   
     @Test
     public void testValidarDatos() {
         System.out.println("validarDatos");
@@ -88,7 +88,7 @@ public class PanelCrearEventoTest {
         result = instance.validarDatos(nombre, fechaDeInicio, fechaDeTermino, capacidad, descripcion, diasMaximos);
         assertEquals(expResult, result);
     }
-    
+    */
     
     @Test
     public void testValidarNombre() throws SQLException{       
@@ -173,8 +173,8 @@ public class PanelCrearEventoTest {
         assertEquals(expResult, result);
         
         expResult = 0;
-        inicio = "22/12/2019";
-        termino = "23/01/2020";
+        inicio = "22-12-2019";
+        termino = "23-01-2020";
         dias ="20";
         result = instance.validarFechas(inicio,termino,dias);
         assertEquals(expResult, result);
@@ -207,5 +207,130 @@ public class PanelCrearEventoTest {
 
     }
     
+    
+    
+    @Test
+    /**
+     * Brayan Escobar.
+     */
+    public void validarNombreTest() throws SQLException{       
+        VentanaPrincipalOrganizador v  = new VentanaPrincipalOrganizador();
+        PanelCrearEvento instance = new PanelCrearEvento(v);
+        String nombre = "";
+        int expResult = 1;
+        
+        //validar nombre vacio
+        int result = instance.validarNombre(nombre);        
+        assertEquals(expResult, result);
+        
+        nombre = "EVENTO";
+        expResult = 0;
+        result = instance.validarNombre(nombre);        
+        assertEquals(expResult, result);
+        
+        nombre = "!#$%&/()=";
+        
+        expResult = 1;
+        result = instance.validarNombre(nombre);        
+        assertEquals(expResult, result);
+        
+        nombre = "eveto *";
+        
+        expResult = 1;
+        result = instance.validarNombre(nombre); 
+        System.out.println("resultado:"+result);
+        assertEquals(expResult, result);
+        
+    }
+    
 
+    @Test
+    public void validarDescripcionTest() throws SQLException{
+        VentanaPrincipalOrganizador v  = new VentanaPrincipalOrganizador();
+        PanelCrearEvento instance = new PanelCrearEvento(v);
+        String descripcion = "";
+        int expResult = 2;
+        
+        //validar descripcion vacia
+        int result = instance.validarDescripcion(descripcion);        
+        assertEquals(expResult, result);
+        
+        //validar tamaño maximo, pero acepta cualquier caracter
+        expResult = 0;
+        descripcion = "*";
+        result = instance.validarDescripcion(descripcion);
+        System.out.println("resultado validar descripcion:"+result);
+        assertEquals(expResult, result);
+        
+    }
+    
+    @Test
+    public void validarFechasTest() throws SQLException, ParseException{
+        VentanaPrincipalOrganizador v  = new VentanaPrincipalOrganizador();
+        PanelCrearEvento instance = new PanelCrearEvento(v);
+        String inicio = "";
+        String termino = "";
+        String dias = "";
+        int expResult = 3;
+        
+        //validar fecha vacia
+        int result = instance.validarFechas(inicio,termino,dias);        
+        assertEquals(expResult, result);
+    
+        //validar formato valido
+        expResult = 4;
+        inicio = "asnfk";
+        termino = "123";
+        dias = "sfs";
+        result = instance.validarFechas(inicio,termino,dias);
+        assertEquals(expResult, result);
+        
+        //validar fecha valida
+        expResult = 5;
+        inicio = "21/10/2019";
+        termino = "18/10/1938";
+        dias = "-1";
+        result = instance.validarFechas(inicio,termino,dias);
+        assertEquals(expResult, result);
+        
+        expResult = 0;
+        inicio = "22/12/2019";
+        termino = "23/01/2020";
+        dias ="20";
+        result = instance.validarFechas(inicio,termino,dias);
+        assertEquals(expResult, result);
+    }   
+    
+    @Test
+    public void validarCapacidadTest() throws SQLException{
+        VentanaPrincipalOrganizador v  = new VentanaPrincipalOrganizador();
+        PanelCrearEvento instance = new PanelCrearEvento(v);
+        String capacidad = "";
+        int expResult = 7;
+        
+        //validar capacidad vacia
+        int result = instance.validarCapacidad(capacidad);        
+        assertEquals(expResult, result);
+        
+        
+        //validar que es un numero valido
+        expResult = 7;
+        capacidad = "asd";
+        result = instance.validarCapacidad(capacidad);
+        assertEquals(expResult, result);
+        
+        //capacidad valida
+        expResult = 0;
+        capacidad = "123456789";
+        result = instance.validarCapacidad(capacidad);
+        assertEquals(expResult, result);
+        
+        //capacidad negativa
+        expResult = 7;
+        capacidad = "-1";
+        result = instance.validarCapacidad(capacidad);
+        assertEquals(expResult, result);
+
+    }
+    
 }

@@ -42,12 +42,14 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
         listaEventos = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
         botonEliminarEvento = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        listaOpciones = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel19.setText("1. Selecciones el evento a modificar");
+        jLabel19.setText("2. Selecciones el evento a modificar");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
@@ -67,6 +69,20 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
             }
         });
 
+        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel20.setText("1. Seleccione una opcion de listado de eventos");
+
+        listaOpciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaOpcionesMouseClicked(evt);
+            }
+        });
+        listaOpciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaOpcionesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,14 +93,16 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
                         .addGap(50, 50, 50)
                         .addComponent(jLabel4)
                         .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel19)
                             .addComponent(jLabel18)
-                            .addComponent(listaEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(listaOpciones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(listaEventos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(299, 299, 299)
+                        .addGap(278, 278, 278)
                         .addComponent(botonEliminarEvento)))
-                .addContainerGap(385, Short.MAX_VALUE))
+                .addContainerGap(436, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,24 +115,41 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
                         .addGap(100, 100, 100)
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel19)))
+                        .addComponent(jLabel20)
+                        .addGap(18, 18, 18)
+                        .addComponent(listaOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32)
+                .addComponent(jLabel19)
                 .addGap(18, 18, 18)
                 .addComponent(listaEventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botonEliminarEvento)
-                .addContainerGap(456, Short.MAX_VALUE))
+                .addContainerGap(369, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEliminarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarEventoActionPerformed
         // TODO add your handling code here:
+        if(this.listaOpciones.getSelectedIndex()<=0){
+            JOptionPane.showMessageDialog(null, "No a seleccionado un tipo de filtrado", "Error al filtrar eventos", JOptionPane.WARNING_MESSAGE);    
+            return;
+        }
         if(this.listaEventos.getSelectedIndex()<=0){
             JOptionPane.showMessageDialog(null, "No a seleccionado la propiedad a modificar", "Error al seleccionar propiedad", JOptionPane.WARNING_MESSAGE);    
             return;
         }
         boolean resultado = false;
         System.out.println("this.eventos.get(this.listaEventos.getSelectedIndex()-1" + this.eventos.get(this.listaEventos.getSelectedIndex()-1));
-        resultado = this.papa.getControladorOrganizador().eliminarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento());
+        if(this.listaOpciones.getSelectedIndex()==1){
+            int numero = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere eliminar este evento publicado? \n" + "Nota: no se le rembolsara el dinero del arriendo", "Confirmar eliminar evento", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(numero==1){
+                return ;
+            }
+            this.papa.getControladorOrganizador().devolverTodasLasEntradasDelEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento());
+            resultado = this.papa.getControladorOrganizador().eliminarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento());
+        }else{
+            resultado = this.papa.getControladorOrganizador().eliminarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento());
+        }
         System.out.println("resultado:" + resultado);
         if(resultado){
             //agregando sectores
@@ -132,13 +167,33 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
         
     }//GEN-LAST:event_listaEventosActionPerformed
 
+    private void listaOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaOpcionesActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        if(this.listaOpciones.getSelectedIndex()<=0){
+            return;
+        }
+        if(this.listaOpciones.getSelectedIndex()==1){
+            this.actualizarMenuEventosPublicados();
+        }
+        if(this.listaOpciones.getSelectedIndex()==2){
+            this.actualizarMenuEventosNoPublicados();
+        }
+    }//GEN-LAST:event_listaOpcionesActionPerformed
+
+    private void listaOpcionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaOpcionesMouseClicked
+
+    }//GEN-LAST:event_listaOpcionesMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonEliminarEvento;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JComboBox<String> listaEventos;
+    private javax.swing.JComboBox<String> listaOpciones;
     // End of variables declaration//GEN-END:variables
 
     //Aca abajo van a estar los metodos que se tienen que hacer 
@@ -149,8 +204,31 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
      * numeros mayores que 0 son errores
      */
  
+    public void actualizarMenuOpciones(){
+        this.listaOpciones.removeAllItems();
+        this.listaOpciones.addItem("");
+        this.listaOpciones.addItem("Eventos Publicados");
+        this.listaOpciones.addItem("Eventos No Publicados");
+        this.repaint();
+        this.revalidate();
+    }
+    
     // no se puede hacer tdd ya que necesita otro metodo
-    private void actualizarMenuOpciones(){
+    private void actualizarMenuEventosPublicados(){
+        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosPublicadosDeUnOrganizador();
+        listaEventos.removeAllItems();
+        listaEventos.addItem("");
+        if(this.eventos!=null){
+            for(int i=0; i<this.eventos.size(); i++){
+                listaEventos.addItem("Id evento: " + eventos.get(i).getIdEvento() + "   Nombre evento: " + eventos.get(i).getNombre());
+            }
+            this.repaint();
+            this.revalidate();
+        }
+    }
+    
+    // no se puede hacer tdd ya que necesita otro metodo
+    private void actualizarMenuEventosNoPublicados(){
         eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosNoPublicadosDeUnOrganizador();
         listaEventos.removeAllItems();
         listaEventos.addItem("");
