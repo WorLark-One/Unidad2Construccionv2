@@ -141,8 +141,10 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
         boolean resultado = false;
         System.out.println("this.eventos.get(this.listaEventos.getSelectedIndex()-1" + this.eventos.get(this.listaEventos.getSelectedIndex()-1));
         if(this.listaOpciones.getSelectedIndex()==1){
-            int bandera = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere eliminar este evento publicado? \n" + "Nota: no se le rembolsara el dinero del arriendo", "Confirmar eliminar evento", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            System.out.println(bandera);
+            int numero = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere eliminar este evento publicado? \n" + "Nota: no se le rembolsara el dinero del arriendo", "Confirmar eliminar evento", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(numero==1){
+                return ;
+            }
             resultado = this.papa.getControladorOrganizador().eliminarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento());
         }else{
             resultado = this.papa.getControladorOrganizador().eliminarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento());
