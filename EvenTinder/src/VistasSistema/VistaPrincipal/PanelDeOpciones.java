@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaPrincipal;
 
+import java.awt.Color;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,7 +87,7 @@ public class PanelDeOpciones extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        botonCrearCuenta.setBackground(new java.awt.Color(244, 244, 244));
+        botonCrearCuenta.setBackground(new java.awt.Color(255, 255, 255));
         botonCrearCuenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         botonCrearCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -102,11 +103,17 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         jLabel21.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel21.setText("Usuario invitado");
 
-        botonHome.setBackground(new java.awt.Color(244, 244, 244));
+        botonHome.setBackground(new java.awt.Color(255, 255, 255));
         botonHome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         botonHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonHomeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonHomeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonHomeMouseExited(evt);
             }
         });
         botonHome.setLayout(new java.awt.GridBagLayout());
@@ -115,7 +122,7 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botonListaDeEventos1.setText("EvenTinder");
         botonHome.add(botonListaDeEventos1, new java.awt.GridBagConstraints());
 
-        botonIniciarSesion.setBackground(new java.awt.Color(244, 244, 244));
+        botonIniciarSesion.setBackground(new java.awt.Color(255, 255, 255));
         botonIniciarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         botonIniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -131,7 +138,7 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/icons8-decisión-50 (1).png"))); // NOI18N
         jLabel19.setToolTipText("");
 
-        botonListaEventos.setBackground(new java.awt.Color(244, 244, 244));
+        botonListaEventos.setBackground(new java.awt.Color(255, 255, 255));
         botonListaEventos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         botonListaEventos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -310,6 +317,16 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             Logger.getLogger(PanelDeOpciones.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botonListaEventosMouseClicked
+
+    private void botonHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonHomeMouseEntered
+        // TODO add your handling code here:
+        this.botonHome.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonHomeMouseEntered
+
+    private void botonHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonHomeMouseExited
+        // TODO add your handling code here:
+        this.botonHome.setBackground(Color.white);
+    }//GEN-LAST:event_botonHomeMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
