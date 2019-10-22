@@ -93,6 +93,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonCrearCuentaMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonCrearCuentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonCrearCuentaMouseExited(evt);
+            }
         });
         botonCrearCuenta.setLayout(new java.awt.GridBagLayout());
 
@@ -128,6 +134,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonIniciarSesionMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonIniciarSesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonIniciarSesionMouseExited(evt);
+            }
         });
         botonIniciarSesion.setLayout(new java.awt.GridBagLayout());
 
@@ -143,6 +155,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botonListaEventos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonListaEventosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonListaEventosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonListaEventosMouseExited(evt);
             }
         });
         botonListaEventos.setLayout(new java.awt.GridBagLayout());
@@ -327,6 +345,36 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         // TODO add your handling code here:
         this.botonHome.setBackground(Color.white);
     }//GEN-LAST:event_botonHomeMouseExited
+
+    private void botonIniciarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIniciarSesionMouseEntered
+        // TODO add your handling code here:
+        this.botonIniciarSesion.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonIniciarSesionMouseEntered
+
+    private void botonIniciarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIniciarSesionMouseExited
+        // TODO add your handling code here:
+        this.botonIniciarSesion.setBackground(Color.white);
+    }//GEN-LAST:event_botonIniciarSesionMouseExited
+
+    private void botonCrearCuentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCrearCuentaMouseEntered
+        // TODO add your handling code here:
+        this.botonCrearCuenta.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonCrearCuentaMouseEntered
+
+    private void botonCrearCuentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCrearCuentaMouseExited
+        // TODO add your handling code here:
+        this.botonCrearCuenta.setBackground(Color.white);
+    }//GEN-LAST:event_botonCrearCuentaMouseExited
+
+    private void botonListaEventosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonListaEventosMouseEntered
+        // TODO add your handling code here:
+        this.botonListaEventos.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonListaEventosMouseEntered
+
+    private void botonListaEventosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonListaEventosMouseExited
+        // TODO add your handling code here:
+        this.botonListaEventos.setBackground(Color.white);
+    }//GEN-LAST:event_botonListaEventosMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

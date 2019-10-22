@@ -61,7 +61,7 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
         initComponents();
         Calendar ahoraCal = Calendar.getInstance();
         ano = ahoraCal.get(Calendar.YEAR);
-        mes = ahoraCal.get(Calendar.MONTH);
+        mes = ahoraCal.get(Calendar.MONTH) +1;
         String inicio = "" + ano + "-" + mes + "-1";
         String termino =  "" + ano + "-" + mes + "-31";
         fechaInicio= sdf.parse(inicio);
