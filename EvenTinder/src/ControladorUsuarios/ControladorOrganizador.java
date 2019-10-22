@@ -168,6 +168,9 @@ public class ControladorOrganizador {
      * @param idEvento 
      */
     public void devolverTodasLasEntradasDelEvento(int idEvento) {
-        
+        ArrayList<Compra> aux = this.gestorVentas.obtenerInformacionDelHistorialDeCompraDeUnEvento(idEvento);
+        for(Compra c:aux){
+            this.gestorVentas.eliminarCompra(c.getId());
+        }                
     }
 }

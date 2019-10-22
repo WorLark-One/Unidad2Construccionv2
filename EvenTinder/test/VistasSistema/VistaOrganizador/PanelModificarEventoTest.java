@@ -90,6 +90,9 @@ public class PanelModificarEventoTest {
         
     
     @Test
+    /**
+     * Pinky
+     */
     public void testValidarNombre() throws SQLException{       
         VentanaPrincipalOrganizador v  = new VentanaPrincipalOrganizador();
         PanelCrearEvento instance = new PanelCrearEvento(v);
@@ -120,6 +123,9 @@ public class PanelModificarEventoTest {
     }
     
     @Test
+    /**
+     * Pinky
+     */
     public void validarDescripcion() throws SQLException{
         VentanaPrincipalOrganizador v  = new VentanaPrincipalOrganizador();
         PanelCrearEvento instance = new PanelCrearEvento(v);
@@ -143,6 +149,9 @@ public class PanelModificarEventoTest {
     }
     
     @Test
+    /**
+     * Pinky
+     */
     public void validarFechas() throws SQLException, ParseException{
         VentanaPrincipalOrganizador v  = new VentanaPrincipalOrganizador();
         PanelCrearEvento instance = new PanelCrearEvento(v);
@@ -172,8 +181,8 @@ public class PanelModificarEventoTest {
         assertEquals(expResult, result);
         
         expResult = 0;
-        inicio = "22/12/2019";
-        termino = "23/01/2020";
+        inicio = "22-12-2019";
+        termino = "23-01-2020";
         dias ="20";
         result = instance.validarFechas(inicio,termino,dias);
         assertEquals(expResult, result);
@@ -181,7 +190,9 @@ public class PanelModificarEventoTest {
     
     
     @Test
-    
+    /**
+     * Pinky
+     */
     public void validarCapacidad() throws SQLException{
         VentanaPrincipalOrganizador v  = new VentanaPrincipalOrganizador();
         PanelCrearEvento instance = new PanelCrearEvento(v);
