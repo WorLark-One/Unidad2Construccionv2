@@ -145,6 +145,7 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
             if(numero==1){
                 return ;
             }
+            this.papa.getControladorOrganizador().devolverTodasLasEntradasDelEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento());
             resultado = this.papa.getControladorOrganizador().eliminarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento());
         }else{
             resultado = this.papa.getControladorOrganizador().eliminarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento());
