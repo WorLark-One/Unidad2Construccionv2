@@ -518,8 +518,9 @@ public class ControladorBDDeEventos {
 
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
-                String sql = "select * from evento where evento.publicado=true and evento.reforganizador='" + rutOrganizador + "'";
+                java.util.Date fecha = new Date();
+                String sql = "select * from evento where evento.publicado=true and evento.reforganizador='" + rutOrganizador + "'"
+                        + "and evento.fechainicio <= '" + fecha + "'::date";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idEvento = Integer.parseInt(resultado.getString("id"));
@@ -573,8 +574,10 @@ public class ControladorBDDeEventos {
 
             try {
                 java.sql.Statement st = miConexion.createStatement();
+                java.util.Date fecha = new Date();
 
-                String sql = "select * from evento where evento.publicado=false and evento.reforganizador='" + rutOrganizador + "'";
+                String sql = "select * from evento where evento.publicado=false and evento.reforganizador='" + rutOrganizador + "'"
+                        + "and evento.fechainicio <= '" + fecha + "'::date ";
                 //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
