@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -200,18 +201,27 @@ public class PanelHistorialDeCompra extends javax.swing.JPanel {
         if(this.listaDeCompras.getSelectedIndex()<0 || this.compras==null){
             return;
         }
-        this.nombreEvento.setText("Nombre del evento: " + Integer.toString(this.compras.get(this.listaDeCompras.getSelectedIndex()).getId()));
+        this.nombreEvento.setText("Nombre del evento: " + this.compras.get(this.listaDeCompras.getSelectedIndex()).getNombreEvento());
         this.fechaCompra.setText("Fecha de compra: " + convertirFechaString(this.compras.get(this.listaDeCompras.getSelectedIndex()).getFechaDeCompra()));
         this.numeroEntrada.setText("Numero de entradas: " + Integer.toString(this.compras.get(this.listaDeCompras.getSelectedIndex()).getNumeroDeEntrada()));
         this.precioTotal.setText("Precio total: " + Integer.toString(this.compras.get(this.listaDeCompras.getSelectedIndex()).getPrecioTotalDeLaCompra()));
     }//GEN-LAST:event_listaDeComprasMouseClicked
 
     private void botonDevolverEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDevolverEntradaActionPerformed
-        // TODO add your handling code here:
         if(this.listaDeCompras.getSelectedIndex()<0){
             return;
         }
-        this.papa.getControladorUsuario().eliminarCompra(this.compras.get(this.listaDeCompras.getSelectedIndex()).getId());
+        boolean resp = this.papa.getControladorUsuario().eliminarCompra(this.compras.get(this.listaDeCompras.getSelectedIndex()).getId());
+        if(resp){
+            actualizarListaDeCompra();
+            this.nombreEvento.setText("Nombre del evento: ");
+            this.fechaCompra.setText("Fecha de compra: ");
+            this.numeroEntrada.setText("Numero de entradas: ");
+            this.precioTotal.setText("Precio total: ");
+            JOptionPane.showMessageDialog(null, "Se a realizado la devolucion con exito");
+        }else{
+            JOptionPane.showMessageDialog(null, "El plazo de la devolucion espiro", "Error al devolver la entrada", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_botonDevolverEntradaActionPerformed
 
 
@@ -238,7 +248,7 @@ public class PanelHistorialDeCompra extends javax.swing.JPanel {
         }
         modeloLista.removeAllElements();
         for (int i = 0; i < this.compras.size(); i++) {
-            this.modeloLista.addElement("Id compra: " + this.compras.get(i).getId());
+            this.modeloLista.addElement("Id compra: " + this.compras.get(i).getId() + "   evento: " + this.compras.get(i).getNombreEvento());
         }
         this.listaDeCompras.setModel(modeloLista);
         this.repaint();

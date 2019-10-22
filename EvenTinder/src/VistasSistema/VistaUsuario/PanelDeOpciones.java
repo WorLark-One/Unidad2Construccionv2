@@ -6,6 +6,7 @@
 package VistasSistema.VistaUsuario;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -261,8 +262,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
     }//GEN-LAST:event_botonEliminarCuentaMouseClicked
 
     private void botoListaDeEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoListaDeEventosMouseClicked
-        // TODO add your handling code here:
-        this.papa.listaDeEventos();
+        try {
+            // TODO add your handling code here:
+            this.papa.listaDeEventos();
+        } catch (ParseException ex) {
+            Logger.getLogger(PanelDeOpciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botoListaDeEventosMouseClicked
 
     private void botonHome1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonHome1MouseClicked
