@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package VistasSistema.VistaUsuario;
-import VistasSistema.VistaUsuario.VentanaPrincipalUsuario;
-import VistasSistema.VistaUsuario.PanelEliminarUsuario;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 /**
