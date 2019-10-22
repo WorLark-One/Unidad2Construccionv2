@@ -173,8 +173,8 @@ public class PanelCrearEventoTest {
         assertEquals(expResult, result);
         
         expResult = 0;
-        inicio = "22/12/2019";
-        termino = "23/01/2020";
+        inicio = "22-12-2019";
+        termino = "23-01-2020";
         dias ="20";
         result = instance.validarFechas(inicio,termino,dias);
         assertEquals(expResult, result);

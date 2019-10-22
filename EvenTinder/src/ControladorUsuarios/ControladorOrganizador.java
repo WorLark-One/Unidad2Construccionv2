@@ -162,4 +162,15 @@ public class ControladorOrganizador {
     public ArrayList<Compra> obtenerInformacionDelHistorialDeCompraDeUnEvento(int idEvento){
         return this.gestorVentas.obtenerInformacionDelHistorialDeCompraDeUnEvento(idEvento);
     }
+
+    /**
+     * Metodo que se encarga en devolver todas las compras realizadas a ese eventos
+     * @param idEvento 
+     */
+    public void devolverTodasLasEntradasDelEvento(int idEvento) {
+        ArrayList<Compra> aux = this.gestorVentas.obtenerInformacionDelHistorialDeCompraDeUnEvento(idEvento);
+        for(Compra c:aux){
+            this.gestorVentas.eliminarCompra(c.getId());
+        }                
+    }
 }

@@ -574,12 +574,14 @@ public class PanelCrearEvento extends javax.swing.JPanel {
         caracteres.add(32);
         if(!nombre.equals("")){
             char[] aux = nombre.toCharArray();
-            for(char c : aux){                
-                int ascii = (int) c;
-                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122)|| (ascii >=48 && ascii <=57) || caracteres.contains(ascii)  )   ){
-                    return 1;
-                }
-            }  
+            if(aux.length <5){
+                for(char c : aux){                
+                    int ascii = (int) c;
+                    if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122)|| (ascii >=48 && ascii <=57) || caracteres.contains(ascii)  )   ){
+                        return 1;
+                    }
+                }  
+            }
         }
         else{
             return 1;
@@ -620,14 +622,14 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     public int validarFechas(String fechaDeInicio, String fechaDeTermino, String diasMaximosDevolucion) throws ParseException{
         if(!fechaDeInicio.equals("") && !fechaDeTermino.equals("") && !diasMaximosDevolucion.equals("")  ){  
             try {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 sdf.setLenient(false);
                 
                 Date inicio = sdf.parse(fechaDeInicio);               
                 Date termino = sdf.parse(fechaDeTermino);
                 Date actual = new Date();
                                 
-                if(inicio.after(actual) && inicio.before(termino) && isNumero(diasMaximosDevolucion) ){
+                if(inicio.after(actual) && (inicio.before(termino)|| inicio.equals(termino)) && isNumero(diasMaximosDevolucion) ){
                     int dias=(int) ((inicio.getTime()-actual.getTime())/86400000);                    
                     if(Integer.parseInt(diasMaximosDevolucion) <= dias){
                         return 0;
@@ -639,7 +641,6 @@ public class PanelCrearEvento extends javax.swing.JPanel {
                 else{
                     return 5;
                 }
-
             }catch (ParseException e) {
                 return 4;
             }            
@@ -649,7 +650,13 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     
     public int validarCapacidad(String capacidad){
         if(!capacidad.equals("") && isNumero(capacidad)){
-            return 0;
+            char[] aux = capacidad.toCharArray();
+            if(aux.length <=10){
+                return 0;
+            }
+            else{
+                return 7;
+            }
         }
         else{
             return 7;
