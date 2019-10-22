@@ -96,12 +96,10 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botonCrearCuenta.setLayout(new java.awt.GridBagLayout());
 
         jLabel17.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(51, 51, 51));
         jLabel17.setText("Crear cuenta");
         botonCrearCuenta.add(jLabel17, new java.awt.GridBagConstraints());
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(51, 51, 51));
         jLabel21.setText("Usuario invitado");
 
         botonHome.setBackground(new java.awt.Color(244, 244, 244));
@@ -114,7 +112,6 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botonHome.setLayout(new java.awt.GridBagLayout());
 
         botonListaDeEventos1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        botonListaDeEventos1.setForeground(new java.awt.Color(51, 51, 51));
         botonListaDeEventos1.setText("EvenTinder");
         botonHome.add(botonListaDeEventos1, new java.awt.GridBagConstraints());
 
@@ -128,7 +125,6 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botonIniciarSesion.setLayout(new java.awt.GridBagLayout());
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(51, 51, 51));
         jLabel18.setText("Iniciar sesion");
         botonIniciarSesion.add(jLabel18, new java.awt.GridBagConstraints());
 
@@ -145,7 +141,6 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botonListaEventos.setLayout(new java.awt.GridBagLayout());
 
         botonListaDeEventos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        botonListaDeEventos.setForeground(new java.awt.Color(51, 51, 51));
         botonListaDeEventos.setText("Lista de eventos");
         botonListaEventos.add(botonListaDeEventos, new java.awt.GridBagConstraints());
 
