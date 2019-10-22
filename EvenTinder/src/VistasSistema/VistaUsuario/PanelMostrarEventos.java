@@ -45,7 +45,7 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
         initComponents();
         Calendar ahoraCal = Calendar.getInstance();
         ano = ahoraCal.get(Calendar.YEAR);
-        mes = ahoraCal.get(Calendar.MONTH);
+        mes = ahoraCal.get(Calendar.MONTH) +1;
         String inicio = "" + ano + "-" + mes + "-1";
         String termino =  "" + ano + "-" + mes + "-31";
         fechaInicio= sdf.parse(inicio);
@@ -66,7 +66,11 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
         String termino =  "" + ano + "-" + mes + "-31";
         fechaInicio= sdf.parse(inicio);
         fechaTermino= sdf.parse(termino);   
-        this.texto.setText("Eventos Disponibles - " + mes + "/" + ano);
+        if(mes<10){
+            this.texto.setText("Eventos Disponibles -  " + mes + "/" + ano);
+        }else{
+            this.texto.setText("Eventos Disponibles - " + mes + "/" + ano);
+        }
         this.actualizarListaDeEventos();
     }
 
@@ -141,17 +145,15 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(texto)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -162,14 +164,14 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
                         .addGap(50, 50, 50)
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
+                        .addGap(98, 98, 98)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(texto)
                             .addComponent(jButton1)
-                            .addComponent(jButton2))
+                            .addComponent(jButton2)
+                            .addComponent(texto))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -244,14 +246,18 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
         String termino =  "" + ano + "-" + mes + "-31";
         fechaInicio= sdf.parse(inicio);
         fechaTermino= sdf.parse(termino);
-        this.texto.setText("Eventos Disponibles - " + mes + "/" + ano);
+        if(mes<10){
+            this.texto.setText("Eventos Disponibles -  " + mes + "/" + ano);
+        }else{
+            this.texto.setText("Eventos Disponibles - " + mes + "/" + ano);
+        }
         actualizarListaDeEventos();
     }
     
     private void quitarUnMes() throws ParseException{
         Calendar ahoraCal = Calendar.getInstance();
         if(ahoraCal.get(Calendar.YEAR)==ano){
-            if(mes==ahoraCal.get(Calendar.MONTH)){
+            if(mes==ahoraCal.get(Calendar.MONTH) +1){
                 JOptionPane.showMessageDialog(null, "No puede volver mas atras dado que la fecha no se lo permite", "Error en la seleccion de la fecha", JOptionPane.WARNING_MESSAGE);
                 return;
             }
@@ -265,7 +271,11 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
         String termino =  "" + ano + "-" + mes + "-31";
         fechaInicio= sdf.parse(inicio);
         fechaTermino= sdf.parse(termino);
-        this.texto.setText("Eventos Disponibles - " + mes + "/" + ano);
+        if(mes<10){
+            this.texto.setText("Eventos Disponibles -  " + mes + "/" + ano);
+        }else{
+            this.texto.setText("Eventos Disponibles - " + mes + "/" + ano);
+        }
         actualizarListaDeEventos();
     }
 }

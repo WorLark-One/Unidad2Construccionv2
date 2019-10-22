@@ -33,10 +33,14 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
     private ControladorPrincipal controladorPrincipal;
     private PanelMostrarEventos mostrarEventos;
     
-    public VentanaPrincipalUsuario() throws ParseException {
+    public VentanaPrincipalUsuario() {
         this.controladorUsuario= new ControladorCliente();
         this.controladorPrincipal= new ControladorPrincipal();
-        this.mostrarEventos= new PanelMostrarEventos(this);
+        try {
+            this.mostrarEventos= new PanelMostrarEventos(this);
+        } catch (ParseException ex) {
+            Logger.getLogger(VentanaPrincipalUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         PanelDeOpciones panelDeOpciones=new PanelDeOpciones(this);
         initComponents();
         PanelHome home= new PanelHome();
@@ -93,11 +97,7 @@ public class VentanaPrincipalUsuario extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try {
-                    new VentanaPrincipalUsuario().setVisible(true);
-                } catch (ParseException ex) {
-                    Logger.getLogger(VentanaPrincipalUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new VentanaPrincipalUsuario().setVisible(true);
             }
         });
     }
