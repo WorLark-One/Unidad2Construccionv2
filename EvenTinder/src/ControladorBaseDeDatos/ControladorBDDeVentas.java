@@ -34,6 +34,7 @@ public class ControladorBDDeVentas {
 
     /**
      * Obtiene una lista con todas las compras realizadas por un usuario.
+     *
      * @param rutUsuario: rut del usuario.
      * @return arryaList
      */
@@ -92,9 +93,11 @@ public class ControladorBDDeVentas {
     }
 
     /**
-     * Obtiene una lista de todas las compras realizadas por clientes de un evento.
+     * Obtiene una lista de todas las compras realizadas por clientes de un
+     * evento.
+     *
      * @param idEvento
-     * @return 
+     * @return
      */
     public ArrayList<Compra> obtenerInformacionDeHistorrialDeCompraDeUnEvento(int idEvento) {
         this.conexion.crearConexion();
@@ -149,14 +152,18 @@ public class ControladorBDDeVentas {
         }
         return null;
     }
+
     /**
      * registra una compra en la base de datos.
+     *
      * @param rutCliente: rut del cliente
      * @param idEvento: identificador del evento donde se realiza el evento
      * @param nombreSector: nombre del sector
-     * @param cantidadDeEntradas: numero de entradas respecto a un evento y sector especifico.
-     * @param idPropiedad: identificador de la propiedad donde se realizara el evento.
-     * @return 
+     * @param cantidadDeEntradas: numero de entradas respecto a un evento y
+     * sector especifico.
+     * @param idPropiedad: identificador de la propiedad donde se realizara el
+     * evento.
+     * @return
      */
     public boolean registrarCompra(String rutCliente, int idEvento, String nombreSector, int cantidadDeEntradas, int idPropiedad) {
 
@@ -187,7 +194,8 @@ public class ControladorBDDeVentas {
                         String fechaComoCadena = this.sdf.format(fecha);
                         String tarjeta = obtenerTarjetaCreditoCliente(miConexion, rutCliente);
                         String nombreEvento = obtenerNombreEvento(miConexion, idEvento);
-                        this.guardian.compraEntradas(rutCliente, idCompra, cantidadDeEntradas, fechaComoCadena, precioTotalCompra, listaEntradas, tarjeta, nombreEvento);
+                        String correo = obtenerCorreoCliente(miConexion, rutCliente);
+                        this.guardian.compraEntradas(correo, idCompra, cantidadDeEntradas, fechaComoCadena, precioTotalCompra, listaEntradas, tarjeta, nombreEvento);
                     }
                     st.close();
                     return true;
@@ -209,10 +217,13 @@ public class ControladorBDDeVentas {
         return false;
 
     }
+
     /**
      * Cancela la compra realizada por un cliente
+     *
      * @param idCompra: identificador de una compra.
-     * @return true si se logra eliminar el registro de compra, false de lo contrario.
+     * @return true si se logra eliminar el registro de compra, false de lo
+     * contrario.
      */
     public boolean cancelarCompra(int idCompra) {
         this.conexion.crearConexion();
@@ -221,9 +232,9 @@ public class ControladorBDDeVentas {
         if (miConexion != null) {
 
             try {
-                
+
                 generarReembolsoCompra(miConexion, idCompra);
-                
+
                 borrarInstanciasEntradas(miConexion, idCompra);
                 borrarRealizaCompra(miConexion, idCompra);
                 java.sql.Statement st = miConexion.createStatement();
@@ -239,13 +250,15 @@ public class ControladorBDDeVentas {
         }
         return false;
     }
+
     /**
      * Obtiene el precio que tiene un evento por sector.
+     *
      * @param conexion: conexion con la base de datos.
      * @param idEvento: identificador de un evento.
      * @param nombreSector: nombre del sector.
      * @param idPropiedad: identificador de la propiedad.
-     * @return 
+     * @return
      */
     private int obtenerPrecioEventoPorSector(Connection conexion, int idEvento, String nombreSector, int idPropiedad) {
 
@@ -277,9 +290,10 @@ public class ControladorBDDeVentas {
         return 0;
 
     }
+
     /**
-     * Metodo privado.
-     * Relaciona las tablas de compra y cliente.
+     * Metodo privado. Relaciona las tablas de compra y cliente.
+     *
      * @param conexion: conexion con la base de datos.
      * @param rutCliente: rut del cliente.
      * @param idCompra: identificador de una compra.
@@ -306,11 +320,11 @@ public class ControladorBDDeVentas {
     }
 
     /**
-     * Metodo privado.
-     * Obtiene la capcidad maxima de un evento.
+     * Metodo privado. Obtiene la capcidad maxima de un evento.
+     *
      * @param conexion: conexion con la base de datos.
      * @param idEvento: identificador del evento.
-     * @return capacidad maxima del evento  de lo contrario -1.
+     * @return capacidad maxima del evento de lo contrario -1.
      */
     private int obtenerCapacidMaximaEvento(Connection conexion, int idEvento) {
         Connection miConexion = conexion;
@@ -335,9 +349,10 @@ public class ControladorBDDeVentas {
         }
         return -1;
     }
+
     /**
-     * Metodo privado.
-     * obtiene el numero de entradas vendidas de un evento.
+     * Metodo privado. obtiene el numero de entradas vendidas de un evento.
+     *
      * @param conexion: conexion con la base de datos.
      * @param idEvento: identidicador del evento.
      * @return numero de entras vendidas.
@@ -374,14 +389,15 @@ public class ControladorBDDeVentas {
         }
         return -1;
     }
+
     /**
-     * Metodo privado.
-     * Obtiene el identidicador de una entrada.
+     * Metodo privado. Obtiene el identidicador de una entrada.
+     *
      * @param conexion
      * @param idEvento: identificador del evento.
      * @param nombreSector: nombre del sector.
      * @param idPropiedad: identificador de una propiedad.
-     * @return 
+     * @return
      */
     private int obtenerIdentificadorDeEntrada(Connection conexion, int idEvento, String nombreSector, int idPropiedad) {
         Connection miConexion = conexion;
@@ -413,8 +429,8 @@ public class ControladorBDDeVentas {
     }
 
     /**
-     * Metodo privado.
-     * Genera instancias de entras.
+     * Metodo privado. Genera instancias de entras.
+     *
      * @param miConexion: conexion con la base de datos.
      * @param idCompra: identificador de una compra.
      * @param idEntrada: identificado de una entrada,
@@ -440,11 +456,14 @@ public class ControladorBDDeVentas {
         }
         return false;
     }
+
     /**
      * Borra el registro de instancias de entradas de la base de datos.
+     *
      * @param miConexion: conexion con la base de datos.
      * @param idCompra: identificador de una compra.
-     * @return true si se borran los registros de instancias, false de lo contrario.
+     * @return true si se borran los registros de instancias, false de lo
+     * contrario.
      */
     private boolean borrarInstanciasEntradas(Connection miConexion, int idCompra) {
         if (miConexion != null) {
@@ -464,10 +483,11 @@ public class ControladorBDDeVentas {
         }
         return false;
     }
-    
+
     /**
-     * Meotodo privado.
-     * borra el registro que relaciona una compra con un cliente.
+     * Meotodo privado. borra el registro que relaciona una compra con un
+     * cliente.
+     *
      * @param miConexion: conexion con la base de datos.
      * @param idCompra: identificador de una compra.
      * @return true si borra el registro, false de lo contrario.
@@ -489,12 +509,14 @@ public class ControladorBDDeVentas {
         }
         return false;
     }
+
     /**
-     * Metodo privado.
-     * Obtiene una lista de entradas referente a una compra.
+     * Metodo privado. Obtiene una lista de entradas referente a una compra.
+     *
      * @param miConexion: conexion con la base de datos.
      * @param idCompra: identificador de una compra.
-     * @return  lista de entradas o null en caso de que no existan entradas referentes a esa compra.
+     * @return lista de entradas o null en caso de que no existan entradas
+     * referentes a esa compra.
      */
     private ArrayList<Entrada> obtenerListaEntradas(Connection miConexion, int idCompra) {
 
@@ -529,8 +551,10 @@ public class ControladorBDDeVentas {
         }
         return null;
     }
+
     /**
      * Obtiene el numero de entradas que quedan por vender de un evento.
+     *
      * @param idEvento: identificador de un evento.
      * @return numero de entradas que quedan por vender.
      */
@@ -554,9 +578,10 @@ public class ControladorBDDeVentas {
         return entradas;
 
     }
+
     /**
-     * Metodo privado.
-     * Obtiene la tarjeta de credito de un cliente.
+     * Metodo privado. Obtiene la tarjeta de credito de un cliente.
+     *
      * @param miConexion: conexion con la base de datos.
      * @param rutCliente: rut del cliente.
      * @return tarjeta de credito del cliente, o null si no encuentra registrado
@@ -586,11 +611,13 @@ public class ControladorBDDeVentas {
         }
         return null;
     }
+
     /**
      * Obtiene el nombre de un evento.
+     *
      * @param miConexion: conexion con la base de datos.
      * @param idEvento: identificador de un evento
-     * @return  nombre del evento.
+     * @return nombre del evento.
      */
     private String obtenerNombreEvento(Connection miConexion, int idEvento) {
         if (miConexion != null)// si hay conexion.
@@ -616,13 +643,14 @@ public class ControladorBDDeVentas {
         }
         return null;
     }
+
     /**
-     * Metodo privado
-     * Generar Reembolso de una compra.
+     * Metodo privado Generar Reembolso de una compra.
+     *
      * @param miConexion: conexion con la base de datos.
      * @param idCompra : identificador de una compra.
      */
-    private void generarReembolsoCompra(Connection miConexion,int idCompra) {
+    private void generarReembolsoCompra(Connection miConexion, int idCompra) {
 
         if (miConexion != null) {
 
@@ -636,7 +664,7 @@ public class ControladorBDDeVentas {
                 if (comparacion == true) {
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "select DISTINCT\n"
-                            + "cliente.nombrecompleto,compra.id,compra.numeroentradas,compra.fechacompra,compra.preciototal,cliente.tarjetacredito,\n"
+                            + "cliente.nombrecompleto,cliente.correo,compra.id,compra.numeroentradas,compra.fechacompra,compra.preciototal,cliente.tarjetacredito,\n"
                             + "evento.nombre as nombreevento\n"
                             + "from cliente\n"
                             + "inner join realizacompra ON realizacompra.refcliente = cliente.rut\n"
@@ -645,22 +673,23 @@ public class ControladorBDDeVentas {
                             + "inner join entrada on instanciaentrada.refentrada=entrada.id\n"
                             + "inner join asociacioneventoentradasector on entrada.id=asociacioneventoentradasector.refentrada\n"
                             + "inner join evento on asociacioneventoentradasector.refevento = evento.id\n"
-                            + "where compra.id="+idCompra+" ";
+                            + "where compra.id=" + idCompra + " ";
                     ResultSet resultado = st.executeQuery(sql);
-                while (resultado.next()) {
-                    // obtengo la informacion del cliente.
-                    String  nombreCliente = resultado.getString("nombrecompleto");
-                    int idComp = resultado.getInt("idcompra");
-                    int numeroEntradas = resultado.getInt("numeroentradas");
-                    Date fechaCom= resultado.getDate("fechacompra");
-                    int precioT = resultado.getInt("preciototal");
-                    String tarjeta=resultado.getString("tarjetacredito");
-                    String nombreEvento=resultado.getString("nombreevento");
-                    String fechaComoCadena = this.sdf.format(fechaCom);
-                    this.guardian.reembolsoCompra(nombreCliente, idComp,numeroEntradas , fechaComoCadena, precioT, tarjeta, nombreEvento);
-                }
-                resultado.close();
-                st.close();
+                    while (resultado.next()) {
+                        // obtengo la informacion del cliente.
+                        String nombreCliente = resultado.getString("nombrecompleto");
+                        int idComp = resultado.getInt("idcompra");
+                        String correo=resultado.getString("correo");
+                        int numeroEntradas = resultado.getInt("numeroentradas");
+                        Date fechaCom = resultado.getDate("fechacompra");
+                        int precioT = resultado.getInt("preciototal");
+                        String tarjeta = resultado.getString("tarjetacredito");
+                        String nombreEvento = resultado.getString("nombreevento");
+                        String fechaComoCadena = this.sdf.format(fechaCom);
+                        this.guardian.reembolsoCompra(correo, idComp, numeroEntradas, fechaComoCadena, precioT, tarjeta, nombreEvento);
+                    }
+                    resultado.close();
+                    st.close();
                 }
 
                 //return true;
@@ -671,8 +700,10 @@ public class ControladorBDDeVentas {
         }
         //return false;
     }
+
     /**
      * Obtiene el plazo de devolucion de entradas de un evento.
+     *
      * @param miConexion: conexion con la base de datos.
      * @param idCompra: identificador de una compra.
      * @return numero de dias de plazo de devolucion.
@@ -707,9 +738,10 @@ public class ControladorBDDeVentas {
         }
         return -1;
     }
+
     /**
-     * Metodo privado.
-     * apartir de una fecha, le suma una cantidad de dias.
+     * Metodo privado. apartir de una fecha, le suma una cantidad de dias.
+     *
      * @param miConexion: conexion con la base de datos.
      * @param fechaActual: fecha.
      * @param dias: numero de dias los cuales quiere que se le sume a la fecha.
@@ -740,9 +772,10 @@ public class ControladorBDDeVentas {
         }
         return null;
     }
+
     /**
-     * Metodo privado
-     * Obtiene la fecha de compra de una compra en especifica.
+     * Metodo privado Obtiene la fecha de compra de una compra en especifica.
+     *
      * @param miConexion: conexion con la base de datos.
      * @param idCompra: identificador de una compra.
      * @return fecha de compra.
@@ -761,6 +794,33 @@ public class ControladorBDDeVentas {
                     resultado.close();
                     st.close();
                     return fecha;
+
+                }
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return null;
+            }
+
+        }
+        return null;
+    }
+
+    private String obtenerCorreoCliente(Connection miConexion, String rutCliente) {
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select cliente.correo\n"
+                        + "from cliente\n"
+                        + "where cliente.rut='"+rutCliente+"'";
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    String  correo = resultado.getString("correo");
+                    resultado.close();
+                    st.close();
+                    return correo;
 
                 }
             } catch (SQLException e) {

@@ -316,7 +316,7 @@ public class ControladorBDDeEventos {
                     borrarAsociacionEventoSectorEntrada(miConexion, idEvento);
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "delete from evento where evento.id=" + idEvento + "";
-                    System.out.println(sql);
+                    //System.out.println(sql);
                     st.executeUpdate(sql);
                     st.close();
                     return true;
@@ -343,7 +343,7 @@ public class ControladorBDDeEventos {
             try {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "delete from asociacioneventoentradasector where asociacioneventoentradasector.refevento=" + idEvento + "";
-                System.out.println(sql);
+                //System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
                 return true;
@@ -724,7 +724,7 @@ public class ControladorBDDeEventos {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select DISTINCT cliente.nombrecompleto, compra.id,compra.numeroentradas,compra.fechacompra,compra.preciototal,cliente.tarjetacredito,evento.nombre\n"
+                String sql = "select DISTINCT cliente.nombrecompleto,cliente.correo, compra.id,compra.numeroentradas,compra.fechacompra,compra.preciototal,cliente.tarjetacredito,evento.nombre\n"
                         + "from cliente\n"
                         + "inner join realizacompra ON realizacompra.refcliente = cliente.rut\n"
                         + "inner join compra on compra.id = realizacompra.refcompra\n"
@@ -737,6 +737,7 @@ public class ControladorBDDeEventos {
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     String nombreCompleto = resultado.getString("nombrecompleto");
+                    String correo=resultado.getString("correo");
                     int idCompra = Integer.parseInt(resultado.getString("id"));
                     int numeroEntradas = Integer.parseInt(resultado.getString("capacidad"));
                     Date fechaCompra = resultado.getDate("fechacompra");
@@ -745,7 +746,7 @@ public class ControladorBDDeEventos {
                     String nombreEvento = resultado.getString("nombre");
                     String fechaComoCadena = this.sdf.format(fechaCompra);
                     //ArrayList<Entrada>listaEntradas=obtenerListaEntradasDeUnaCompra(miConexion, idCompra);
-                    this.guardian.eventoCancelado(nombreCompleto, idCompra, numeroEntradas, fechaComoCadena, precioTotal, tarjeta, nombreEvento);
+                    this.guardian.eventoCancelado(correo, idCompra, numeroEntradas, fechaComoCadena, precioTotal, tarjeta, nombreEvento);
 
                 }
                 resultado.close();
@@ -1330,7 +1331,7 @@ public class ControladorBDDeEventos {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select  propietario.nombrecompleto,evento.id,evento.nombre as nombreevento,evento.fechainicio,evento.fechatermino,propietario.cuentacorriente,\n"
+                String sql = "select  propietario.nombrecompleto,propietario.correo,evento.id,evento.nombre as nombreevento,evento.fechainicio,evento.fechatermino,propietario.cuentacorriente,\n"
                         + "propiedad.id as idPropiedad, propiedad.nombre as nombrePropiedad\n"
                         + "from propietario\n"
                         + "inner join propiedad on propietario.rut = propiedad.refpropietario\n"
@@ -1342,6 +1343,7 @@ public class ControladorBDDeEventos {
                 while (resultado.next()) {
                     String nombrePropietario = resultado.getString("nombre");
                     int idEven = Integer.parseInt(resultado.getString("id"));
+                    String correo=resultado.getString("correo");
                     String nombreEvento = resultado.getString("nombreevento");
                     Date fechaInicio = resultado.getDate("fechainicio");
                     Date fechaTermino = resultado.getDate("fechatermino");
@@ -1351,7 +1353,7 @@ public class ControladorBDDeEventos {
                     String fechaIni = this.sdf.format(fechaInicio);
                     String fechaTer = this.sdf.format(fechaTermino);
                     
-                    this.guardian.arriendoPropiedad(nombrePropietario, idEven, fechaIni, fechaTer, nombreEvento, cuentaCorriente, idPropiedad, nombrePropiedad);
+                    this.guardian.arriendoPropiedad(correo, idEven, fechaIni, fechaTer, nombreEvento, cuentaCorriente, idPropiedad, nombrePropiedad);
 
                 }
                 resultado.close();
