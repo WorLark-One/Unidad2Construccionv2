@@ -239,7 +239,7 @@ public class GestionDePropiedad {
      * @return True si se rechazo la solicitud con exito. False si no se pudo rechazar la solicitud.
      */
     public boolean rechazarSolicitud(int idEvento) {
-        return this.gestorEventos.eliminarEvento(idEvento);
+        return this.gestorEventos.rechazarSolicitud(idEvento);
     }
 
     /**

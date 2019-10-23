@@ -190,12 +190,14 @@ public class ControladorBDDeVentas {
                         boolean relacionarCompraCliente = relacionCompraCliente(miConexion, rutCliente, idCompra);
                         // genero la instancia de entrada
                         generarInstanciaEntrada(miConexion, idCompra, idEntrada, cantidadDeEntradas);
-                        ArrayList<Entrada> listaEntradas = obtenerListaEntradas(miConexion, idCompra);
+                        
+                        ArrayList<String> listaEntrada = obtenerListaEntradasCorreo(miConexion, idCompra);
+                        
                         String fechaComoCadena = this.sdf.format(fecha);
                         String tarjeta = obtenerTarjetaCreditoCliente(miConexion, rutCliente);
                         String nombreEvento = obtenerNombreEvento(miConexion, idEvento);
                         String correo = obtenerCorreoCliente(miConexion, rutCliente);
-                        this.guardian.compraEntradas(correo, idCompra, cantidadDeEntradas, fechaComoCadena, precioTotalCompra, listaEntradas, tarjeta, nombreEvento);
+                        this.guardian.compraEntradas(correo, idCompra, cantidadDeEntradas, fechaComoCadena, precioTotalCompra, listaEntrada, tarjeta, nombreEvento);
                     }
                     st.close();
                     return true;
@@ -215,6 +217,46 @@ public class ControladorBDDeVentas {
 
         }
         return false;
+
+    }
+
+    private ArrayList<String> obtenerListaEntradasCorreo(Connection miConexion, int idCompra) {
+
+        ArrayList<String> entradas = new ArrayList<>();
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select instanciaentrada.id,asociacioneventoentradasector.precio,\n"
+                        + "asociacioneventoentradasector.refSector\n"
+                        + "from compra\n"
+                        + "inner join instanciaentrada instanciaentrada ON instanciaentrada.refcompra = compra.id \n"
+                        + "inner join entrada on instanciaentrada.refentrada=entrada.id\n"
+                        + "inner join asociacioneventoentradasector on entrada.id = asociacioneventoentradasector.refentrada\n"
+                        + "where compra.id = "+idCompra+"";
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    // obtengo la informacion del cliente.
+                    int idEntrada = Integer.parseInt(resultado.getString("id"));
+                    int precio = resultado.getInt("precio");
+                    String nombreSector=resultado.getString("refsector");
+                    String cadena=idEntrada+";"+precio+";"+nombreSector;
+                    entradas.add(cadena);
+
+                }
+                resultado.close();
+                st.close();
+                //Collections.sort(compras);
+                return entradas;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return null;
+            }
+        }
+        return null;
 
     }
 
@@ -679,13 +721,14 @@ public class ControladorBDDeVentas {
                         // obtengo la informacion del cliente.
                         String nombreCliente = resultado.getString("nombrecompleto");
                         int idComp = resultado.getInt("idcompra");
-                        String correo=resultado.getString("correo");
+                        String correo = resultado.getString("correo");
                         int numeroEntradas = resultado.getInt("numeroentradas");
                         Date fechaCom = resultado.getDate("fechacompra");
                         int precioT = resultado.getInt("preciototal");
                         String tarjeta = resultado.getString("tarjetacredito");
                         String nombreEvento = resultado.getString("nombreevento");
                         String fechaComoCadena = this.sdf.format(fechaCom);
+
                         this.guardian.reembolsoCompra(correo, idComp, numeroEntradas, fechaComoCadena, precioT, tarjeta, nombreEvento);
                     }
                     resultado.close();
@@ -814,10 +857,10 @@ public class ControladorBDDeVentas {
 
                 String sql = "select cliente.correo\n"
                         + "from cliente\n"
-                        + "where cliente.rut='"+rutCliente+"'";
+                        + "where cliente.rut='" + rutCliente + "'";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    String  correo = resultado.getString("correo");
+                    String correo = resultado.getString("correo");
                     resultado.close();
                     st.close();
                     return correo;
