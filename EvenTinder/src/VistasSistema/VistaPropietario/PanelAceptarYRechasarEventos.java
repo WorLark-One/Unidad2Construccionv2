@@ -85,15 +85,19 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
+        listaPropiedades.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         listaPropiedades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaPropiedadesActionPerformed(evt);
             }
         });
 
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel20.setText("Descripcion del evento");
 
+        jPanel1.setBackground(new java.awt.Color(234, 234, 234));
+
+        lista.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaMouseClicked(evt);
@@ -118,12 +122,13 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel19.setText("1. Elija una propiedad");
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menú Lista de solicitudes de eventos");
+        jLabel18.setText("Menú lista de solicitudes de eventos");
 
+        aceptar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         aceptar.setText("Aceptar");
         aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +136,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
             }
         });
 
+        rechazar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         rechazar.setText("Rechazar");
         rechazar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,16 +144,23 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
             }
         });
 
+        jPanel2.setBackground(new java.awt.Color(234, 234, 234));
+
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
+        nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         nombre.setText("Nombre: ");
 
+        descripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         descripcion.setText("Descripcion: ");
 
+        capacidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         capacidad.setText("Capacidad: ");
 
+        fechaDeInicio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         fechaDeInicio.setText("Fecha de inicio:");
 
+        fechaDeTermino.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         fechaDeTermino.setText("Fecha de termino:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -163,7 +176,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                     .addComponent(fechaDeInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(fechaDeTermino)
-                        .addGap(0, 353, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -199,7 +212,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel21.setText("Lista de eventos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -210,24 +223,20 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel20))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19)
+                    .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(aceptar)
                         .addGap(18, 18, 18)
                         .addComponent(rechazar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel21))
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel19)
-                    .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +264,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                 .addComponent(jLabel20)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

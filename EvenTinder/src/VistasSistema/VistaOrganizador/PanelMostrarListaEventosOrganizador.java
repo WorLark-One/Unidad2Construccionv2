@@ -6,6 +6,7 @@
 package VistasSistema.VistaOrganizador;
 
 import ModuloGestionEventos.Evento;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -27,6 +28,7 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
     public PanelMostrarListaEventosOrganizador(VentanaPrincipalOrganizador papa) {
         this.papa=papa;
         initComponents();
+        this.lista.setBackground(Color.WHITE);
         modeloLista2 = new DefaultListModel();
         this.lista.setModel(this.modeloLista2);
         this.actualizarMenuOpciones();
@@ -58,9 +60,12 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel19.setText("Seleccione una opcion de listado de eventos");
 
+        jPanel1.setBackground(new java.awt.Color(232, 232, 232));
+
+        lista.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jScrollPane1.setViewportView(lista);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -80,7 +85,7 @@ public class PanelMostrarListaEventosOrganizador extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel20.setText("Lista de eventos");
 
         listaEventos.addActionListener(new java.awt.event.ActionListener() {

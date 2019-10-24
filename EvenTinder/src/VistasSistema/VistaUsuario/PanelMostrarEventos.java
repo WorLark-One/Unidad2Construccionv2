@@ -7,6 +7,7 @@ package VistasSistema.VistaUsuario;
 
 import ModuloGestionEventos.Evento;
 import VistasSistema.VistaPrincipal.VentanaPrincipal;
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
         this.papa=papa;
         this.modeloLista= new DefaultListModel();
         initComponents();
+        this.listaDeEventos.setBackground(Color.WHITE);
         Calendar ahoraCal = Calendar.getInstance();
         ano = ahoraCal.get(Calendar.YEAR);
         mes = ahoraCal.get(Calendar.MONTH) +1;
@@ -114,6 +116,9 @@ public class PanelMostrarEventos extends javax.swing.JPanel {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(232, 232, 232));
+
+        listaDeEventos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         listaDeEventos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaDeEventosMouseClicked(evt);
