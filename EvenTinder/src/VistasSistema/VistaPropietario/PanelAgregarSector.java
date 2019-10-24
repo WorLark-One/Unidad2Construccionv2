@@ -66,15 +66,19 @@ public class PanelAgregarSector extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menú Agregar sectores");
+        jLabel18.setText("Menú agregar sectores");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
+        jPanel2.setBackground(new java.awt.Color(232, 232, 232));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Nombre");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Ingrese los siguientes datos");
 
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("Capacidad");
 
         nombre.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +87,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             }
         });
 
+        guardarCambios.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         guardarCambios.setText("Guardar Cambios");
         guardarCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +95,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             }
         });
 
+        volver.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,13 +117,14 @@ public class PanelAgregarSector extends javax.swing.JPanel {
                             .addComponent(jLabel5))
                         .addGap(65, 65, 65)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(capacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(guardarCambios)
                                 .addGap(18, 18, 18)
-                                .addComponent(volver)))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                                .addComponent(volver)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(nombre)
+                            .addComponent(capacidad))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,8 +146,12 @@ public class PanelAgregarSector extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPanel3.setBackground(new java.awt.Color(232, 232, 232));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Lista de sectores actuales en el sistema");
+
+        jPanel1.setBackground(new java.awt.Color(226, 226, 226));
 
         jScrollPane1.setViewportView(listaSectores);
 

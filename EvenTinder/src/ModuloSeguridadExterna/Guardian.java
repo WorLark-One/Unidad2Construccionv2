@@ -78,7 +78,7 @@ public class Guardian {
         // TODO implement here
     }
     
-    public void compraEntradas(String cliente, int idCompra,int nDeEntradas,String fecha,int precioTotal,ArrayList<Entrada> entradas,String tc,String nombreEvento){
+    public void compraEntradas(String correoCliente, int idCompra,int nDeEntradas,String fecha,int precioTotal,ArrayList<String> entradas,String tc,String nombreEvento){
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
         props.setProperty("mail.smtp.starttls.enable", "true");
@@ -90,7 +90,7 @@ public class Guardian {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(this.correo));
-            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(cliente));
+            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(correoCliente));
             message.setSubject("Recibimos tu compra ID: "+idCompra+ " en EvenTinder");
             String s = "Gracias por preferir EvenTinder \n"
                     + "Recibimos tu compra que realizaste por EvenTinder para el evento ' "+nombreEvento+" ' y te informamos vía e–mail que la compra se ha procesado satisfactoriamente.\n"
@@ -99,8 +99,14 @@ public class Guardian {
                     + "     N° de entradas compradas: "+nDeEntradas+"\n"
                     + "     Fecha de compra: "+fecha+"\n"
                     + "         Entradas compradas \n";
+            
             for (int i = 0; i < entradas.size(); i++) {
-                s = s +"            ID entrada: "+entradas.get(i).getIdEntrada()+"  Valor: $"+entradas.get(i).getPrecio()+"  Sector: "+"faltaria esto en la clase entrada"+ "\n";
+                String cadena=entradas.get(i);
+                String[] a = cadena.split(";");
+                String id=a[0];
+                String precio=a[1];
+                String sector=a[2];
+                s = s +"            ID entrada: "+id+"  Valor: $"+precio+"  Sector: "+sector+ "\n";
             }
             String[] tcDijitos =tc.split("");
             String tcNueva = "*";
@@ -123,7 +129,7 @@ public class Guardian {
         }
     }
     
-    public void eventoCancelado(String cliente, int idCompra,int nDeEntradas,String fecha,int precioTotal,String tc,String nombreEvento){
+    public void eventoCancelado(String correoCliente, int idCompra,int nDeEntradas,String fecha,int precioTotal,String tc,String nombreEvento){
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
         props.setProperty("mail.smtp.starttls.enable", "true");
@@ -135,7 +141,7 @@ public class Guardian {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(this.correo));
-            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(cliente));
+            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(correoCliente));
             message.setSubject("El evento  ' "+nombreEvento+" ' se ha cancelado");
             String s = "Tenemos una mala noticia para ti. \n"
                     + "Lamentamos informarte que el evento ' "+nombreEvento+" ' se ha cancelado y te informamos vía e–mail que tu comprar fue reembolsada satisfactoriamente.\n"
@@ -164,6 +170,9 @@ public class Guardian {
             throw new RuntimeException(e);
         }
     }
+    
+  
+    
     
     public void reembolsoCompra(String cliente, int idCompra,int nDeEntradas,String fecha,int precioTotal,String tc,String nombreEvento){
         Properties props = new Properties();
@@ -207,7 +216,7 @@ public class Guardian {
         }
     }
     
-    public void arriendoPropiedad(String propietario,int idEvento, String nombreEvento, String fechaDeInicio, String fechaDeTermino, String cuentaCorriente, int idPropiedad, String nombrePropiedad){
+    public void arriendoPropiedad(String correoPropietario,int idEvento, String nombreEvento, String fechaDeInicio, String fechaDeTermino, String cuentaCorriente, int idPropiedad, String nombrePropiedad){
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
         props.setProperty("mail.smtp.starttls.enable", "true");
@@ -219,7 +228,7 @@ public class Guardian {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(this.correo));
-            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(propietario));
+            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(correoPropietario));
             message.setSubject("Solicitud de evento aceptada para el evento: ' "+ nombreEvento+" ' con ID: "+idEvento+ " en EvenTinder");
             String s = "Gracias por preferir EvenTinder \n"
                    + "Haz aceptado exitosamente la solicitud del evento ' "+nombreEvento+" ' para tu propiedad "+nombrePropiedad+"y te informamos vía e–mail que los detalles del evento son los siguientes: \n"

@@ -7,6 +7,7 @@ package VistasSistema.VistaOrganizador;
 
 import ModuloGestionEventos.Evento;
 import ModuloGestionVentas.Compra;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
@@ -26,6 +27,7 @@ public class PanelMostrarEstadisticasDeVentasPorEvento extends javax.swing.JPane
     
     public PanelMostrarEstadisticasDeVentasPorEvento(VentanaPrincipalOrganizador papa) {
         initComponents();
+        this.lista.setBackground(Color.WHITE);
         this.papa=papa;
         modeloLista2 = new DefaultListModel();
         this.lista.setModel(this.modeloLista2);
@@ -53,6 +55,9 @@ public class PanelMostrarEstadisticasDeVentasPorEvento extends javax.swing.JPane
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
+        jPanel1.setBackground(new java.awt.Color(232, 232, 232));
+
+        lista.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jScrollPane1.setViewportView(lista);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -72,7 +77,7 @@ public class PanelMostrarEstadisticasDeVentasPorEvento extends javax.swing.JPane
                 .addContainerGap())
         );
 
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel20.setText("Información del evento");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
@@ -86,7 +91,7 @@ public class PanelMostrarEstadisticasDeVentasPorEvento extends javax.swing.JPane
             }
         });
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel19.setText("Seleccione una opcion de listado de eventos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

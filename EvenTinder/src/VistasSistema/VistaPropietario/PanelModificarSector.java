@@ -60,6 +60,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
+        guardarCambios.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         guardarCambios.setText("Guardar Cambios");
         guardarCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +68,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
             }
         });
 
+        volver.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +81,9 @@ public class PanelModificarSector extends javax.swing.JPanel {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
+        jPanel1.setBackground(new java.awt.Color(232, 232, 232));
+
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("Capacidad");
 
         nombre.addActionListener(new java.awt.event.ActionListener() {
@@ -87,9 +92,10 @@ public class PanelModificarSector extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Nombre");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("2. Ingrese los siguientes datos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -126,9 +132,12 @@ public class PanelModificarSector extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(232, 232, 232));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("1. Seleccione un sector");
 
+        listaSectores.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         listaSectores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaSectoresActionPerformed(evt);

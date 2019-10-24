@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaPropietario;
 
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,8 +39,6 @@ public class PanelDeOpciones extends javax.swing.JPanel {
 
         jLabel21 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        botonCerrarSesion = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
         botonModificarCuenta = new javax.swing.JPanel();
         botonListaDeEventos = new javax.swing.JLabel();
         botonContactenos = new javax.swing.JPanel();
@@ -60,6 +59,17 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         botoHistorialDeEventos = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        botonCerrarSecion = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -71,24 +81,17 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("Propietario");
 
-        botonCerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
-        botonCerrarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        botonCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botonCerrarSesionMouseClicked(evt);
-            }
-        });
-        botonCerrarSesion.setLayout(new java.awt.GridBagLayout());
-
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel20.setText("Cerrar sesión");
-        botonCerrarSesion.add(jLabel20, new java.awt.GridBagConstraints());
-
         botonModificarCuenta.setBackground(new java.awt.Color(255, 255, 255));
         botonModificarCuenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         botonModificarCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonModificarCuentaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonModificarCuentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonModificarCuentaMouseExited(evt);
             }
         });
         botonModificarCuenta.setLayout(new java.awt.GridBagLayout());
@@ -107,6 +110,7 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         jLabel22.setBackground(new java.awt.Color(255, 255, 255));
         jLabel22.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("Nosotros");
 
         javax.swing.GroupLayout botonContactenosLayout = new javax.swing.GroupLayout(botonContactenos);
@@ -115,8 +119,8 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             botonContactenosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botonContactenosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel22)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         botonContactenosLayout.setVerticalGroup(
             botonContactenosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,6 +135,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botonEliminarCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonEliminarCuentaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonEliminarCuentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonEliminarCuentaMouseExited(evt);
             }
         });
         botonEliminarCuenta.setLayout(new java.awt.GridBagLayout());
@@ -150,6 +160,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botoCrearPropiedadMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botoCrearPropiedadMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botoCrearPropiedadMouseExited(evt);
+            }
         });
         botoCrearPropiedad.setLayout(new java.awt.GridBagLayout());
 
@@ -168,6 +184,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonHome1MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonHome1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonHome1MouseExited(evt);
+            }
         });
         botonHome1.setLayout(new java.awt.GridBagLayout());
 
@@ -180,6 +202,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botoModificarPropiedad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botoModificarPropiedadMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botoModificarPropiedadMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botoModificarPropiedadMouseExited(evt);
             }
         });
         botoModificarPropiedad.setLayout(new java.awt.GridBagLayout());
@@ -199,6 +227,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botoEliminarPropiedadMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botoEliminarPropiedadMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botoEliminarPropiedadMouseExited(evt);
+            }
         });
         botoEliminarPropiedad.setLayout(new java.awt.GridBagLayout());
 
@@ -216,6 +250,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botoListaDePropiedades.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botoListaDePropiedadesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botoListaDePropiedadesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botoListaDePropiedadesMouseExited(evt);
             }
         });
         botoListaDePropiedades.setLayout(new java.awt.GridBagLayout());
@@ -235,6 +275,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botoSolicitudDeEventosMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botoSolicitudDeEventosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botoSolicitudDeEventosMouseExited(evt);
+            }
         });
         botoSolicitudDeEventos.setLayout(new java.awt.GridBagLayout());
 
@@ -253,6 +299,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botoHistorialDeEventosMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botoHistorialDeEventosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botoHistorialDeEventosMouseExited(evt);
+            }
         });
         botoHistorialDeEventos.setLayout(new java.awt.GridBagLayout());
 
@@ -265,37 +317,181 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(12, 105, 12, 115);
         botoHistorialDeEventos.add(jLabel7, gridBagConstraints);
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 73, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel8.setText(" Usuario");
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 73, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel9.setText("Evento");
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 73, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 73, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jLabel10.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel10.setText("Propiedad");
+
+        jPanel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 68, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 68, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        botonCerrarSecion.setBackground(new java.awt.Color(255, 255, 255));
+        botonCerrarSecion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        botonCerrarSecion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonCerrarSecionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonCerrarSecionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonCerrarSecionMouseExited(evt);
+            }
+        });
+        botonCerrarSecion.setLayout(new java.awt.GridBagLayout());
+
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel12.setText("Cerrar Sesión");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 104, 12, 114);
+        botonCerrarSecion.add(jLabel12, gridBagConstraints);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(botonContactenos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(75, 75, 75)
+                            .addComponent(jLabel21))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel9)
+                                .addGap(7, 7, 7)
+                                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel10)
+                                .addGap(8, 8, 8)
+                                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(botoSolicitudDeEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(botoCrearPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(botoModificarPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(botoEliminarPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(botoListaDePropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(botoHistorialDeEventos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(botonModificarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botoSolicitudDeEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botoListaDePropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botoEliminarPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botoModificarPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botoCrearPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonEliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botoHistorialDeEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(botonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(77, 77, 77))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addGap(105, 105, 105))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(botonCerrarSecion, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(49, 49, 49)
+                                    .addComponent(botonHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(botonModificarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(botonEliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(botonContactenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,14 +501,31 @@ public class PanelDeOpciones extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel23)
                 .addGap(18, 18, 18)
-                .addComponent(botonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
                 .addComponent(botonHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
                 .addComponent(botonModificarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonEliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonCerrarSecion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10)))
+                .addGap(18, 18, 18)
                 .addComponent(botoCrearPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botoModificarPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -320,11 +533,19 @@ public class PanelDeOpciones extends javax.swing.JPanel {
                 .addComponent(botoEliminarPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botoListaDePropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addComponent(botoSolicitudDeEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botoHistorialDeEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
                 .addComponent(botonContactenos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -338,11 +559,6 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             Logger.getLogger(PanelDeOpciones.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botonModificarCuentaMouseClicked
-
-    private void botonCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarSesionMouseClicked
-        // TODO add your handling code here:
-        this.papa.cerrarSesion();
-    }//GEN-LAST:event_botonCerrarSesionMouseClicked
 
     private void botonContactenosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonContactenosMouseClicked
         // TODO add your handling code here:
@@ -409,6 +625,111 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_botoHistorialDeEventosMouseClicked
 
+    private void botonCerrarSecionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarSecionMouseClicked
+        // TODO add your handling code here:
+        this.papa.cerrarSesion();
+    }//GEN-LAST:event_botonCerrarSecionMouseClicked
+
+    private void botonHome1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonHome1MouseEntered
+        // TODO add your handling code here:
+        this.botonHome1.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonHome1MouseEntered
+
+    private void botonHome1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonHome1MouseExited
+        // TODO add your handling code here:
+        this.botonHome1.setBackground(Color.white);
+    }//GEN-LAST:event_botonHome1MouseExited
+
+    private void botonModificarCuentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarCuentaMouseEntered
+        // TODO add your handling code here:
+        this.botonModificarCuenta.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonModificarCuentaMouseEntered
+
+    private void botonModificarCuentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarCuentaMouseExited
+        // TODO add your handling code here:
+        this.botonModificarCuenta.setBackground(Color.white);
+    }//GEN-LAST:event_botonModificarCuentaMouseExited
+
+    private void botonEliminarCuentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarCuentaMouseEntered
+        // TODO add your handling code here:
+        this.botonEliminarCuenta.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonEliminarCuentaMouseEntered
+
+    private void botonEliminarCuentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarCuentaMouseExited
+        // TODO add your handling code here:
+        this.botonEliminarCuenta.setBackground(Color.white);
+    }//GEN-LAST:event_botonEliminarCuentaMouseExited
+
+    private void botonCerrarSecionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarSecionMouseEntered
+        // TODO add your handling code here:
+        this.botonCerrarSecion.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonCerrarSecionMouseEntered
+
+    private void botonCerrarSecionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarSecionMouseExited
+        // TODO add your handling code here:
+        this.botonCerrarSecion.setBackground(Color.white);
+    }//GEN-LAST:event_botonCerrarSecionMouseExited
+
+    private void botoCrearPropiedadMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoCrearPropiedadMouseEntered
+        // TODO add your handling code here:
+        this.botoCrearPropiedad.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botoCrearPropiedadMouseEntered
+
+    private void botoCrearPropiedadMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoCrearPropiedadMouseExited
+        // TODO add your handling code here:
+        this.botoCrearPropiedad.setBackground(Color.white);
+    }//GEN-LAST:event_botoCrearPropiedadMouseExited
+
+    private void botoModificarPropiedadMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoModificarPropiedadMouseEntered
+        // TODO add your handling code here:
+        this.botoModificarPropiedad.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botoModificarPropiedadMouseEntered
+
+    private void botoModificarPropiedadMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoModificarPropiedadMouseExited
+        // TODO add your handling code here:
+        this.botoModificarPropiedad.setBackground(Color.white);
+    }//GEN-LAST:event_botoModificarPropiedadMouseExited
+
+    private void botoEliminarPropiedadMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoEliminarPropiedadMouseEntered
+        // TODO add your handling code here:
+        this.botoEliminarPropiedad.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botoEliminarPropiedadMouseEntered
+
+    private void botoEliminarPropiedadMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoEliminarPropiedadMouseExited
+        // TODO add your handling code here:
+        this.botoEliminarPropiedad.setBackground(Color.white);
+    }//GEN-LAST:event_botoEliminarPropiedadMouseExited
+
+    private void botoListaDePropiedadesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoListaDePropiedadesMouseEntered
+        // TODO add your handling code here:
+        this.botoListaDePropiedades.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botoListaDePropiedadesMouseEntered
+
+    private void botoListaDePropiedadesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoListaDePropiedadesMouseExited
+        // TODO add your handling code here:
+        this.botoListaDePropiedades.setBackground(Color.white);
+    }//GEN-LAST:event_botoListaDePropiedadesMouseExited
+
+    private void botoSolicitudDeEventosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoSolicitudDeEventosMouseEntered
+        // TODO add your handling code here:
+        this.botoSolicitudDeEventos.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botoSolicitudDeEventosMouseEntered
+
+    private void botoSolicitudDeEventosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoSolicitudDeEventosMouseExited
+        // TODO add your handling code here:
+        this.botoSolicitudDeEventos.setBackground(Color.white);
+    }//GEN-LAST:event_botoSolicitudDeEventosMouseExited
+
+    private void botoHistorialDeEventosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoHistorialDeEventosMouseEntered
+        // TODO add your handling code here:
+        this.botoHistorialDeEventos.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botoHistorialDeEventosMouseEntered
+
+    private void botoHistorialDeEventosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoHistorialDeEventosMouseExited
+        // TODO add your handling code here:
+        this.botoHistorialDeEventos.setBackground(Color.white);
+    }//GEN-LAST:event_botoHistorialDeEventosMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botoCrearPropiedad;
@@ -417,7 +738,7 @@ public class PanelDeOpciones extends javax.swing.JPanel {
     private javax.swing.JPanel botoListaDePropiedades;
     private javax.swing.JPanel botoModificarPropiedad;
     private javax.swing.JPanel botoSolicitudDeEventos;
-    private javax.swing.JPanel botonCerrarSesion;
+    private javax.swing.JPanel botonCerrarSecion;
     private javax.swing.JPanel botonContactenos;
     private javax.swing.JPanel botonEliminarCuenta;
     private javax.swing.JPanel botonHome1;
@@ -425,8 +746,9 @@ public class PanelDeOpciones extends javax.swing.JPanel {
     private javax.swing.JLabel botonListaDeEventos2;
     private javax.swing.JPanel botonModificarCuenta;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -435,5 +757,13 @@ public class PanelDeOpciones extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel9;
     // End of variables declaration//GEN-END:variables
 }
