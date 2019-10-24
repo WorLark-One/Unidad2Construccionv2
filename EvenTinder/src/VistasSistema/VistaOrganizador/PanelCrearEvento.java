@@ -477,8 +477,27 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     }//GEN-LAST:event_botonRegistrarPrecioActionPerformed
 
     private void botonCrearEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearEventoActionPerformed
-        // TODO add your handling code here:
-        int resp = this.validarDatos(this.nombre.getText(), this.descripcion.getText(), this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.capacidad.getText(),this.diasMaximosDevolucion.getText());
+        // TODO add your handling code here:.
+        int resp=0;
+        String errores="";
+        if(resp==1){
+            
+        }
+        if(resp==2){
+            
+        }
+        if(resp==3){
+            
+        }
+        if(resp==4){
+            
+        }
+        if(resp==5){
+            
+        }
+        if(resp==6){
+            
+        }
         if(this.listaPropiedades.getSelectedIndex()<=0){
             JOptionPane.showMessageDialog(null, "Debe seleccionar una propiedad", "Error al seleccionar una propiedad", JOptionPane.WARNING_MESSAGE);
             return;
@@ -507,36 +526,9 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             }else{
                 JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
             }
-        }
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre del evento tenga solo letras y numeros \n"
-                + "Ej: LolaPaluzza", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que la descripcion tenga entre entre sea: nnn nnn nnn - nok \n" +
-                "Ej: 11111111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==3){
-            JOptionPane.showMessageDialog(null, "Se espera que la fecha de inicio tenga el siguiente formato: dd-mm-aaaa \n" +
-                "Ej: 10-10-2010", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==4){
-            JOptionPane.showMessageDialog(null, "Se espera que la fecha de termino tenga el siguiente formato: dd-mm-aaaa \n" +
-                "Ej: 10-10-2020", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==5){
-            JOptionPane.showMessageDialog(null, "Se espera que la capacidad sea mayor que 0 \n" +
-                "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==6){
-            JOptionPane.showMessageDialog(null, "Se espera que los dias maximos de devolucion sea mayor que 0 \n" +
-                "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
+        }else{
+            JOptionPane.showMessageDialog(null, "Los errores al ingresar datos son: \n" +
+                errores, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonCrearEventoActionPerformed
 
@@ -592,11 +584,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
      * 0 = Correcto
      * numeros mayores que 0 son errores
      */
-    
-    public int validarDatos(String nombre,String descripcion, String fechaDeInicio, String fechaDeTermino, String capacidad, String diasMaximos){
-        return 0;
-    }
-    
+
     public int validarNombre(String nombre){
         ArrayList<Integer> caracteres = new ArrayList();
         caracteres.add(193);
