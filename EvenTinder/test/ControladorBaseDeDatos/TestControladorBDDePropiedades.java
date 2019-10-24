@@ -32,7 +32,7 @@ public class TestControladorBDDePropiedades {
     
     @Test
     public void obtenerInformaciónDePropiedades() throws SQLException {
-        String rut = "0101";
+        String rut = "22.222.222-2";
         ArrayList<Propiedad> propiedades = c.obtenerInformacionDePropiedades(rut);
         
         for (Propiedad p: propiedades) {
@@ -45,13 +45,13 @@ public class TestControladorBDDePropiedades {
     @Test
     public void registrarPropiedad() throws SQLException, ParseException {
         int esperado = 0;
-        String rut="1"; 
-        String nombre="Campo";
+        String rut="22.222.222-2"; 
+        String nombre="Campo Santo";
         String ubicacion="Sagrada Familia"; 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         Date fechaDePublicacion = format.parse ( "06-10-2019" );  
         int capacidadTotal=600; 
-        int valorDeArriendo = 20; 
+        int valorDeArriendo = 2000; 
         String descripcion = "Lo mejor";
         int resultado = c.registrarPropiedad(rut, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion);
         
@@ -73,17 +73,17 @@ public class TestControladorBDDePropiedades {
     @Test
     public void modifcarPropiedad() throws SQLException, ParseException {
         boolean esperado = false;
-        int id=6; 
+        int id=7; 
         String nombre="Utal";
-        String ubicacion="Talca"; 
+        String ubicacion="Talcahuano"; 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        Date fechaDePublicacion = format.parse ( "" );  
-        int capacidadTotal=0; 
-        int valorDeArriendo = 20; 
+        Date fechaDePublicacion = format.parse ( "20-10-2019" );  
+        int capacidadTotal=1000; 
+        int valorDeArriendo = 1000; 
         String descripcion = "Donde está?";
         boolean resultado = c.modifcarPropiedad(id, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion);
         
-        assertNotEquals(esperado, resultado);
+        assertTrue(resultado);
         
         if (resultado==esperado) {
             
@@ -97,19 +97,12 @@ public class TestControladorBDDePropiedades {
     
     @Test
     public void eliminarPropiedad() throws SQLException {
-        boolean esperado = false;
-        int id=7; 
+        int id=11; 
         boolean resultado = c.eliminarPropiedad(id);
         
-        assertNotEquals(esperado, resultado);
+        assertTrue(resultado);
+        fail("No se eliminó la propiedad");
         
-        if (resultado==esperado) {
-            
-            fail("No se eliminó la propiedad");
-        }
-        else {
-            System.out.println("Se eliminó correctamente la propiedad de la base de datos");
-        }
         
     }
     
@@ -119,18 +112,12 @@ public class TestControladorBDDePropiedades {
         boolean esperado = true;
         String nombreSector = "Piscina";
         int capacidad = 10;
-        int idPropiedad=1; 
+        int idPropiedad=10; 
         boolean resultado = c.registrarSector(nombreSector, capacidad, idPropiedad);
         
         assertEquals(esperado, resultado);
-        
-        if (resultado!=esperado) {
-            
-            fail("No se registró el sector");
-        }
-        else {
-            System.out.println("Se añadió correctaemente el sector a la Base de datos");
-        }
+        fail("No se registró el sector");
+
     }
     
     @Test
@@ -143,14 +130,7 @@ public class TestControladorBDDePropiedades {
         boolean resultado = c.modificarSector(nombreSector, idPropiedad, nuevoSector, capacidad);
         
         assertEquals(esperado, resultado);
-        
-        if (resultado!=esperado) {
-            
-            fail("No se modificó el sector");
-        }
-        else {
-            System.out.println("Se modificó correctaemente el sector en la Base de datos");
-        }
+         fail("No se modificó el sector");
         
     }
     
@@ -158,19 +138,14 @@ public class TestControladorBDDePropiedades {
     @Test
     public void eliminarSector() throws SQLException {
         boolean esperado = true;
-        String nombreSector = "Terraza";
-        int idPropiedad=6; 
+        String nombreSector = "Centro";
+        int idPropiedad=1; 
         boolean resultado = c.eliminarSector(nombreSector, idPropiedad);
         
         assertEquals(esperado, resultado);
         
-        if (resultado!=esperado) {
-            
-            fail("No se modificó el sector");
-        }
-        else {
-            System.out.println("Se modificó correctaemente el sector en la Base de datos");
-        }
+          fail("No se modificó el sector");  
+  
     }
 
 }

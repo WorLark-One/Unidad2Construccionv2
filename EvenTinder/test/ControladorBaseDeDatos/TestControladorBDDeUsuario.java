@@ -28,17 +28,15 @@ public class TestControladorBDDeUsuario {
         ConexionBD c = new ConexionBD();
         c.crearConexion();
         
-        String tipoUsuario = "";
-        String rut = "18666568-5";
-        String clave = "12345";
+        String tipoUsuario = "organizador";
+        String rut = "10000000-5";
+        String clave = "12345678";
                 
         boolean r = b.preguntarPorUsuario(tipoUsuario, rut, clave);
         boolean esp = true;
         
-        if (r==false) {
-            fail("No se validó correctamente el usuario");
-        }
         assertEquals(esp, r);
+        fail("No se validó correctamente el usuario");
         
     }
     
