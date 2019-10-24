@@ -6,6 +6,7 @@
 package VistasSistema.VistaPropietario;
 
 import ModuloGestionPropiedades.Propiedad;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -28,8 +29,14 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
     public PanelListaDePropiedades(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
         initComponents();
-        
+        this.nombre.setFont(new java.awt.Font("Arial", 0, 12));
+        this.descripcion.setFont(new java.awt.Font("Arial", 0, 12));
+        this.ubicacion.setFont(new java.awt.Font("Arial", 0, 12));
+        this.capacidadTotal.setFont(new java.awt.Font("Arial", 0, 12));
+        this.cantidadDeSectores.setFont(new java.awt.Font("Arial", 0, 12));
+        this.valorArriendo.setFont(new java.awt.Font("Arial", 0, 12));
         this.modeloLista=new DefaultListModel();
+        this.listaSectores.setBackground(Color.WHITE);
         this.actualizarMenuOpciones();
     }
 
@@ -78,20 +85,23 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
+        opciones.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         opciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opcionesActionPerformed(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setText("1. Seleccione una propiedad");
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setText("Seleccione una propiedad");
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Descripcion de la propiedad");
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Lista de sectores");
+
+        jPanel9.setBackground(new java.awt.Color(232, 232, 232));
 
         jScrollPane2.setViewportView(listaSectores);
 
@@ -116,6 +126,8 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         jLabel18.setText("Menú Lista de propiedades");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
+
+        jPanel2.setBackground(new java.awt.Color(232, 232, 232));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 

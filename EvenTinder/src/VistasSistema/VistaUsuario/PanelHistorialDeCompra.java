@@ -6,6 +6,7 @@
 package VistasSistema.VistaUsuario;
 
 import ModuloGestionVentas.Compra;
+import java.awt.Color;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class PanelHistorialDeCompra extends javax.swing.JPanel {
         this.papa=papa;
         this.modeloLista= new DefaultListModel();
         initComponents();
+        this.listaDeCompras.setBackground(Color.WHITE);
         this.actualizarListaDeCompra();
     }
 
@@ -59,6 +61,8 @@ public class PanelHistorialDeCompra extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        jPanel2.setBackground(new java.awt.Color(232, 232, 232));
 
         listaDeCompras.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         listaDeCompras.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -90,14 +94,20 @@ public class PanelHistorialDeCompra extends javax.swing.JPanel {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
+        jPanel1.setBackground(new java.awt.Color(232, 232, 232));
+
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        nombreEvento.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nombreEvento.setText("Nombre del evento: ");
 
+        numeroEntrada.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         numeroEntrada.setText("Numero de entradas: ");
 
+        fechaCompra.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         fechaCompra.setText("Fecha de compra: ");
 
+        precioTotal.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         precioTotal.setText("Precio total de la compra: ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -127,6 +137,7 @@ public class PanelHistorialDeCompra extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        botonDevolverEntrada.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         botonDevolverEntrada.setText("Devolver Entrada");
         botonDevolverEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,7 +185,7 @@ public class PanelHistorialDeCompra extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addContainerGap(314, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

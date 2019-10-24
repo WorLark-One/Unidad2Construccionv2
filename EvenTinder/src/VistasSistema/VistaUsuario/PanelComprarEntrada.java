@@ -86,17 +86,24 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú compra de entrada");
 
-        jLabel23.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(232, 232, 232));
+
+        jLabel23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel23.setText("Detalles de la compra");
 
+        nombreSector.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nombreSector.setText("Nombre: ");
 
+        precioEntrada.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         precioEntrada.setText("Precio de la entrada: ");
 
+        capacidadDisponioble.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         capacidadDisponioble.setText("Capacidad disponible: ");
 
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText("Cantidad de entradas a comprar: ");
 
+        botonCompra.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         botonCompra.setText("Comprar");
         botonCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,12 +128,12 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(botonCompra)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(cantidadDeEntradas))))
+                        .addComponent(cantidadDeEntradas, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(155, 155, 155)
+                .addComponent(botonCompra)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,24 +150,31 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cantidadDeEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(botonCompra)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
+        jPanel3.setBackground(new java.awt.Color(232, 232, 232));
+
+        fechaDeInicio.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         fechaDeInicio.setText("Fecha de inicio");
 
+        fechaDeTermino.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         fechaDeTermino.setText("Fecha de termino");
 
+        descripcion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         descripcion.setText("Descripcion");
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel19.setText("Datos del evento");
 
+        dias.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         dias.setText("Dias maximo de devolucion");
 
+        nombre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nombre.setText("Nombre");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -196,6 +210,11 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        jPanel5.setBackground(new java.awt.Color(232, 232, 232));
+
+        jPanel6.setBackground(new java.awt.Color(226, 226, 226));
+
+        listaDeSectores.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         listaDeSectores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaDeSectoresMouseClicked(evt);
@@ -220,7 +239,7 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel22.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel22.setText("Lista de sectores");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -260,7 +279,7 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
                         .addComponent(botonVolverAtras)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel18)))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,7 +297,7 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(50, Short.MAX_VALUE))
+                        .addContainerGap(84, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE))))

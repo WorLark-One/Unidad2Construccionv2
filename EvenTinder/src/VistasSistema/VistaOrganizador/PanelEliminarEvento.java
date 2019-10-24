@@ -48,11 +48,12 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel19.setText("2. Selecciones el evento a modificar");
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel19.setText("2. Selecciones el evento que desea cancelar");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
+        listaEventos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         listaEventos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaEventosActionPerformed(evt);
@@ -60,8 +61,9 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
         });
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menú eliminar de evento");
+        jLabel18.setText("Menú cancelar de evento");
 
+        botonEliminarEvento.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         botonEliminarEvento.setText("Eliminar evento");
         botonEliminarEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,9 +71,10 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
             }
         });
 
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel20.setText("1. Seleccione una opcion de listado de eventos");
 
+        listaOpciones.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         listaOpciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaOpcionesMouseClicked(evt);
@@ -102,7 +105,7 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(278, 278, 278)
                         .addComponent(botonEliminarEvento)))
-                .addContainerGap(436, Short.MAX_VALUE))
+                .addContainerGap(401, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +127,7 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
                 .addComponent(listaEventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botonEliminarEvento)
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap(367, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

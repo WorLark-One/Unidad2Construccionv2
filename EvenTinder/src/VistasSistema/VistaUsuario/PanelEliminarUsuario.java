@@ -49,6 +49,7 @@ public class PanelEliminarUsuario extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("Rut");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
@@ -59,6 +60,7 @@ public class PanelEliminarUsuario extends javax.swing.JPanel {
             }
         });
 
+        botonEliminarCuenta.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         botonEliminarCuenta.setText("Eliminar cuenta");
         botonEliminarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,9 +71,10 @@ public class PanelEliminarUsuario extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú Eliminar cuenta de usuario");
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel19.setText("1. Para eliminar cuenta ingrese su rut con su clave");
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel19.setText("Para eliminar cuenta ingrese su rut con su clave");
 
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText("Clave");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -94,7 +97,7 @@ public class PanelEliminarUsuario extends javax.swing.JPanel {
                             .addComponent(botonEliminarCuenta)))
                     .addComponent(jLabel18)
                     .addComponent(jLabel19))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -74,13 +74,18 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú Modificar una propiedad");
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(232, 232, 232));
+
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel19.setText("2. Ingrese los datos que desee modificar de la propiedad");
 
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("Descripción");
 
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel15.setText("Valor de arriendo");
 
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText("Ubicación");
 
         ubicacion.addActionListener(new java.awt.event.ActionListener() {
@@ -89,12 +94,14 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel3.setText("Nombre");
 
         descripcion.setColumns(20);
         descripcion.setRows(5);
         jScrollPane1.setViewportView(descripcion);
 
+        botonRegistrar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         botonRegistrar.setText("Guardar Cambios");
         botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,9 +160,12 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(232, 232, 232));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("3. Agregar, modificar y/o eliminar sector");
 
+        listaOpciones.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         listaOpciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaOpcionesActionPerformed(evt);
@@ -185,9 +195,12 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPanel3.setBackground(new java.awt.Color(232, 232, 232));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("1. Seleccione la propiedad");
 
+        listaPropiedades.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         listaPropiedades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaPropiedadesActionPerformed(evt);
@@ -200,10 +213,12 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(listaPropiedades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,12 +238,11 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel18)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(719, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

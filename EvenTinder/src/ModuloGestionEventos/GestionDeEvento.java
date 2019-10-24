@@ -87,7 +87,7 @@ public class GestionDeEvento {
      * @return
      */
     public boolean rechazarSolicitud(int idEvento){
-        return this.controlador.eliminarEvento(idEvento);                                
+        return this.controlador.rechazarSolicitudPropietario(idEvento);                                
     }
 
     /**

@@ -40,7 +40,7 @@
                       <Component id="jPanel2" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="322" max="32767" attributes="0"/>
+              <EmptySpace pref="314" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -70,6 +70,11 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel2">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e8" green="e8" red="e8" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -135,6 +140,11 @@
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e8" green="e8" red="e8" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -205,21 +215,33 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="nombreEvento">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nombre del evento: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="numeroEntrada">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Numero de entradas: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="fechaCompra">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Fecha de compra: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="precioTotal">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Precio total de la compra: "/>
               </Properties>
             </Component>
@@ -227,6 +249,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="botonDevolverEntrada">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Devolver Entrada"/>
           </Properties>
           <Events>
