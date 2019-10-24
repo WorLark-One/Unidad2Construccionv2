@@ -49,7 +49,7 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel19.setText("2. Selecciones el evento a modificar");
+        jLabel19.setText("2. Selecciones el evento que desea cancelar");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
@@ -60,7 +60,7 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
         });
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menú eliminar de evento");
+        jLabel18.setText("Menú cancelar de evento");
 
         botonEliminarEvento.setText("Eliminar evento");
         botonEliminarEvento.addActionListener(new java.awt.event.ActionListener() {
