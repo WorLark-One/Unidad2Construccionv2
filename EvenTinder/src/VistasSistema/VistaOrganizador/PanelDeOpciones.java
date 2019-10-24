@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,10 +40,10 @@ public class PanelDeOpciones extends javax.swing.JPanel {
 
         jLabel21 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        botonContactenos = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
         botonCrearEvento = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        botonContactenos = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
         botonHome = new javax.swing.JPanel();
         botonListaDeEventos2 = new javax.swing.JLabel();
         botonModificarEvento = new javax.swing.JPanel();
@@ -77,6 +78,25 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("Organizador");
 
+        botonCrearEvento.setBackground(new java.awt.Color(255, 255, 255));
+        botonCrearEvento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        botonCrearEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonCrearEventoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonCrearEventoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonCrearEventoMouseExited(evt);
+            }
+        });
+        botonCrearEvento.setLayout(new java.awt.GridBagLayout());
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setText("Crear evento");
+        botonCrearEvento.add(jLabel2, new java.awt.GridBagConstraints());
+
         botonContactenos.setBackground(new java.awt.Color(0, 0, 0));
         botonContactenos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -94,10 +114,7 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botonContactenos.setLayout(botonContactenosLayout);
         botonContactenosLayout.setHorizontalGroup(
             botonContactenosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botonContactenosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         botonContactenosLayout.setVerticalGroup(
             botonContactenosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,29 +124,17 @@ public class PanelDeOpciones extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        botonCrearEvento.setBackground(new java.awt.Color(255, 255, 255));
-        botonCrearEvento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        botonCrearEvento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botonCrearEventoMouseClicked(evt);
-            }
-        });
-        botonCrearEvento.setLayout(new java.awt.GridBagLayout());
-
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setText("Crear evento");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 105, 12, 115);
-        botonCrearEvento.add(jLabel2, gridBagConstraints);
-
         botonHome.setBackground(new java.awt.Color(255, 255, 255));
         botonHome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         botonHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonHomeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonHomeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonHomeMouseExited(evt);
             }
         });
         botonHome.setLayout(new java.awt.GridBagLayout());
@@ -143,6 +148,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botonModificarEvento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonModificarEventoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonModificarEventoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonModificarEventoMouseExited(evt);
             }
         });
         botonModificarEvento.setLayout(new java.awt.GridBagLayout());
@@ -162,6 +173,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonEliminarEventoMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonEliminarEventoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonEliminarEventoMouseExited(evt);
+            }
         });
         botonEliminarEvento.setLayout(new java.awt.GridBagLayout());
 
@@ -180,23 +197,30 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonListaDeEventossMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonListaDeEventossMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonListaDeEventossMouseExited(evt);
+            }
         });
         botonListaDeEventoss.setLayout(new java.awt.GridBagLayout());
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Lista de eventos");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 105, 12, 115);
-        botonListaDeEventoss.add(jLabel5, gridBagConstraints);
+        botonListaDeEventoss.add(jLabel5, new java.awt.GridBagConstraints());
 
         botoEstadisticasDeVentasPorEvento.setBackground(new java.awt.Color(255, 255, 255));
         botoEstadisticasDeVentasPorEvento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         botoEstadisticasDeVentasPorEvento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botoEstadisticasDeVentasPorEventoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botoEstadisticasDeVentasPorEventoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botoEstadisticasDeVentasPorEventoMouseExited(evt);
             }
         });
         botoEstadisticasDeVentasPorEvento.setLayout(new java.awt.GridBagLayout());
@@ -243,6 +267,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonModificarCuentaMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonModificarCuentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonModificarCuentaMouseExited(evt);
+            }
         });
         botonModificarCuenta.setLayout(new java.awt.GridBagLayout());
 
@@ -255,6 +285,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botonEliminarCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonEliminarCuentaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonEliminarCuentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonEliminarCuentaMouseExited(evt);
             }
         });
         botonEliminarCuenta.setLayout(new java.awt.GridBagLayout());
@@ -273,6 +309,12 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         botonCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonCerrarSesionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonCerrarSesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonCerrarSesionMouseExited(evt);
             }
         });
         botonCerrarSesion.setLayout(new java.awt.GridBagLayout());
@@ -295,9 +337,9 @@ public class PanelDeOpciones extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(botonCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botonModificarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonEliminarCuenta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonEliminarCuenta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonCerrarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -366,29 +408,22 @@ public class PanelDeOpciones extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel8)
                         .addGap(7, 7, 7)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(botonContactenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(botonModificarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonListaDeEventoss, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botoEstadisticasDeVentasPorEvento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonEliminarEvento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonCrearEvento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(botonContactenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(botonModificarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonEliminarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonListaDeEventoss, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botoEstadisticasDeVentasPorEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonCrearEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,6 +513,96 @@ public class PanelDeOpciones extends javax.swing.JPanel {
         // TODO add your handling code here:
         this.papa.estadisticasDeVentasPorEvento();
     }//GEN-LAST:event_botoEstadisticasDeVentasPorEventoMouseClicked
+
+    private void botonHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonHomeMouseEntered
+        // TODO add your handling code here:
+        this.botonHome.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonHomeMouseEntered
+
+    private void botonHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonHomeMouseExited
+        // TODO add your handling code here:
+        this.botonHome.setBackground(Color.white);
+    }//GEN-LAST:event_botonHomeMouseExited
+
+    private void botonModificarCuentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarCuentaMouseEntered
+        // TODO add your handling code here:
+        this.botonModificarCuenta.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonModificarCuentaMouseEntered
+
+    private void botonModificarCuentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarCuentaMouseExited
+        // TODO add your handling code here:
+        this.botonModificarCuenta.setBackground(Color.white);
+    }//GEN-LAST:event_botonModificarCuentaMouseExited
+
+    private void botonEliminarCuentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarCuentaMouseEntered
+        // TODO add your handling code here:
+        this.botonEliminarCuenta.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonEliminarCuentaMouseEntered
+
+    private void botonEliminarCuentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarCuentaMouseExited
+        // TODO add your handling code here:
+        this.botonEliminarCuenta.setBackground(Color.white);
+    }//GEN-LAST:event_botonEliminarCuentaMouseExited
+
+    private void botonCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarSesionMouseEntered
+        // TODO add your handling code here:
+        this.botonCerrarSesion.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonCerrarSesionMouseEntered
+
+    private void botonCerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarSesionMouseExited
+        // TODO add your handling code here:
+        this.botonCerrarSesion.setBackground(Color.white);
+    }//GEN-LAST:event_botonCerrarSesionMouseExited
+
+    private void botonCrearEventoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCrearEventoMouseEntered
+        // TODO add your handling code here:
+        this.botonCrearEvento.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonCrearEventoMouseEntered
+
+    private void botonCrearEventoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCrearEventoMouseExited
+        // TODO add your handling code here:
+        this.botonCrearEvento.setBackground(Color.white);
+    }//GEN-LAST:event_botonCrearEventoMouseExited
+
+    private void botonModificarEventoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarEventoMouseEntered
+        // TODO add your handling code here:
+        this.botonModificarEvento.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonModificarEventoMouseEntered
+
+    private void botonModificarEventoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarEventoMouseExited
+        // TODO add your handling code here:
+        this.botonModificarEvento.setBackground(Color.white);
+    }//GEN-LAST:event_botonModificarEventoMouseExited
+
+    private void botonEliminarEventoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarEventoMouseEntered
+        // TODO add your handling code here:
+        this.botonEliminarEvento.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonEliminarEventoMouseEntered
+
+    private void botonEliminarEventoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarEventoMouseExited
+        // TODO add your handling code here:
+        this.botonEliminarEvento.setBackground(Color.white);
+    }//GEN-LAST:event_botonEliminarEventoMouseExited
+
+    private void botonListaDeEventossMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonListaDeEventossMouseEntered
+        // TODO add your handling code here:
+        this.botonListaDeEventoss.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botonListaDeEventossMouseEntered
+
+    private void botonListaDeEventossMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonListaDeEventossMouseExited
+        // TODO add your handling code here:
+        this.botonListaDeEventoss.setBackground(Color.white);
+    }//GEN-LAST:event_botonListaDeEventossMouseExited
+
+    private void botoEstadisticasDeVentasPorEventoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoEstadisticasDeVentasPorEventoMouseEntered
+        // TODO add your handling code here:
+        this.botoEstadisticasDeVentasPorEvento.setBackground(new Color(234,234,234));
+    }//GEN-LAST:event_botoEstadisticasDeVentasPorEventoMouseEntered
+
+    private void botoEstadisticasDeVentasPorEventoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botoEstadisticasDeVentasPorEventoMouseExited
+        // TODO add your handling code here:
+        this.botoEstadisticasDeVentasPorEvento.setBackground(Color.white);
+    }//GEN-LAST:event_botoEstadisticasDeVentasPorEventoMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
