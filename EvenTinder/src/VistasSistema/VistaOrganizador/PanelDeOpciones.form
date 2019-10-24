@@ -50,8 +50,8 @@
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="botonContactenos" max="32767" attributes="0"/>
                   </Group>
@@ -63,12 +63,17 @@
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="botonModificarEvento" min="-2" pref="180" max="-2" attributes="0"/>
-                          <Component id="botonCrearEvento" min="-2" pref="180" max="-2" attributes="0"/>
-                          <Component id="botonEliminarEvento" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="botonListaDeEventoss" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="botoEstadisticasDeVentasPorEvento" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="botonEliminarEvento" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="botonCrearEvento" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -97,7 +102,7 @@
                   </Group>
                   <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="botonCrearEvento" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="botonModificarEvento" min="-2" pref="30" max="-2" attributes="0"/>
@@ -107,7 +112,7 @@
               <Component id="botonListaDeEventoss" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="botoEstadisticasDeVentasPorEvento" min="-2" pref="30" max="-2" attributes="0"/>
-              <EmptySpace pref="307" max="32767" attributes="0"/>
+              <EmptySpace pref="295" max="32767" attributes="0"/>
               <Component id="botonContactenos" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
