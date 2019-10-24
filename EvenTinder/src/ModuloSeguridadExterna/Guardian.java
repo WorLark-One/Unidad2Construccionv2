@@ -1,6 +1,5 @@
 package ModuloSeguridadExterna;
 
-import ModuloGestionEventos.Entrada;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.mail.Message;
@@ -77,8 +76,19 @@ public class Guardian {
     public void enviarCorreo() {
         // TODO implement here
     }
-    
-    public void compraEntradas(String correoCliente, int idCompra,int nDeEntradas,String fecha,int precioTotal,ArrayList<String> entradas,String tc,String nombreEvento){
+    /**
+     * Correo que se envia cuando un cliente compra un numero de entradas 
+     * relacionadas a un evento.
+     * @param correoCliente: correo del cliente.
+     * @param idCompra: identificador de la compra.
+     * @param nDeEntradas: numero de entradas compradas.
+     * @param fecha:fecha de compra.
+     * @param precioTotal:precio total.
+     * @param entradas: lista de entradas.
+     * @param tc:tarjeta de credito del cliente.
+     * @param nombreEvento : nombre del evento.
+     */
+    public void correoClienteCompraDeEntradas(String correoCliente, int idCompra,int nDeEntradas,String fecha,int precioTotal,ArrayList<String> entradas,String tc,String nombreEvento){
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
         props.setProperty("mail.smtp.starttls.enable", "true");
@@ -129,7 +139,7 @@ public class Guardian {
         }
     }
     
-    public void eventoCancelado(String correoCliente, int idCompra,int nDeEntradas,String fecha,int precioTotal,String tc,String nombreEvento){
+    public void CorreoClienteCancelacionEvento(String correoCliente, int idCompra,int nDeEntradas,String fecha,int precioTotal,String tc,String nombreEvento){
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
         props.setProperty("mail.smtp.starttls.enable", "true");
@@ -171,10 +181,17 @@ public class Guardian {
         }
     }
     
-  
-    
-    
-    public void reembolsoCompra(String cliente, int idCompra,int nDeEntradas,String fecha,int precioTotal,String tc,String nombreEvento){
+    /**
+     * Correo que se envia a un cliente cuando cancela una compra.
+     * @param correoCliente: correo del cliente.
+     * @param idCompra:identificador de la compra.
+     * @param nDeEntradas: numero de entradas compradas.
+     * @param fecha:fecha de compra.
+     * @param precioTotal:precio total de la compra.
+     * @param tc:tarjeta de credito del cliente.
+     * @param nombreEvento :nombre del evento.
+     */
+    public void correoClienteReembolsoDeCompra(String correoCliente, int idCompra,int nDeEntradas,String fecha,int precioTotal,String tc,String nombreEvento){
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
         props.setProperty("mail.smtp.starttls.enable", "true");
@@ -186,7 +203,7 @@ public class Guardian {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(this.correo));
-            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(cliente));
+            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(correoCliente));
             message.setSubject("Solicitud de reembolso de la compra: "+ idCompra+" en EvenTinder");
             String s = "Tenemos una mala noticia para ti. \n"
                     + "Lamentamos informarte que el evento ' "+nombreEvento+" ' se ha cancelado y te informamos vía e–mail que tu comprar fue reembolsada satisfactoriamente.\n"
@@ -216,7 +233,18 @@ public class Guardian {
         }
     }
     
-    public void arriendoPropiedad(String correoPropietario,int idEvento, String nombreEvento, String fechaDeInicio, String fechaDeTermino, String cuentaCorriente, int idPropiedad, String nombrePropiedad){
+    /**
+     * Se envia un correo al propietario para confirma que ha aceptado un evento.
+     * @param correoPropietario: correo del propietario.
+     * @param idEvento: identificador de un evento.
+     * @param nombreEvento:nombre del evento.
+     * @param fechaDeInicio: fecha de inicio del evento.
+     * @param fechaDeTermino:fecha de termino del evento.
+     * @param cuentaCorriente:cuenta corriente del propietario
+     * @param idPropiedad: identificador de una propiedad.
+     * @param nombrePropiedad : nombre de la propiedad.
+     */
+    public void CorreoPropietarioAceptarEvento(String correoPropietario,int idEvento, String nombreEvento, String fechaDeInicio, String fechaDeTermino, String cuentaCorriente, int idPropiedad, String nombrePropiedad){
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
         props.setProperty("mail.smtp.starttls.enable", "true");
@@ -231,7 +259,7 @@ public class Guardian {
             message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(correoPropietario));
             message.setSubject("Solicitud de evento aceptada para el evento: ' "+ nombreEvento+" ' con ID: "+idEvento+ " en EvenTinder");
             String s = "Gracias por preferir EvenTinder \n"
-                   + "Haz aceptado exitosamente la solicitud del evento ' "+nombreEvento+" ' para tu propiedad "+nombrePropiedad+"y te informamos vía e–mail que los detalles del evento son los siguientes: \n"
+                   + "Haz aceptado exitosamente la solicitud del evento ' "+nombreEvento+" ' para tu propiedad "+nombrePropiedad+" y te informamos vía e–mail que los detalles del evento son los siguientes: \n"
                    + "     ID del evento: "+idEvento+"\n"
                    + "     Nombre del evento: "+nombreEvento+"\n"
                    + "     A realizar en tú propieda: "+nombrePropiedad+"\n"
@@ -258,20 +286,16 @@ public class Guardian {
             throw new RuntimeException(e);
         }
     }
-    
     /**
-    * 
-    * @param organizador
-    * @param idEvento
-    * @param nombreEvento
-    * @param fechaDeInicio
-    * @param fechaDeTermino
-    * @param tarjetaCredito
-    * @param idPropiedad
-    * @param nombrePropiedad 
-    */
-    
-    public void eventoAceptado(String organizador,int idEvento, String nombreEvento, String fechaDeInicio, String fechaDeTermino, String tarjetaCredito, int idPropiedad, String nombrePropiedad){
+     * Se envia un evento al propietario de que fue cancelado el evento que se realizaria en
+     * su propiedad.
+     * @param CorreoPropietario: correo del propietario.
+     * @param idEvento:identificador del evento.
+     * @param nombreEvento: nombre del evento.
+     * @param fechaIni:fecha de inicio del evento.
+     * @param fechaTer fecha de termino del evento.
+     */
+    public void correoPropietarioCancelacionEvento(String CorreoPropietario,int idEvento,String nombreEvento,String fechaIni,String fechaTer){
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
         props.setProperty("mail.smtp.starttls.enable", "true");
@@ -283,7 +307,47 @@ public class Guardian {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(this.correo));
-            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(organizador));
+            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(CorreoPropietario));
+            message.setSubject("El evento fue rechazado satisfactoriamente, nombre del evento ' "+ nombreEvento+" ' con ID: "+idEvento+ " fue cancelado en EvenTinder");
+            String s = "Gracias por preferir EvenTinder \n"
+                    + "Le informamos vía e–mail que el evento ' "+nombreEvento+" ' con ID: "+idEvento+"  fue Cancelado.\n"
+                    + "Los detalles del evento cancelado son los siguientes:\n"
+                    + "     ID del evento: "+idEvento+"\n"
+                    + "     Nombre del evento: "+nombreEvento+"\n";
+          
+            message.setText(s);
+            Transport t = session.getTransport("smtp");
+            t.connect(this.correo,this.pass);
+            t.sendMessage(message,message.getAllRecipients());
+            t.close();
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    /**
+     * Se envia un correo al organizador del evento, que dicho evento fue aceptado por un propietario.
+     * @param correoOrganizador: correo del organizador.
+     * @param idEvento: identificador de un evento.
+     * @param nombreEvento: nombre del evento.
+     * @param fechaDeInicio:fecha de inicio del evento.
+     * @param fechaDeTermino:fecha de termino del evento.
+     * @param tarjetaCredito:tarjeta de credito del organizador.
+     * @param idPropiedad:identificador de la propiedad donde se realiza el evento.
+     * @param nombrePropiedad: nombre de la propiedad.
+     */
+    public void correoOrganizadorEventoAceptado(String correoOrganizador,int idEvento, String nombreEvento, String fechaDeInicio, String fechaDeTermino, String tarjetaCredito, int idPropiedad, String nombrePropiedad){
+        Properties props = new Properties();
+        props.setProperty("mail.smtp.host", "smtp.gmail.com");
+        props.setProperty("mail.smtp.starttls.enable", "true");
+        props.setProperty("mail.smtp.port","587");
+        props.setProperty("mail.smtp.user", this.correo);
+        props.setProperty("mail.smtp.auth", "true");
+        Session session = Session.getDefaultInstance(props);
+        session.setDebug(true); 
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(this.correo));
+            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(correoOrganizador));
             message.setSubject("Su evento ' "+ nombreEvento+" ' con ID: "+idEvento+ " fue aceptado en EvenTinder");
             String s = "Gracias por preferir EvenTinder \n"
                     + "Le informamos vía e–mail que su evento ' "+nombreEvento+" ' con ID: "+idEvento+"  fue aceptado satisfactoriamente.\n"
@@ -313,8 +377,65 @@ public class Guardian {
             throw new RuntimeException(e);
         }
     }
+    /**
+     * Se envia un correo al organizador de que se evento fue rechazo por el propietario.
+     * @param correoOrganizador: correo del organizador.
+     * @param idEvento: identificador de un evento.
+     * @param nombreEvento:nombre del evento.
+     * @param fechaDeInicio: fecha de inicio del evento
+     * @param fechaDeTermino: fecha de termino del evento.
+     * @param tarjetaCredito: tarjeta de credito del organizador.
+     * @param idPropiedad: identificador de propiedad.
+     * @param nombrePropiedad :nombre de la propiedad.
+     */
     
+    
+    
+    public void correoOrganizadorEventoRechazado(String correoOrganizador,int idEvento, String nombreEvento, String fechaDeInicio, String fechaDeTermino, String tarjetaCredito, int idPropiedad, String nombrePropiedad){
+        Properties props = new Properties();
+        props.setProperty("mail.smtp.host", "smtp.gmail.com");
+        props.setProperty("mail.smtp.starttls.enable", "true");
+        props.setProperty("mail.smtp.port","587");
+        props.setProperty("mail.smtp.user", this.correo);
+        props.setProperty("mail.smtp.auth", "true");
+        Session session = Session.getDefaultInstance(props);
+        session.setDebug(true); 
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(this.correo));
+            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(correoOrganizador));
+            message.setSubject("Lamentablemente el  evento  ' "+ nombreEvento+" ' con ID: "+idEvento+ " fue cancelado en EvenTinder");
+            String s = "Gracias por preferir EvenTinder \n"
+                    + "Le informamos vía e–mail que su evento ' "+nombreEvento+" ' con ID: "+idEvento+"  fue Cancelado.\n"
+                    + "Los detalles del evento cancelado son los siguientes:\n"
+                    + "     ID del evento: "+idEvento+"\n"
+                    + "     Nombre del evento: "+nombreEvento+"\n"
+                    + "     se realizaria en la propiedad: "+nombrePropiedad+" con id:"+idPropiedad+"\n"
+                    + "     Inicio: "+fechaDeInicio+"\n"
+                    + "     Termino: "+fechaDeTermino+"\n";
+            String[] tcDijitos =tarjetaCredito.split("");
+            String tcNueva = "*";
+            for (int i = 1; i < tcDijitos.length; i++) {
+                if (i<tcDijitos.length-4) {
+                    tcNueva+="*";
+                }
+                else{
+                    tcNueva+=tcDijitos[i];
+                }
+            }
+            s = s +"     El dinero por el arriendo de su propiedad ya fue cargado anteriormente a  su tarjeta de credito: "+tcNueva+"\n";
+            message.setText(s);
+            Transport t = session.getTransport("smtp");
+            t.connect(this.correo,this.pass);
+            t.sendMessage(message,message.getAllRecipients());
+            t.close();
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    
+    
     public static void main(String args[]) {
         Guardian g = new Guardian();
     }
