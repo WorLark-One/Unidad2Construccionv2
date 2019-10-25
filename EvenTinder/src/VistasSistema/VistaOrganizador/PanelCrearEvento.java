@@ -11,6 +11,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -479,33 +481,69 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     private void botonCrearEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearEventoActionPerformed
         // TODO add your handling code here:.
         int resp=0;
-        String errores="";
-        if(resp==1){
-            
+        String mensajes="";
+        int[] errores = new int[4];
+        errores[0] = this.validarNombre(this.nombre.getText());
+        errores[1] = this.validarDescripcion(this.descripcion.getText());
+        try {
+            errores[2] = this.validarFechas(this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.diasMaximosDevolucion.getText());
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Formato de Fechas Incorrecto, Ingreselas nuevamente\n"
+                    + "Ej: 21-08-2019", "Error con Formato de Fechas", JOptionPane.WARNING_MESSAGE);
         }
-        if(resp==2){
-            
-        }
-        if(resp==3){
-            
-        }
-        if(resp==4){
-            
-        }
-        if(resp==5){
-            
-        }
-        if(resp==6){
-            
-        }
+        errores[3] = this.validarCapacidad(this.capacidad.getText());
+        
+        
         if(this.listaPropiedades.getSelectedIndex()<=0){
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una propiedad", "Error al seleccionar una propiedad", JOptionPane.WARNING_MESSAGE);
-            return;
+            String prop = "Error Al Seleccionar Una Propiedad:\n- Debe Seleccionar Una Propiedad\n";
+            mensajes = mensajes+prop;
+//            JOptionPane.showMessageDialog(null, "Debe seleccionar una propiedad", "Error al seleccionar una propiedad", JOptionPane.WARNING_MESSAGE);
+//            return;
         }
         if(!go){
-            JOptionPane.showMessageDialog(null, "Debe agregar por lo menos un valor de entrada", "Error al registrar sector", JOptionPane.WARNING_MESSAGE);
-            return;
+            String entrada = "Error Al Registrar Sector:\n- Debe Agregar Por Lo Menos Un Valor De Entrada\n";
+            mensajes = mensajes+entrada;
+//            JOptionPane.showMessageDialog(null, "Debe agregar por lo menos un valor de entrada", "Error al registrar sector", JOptionPane.WARNING_MESSAGE);
+//            return;
         }
+                
+        for(int i = 0; i<4;i++){
+            String aux = "";
+            switch (errores[i]){
+                case 1:
+                    aux = "Se espera que el Nombre solo contenga Letras y Numeros.\n";
+                    resp = 1;
+                   break;
+                case 2: 
+                    aux = "Se espera que la Descripcion contenga entre 1 y 500 caracteres.\n";
+                    resp = 1;
+                    break;
+                case 3:
+                    aux = "Se espera que el campo Fecha de Inicio, Fecha de Termino y Dias Maximos de Devolucion no esten vacios.\n";
+                    resp = 1;
+                    break;
+                case 4:
+                    aux = "Se espera que la fecha sea del siguiente formato: 18-09-2019.\n";
+                    resp = 1;
+                    break;
+                case 5:
+                    aux = "Se esperan fechas validas con respecto al Tiempo.(Fecha de Inicio antes que la Fecha de Termino, dias de devolucion coherentes, etc).\n";
+                    resp = 1;
+                    break;                    
+                case 6:
+                    aux = "Se espera que los Dias de Devolucion sean Validos.\n";
+                    resp = 1;
+                    break; 
+                case 7:
+                    aux = "Se espera que la Capacidad sea un numero valido mayor que 0 y con maximo 10 digitos.\n";
+                    resp = 1;
+                    break;
+                default:
+                    break;
+            }
+            mensajes = mensajes+aux;
+        }
+        
         if(resp==0){
             int idEvento = 0;
             idEvento = this.papa.getControladorOrganizador().crearEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false, this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
@@ -526,9 +564,10 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             }else{
                 JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
             }
-        }else{
+        }
+        else{
             JOptionPane.showMessageDialog(null, "Los errores al ingresar datos son: \n" +
-                errores, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+                mensajes, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonCrearEventoActionPerformed
 

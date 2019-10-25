@@ -8,7 +8,6 @@ package VistasSistema.VistaPropietario;
 import ModuloGestionPropiedades.Propiedad;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -161,7 +160,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -179,9 +178,11 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,10 +202,10 @@ public class PanelAgregarSector extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel18)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(408, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -226,7 +227,22 @@ public class PanelAgregarSector extends javax.swing.JPanel {
 
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
         // TODO add your handling code here:
-        int resp = validarEntrada(this.nombre.getText(), this.capacidad.getText());
+        int resp = 0;
+        String mensajes="";
+        int[] errores = new int[2];
+        errores[0] = this.validarNombreSector(this.nombre.getText());
+        errores[1] = this.validarCapacidadSector(this.capacidad.getText());
+        String aux = "";
+        if(errores[0] != 0){
+            aux = "- Se espera que el Nombre del Sector contenga solo Letras y Numeros.\n";
+            mensajes = mensajes+aux;
+            resp = 1;
+        }
+        if(errores[1] != 0){
+            aux = "- Se espera que la Capacidad sea un numero entre 1 y la capacidad maxima disponible.\n";
+            mensajes = mensajes+aux;
+            resp = 1;
+        }                
         if(resp==0){
             boolean bandera = false;
             for (int i = 0; i < this.propiedades.get(this.id).getListaSectores().size(); i++) {
@@ -260,15 +276,9 @@ public class PanelAgregarSector extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se a podido añadir el sector a la base de datos", "Error al guardar sector", JOptionPane.WARNING_MESSAGE);
             }
         }
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre del sector tenga letras y/o numero \n"
-                    + "Ej: Platea", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;        
-        }
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que la capacidad del sector sea mayor que 0 \n" + 
-                    "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
+        else{
+            JOptionPane.showMessageDialog(null, "Errores encontrados: \n" +
+                mensajes, "Error al Añadir Sector", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
@@ -318,14 +328,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             this.listaSectores.setModel(this.modeloLista);
     }
     
-    
-     /**
-      * Metodo que verifica los datos ingresados al crear un sector. 
-      * @param nombre nombre del sector ingresado.
-      * @param capacidad capacidad del sector ingresado.
-      * @return un numero que indica el campo que se ingreso de manera erronea.
-      */
-    public int validarEntrada(String nombre, String capacidad) {
+    public int validarNombreSector(String nombre){
         ArrayList<Integer> caracteres = new ArrayList();
         caracteres.add(193);
         caracteres.add(201);
@@ -356,6 +359,10 @@ public class PanelAgregarSector extends javax.swing.JPanel {
         else{
             return 1;
         }
+        return 0;
+    }
+    
+    public int validarCapacidadSector(String capacidad){
         // capacidad que puede ser cualquier numero aceptado por una variable tipo int  (2,147,483,647)
         if(!capacidad.equals("") && isNumero(capacidad)){
             try{

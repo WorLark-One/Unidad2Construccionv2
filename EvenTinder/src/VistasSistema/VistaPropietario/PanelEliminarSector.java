@@ -100,7 +100,7 @@ public class PanelEliminarSector extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(volver))
                     .addComponent(listaSectores, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +120,7 @@ public class PanelEliminarSector extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(eliminarSector)
                             .addComponent(volver))))
-                .addGap(56, 297, Short.MAX_VALUE))
+                .addGap(56, 145, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

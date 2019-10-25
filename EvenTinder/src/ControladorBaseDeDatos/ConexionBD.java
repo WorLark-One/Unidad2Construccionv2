@@ -159,7 +159,6 @@ public class ConexionBD {
         crearTablaAsociarEventoEntradaSector(conexion);
         crearTablaRealizaCompra(conexion);
 
-
     }
 
     // creacion de tablas
@@ -286,6 +285,7 @@ public class ConexionBD {
                         + "	descripcion varchar(100),\n"
                         + "	numeroDeSectores integer,\n"
                         + "	refPropietario varchar(12),\n"
+                        + "	activa boolean not NULL default 'true',\n"
                         + "	PRIMARY KEY(id),\n"
                         + "	FOREIGN KEY (refPropietario) references Propietario(rut) ON DELETE CASCADE\n"
                         + ");";

@@ -6,7 +6,6 @@
 package VistasSistema.VistaOrganizador;
 
 import ModuloGestionUsuario.Organizador;
-import ModuloGestionUsuario.Usuario;
 import VistasSistema.VistaPropietario.PanelModificarPropietario;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -173,7 +172,46 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
-        int resp = validarModificarOrganizador(this.nombre.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.tarjetaDeCredito.getText());
+        //int resp = validarModificarOrganizador(this.nombre.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.tarjetaDeCredito.getText());
+        int resp = 0;
+        String mensajes="";
+        int[] errores = new int[5];
+        errores[0] = this.validarNombre(this.nombre.getText());
+        errores[1] = this.validarClave(this.clave.getText());
+        errores[2] = this.validarNumeroTelefonico(this.numeroTelefonico.getText());
+        errores[3] = this.validarCorreoElectronico(this.correoElectronico.getText());
+        errores[4] = this.validarTarjetaDeCredito(this.tarjetaDeCredito.getText());
+        
+        for(int i = 0; i<5; i++){
+            String aux = "";
+            switch(errores[i]){
+                case 1:
+                    aux = "- Se espera que el Nombre solo contenga Letras y Numeros.\n";
+                    resp = 1;
+                    break;
+                case 3:
+                    aux = "- La Contraseña debe tener por lo menos 8 caracteres (Solo Letras o Numeros).\n";
+                    resp = 1;
+                    break;
+                case 4:
+                    aux = "- El Numero Telefonico debe tener 9 digitos (Solo Numeros Chilenos Por El Momento).\n";
+                    resp = 1;
+                    break;
+                case 5:
+                    aux = "- El Correo Electronico debe tener un formato valido (Ejemplo: usuario@correo.cl, Solo Correos .cl o .com).\n";
+                    resp = 1;
+                    break;
+                case 6:
+                    aux = "- El numero de Tarjeta de Credito debe tener 16 digitos (Ejemplo: 1234 5678 9012 3456).\n";
+                    resp = 1;
+                    break;
+                default:
+                    break;
+            }
+            mensajes = mensajes+aux;
+        }
+        
+        
         if(resp==0){
             boolean respuesta = false;
             try {
@@ -192,36 +230,9 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
             }
         }
-
-        
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre sea solo letras \n"
-                    + "Ej: Daniel Moreno", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que el rut tenga entre entre sea: nnn nnn nnn - nok \n" + 
-                    "Ej: 11111111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==3){
-            JOptionPane.showMessageDialog(null, "Se espera que la clave tenga minimo 8 digitos \n" + 
-                    "Ej: 12345678", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==4){
-            JOptionPane.showMessageDialog(null, "Se espera que el numero telefonico tenga 9 digitos \n" + 
-                    "Ej: 987654321", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==5){
-            JOptionPane.showMessageDialog(null, "Se espera que el correo electronico sea algo@gmail.com o sea algo@gmail.cl \n" + 
-                    "Ej: elmejorproyectodelmundo@gmail.cl", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==6){
-            JOptionPane.showMessageDialog(null, "Se espera que la tarjeta de credigo tenga 16 numeros \n" + 
-                    "Ej: 12345678901234", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+        else{
+            JOptionPane.showMessageDialog(null, "Los errores al ingresar datos son: \n" +
+                mensajes, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
@@ -261,17 +272,8 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
     7 falta tarjetaDeCredito
     8 falta CuentaBancaria 
     */
-    
-    /**
-     * Metodo que verifica la correctitud de los datos ingresados en el sistema por el usuario para modificar una cuenta organizador.
-     * @param nombre el nombre ingresado.
-     * @param clave La clave ingresada.
-     * @param numeroTelefonico El numero telefonico ingresado.
-     * @param correoElectronico El correo electronico ingresado.
-     * @param tarjetaDeCredito La tarjetra de credito ingresada.
-     * @return Un numero que indica cual de los datos ingresados esta erroneo.
-     */
-    public int validarModificarOrganizador (String nombre, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito){                                               
+            
+    public int validarNombre(String nombre){
         ArrayList<Integer> caracteres = new ArrayList();
         caracteres.add(193);
         caracteres.add(201);
@@ -299,6 +301,10 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 1;
         }
+        return 0;
+    }
+    
+    public int validarClave(String clave){
         //clave con letras y numeros, minimo 8 caracteres
         if(!"".equals(clave)){
             char[] aux = clave.toCharArray();
@@ -315,6 +321,10 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 3;
         }
+        return 0;
+    }
+    
+    public int validarNumeroTelefonico(String numeroTelefonico){
         //numero telefonico con 9 numeros.
         if(!"".equals(numeroTelefonico)){
             char[] aux = numeroTelefonico.toCharArray();
@@ -331,6 +341,24 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 4;
         }
+        return 0;
+    }
+    
+    public int validarCorreoElectronico(String correoElectronico){
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32);
         //correo electronico. prefijo con letras, numeros. acepta 2 dominio, que pueden ser letras y numeros de cualquier largo, tambien acepta solo ".cl" y ".com"
         if(!"".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
@@ -377,6 +405,10 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 5;
         }
+        return 0;
+    }
+    
+    public int validarTarjetaDeCredito(String tarjetaDeCredito){
         // tarjeta de credito de 16 numero
         if(!"".equals(tarjetaDeCredito)){
             tarjetaDeCredito = tarjetaDeCredito.replace(" ", "");
@@ -394,7 +426,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 6;
         }
-        return 0;
+        return 0;        
     }
 
     public void actualizarInfomacion() throws SQLException{

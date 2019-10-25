@@ -63,7 +63,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
         jLabel18.setText("Menú Modificar cuenta de propietario");
 
         jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel19.setText("1. Ingrese los datos que desee modificar");
+        jLabel19.setText("Ingrese los datos que desee modificar");
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Nombre completo");
@@ -173,7 +173,45 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
-        int resp = validarEntrada(this.nombre.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.cuentaBancaria.getText());
+        
+        int resp = 0;
+        String mensajes="";
+        int[] errores = new int[5];
+        errores[0] = this.validarNombre(this.nombre.getText());
+        errores[1] = this.validarClave(this.clave.getText());
+        errores[2] = this.validarNumeroTelefonico(this.numeroTelefonico.getText());
+        errores[3] = this.validarCorreoElectronico(this.correoElectronico.getText());
+        errores[4] = this.validarCuentaBancaria(this.cuentaBancaria.getText());
+        
+        for(int i = 0; i<5; i++){
+            String aux = "";
+            switch(errores[i]){
+                case 1:
+                    aux = "- Se espera que el Nombre solo contenga Letras y Numeros.\n";
+                    resp = 1;
+                    break;
+                case 3:
+                    aux = "- La Contraseña debe tener por lo menos 8 caracteres (Solo Letras o Numeros).\n";
+                    resp = 1;
+                    break;
+                case 4:
+                    aux = "- El Numero Telefonico debe tener 9 digitos (Solo Numeros Chilenos Por El Momento).\n";
+                    resp = 1;
+                    break;
+                case 5:
+                    aux = "- El Correo Electronico debe tener un formato valido (Ejemplo: usuario@correo.cl, Solo Correos .cl o .com).\n";
+                    resp = 1;
+                    break;
+                case 7:
+                    aux = "- El numero de Cuenta Bancaria debe tener 20 digitos (Ejemplo: 1234 5678 9012 3456 7890).\n";
+                    resp = 1;
+                    break;
+                default:
+                    break;
+            }
+            mensajes = mensajes+aux;
+        }
+                                
         if(resp==0){
             boolean respuesta = false;
             try {
@@ -197,36 +235,10 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
             }
         }
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre sea solo letras \n"
-                    + "Ej: Daniel Moreno", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que el rut tenga entre entre sea: nnn nnn nnn - nok \n" + 
-                    "Ej: 11111111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==3){
-            JOptionPane.showMessageDialog(null, "Se espera que la clave tenga minimo 8 digitos \n" + 
-                    "Ej: 12345678", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==4){
-            JOptionPane.showMessageDialog(null, "Se espera que el numero telefonico tenga 9 digitos \n" + 
-                    "Ej: 987654321", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==5){
-            JOptionPane.showMessageDialog(null, "Se espera que el correo electronico sea algo@gmail.com o sea algo@gmail.cl \n" + 
-                    "Ej: elmejorproyectodelmundo@gmail.cl", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==6){
-            JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria tenga 20 digitos \n" + 
-                    "Ej: 12345678901234567890", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        else{
+            JOptionPane.showMessageDialog(null, "Los errores al ingresar datos son: \n" +
+                mensajes, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+        }       
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
 
@@ -266,16 +278,8 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     8 falta CuentaBancaria 
     */
     
-    /**
-     * Metodo que verifica la correctitud de los datos ingresados en el sistema por el usuario para modificar una cuenta propietario.
-     * @param nombre el nombre ingresado.
-     * @param clave La clave ingresada.
-     * @param numeroTelefonico El numero telefonico ingresado.
-     * @param correoElectronico El correo electronico ingresado.
-     * @param cuentaBancaria La cuenta bancaria ingresada.
-     * @return Un numero que indica cual de los datos ingresados esta erroneo.
-     */
-    public int validarEntrada(String nombre, String clave, String numeroTelefonico, String correoElectronico, String cuentaBancaria){                                               
+    
+    public int validarNombre(String nombre){
         ArrayList<Integer> caracteres = new ArrayList();
         caracteres.add(193);
         caracteres.add(201);
@@ -298,14 +302,15 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                 if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || caracteres.contains(ascii))) {
                     return 1;
                 }
-            }
-            if(aux.length >=100){
-                return 1;
-            }
+            }  
         }
         else{
             return 1;
         }
+        return 0;
+    }
+    
+    public int validarClave(String clave){
         //clave con letras y numeros, minimo 8 caracteres
         if(!"".equals(clave)){
             char[] aux = clave.toCharArray();
@@ -322,6 +327,10 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
         else{
             return 3;
         }
+        return 0;
+    }
+    
+    public int validarNumeroTelefonico(String numeroTelefonico){
         //numero telefonico con 9 numeros.
         if(!"".equals(numeroTelefonico)){
             char[] aux = numeroTelefonico.toCharArray();
@@ -333,11 +342,29 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             }
             if(aux.length != 9){
                 return 4;
-            }            
+            }
         }
         else{
             return 4;
         }
+        return 0;
+    }
+    
+    public int validarCorreoElectronico(String correoElectronico){
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32);
         //correo electronico. prefijo con letras, numeros. acepta 2 dominio, que pueden ser letras y numeros de cualquier largo, tambien acepta solo ".cl" y ".com"
         if(!"".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
@@ -352,7 +379,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                     }                    
                     String[] puntos = arroba[1].split("\\.");                    
                     if((puntos.length == 2 || puntos.length == 3) && !puntos[0].equals("") && !puntos[1].equals("")){   
-                        if("cl".equals(puntos[puntos.length-1])  || "com".equals(puntos[puntos.length-1])){                            
+                        if("cl".equals(puntos[puntos.length-1]) || "com".equals(puntos[puntos.length-1])    ){                            
                             int i = 0;
                             while(i < puntos.length-1){
                                 char[] dominio = puntos[i].toCharArray();
@@ -379,30 +406,34 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
             }
             else{
                 return 5;
-            }    
+            }  
         }
         else{
-            return 5 ;
+            return 5;
         }
-        //cuenta bancaria de 20 digitos.
-        if(!"".equals(cuentaBancaria)){
-            cuentaBancaria = cuentaBancaria.replace(" ", "");
-                char[] aux = cuentaBancaria.toCharArray();
-                for(char c : aux){
-                    int ascii = (int) c;
-                    if( !((ascii >=48 && ascii <=57) )){
-                        return 6;
-                    }
-                }
-                if(aux.length !=20){
-                    return 6;
-                }         
-        }
-        else{
-            return 6;
-        }            
         return 0;
     }
+    
+    public int validarCuentaBancaria(String cuentaBancaria){
+        if(!"".equals(cuentaBancaria)){
+            cuentaBancaria = cuentaBancaria.replace(" ", "");
+            char[] aux = cuentaBancaria.toCharArray();
+            for(char c : aux){
+                int ascii = (int) c;
+                if( !((ascii >=48 && ascii <=57) )){
+                    return 7;
+                }
+            }
+            if(aux.length !=20){
+                return 7;
+            }         
+
+        }
+        else{
+            return 7;
+        }
+        return 0;        
+    }    
     
     public void actualizarInfomacion() throws SQLException{
         Propietario usuario =(Propietario) this.papa.getControladorPrincipal().obtenerInformacionUsuario();

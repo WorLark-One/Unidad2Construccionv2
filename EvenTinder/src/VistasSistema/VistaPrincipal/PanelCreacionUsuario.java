@@ -279,7 +279,63 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
     
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         // TODO add your handling code here:
-        int resp = this.validarResgistro(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(),this.tarjetaDeCredito.getText() , this.CuentaBancaria.getText());
+        //int resp = this.validarResgistro(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(),this.tarjetaDeCredito.getText() , this.CuentaBancaria.getText());
+        int resp = 0;
+        String mensajes="";
+        int[] errores = new int[7];
+        if(this.tipoUsuario.equals("")){
+           errores[0] = 1;
+           resp = 1;
+        }
+        errores[1] = this.validarNombre(this.nombre.getText());
+        errores[2] = this.validarRUT(this.rut.getText());
+        errores[3] = this.validarClave(this.clave.getText());
+        errores[4] = this.validarNumeroTelefonico(this.numeroTelefonico.getText());
+        errores[5] = this.validarCorreo(this.correoElectronico.getText());
+        errores[6] = this.validarCuenta(this.tipoUsuario, this.tarjetaDeCredito.getText(), this.CuentaBancaria.getText());
+        
+        for(int i = 0; i<7;i++){
+            String aux = "";
+            switch (errores[i]){
+                case 1:
+                    aux = "- Debe seleccionar un Tipo de Usuario.\n";
+                    resp = 1;
+                   break;
+                case 2: 
+                    aux = "- Se espera que el Nombre solo contenga Letras y Numeros.\n";
+                    resp = 1;
+                    break;
+                case 3:
+                    aux = "- Se espera que el RUT tenga un formato valido (Ejemplo: 12.345.678-9).\n";
+                    resp = 1;
+                    break;
+                case 4:
+                    aux = "- La Contraseña debe tener por lo menos 8 caracteres (Solo Letras o Numeros).\n";
+                    resp = 1;
+                    break;
+                case 5:
+                    aux = "- El Numero Telefonico debe tener 9 digitos (Solo Numeros Chilenos Por El Momento).\n";
+                    resp = 1;
+                    break;                    
+                case 6:
+                    aux = "- El Correo Electronico debe tener un formato valido (Ejemplo: usuario@correo.cl, Solo Correos .cl o .com).\n";
+                    resp = 1;
+                    break; 
+                case 7:
+                    aux = "- El numero de Tarjeta de Credito debe tener 16 digitos (Ejemplo: 1234 5678 9012 3456).\n";
+                    resp = 1;
+                    break;
+                case 8:
+                    aux = "- El numero de Cuenta Bancaria debe tener 20 digitos (Ejemplo: 1234 5678 9012 3456 7890).\n";
+                    resp = 1;
+                    break;
+                default:
+                    break;
+            }
+            mensajes = mensajes+aux;
+        }
+
+        
         if(resp==0){
             boolean respuesta = false;
             try {
@@ -306,45 +362,11 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
             }
         }
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de usuario", "Error al seleccionar el tipo de usuario", JOptionPane.WARNING_MESSAGE);
-            return;
+        else{
+            JOptionPane.showMessageDialog(null, "Los errores al ingresar datos son: \n" +
+                mensajes, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre sea solo letras \n"
-                    + "Ej: Daniel Moreno", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==3){
-            JOptionPane.showMessageDialog(null, "Se espera que el rut tenga entre entre sea: nnn nnn nnn - nok \n" + 
-                    "Ej: 11.111.111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==4){
-            JOptionPane.showMessageDialog(null, "Se espera que la clave tenga minimo 8 digitos \n" + 
-                    "Ej: 12345678", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==5){
-            JOptionPane.showMessageDialog(null, "Se espera que el numero telefonico tenga 9 digitos \n" + 
-                    "Ej: 987654321", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==6){
-            JOptionPane.showMessageDialog(null, "Se espera que el correo electronico sea algo@gmail.com o sea algo@gmail.cl \n" + 
-                    "Ej: elmejorproyectodelmundo@gmail.cl", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==7){
-            JOptionPane.showMessageDialog(null, "Se espera que la tarjeta de credito tenga 16 digitos \n" + 
-                    "Ej: 12345678901234", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==8){
-            JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria tenga 20 digitos \n" + 
-                    "Ej: 12345678901234567890", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveActionPerformed
@@ -438,19 +460,8 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
     7 falta tarjetaDeCredito
     8 falta CuentaBancaria 
     */
-    
-    /**
-     * Metodo que verifica la correctitud de los datos ingresados en el sistema por el usuario para crear una cuenta.
-     * @param tipoUsuario El tipo de usuario que se desea crear.
-     * @param rut El rut ingresado.
-     * @param clave La clave ingresada.
-     * @param numeroTelefonico El numero telefonico ingresado.
-     * @param correoElectronico El correo electronico ingresado.
-     * @param tarjetaDeCredito La tarjetra de credito ingresada.
-     * @param CuentaBancaria La cuenta bancaria ingresada.
-     * @return Un numero que indica cual de los datos ingresados esta erroneo.
-     */
-    public int validarResgistro(String tipoUsuario, String nombre, String rut, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito, String CuentaBancaria) {                                               
+                
+    public int validarNombre(String nombre){
         ArrayList<Integer> caracteres = new ArrayList();
         caracteres.add(193);
         caracteres.add(201);
@@ -482,8 +493,11 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         else{
             return 2;
         }
-        //rut con el formato 12.345.678-9, acepta k y 0 en el digito verificador.
-        if(!"".equals(rut)){
+        return 0;
+    }
+    
+    public int validarRUT(String rut){
+         if(!"".equals(rut)){
             String[] guion = rut.split("-");
             if(guion.length == 2){
                 char[] digVerificador = guion[1].toCharArray();
@@ -535,7 +549,10 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             System.out.println("rut vacio");
             return 3;
         }
-        //clave con letras y numeros, minimo 8 caracteres
+        return 0;
+    }
+    
+    public int validarClave(String clave){
         if(!"".equals(clave)){
             char[] aux = clave.toCharArray();
             for(char c : aux){
@@ -551,7 +568,10 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         else{
             return 4;
         }
-        //numero telefonico con 9 numeros.
+        return 0;
+    }
+    
+    public int validarNumeroTelefonico(String numeroTelefonico){
         if(!"".equals(numeroTelefonico)){
             char[] aux = numeroTelefonico.toCharArray();
             for(char c : aux){
@@ -567,7 +587,24 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         else{
             return 5;
         }
-        //correo electronico. prefijo con letras, numeros. acepta 2 dominio, que pueden ser letras y numeros de cualquier largo, tambien acepta solo ".cl" y ".com"
+        return 0;
+    }
+    
+    public int validarCorreo(String correoElectronico){
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32); 
         if(!"".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
                 
@@ -614,6 +651,12 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         else{
             return 6;
         }
+        return 0;
+    }
+    
+    
+    
+    public int validarCuenta(String tipoUsuario, String tarjetaDeCredito, String cuentaBancaria){
         // tarjeta de credito de 16 numero
         if("organizador".equals(tipoUsuario) || "cliente".equals(tipoUsuario)){
             if(!"".equals(tarjetaDeCredito)){
@@ -635,9 +678,9 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         }
         //cuenta bancaria de 20 digitos.
         if("propietario".equals(tipoUsuario)){            
-            if(!"".equals(CuentaBancaria)){
-                CuentaBancaria = CuentaBancaria.replace(" ", "");
-                char[] aux = CuentaBancaria.toCharArray();
+            if(!"".equals(cuentaBancaria)){
+                cuentaBancaria = cuentaBancaria.replace(" ", "");
+                char[] aux = cuentaBancaria.toCharArray();
                 for(char c : aux){
                     int ascii = (int) c;
                     if( !((ascii >=48 && ascii <=57) )){
@@ -655,6 +698,8 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         }
         return 0;
     }
+    
+    
     
     /**
      * Este va a ser el formato de las consultas para ser luego testeadas en el junit

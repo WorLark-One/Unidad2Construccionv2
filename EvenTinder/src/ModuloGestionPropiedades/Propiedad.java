@@ -17,6 +17,7 @@ public class Propiedad implements Comparable<Propiedad>{
     private int capacidadTotal;
     private int valorArriendo;
     private ArrayList<Sector> listaSectores;
+    private boolean activa;
 
     public Propiedad(int id, String nombre, String descripcion, Date fechaDePublicacion, String ubicacion, int capacidadTotal, int valorArriendo) {
         this.id = id;
@@ -27,6 +28,7 @@ public class Propiedad implements Comparable<Propiedad>{
         this.capacidadTotal = capacidadTotal;
         this.valorArriendo = valorArriendo;
         this.listaSectores = new ArrayList<>();
+        this.activa=true;//inicialmente la propiedad 
     }
 
     /**
@@ -154,6 +156,16 @@ public class Propiedad implements Comparable<Propiedad>{
     public void setListaSectores(ArrayList<Sector> listaSectores) {
         this.listaSectores = listaSectores;
     }
+
+    public boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+    
+    
 
     @Override
     public int compareTo(Propiedad o) {

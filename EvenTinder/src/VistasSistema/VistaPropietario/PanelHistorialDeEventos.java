@@ -232,7 +232,7 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
         this.modeloLista=new DefaultListModel();
         if(this.eventos!=null){
             for(int i=0; i<this.eventos.size(); i++){
-                this.modeloLista.addElement(eventos.get(i).getNombre());
+                this.modeloLista.addElement("Nombre: " + eventos.get(i).getNombre() + "   Fecha inicio: " + eventos.get(i).getFechaDeInicio()+ "   Fecha termino: " + eventos.get(i).getFechaDeTermino());
             }
         }
         this.lista.setModel(this.modeloLista);
@@ -254,7 +254,7 @@ public class PanelHistorialDeEventos extends javax.swing.JPanel {
             for(int i=0; i<this.eventos.size(); i++){
                 for(int j=0; j<this.propiedades.size(); j++){
                     if(this.eventos.get(i).getIdPropiedad()==id){
-                        this.modeloLista.addElement(eventos.get(i).getNombre());
+                        this.modeloLista.addElement("nombre: " + eventos.get(i).getNombre() + "   fecha inicio: " + eventos.get(i).getFechaDeInicio()+ "   fecha termino: " + eventos.get(i).getFechaDeTermino());
                         break;
                     }
                 }
