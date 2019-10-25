@@ -168,7 +168,6 @@ public class ControladorBDDeVentas {
     public boolean registrarCompra(String rutCliente, int idEvento, String nombreSector, int cantidadDeEntradas, int idPropiedad) {
 
         this.conexion.crearConexion();
-        boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
@@ -197,7 +196,7 @@ public class ControladorBDDeVentas {
                         String tarjeta = obtenerTarjetaCreditoCliente(miConexion, rutCliente);
                         String nombreEvento = obtenerNombreEvento(miConexion, idEvento);
                         String correo = obtenerCorreoCliente(miConexion, rutCliente);
-                        this.guardian.compraEntradas(correo, idCompra, cantidadDeEntradas, fechaComoCadena, precioTotalCompra, listaEntrada, tarjeta, nombreEvento);
+                        this.guardian.correoClienteCompraDeEntradas(correo, idCompra, idEntrada, fechaComoCadena, precioCompra, listaEntrada, tarjeta, nombreEvento);
                     }
                     st.close();
                     return true;
@@ -274,7 +273,7 @@ public class ControladorBDDeVentas {
         if (miConexion != null) {
 
             try {
-
+                //generar reembolso de la compra.
                 generarReembolsoCompra(miConexion, idCompra);
 
                 borrarInstanciasEntradas(miConexion, idCompra);
@@ -729,7 +728,7 @@ public class ControladorBDDeVentas {
                         String nombreEvento = resultado.getString("nombreevento");
                         String fechaComoCadena = this.sdf.format(fechaCom);
 
-                        this.guardian.reembolsoCompra(correo, idComp, numeroEntradas, fechaComoCadena, precioT, tarjeta, nombreEvento);
+                        this.guardian.correoClienteReembolsoDeCompra(correo, idComp, numeroEntradas, fechaComoCadena, precioT, tarjeta, nombreEvento);
                     }
                     resultado.close();
                     st.close();

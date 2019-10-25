@@ -3,6 +3,7 @@ package ControladorBaseDeDatos;
 import ModuloGestionEventos.Entrada;
 import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
+import ModuloGestionVentas.Compra;
 import ModuloSeguridadExterna.Guardian;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -63,18 +64,18 @@ public class ControladorBDDeEventos {
      */
     public int crearEvento(String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int diasMaximoDevolucion, boolean publicado, int idPropiedad, String rutOrganizador) {
         this.conexion.crearConexion();
-        boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
             boolean nombreRepetido = validarNombreEvento(rutOrganizador, nombre);
-            //System.out.println("repetido:" + nombreRepetido);
-            if (nombreRepetido == false) {
+            boolean validarFecha = validarFechaDeArriendo(miConexion, fechaDeInicio, idPropiedad);
+            if (nombreRepetido == false && validarFecha == true) {
                 try {
 
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "insert into evento values(DEFAULT,'" + nombre + "','" + descripcion + "','" + fechaDeInicio + "','" + fechaDeTermino + "',\n"
                             + " " + capacidad + ", " + diasMaximoDevolucion + " ," + publicado + ",'" + rutOrganizador + "')"
                             + " RETURNING id";
+                    //System.out.println(sql);
                     ResultSet resultado = st.executeQuery(sql);
                     while (resultado.next()) {
                         int idEvento = Integer.parseInt(resultado.getString("id"));
@@ -88,7 +89,7 @@ public class ControladorBDDeEventos {
                     st.close();
 
                 } catch (SQLException e) {
-                    //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                    //System.out.println("ERROR DE CONEXION: añadirEvento" + e);
 
                     return 0;
                 } finally {
@@ -309,14 +310,16 @@ public class ControladorBDDeEventos {
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
+            //verificar si un evento es finalizado.
             boolean eliminar = VerificarEliminarEvento(miConexion, idEvento);
             if (eliminar == true) {
                 try {
+                    ArrayList<Integer> listaCompra = obtenerIdentificadoresDeCompra(miConexion, idEvento);
+                    generarRembolsoDeCompra(miConexion, listaCompra);
                     eliminarAsociacionEventoPropiedad(miConexion, idEvento);
                     borrarAsociacionEventoSectorEntrada(miConexion, idEvento);
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "delete from evento where evento.id=" + idEvento + "";
-                    //System.out.println(sql);
                     st.executeUpdate(sql);
                     st.close();
                     return true;
@@ -373,7 +376,13 @@ public class ControladorBDDeEventos {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select * from evento where evento.reforganizador='" + rutOrganizador + "'";
+                String sql = "select evento.id, evento.nombre,evento.descripcion,evento.fechainicio,evento.fechatermino,evento.capacidad,\n"
+                        + "evento.plazodevolucionentradas,evento.publicado\n"
+                        + "from evento\n"
+                        + "inner join celebra on evento.id = celebra.refevento\n"
+                        + "inner join propiedad on celebra.refpropiedad = propiedad.id\n"
+                        + "where evento.reforganizador='" + rutOrganizador + "' \n"
+                        + "and propiedad.activa='true'";
                 // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -418,7 +427,7 @@ public class ControladorBDDeEventos {
      * @param fechaTermino
      * @return
      */
-    public ArrayList<Evento> obtenerEventoPublicados(Date fechaInicioa, Date fechaTermino) {
+    public ArrayList<Evento> obtenerEventoPublicados(Date fechaInicio, Date fechaTermino) {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
@@ -429,8 +438,13 @@ public class ControladorBDDeEventos {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select * from evento where evento.fechainicio >= '" + fechaInicioa + "' and \n"
-                        + "evento.fechainicio <= '" + fechaTermino + "'";
+                String sql = " select evento.id, evento.nombre,evento.descripcion,evento.fechainicio,evento.fechatermino,evento.capacidad,\n"
+                        + "evento.plazodevolucionentradas,evento.publicado\n"
+                        + "from evento\n"
+                        + "inner join celebra on evento.id = celebra.refevento\n"
+                        + "inner join propiedad on celebra.refpropiedad = propiedad.id\n"
+                        + "where evento.fechainicio >= '" + fechaInicio + "' and \n"
+                        + "evento.fechainicio <= '" + fechaTermino + "' and  propiedad.activa='true' and evento.publicado='true'";
                 // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -519,8 +533,13 @@ public class ControladorBDDeEventos {
             try {
                 java.sql.Statement st = miConexion.createStatement();
                 java.util.Date fecha = new Date();
-                String sql = "select * from evento where evento.publicado=true and evento.reforganizador='" + rutOrganizador + "'"
-                        + "and evento.fechainicio <= '" + fecha + "'::date";
+                String sql = "select evento.id, evento.nombre,evento.descripcion,evento.fechainicio,evento.fechatermino,evento.capacidad,\n"
+                        + "evento.plazodevolucionentradas,evento.publicado\n"
+                        + "from evento\n"
+                        + "inner join celebra on evento.id = celebra.refevento\n"
+                        + "inner join propiedad on celebra.refpropiedad = propiedad.id\n"
+                        + "where evento.reforganizador='" + rutOrganizador + "' and evento.fechatermino >= '" + fecha + "'::date\n"
+                        + "and propiedad.activa='true' and evento.publicado='true'";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idEvento = Integer.parseInt(resultado.getString("id"));
@@ -576,8 +595,13 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
                 java.util.Date fecha = new Date();
 
-                String sql = "select * from evento where evento.publicado=false and evento.reforganizador='" + rutOrganizador + "'"
-                        + "and evento.fechainicio <= '" + fecha + "'::date ";
+                String sql = "select evento.id, evento.nombre,evento.descripcion,evento.fechainicio,evento.fechatermino,evento.capacidad,\n"
+                        + "evento.plazodevolucionentradas,evento.publicado\n"
+                        + "from evento\n"
+                        + "inner join celebra on evento.id = celebra.refevento\n"
+                        + "inner join propiedad on celebra.refpropiedad = propiedad.id\n"
+                        + "where evento.reforganizador='" + rutOrganizador + "' and evento.fechatermino >= '" + fecha + "'::date\n"
+                        + "and propiedad.activa='true' and evento.publicado='false'";
                 //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -635,9 +659,13 @@ public class ControladorBDDeEventos {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "SELECT *\n"
-                        + "FROM evento\n"
-                        + "WHERE evento.fechatermino <= '" + fecha + "'::date and evento.reforganizador='" + rutOrganizador + "'";
+                String sql = "select evento.id, evento.nombre,evento.descripcion,evento.fechainicio,evento.fechatermino,evento.capacidad,\n"
+                        + "evento.plazodevolucionentradas,evento.publicado\n"
+                        + "from evento\n"
+                        + "inner join celebra on evento.id = celebra.refevento\n"
+                        + "inner join propiedad on celebra.refpropiedad = propiedad.id\n"
+                        + "where evento.reforganizador='" + rutOrganizador + "' and evento.fechatermino <= '" + fecha + "'::date\n"
+                        + "and propiedad.activa='true'";
 
                 //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
@@ -687,12 +715,13 @@ public class ControladorBDDeEventos {
      */
     public boolean aceptarSolicitudPropietario(int idEvento) {
         this.conexion.crearConexion();
-        boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
             try {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = " UPDATE evento set publicado=true where evento.id=" + idEvento + "";
+                System.out.println(sql);
+                //se envia correo
                 CorreoArriendoPropiedad(miConexion, idEvento);
                 //System.out.println(sql);
                 st.executeUpdate(sql);
@@ -713,48 +742,55 @@ public class ControladorBDDeEventos {
         return false;
     }
 
+    /**
+     * rechaza la solicitud de un organizador para celebrar un evento en sus
+     * propiedad.
+     *
+     * @param idEvento: identificador de un evento.
+     * @return
+     */
     public boolean rechazarSolicitudPropietario(int idEvento) {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
-        ArrayList<Evento> eventos = new ArrayList<>();
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select DISTINCT cliente.nombrecompleto,cliente.correo, compra.id,compra.numeroentradas,compra.fechacompra,compra.preciototal,cliente.tarjetacredito,evento.nombre\n"
-                        + "from cliente\n"
-                        + "inner join realizacompra ON realizacompra.refcliente = cliente.rut\n"
-                        + "inner join compra on compra.id = realizacompra.refcompra\n"
-                        + "inner join instanciaentrada on instanciaentrada.refcompra = realizacompra.refcompra\n"
-                        + "inner join entrada on entrada.id = instanciaentrada.refentrada\n"
-                        + "inner join asociacioneventoentradasector ON asociacioneventoentradasector.refentrada = entrada.id\n"
-                        + "inner join evento on evento.id = asociacioneventoentradasector.refevento\n"
-                        + "where evento.id=" + idEvento + "";
+                String sql = "select DISTINCT  propietario.correo as correopropietario, evento.id as idevento,\n"
+                        + "evento.nombre as nombreevento, evento.fechainicio,evento.fechatermino,\n"
+                        + "organizador.nombrecompleto as nombreorganizador,organizador.correo as correoorganizador, organizador.tarjetacredito,\n"
+                        + "propiedad.id as identificadorpropiedad, propiedad.nombre as nombrepropiedad\n"
+                        + "from evento\n"
+                        + "inner join asociacioneventoentradasector  on evento.id=asociacioneventoentradasector.refevento\n"
+                        + "inner join propiedad on asociacioneventoentradasector.refpropiedad=propiedad.id\n"
+                        + "inner join propietario on propiedad.refpropietario=propietario.rut\n"
+                        + "inner join organizador on evento.reforganizador = organizador.rut\n"
+                        + "where evento.id="+idEvento+" and propiedad.activa='true'";
                 System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-                    System.out.println("khjkfkffk");
-                    String nombreCompleto = resultado.getString("nombrecompleto");
-                    String correo = resultado.getString("correo");
-                    int idCompra = Integer.parseInt(resultado.getString("id"));
-                    int numeroEntradas = Integer.parseInt(resultado.getString("numeroentradas"));
-                    Date fechaCompra = resultado.getDate("fechacompra");
-                    int precioTotal = Integer.parseInt(resultado.getString("preciototal"));
-                    String tarjeta = resultado.getString("tarjetacredito");
-                    String nombreEvento = resultado.getString("nombre");
-                    String fechaComoCadena = this.sdf.format(fechaCompra);
-                    //ArrayList<Entrada>listaEntradas=obtenerListaEntradasDeUnaCompra(miConexion, idCompra);
-                    System.out.println("el correo desde rechazar solicitud es :" + correo);
-                    this.guardian.eventoCancelado(correo, idCompra, numeroEntradas, fechaComoCadena, precioTotal, tarjeta, nombreEvento);
+                    String correoPropietario = resultado.getString("correopropietario");
+                    String correoOrganizador = resultado.getString("correoorganizador");
+                    String idEven = resultado.getString("idevento");
+                    String nombreEvento = resultado.getString("nombreevento");
+                    Date fechaIni = resultado.getDate("fechainicio");
+                    Date fechaTer = resultado.getDate("fechatermino");
+                    String nombreOrganizador = resultado.getString("nombreorganizador");
+                    String tarjetaOrganizador = resultado.getString("tarjetacredito");
+                    int idPropiedad = Integer.parseInt(resultado.getString("identificadorpropiedad"));
+                    String nombrePropiedad = resultado.getString("nombrepropiedad");
 
+                    String fechaInic = this.sdf.format(fechaIni);
+                    String fechaTerm = this.sdf.format(fechaTer);
+                    // correo de rechazo de evento para el propietario
+                    this.guardian.correoPropietarioCancelacionEvento(correoPropietario, idEvento, nombreEvento, fechaInic, fechaTerm);
+                    //correo de rechazo de evento para organizador.
+                    this.guardian.correoOrganizadorEventoRechazado(correoOrganizador, idEvento, nombreEvento, fechaInic, fechaTerm, tarjetaOrganizador, idPropiedad, nombrePropiedad);
+                    eliminarEvento(idEvento);
+                    return true;
                 }
-                resultado.close();
-                st.close();
-                //Collections.sort(eventos);
-                eliminarEvento(idEvento);
-                return true;
+                
 
             } catch (SQLException e) {
                 System.out.println("ERROR DE CONEXION: rechazarSolicitudPropietario()");
@@ -843,23 +879,20 @@ public class ControladorBDDeEventos {
 
         if (miConexion != null) {
             java.sql.Statement st = null;
-            for (int i = 0; i < entradas.size(); i++) {
-                Integer idEntrada = entradas.get(i);
-                try {
-                    st = miConexion.createStatement();
-                    String sql = "delete from entrada where entrada.id=" + idEntrada + "";
-                    //System.out.println(sql);
-                    st.executeUpdate(sql);
-
-                } catch (SQLException e) {
-                    //System.out.println("ERROR DE CONEXION: eliminarAsociacionEventoPropiedad" + e);
-                    return false;
+            if (entradas != null) {
+                for (int i = 0; i < entradas.size(); i++) {
+                    Integer idEntrada = entradas.get(i);
+                    try {
+                        st = miConexion.createStatement();
+                        String sql = "delete from entrada where entrada.id=" + idEntrada + "";
+                        //System.out.println(sql);
+                        st.executeUpdate(sql);
+                        st.close();
+                    } catch (SQLException e) {
+                        //System.out.println("ERROR DE CONEXION: eliminarAsociacionEventoPropiedad" + e);
+                        return false;
+                    }
                 }
-            }
-            try {
-                st.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(ControladorBDDeEventos.class.getName()).log(Level.SEVERE, null, ex);
             }
             return true;
 
@@ -920,7 +953,8 @@ public class ControladorBDDeEventos {
                         + "inner join propiedad on propietario.rut = propiedad.refpropietario\n"
                         + "inner join celebra on propiedad.id= celebra.refpropiedad\n"
                         + "inner join evento on evento.id= celebra.refevento\n"
-                        + "where propietario.rut='" + rutPropietario + "' and evento.publicado=false";
+                        + "where propietario.rut='" + rutPropietario + "' and evento.publicado='false'"
+                        + "and propiedad.activa='true'";
                 //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -984,7 +1018,8 @@ public class ControladorBDDeEventos {
                         + "inner join propiedad on propietario.rut = propiedad.refpropietario\n"
                         + "inner join celebra on propiedad.id= celebra.refpropiedad\n"
                         + "inner join evento on evento.id= celebra.refevento\n"
-                        + "where propietario.rut='" + rutPropietario + "' and evento.publicado=true";
+                        + "where propietario.rut='" + rutPropietario + "' and evento.publicado=true"
+                        + "and propiedad.activa='true'";
                 //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -1100,7 +1135,7 @@ public class ControladorBDDeEventos {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select * from propietario";
+                String sql = "select * from propietario ";
                 //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -1281,14 +1316,19 @@ public class ControladorBDDeEventos {
     public ArrayList<Evento> obtenerTodosLosEventos() {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
-        java.util.Date fecha = new Date();
         ArrayList<Evento> eventos = new ArrayList<>();
         if (miConexion != null)// si hay conexion.
         {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select * from evento";
+                String sql = "select evento.id, evento.nombre,evento.descripcion,evento.fechainicio,evento.fechatermino,evento.capacidad,\n"
+                        + "evento.plazodevolucionentradas,evento.publicado\n"
+                        + "from evento\n"
+                        + "inner join celebra on evento.id = celebra.refevento\n"
+                        + "inner join propiedad on celebra.refpropiedad = propiedad.id\n"
+                        + "where \n"
+                        + " propiedad.activa='true'";
                 // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -1326,7 +1366,6 @@ public class ControladorBDDeEventos {
     }
 
     private void CorreoArriendoPropiedad(Connection miConexion, int idEvento) {
-
         if (miConexion != null)// si hay conexion.
         {
             try {
@@ -1340,12 +1379,11 @@ public class ControladorBDDeEventos {
                         + "inner join celebra on celebra.refevento = evento.id\n"
                         + "inner join propiedad on celebra.refpropiedad = propiedad.id\n"
                         + "inner join propietario on propiedad.refpropietario = propietario.rut\n"
-                        + "where evento.id="+idEvento+"";
-                System.out.println(sql);
+                        + "where evento.id=" + idEvento + ""
+                        + " and propiedad.activa='true'";
+                //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-
-                    //System.out.println(" pasessssssss");
 
                     //String nombrePropietario = resultado.getString("nombre");
                     int idEven = Integer.parseInt(resultado.getString("idevento"));
@@ -1358,17 +1396,18 @@ public class ControladorBDDeEventos {
                     String nombrePropiedad = resultado.getString("nombrePropiedad");
                     String fechaIni = this.sdf.format(fechaInicio);
                     String fechaTer = this.sdf.format(fechaTermino);
-                    System.out.println("correo de propietario");
-                    System.out.println("el correo desde arriendo propiedad es:" + correo);
-                    this.guardian.arriendoPropiedad(correo, idEven, nombreEvento, fechaIni, fechaTer, cuentaCorriente, idPropiedad, nombrePropiedad);
+                    //System.out.println("correo de propietario");
+                    System.out.println("correo propierario:" + correo);
 
+                    this.guardian.CorreoPropietarioAceptarEvento(correo, idEven, nombreEvento, fechaIni, fechaTer, cuentaCorriente, idPropiedad, nombrePropiedad);
                     // organizador.
                     String correoOrganzador = resultado.getString("correoorganizador");
                     String tarjetaOrg = resultado.getString("tarjetacredito");
-                    this.guardian.eventoAceptado(correoOrganzador, idEvento, nombreEvento, fechaIni, fechaTer, tarjetaOrg, idPropiedad, nombrePropiedad);
+                    System.out.println("correo organizador:" + correoOrganzador);
+                    this.guardian.correoOrganizadorEventoAceptado(correoOrganzador, idEven, nombreEvento, fechaIni, fechaTer, tarjetaOrg, idPropiedad, nombrePropiedad);
                 }
                 resultado.close();
-                st.close();
+                //st.close();
                 //Collections.sort(eventos);
                 //return eventos;
 
@@ -1436,17 +1475,126 @@ public class ControladorBDDeEventos {
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return null;
-            } finally {
-                try {
-                    this.conexion.cerrarBaseDeDatos(miConexion);
-                } catch (SQLException ex) {
-                    //Logger.getLogger(ControladorBDDeEventos.class.getName()).log(Level.SEVERE, null, ex);
-                    //System.out.println("No se cerro la base de datos satisfactoriamente");
-                }
             }
 
         }
         return null;
+    }
+
+    private boolean validarFechaDeArriendo(Connection miConexion, Date fechaDeInicio, int idPropiedad) {
+        if (miConexion != null)// si hay conexion.
+        {
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select evento.fechainicio,evento.fechatermino\n"
+                        + "from celebra\n"
+                        + "inner join evento on celebra.refevento = evento.id\n"
+                        + "where celebra.refpropiedad=" + idPropiedad + " and evento.publicado='true' and\n"
+                        + "evento.fechatermino>= '" + fechaDeInicio + "' ::date";
+                //System.out.println(sql);
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    resultado.close();
+                    st.close();
+                    return false;
+                }
+                resultado.close();
+                st.close();
+                return true;
+                //Collections.sort(eventos);
+                //return eventos;
+
+            } catch (SQLException e) {
+                System.out.println("ERROR DE CONEXION: CorreoArriendoPropiedad()" + e);
+                //return null;
+            }
+        }
+        //return null;
+        return false;
+    }
+
+    private ArrayList<Integer> obtenerIdentificadoresDeCompra(Connection miConexion, int idEvento) {
+        ArrayList<Integer> identificadorCompras = new ArrayList<>();
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select DISTINCT compra.id \n"
+                        + "from asociacioneventoentradasector\n"
+                        + "inner join entrada on asociacioneventoentradasector.refentrada=entrada.id\n"
+                        + "inner join instanciaentrada on entrada.id = instanciaentrada.refentrada\n"
+                        + "inner join compra on instanciaentrada.refcompra = compra.id\n"
+                        + "where  asociacioneventoentradasector.refevento=" + idEvento + " ";
+
+                System.out.println(sql);
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+
+                    int idCompra = Integer.parseInt(resultado.getString("id"));
+                    identificadorCompras.add(idCompra);
+                }
+                resultado.close();
+                st.close();
+                //Collections.sort(eventos);
+                return identificadorCompras;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return null;
+            }
+
+        }
+        return null;
+    }
+
+    private void generarRembolsoDeCompra(Connection miConexion, ArrayList<Integer> listaCompra) {
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                if (listaCompra != null) {
+                    for (int i = 0; i < listaCompra.size(); i++) {
+                        Integer idCompra = listaCompra.get(i);
+                        java.sql.Statement st = miConexion.createStatement();
+
+                        String sql = "select DISTINCT cliente.correo, compra.id as idcompra, compra.numeroentradas,compra.fechacompra,\n"
+                                + "compra.preciototal,cliente.tarjetacredito,evento.nombre\n"
+                                + "from compra\n"
+                                + "inner join realizacompra ON realizacompra.refcompra = compra.id\n"
+                                + "inner join cliente on realizacompra.refcliente = cliente.rut\n"
+                                + "inner join instanciaentrada on instanciaentrada.refcompra = realizacompra.refcompra\n"
+                                + "inner join entrada on instanciaentrada.refentrada=entrada.id\n"
+                                + "inner join asociacioneventoentradasector ON asociacioneventoentradasector.refentrada = entrada.id\n"
+                                + "inner join evento on asociacioneventoentradasector.refevento = evento.id"
+                                + "where compra.id=" + idCompra + " ";
+
+                        //System.out.println(sql);
+                        ResultSet resultado = st.executeQuery(sql);
+                        while (resultado.next()) {
+                            String correoCliente = resultado.getString("correo");
+                            int idComp = resultado.getInt("idcompra");
+                            int numeroEntradas = resultado.getInt("numeroentradas");
+                            Date fechaCompra = resultado.getDate("fechacompra");
+                            int precioCompra = resultado.getInt("preciototal");
+                            String tarjeta = resultado.getString("tarjetacredito");
+                            String nombreEvento = resultado.getString("nombre");
+                            String fechaComoCadena = this.sdf.format(fechaCompra);
+                            this.guardian.correoClienteReembolsoDeCompra(correoCliente, idComp, numeroEntradas, fechaComoCadena, precioCompra, tarjeta, nombreEvento);
+                        }
+                        resultado.close();
+                        st.close();
+                        //Collections.sort(eventos);
+                    }
+                }
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+            }
+
+        }
     }
 
 }

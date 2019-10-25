@@ -63,7 +63,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
         jLabel18.setText("Menú Modificar cuenta de propietario");
 
         jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel19.setText("1. Ingrese los datos que desee modificar");
+        jLabel19.setText("Ingrese los datos que desee modificar");
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Nombre completo");
