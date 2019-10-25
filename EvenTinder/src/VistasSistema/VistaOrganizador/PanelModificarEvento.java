@@ -407,7 +407,56 @@ public class PanelModificarEvento extends javax.swing.JPanel {
 
     private void botonModificarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarEventoActionPerformed
         // TODO add your handling code here:
-        int resp = this.validarDatos(this.nombre.getText(), this.descripcion.getText(), this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.capacidad.getText(),this.diasMaximosDevolucion.getText());
+        int resp=0;
+        String mensajes="";
+        int[] errores = new int[4];
+        errores[0] = this.validarNombre(this.nombre.getText());
+        errores[1] = this.validarDescripcion(this.descripcion.getText());
+        try {
+            errores[2] = this.validarFechas(this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.diasMaximosDevolucion.getText());
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Formato de Fechas Incorrecto, Ingreselas nuevamente\n"
+                    + "Ej: 21-08-2019", "Error con Formato de Fechas", JOptionPane.WARNING_MESSAGE);
+        }
+        errores[3] = this.validarCapacidad(this.capacidad.getText());
+        
+        for(int i = 0; i<4;i++){
+            String aux = "";
+            switch (errores[i]){
+                case 1:
+                    aux = "- Se espera que el nombre solo contenga Letras y Numeros.\n";
+                    resp = 1;
+                   break;
+                case 2: 
+                    aux = "- Se espera que la Descripcion contenga entre 1 y 500 caracteres.\n";
+                    resp = 1;
+                    break;
+                case 3:
+                    aux = "- Se espera que el campo Fecha de Inicio, Fecha de Termino y Dias Maximos de Devolucion no esten vacios.\n";
+                    resp = 1;
+                    break;
+                case 4:
+                    aux = "- Se espera que la fecha sea del siguiente formato: 18-09-2019.\n";
+                    resp = 1;
+                    break;
+                case 5:
+                    aux = "- Se esperan fechas validas con respecto al Tiempo.(Fecha de Inicio antes que la Fecha de Termino, dias de devolucion coherentes, etc).\n";
+                    resp = 1;
+                    break;                    
+                case 6:
+                    aux = "- Se espera que los Dias de Devolucion sean Validos.\n";
+                    resp = 1;
+                    break; 
+                case 7:
+                    aux = "- Se espera que la Capacidad sea un numero valido mayor que 0 y con maximo 10 digitos.\n";
+                    resp = 1;
+                    break;
+                default:
+                    break;
+            }
+            mensajes = mensajes+aux;
+        }
+        
         if(resp==0){
             boolean respuesta = false;
             respuesta=this.papa.getControladorOrganizador().modificarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), this.nombre.getText(), this.descripcion.getText(), this.parseFecha(this.fechaDeInicio.getText()),this.parseFecha(this.fechaDeTermino.getText()), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getCapacidadMaximaDelEvento(), Integer.parseInt(this.diasMaximosDevolucion.getText()), false);
@@ -423,39 +472,14 @@ public class PanelModificarEvento extends javax.swing.JPanel {
                 this.listaSectores.setSelectedIndex(0);
                 this.actualizarListaSectores();
                 this.actualizarMenuEventos();
-            }else{
+            }
+            else{
                 JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
             }
         }
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre del evento tenga solo letras y numeros \n"
-                    + "Ej: La fista de los gatos", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que la descripcion tenga entre entre sea: nnn nnn nnn - nok \n" + 
-                    "Ej: 11111111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==3){
-            JOptionPane.showMessageDialog(null, "Se espera que la fecha de inicio tenga el siguiente formato: dd-mm-aaaa \n" + 
-                    "Ej: 10-10-2010", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==4){
-            JOptionPane.showMessageDialog(null, "Se espera que la fecha de termino tenga el siguiente formato: dd-mm-aaaa \n" + 
-                    "Ej: 10-10-2020", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==5){
-            JOptionPane.showMessageDialog(null, "Se espera que la capacidad sea mayor que 0 \n" + 
-                    "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==6){
-            JOptionPane.showMessageDialog(null, "Se espera que los dias maximos de devolucion sea mayor que 0 \n" + 
-                    "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
+        else{
+            JOptionPane.showMessageDialog(null, "Los errores al ingresar datos son: \n" +
+                mensajes, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
         
         

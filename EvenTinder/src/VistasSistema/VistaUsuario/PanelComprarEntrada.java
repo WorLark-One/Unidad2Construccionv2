@@ -323,7 +323,8 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Se espera que la cantidad de entradas sea un numero entero positivo \n" + 
                     "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
             return;
-        }else{
+        }
+        else{
             boolean bandera=false;
             for (int i = 0; i <this.propiedades.get(punteroPropiedad).getListaSectores().size(); i++) {
                 if(this.propiedades.get(punteroPropiedad).getListaSectores().get(i).getNombre().equals(this.listaDeSectores.getSelectedValue())){

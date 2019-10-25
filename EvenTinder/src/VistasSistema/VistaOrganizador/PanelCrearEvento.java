@@ -491,11 +491,27 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Formato de Fechas Incorrecto, Ingreselas nuevamente\n"
                     + "Ej: 21-08-2019", "Error con Formato de Fechas", JOptionPane.WARNING_MESSAGE);
         }
+        errores[3] = this.validarCapacidad(this.capacidad.getText());
+        
+        
+        if(this.listaPropiedades.getSelectedIndex()<=0){
+            String prop = "Error Al Seleccionar Una Propiedad:\n- Debe Seleccionar Una Propiedad\n";
+            mensajes = mensajes+prop;
+//            JOptionPane.showMessageDialog(null, "Debe seleccionar una propiedad", "Error al seleccionar una propiedad", JOptionPane.WARNING_MESSAGE);
+//            return;
+        }
+        if(!go){
+            String entrada = "Error Al Registrar Sector:\n- Debe Agregar Por Lo Menos Un Valor De Entrada\n";
+            mensajes = mensajes+entrada;
+//            JOptionPane.showMessageDialog(null, "Debe agregar por lo menos un valor de entrada", "Error al registrar sector", JOptionPane.WARNING_MESSAGE);
+//            return;
+        }
+                
         for(int i = 0; i<4;i++){
             String aux = "";
             switch (errores[i]){
                 case 1:
-                    aux = "Se espera que el nombre solo contenga Letras y Numeros.\n";
+                    aux = "Se espera que el Nombre solo contenga Letras y Numeros.\n";
                     resp = 1;
                    break;
                 case 2: 
@@ -527,14 +543,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             }
             mensajes = mensajes+aux;
         }
-        if(this.listaPropiedades.getSelectedIndex()<=0){
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una propiedad", "Error al seleccionar una propiedad", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(!go){
-            JOptionPane.showMessageDialog(null, "Debe agregar por lo menos un valor de entrada", "Error al registrar sector", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        
         if(resp==0){
             int idEvento = 0;
             idEvento = this.papa.getControladorOrganizador().crearEvento(this.nombre.getText(), this.descripcion.getText(),this.parseFecha(this.fechaDeInicio.getText()), this.parseFecha(this.fechaDeTermino.getText()), Integer.parseInt(this.capacidad.getText()),Integer.parseInt(this.diasMaximosDevolucion.getText()), false, this.propiedades.get(this.listaPropiedades.getSelectedIndex()-1).getId());
@@ -555,7 +564,8 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             }else{
                 JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
             }
-        }else{
+        }
+        else{
             JOptionPane.showMessageDialog(null, "Los errores al ingresar datos son: \n" +
                 mensajes, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }

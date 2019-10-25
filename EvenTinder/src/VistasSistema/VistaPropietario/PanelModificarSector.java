@@ -205,7 +205,22 @@ public class PanelModificarSector extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
-        int resp = validarEntrada(this.nombre.getText(), this.capacidad.getText());
+        int resp = 0;
+        String mensajes="";
+        int[] errores = new int[2];
+        errores[0] = this.validarNombreSector(this.nombre.getText());
+        errores[1] = this.validarCapacidadSector(this.capacidad.getText());
+        String aux = "";
+        if(errores[0] != 0){
+            aux = "- Se espera que el Nombre del Sector contenga solo Letras y Numeros.\n";
+            mensajes = mensajes+aux;
+            resp = 1;
+        }
+        if(errores[1] != 0){
+            aux = "- Se espera que la Capacidad sea un numero entre 1 y la capacidad maxima disponible.\n";
+            mensajes = mensajes+aux;
+            resp = 1;
+        }                
         int capacidad=0;
         if(resp==0){
             if(listaSectores.getSelectedIndex()==-1 || listaSectores.getSelectedIndex()==0 ){
@@ -247,16 +262,11 @@ public class PanelModificarSector extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se a podido añadir el sector a la base de datos", "Error al guardar sector", JOptionPane.WARNING_MESSAGE);
             }
         }
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre del sector sea solo letras: \n"
-                    + "Ej: Galeria", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
+        else{
+            JOptionPane.showMessageDialog(null, "Errores encontrados: \n" +
+                mensajes, "Error al Añadir Sector", JOptionPane.WARNING_MESSAGE);
         }
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que la capacidad del sector sea mayor que 0 \n" + 
-                    "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
@@ -308,13 +318,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
      */
     
 
-    /**
-     * Metodo que verifica los datos ingresados al modificar un sector. 
-     * @param nombre nombre del sector ingresado.
-     * @param capacidad capacidad del sector ingresado.
-     * @return un numero que indica el campo que se ingreso de manera erronea.
-     */
-    public int validarEntrada(String nombre, String capacidad) {
+   public int validarNombreSector(String nombre){
         ArrayList<Integer> caracteres = new ArrayList();
         caracteres.add(193);
         caracteres.add(201);
@@ -334,17 +338,21 @@ public class PanelModificarSector extends javax.swing.JPanel {
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) ||(ascii >=48 && ascii <=57)|| caracteres.contains(ascii))) {
+                if(!((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57)||caracteres.contains(ascii))) {
                     return 1;
                 }
-            }            
+            }
             if(aux.length >=100){
-                return 2;
+                return 1;
             }
         }
         else{
             return 1;
         }
+        return 0;
+    }
+    
+    public int validarCapacidadSector(String capacidad){
         // capacidad que puede ser cualquier numero aceptado por una variable tipo int  (2,147,483,647)
         if(!capacidad.equals("") && isNumero(capacidad)){
             try{

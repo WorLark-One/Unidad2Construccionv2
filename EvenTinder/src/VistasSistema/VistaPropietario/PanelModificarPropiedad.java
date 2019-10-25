@@ -270,7 +270,39 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
     }//GEN-LAST:event_ubicacionActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
-        int resp = validarEntrada(this.nombre.getText(),this.descripcion.getText(), this.ubicacion.getText(), this.valorArriendo.getText());
+        
+        int resp=0;
+        String mensajes="";
+        int[] errores = new int[4];
+        errores[0] = this.validarNombrePropiedad(this.nombre.getText());
+        errores[1] = this.validarDescripcionPropiedad(this.descripcion.getText());        
+        errores[2] = this.validarUbicacionPropiedad(this.ubicacion.getText());
+        errores[3] = this.validarValorArriendo(this.valorArriendo.getText());
+        
+        for (int i = 0; i < 5; i++) {
+            String aux = "";
+            switch(errores[i]){
+                case 1:
+                    aux = "- Se espera que el Nombre contenga solo Letras y Numeros.\n";
+                    resp = 1;
+                    break;
+                case 2:
+                    aux = "- La descripcion debe contener entre 1 y 500 caracteres.\n";
+                    resp = 1;
+                    break;
+                case 3:
+                    aux = "- La Ubicacion debe contener entre 1 y 100 caracteres.\n";
+                    resp = 1;
+                    break;
+                case 5:
+                    aux = "- El Valor de Arriendo debe ser un numero mayor que 0.\n";
+                    resp = 1;
+                    break;
+                default:
+                    break;
+            }
+            mensajes = mensajes+aux;
+        }
         if(resp==0){
             //realizar operacion
             java.util.Date fechaDePublicacion = new Date();
@@ -314,36 +346,9 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);  
             }
         }
-        
-        //nombre
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre tenga letras y/o numero \n"
-                    + "Ej: Grado 6", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        //descripcion
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que la descripcion tenga letras y/o numero \n"
-                    + "Ej: Tiene 7 sectores y es muy grande, se puede fumar pero no tomar", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        //ubicacion
-        if(resp==3){
-            JOptionPane.showMessageDialog(null, "Se espera que la ubicacion tenga letras y/o numero \n"
-                    + "Ej: Aguas negras calle 14", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        //numero de sectores
-        if(resp==4){
-            JOptionPane.showMessageDialog(null, "Se espera que numero de sectores sea solo numero \n"
-                    + "Ej: 8", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        //valor de arriendo
-        if(resp==5){
-            JOptionPane.showMessageDialog(null, "Se espera que el valor del arriendo sea un numero \n"
-                    + "Ej: 500000", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
+        else{
+            JOptionPane.showMessageDialog(null, "Los errores al ingresar datos son: \n" +
+                mensajes, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
@@ -468,15 +473,9 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         this.listaOpciones.addItem("Eliminar Sector");
     }
     
- /**
-     * Metodo que valida los datos ingresados al modificar una propiedad.
-     * @param nombre el nombre ingresado.
-     * @param descripcion la descripcion ingresada.
-     * @param ubicacion la ubicacion ingresada.
-     * @param valorArriendo el valor de arriendo ingresado.
-     * @return Un numero que indica el campo que se ingreso de manera incorrecta.
-     */
-    public int validarEntrada(String nombre, String descripcion, String ubicacion, String valorArriendo) {
+ 
+    public int validarNombrePropiedad(String nombre){
+        //nombre con letras mayusculas, minusculas, numeros, tildes.
         ArrayList<Integer> caracteres = new ArrayList();
         caracteres.add(193);
         caracteres.add(201);
@@ -491,22 +490,24 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         caracteres.add(209);
         caracteres.add(241);
         caracteres.add(32);
-        //nombre con letras mayusculas, minusculas, numeros, tildes.
-        if(!nombre.equals("")){
-            char[] aux = nombre.toCharArray();
+        if(!nombre.equals("")){ 
+            char[] aux = nombre.toCharArray();            
             for(char c : aux){                
-                int ascii = (int) c;
-                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) ||(ascii >=48 && ascii <=57)|| caracteres.contains(ascii))) {
+                int ascii = (int) c;                
+                if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || (ascii >=48 && ascii <=57)|| caracteres.contains(ascii))) {                    
                     return 1;
                 }
             } 
-            if(aux.length >=100){
+            if(aux.length>=100){
                 return 1;
             }
         }
         else{
             return 1;
         }
+        return 0;
+    }
+    public int validarDescripcionPropiedad(String descripcion){
         //descripcion que acepta cualquier caracter. no puede superar los 500 caracteres.
         if(!descripcion.equals("")){
             char[] aux = descripcion.toCharArray();
@@ -517,6 +518,9 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         else{
             return 2;
         }
+        return 0;
+    }
+    public int validarUbicacionPropiedad(String ubicacion){
         //ubicacion que acepta cualquier caracter. no puede superar los 500 caracteres.
         if(!ubicacion.equals("")){
             char[] aux = ubicacion.toCharArray();
@@ -526,11 +530,17 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         }
         else{
             return 3;
-        }
-        //valor de arriendo, que acepta cualquier valor que acepte una variable de tipo int (2,147,483,647).
-        if(!valorArriendo.equals("") && isNumero(valorArriendo)){
+        } 
+        return 0;
+    }
+    
+    public int validarValorArriendo(String valorArriendo){
+         //valor de arriendo, que acepta cualquier valor que acepte una variable de tipo int (2,147,483,647).
+        if(!valorArriendo.equals("") ){
             try{
-                Integer.parseInt(valorArriendo);                
+                if (!isNumero(valorArriendo)) {
+                    return 5;
+                }      
             }
             catch(NumberFormatException nfe){
                 return 5;
