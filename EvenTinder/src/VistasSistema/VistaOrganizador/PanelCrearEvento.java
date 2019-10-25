@@ -496,24 +496,31 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             switch (errores[i]){
                 case 1:
                     aux = "Se espera que el nombre solo contenga Letras y Numeros.\n";
+                    resp = 1;
                    break;
                 case 2: 
                     aux = "Se espera que la Descripcion contenga entre 1 y 500 caracteres.\n";
+                    resp = 1;
                     break;
                 case 3:
                     aux = "Se espera que el campo Fecha de Inicio, Fecha de Termino y Dias Maximos de Devolucion no esten vacios.\n";
+                    resp = 1;
                     break;
                 case 4:
                     aux = "Se espera que la fecha sea del siguiente formato: 18-09-2019.\n";
+                    resp = 1;
                     break;
                 case 5:
                     aux = "Se esperan fechas validas con respecto al Tiempo.(Fecha de Inicio antes que la Fecha de Termino, dias de devolucion coherentes, etc).\n";
-                    break;
+                    resp = 1;
+                    break;                    
                 case 6:
                     aux = "Se espera que los Dias de Devolucion sean Validos.\n";
+                    resp = 1;
                     break; 
                 case 7:
                     aux = "Se espera que la Capacidad sea un numero valido mayor que 0 y con maximo 10 digitos.\n";
+                    resp = 1;
                     break;
                 default:
                     break;
