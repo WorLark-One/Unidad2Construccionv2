@@ -358,6 +358,9 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             } catch (SQLException ex) {
                 Logger.getLogger(PanelCrearPropiedad.class.getName()).log(Level.SEVERE, null, ex);
             }
+            if(propiedades==null){
+                return;
+            }
             for (int i = 0; i < propiedades.size(); i++) {
                 if (propiedades.get(i).getNombre().equals(this.nombre.getText())){
                     
