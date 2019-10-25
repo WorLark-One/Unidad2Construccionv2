@@ -11,6 +11,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -479,24 +481,44 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     private void botonCrearEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearEventoActionPerformed
         // TODO add your handling code here:.
         int resp=0;
-        String errores="";
-        if(resp==1){
-            
+        String mensajes="";
+        int[] errores = new int[4];
+        errores[0] = this.validarNombre(this.nombre.getText());
+        errores[1] = this.validarDescripcion(this.descripcion.getText());
+        try {
+            errores[2] = this.validarFechas(this.fechaDeInicio.getText(), this.fechaDeTermino.getText(), this.diasMaximosDevolucion.getText());
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Formato de Fechas Incorrecto, Ingreselas nuevamente\n"
+                    + "Ej: 21-08-2019", "Error con Formato de Fechas", JOptionPane.WARNING_MESSAGE);
         }
-        if(resp==2){
-            
-        }
-        if(resp==3){
-            
-        }
-        if(resp==4){
-            
-        }
-        if(resp==5){
-            
-        }
-        if(resp==6){
-            
+        for(int i = 0; i<4;i++){
+            String aux = "";
+            switch (errores[i]){
+                case 1:
+                    aux = "Se espera que el nombre solo contenga Letras y Numeros.\n";
+                   break;
+                case 2: 
+                    aux = "Se espera que la Descripcion contenga entre 1 y 500 caracteres.\n";
+                    break;
+                case 3:
+                    aux = "Se espera que el campo Fecha de Inicio, Fecha de Termino y Dias Maximos de Devolucion no esten vacios.\n";
+                    break;
+                case 4:
+                    aux = "Se espera que la fecha sea del siguiente formato: 18-09-2019.\n";
+                    break;
+                case 5:
+                    aux = "Se esperan fechas validas con respecto al Tiempo.(Fecha de Inicio antes que la Fecha de Termino, dias de devolucion coherentes, etc).\n";
+                    break;
+                case 6:
+                    aux = "Se espera que los Dias de Devolucion sean Validos.\n";
+                    break; 
+                case 7:
+                    aux = "Se espera que la Capacidad sea un numero valido mayor que 0 y con maximo 10 digitos.\n";
+                    break;
+                default:
+                    break;
+            }
+            mensajes = mensajes+aux;
         }
         if(this.listaPropiedades.getSelectedIndex()<=0){
             JOptionPane.showMessageDialog(null, "Debe seleccionar una propiedad", "Error al seleccionar una propiedad", JOptionPane.WARNING_MESSAGE);
@@ -528,7 +550,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
             }
         }else{
             JOptionPane.showMessageDialog(null, "Los errores al ingresar datos son: \n" +
-                errores, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+                mensajes, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonCrearEventoActionPerformed
 
