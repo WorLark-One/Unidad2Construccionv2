@@ -18,11 +18,11 @@ public class ControladorBDDePropiedades {
 
     public ControladorBDDePropiedades() {
         this.conexion = new ConexionBD();
-        
+
         iniciarlizarBD();
     }
-    
-    public void iniciarlizarBD(){
+
+    public void iniciarlizarBD() {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         this.conexion.crearTablas(miConexion);
@@ -36,7 +36,7 @@ public class ControladorBDDePropiedades {
      * @throws java.sql.SQLException
      */
     public ArrayList<Propiedad> obtenerInformacionDePropiedades(String rut) throws SQLException {
-         this.conexion.crearConexion();
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<Propiedad> propiedades = new ArrayList<>();
@@ -46,7 +46,7 @@ public class ControladorBDDePropiedades {
             try {
                 java.sql.Statement st = miConexion.createStatement();
 
-                String sql = "select * from propiedad where propiedad.refpropietario='" + rut + "'";
+                String sql = "select * from propiedad where propiedad.refpropietario='" + rut + "' and propiedad.activa='true'";
 
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -59,10 +59,11 @@ public class ControladorBDDePropiedades {
                     //int numeroSectores = Integer.parseInt(resultado.getString("numerodesectores"));
                     //String refPropietario = resultado.getString("refpropietario");
                     Date fechaPublicacion = resultado.getDate("fechapublicacion");
-                    ArrayList<Sector>sectores=obtenerInformacionDeSectores(idPropiedad);
-
+                    ArrayList<Sector> sectores = obtenerInformacionDeSectores(idPropiedad);
+                    boolean activo=resultado.getBoolean("activa");
                     Propiedad propiedad = new Propiedad(idPropiedad, nombre, descripcion, fechaPublicacion, ubicacion, capacidadtotal, valorArriendo);
                     propiedad.setListaSectores(sectores);
+                    propiedad.setActiva(activo);
                     propiedades.add(propiedad);
                 }
                 resultado.close();
@@ -82,16 +83,17 @@ public class ControladorBDDePropiedades {
     }
 
     /**
-     * Entrega una propiedad, a traves del identificador de la propiedad y rut del propietario.
+     * Entrega una propiedad, a traves del identificador de la propiedad y rut
+     * del propietario.
      *
      * @param rut; rut del dueño de la propiedad.
      * @param id: identificador de la propiedad.
-     * @return propiedad si encuentra la propiedad de la que se quiere obtener informacion,
-     * null de lo contrario.
+     * @return propiedad si encuentra la propiedad de la que se quiere obtener
+     * informacion, null de lo contrario.
      * @throws java.sql.SQLException
      */
     public Propiedad obtenerInformacionDeUnaPropiedad(String rut, int id) throws SQLException {
-         this.conexion.crearConexion();
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<String> informacion = new ArrayList<>();
@@ -112,12 +114,14 @@ public class ControladorBDDePropiedades {
                     int capacidadtotal = Integer.parseInt(resultado.getString("capacidadtotal"));
                     int valorArriendo = Integer.parseInt(resultado.getString("valorarriendo"));
                     String descripcion = resultado.getString("descripcion");
+                    boolean activo=resultado.getBoolean("activa");
                     //int numeroSectores = Integer.parseInt(resultado.getString("numerodesectores"));
                     //String refPropietario = resultado.getString("refpropietario");
                     Date fechaPublicacion = resultado.getDate("fechapublicacion");
-                    ArrayList<Sector>sectores=obtenerInformacionDeSectores(idPropiedad);
+                    ArrayList<Sector> sectores = obtenerInformacionDeSectores(idPropiedad);
                     Propiedad propiedad = new Propiedad(idPropiedad, nombre, descripcion, fechaPublicacion, ubicacion, capacidadtotal, valorArriendo);
                     propiedad.setListaSectores(sectores);
+                    propiedad.setActiva(activo);
                     return propiedad;
                 }
                 resultado.close();
@@ -152,7 +156,7 @@ public class ControladorBDDePropiedades {
      * @throws java.sql.SQLException
      */
     public int registrarPropiedad(String rut, String nombre, String ubicacion, Date fechaDePublicacion, int capacidadTotal, int valorDeArriendo, String descripcion) throws SQLException {
-         this.conexion.crearConexion();
+        this.conexion.crearConexion();
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -160,7 +164,7 @@ public class ControladorBDDePropiedades {
             try {
 
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = "insert into propiedad values(DEFAULT,'" + nombre + "','" + ubicacion + "','" + fechaDePublicacion + "','"+capacidadTotal+"','" + valorDeArriendo + "','" + descripcion + "','0','" + rut + "')"
+                String sql = "insert into propiedad values(DEFAULT,'" + nombre + "','" + ubicacion + "','" + fechaDePublicacion + "','" + capacidadTotal + "','" + valorDeArriendo + "','" + descripcion + "','0','" + rut + "')"
                         + " RETURNING id";
 
                 ResultSet resultado = st.executeQuery(sql);
@@ -182,9 +186,10 @@ public class ControladorBDDePropiedades {
         //System.out.println("wololoooo");
         return 0;
     }
-    
+
     /**
      * Modifica la informacion de una propiedad.
+     *
      * @param id: identificador de la propiedad.
      * @param nuevoNombre: nuevo nombre de la propiedad.
      * @param NuevaUbicacion: nueva ubicacion de la propiedad.
@@ -192,12 +197,13 @@ public class ControladorBDDePropiedades {
      * @param nuevaCapacidadTotal: nueva capacidad de la propiedad.
      * @param nuevoValorDeArriendo: nuevo valor de arriendo de la propiedad.
      * @param nuevaDescripcion: nueva descripcion de la propiedad.
-     * @return true si modifica la informacion de la propiedad, false de lo contrario.
-     * @throws SQLException 
+     * @return true si modifica la informacion de la propiedad, false de lo
+     * contrario.
+     * @throws SQLException
      */
     public boolean modifcarPropiedad(int id, String nuevoNombre, String NuevaUbicacion, Date fechaDePublicacion, int nuevaCapacidadTotal, int nuevoValorDeArriendo, String nuevaDescripcion) throws SQLException {
 
-         this.conexion.crearConexion();
+        this.conexion.crearConexion();
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -205,9 +211,9 @@ public class ControladorBDDePropiedades {
             try {
 
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = " UPDATE propiedad SET nombre='"+nuevoNombre+"', ubicacion='"+NuevaUbicacion+"',fechapublicacion='"+fechaDePublicacion+"',capacidadtotal='"+nuevaCapacidadTotal+"',\n"
-                        + "valorarriendo='"+nuevoValorDeArriendo+"',descripcion='"+nuevaDescripcion+"'"
-                        + "where propiedad.id="+id+" ";
+                String sql = " UPDATE propiedad SET nombre='" + nuevoNombre + "', ubicacion='" + NuevaUbicacion + "',fechapublicacion='" + fechaDePublicacion + "',capacidadtotal='" + nuevaCapacidadTotal + "',\n"
+                        + "valorarriendo='" + nuevoValorDeArriendo + "',descripcion='" + nuevaDescripcion + "'"
+                        + "where propiedad.id=" + id + " ";
                 st.executeUpdate(sql);
                 //System.out.println(sql);
                 st.close();
@@ -227,36 +233,55 @@ public class ControladorBDDePropiedades {
 
     /**
      * Elimina una propiedad de la base de datos.
+     *
      * @param idPropiedad: identificador de la propiedad.
      * @return true si se elimina la propiedad, false de lo contrario.
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public boolean eliminarPropiedad( int idPropiedad) throws SQLException {
-         this.conexion.crearConexion();
+    public boolean eliminarPropiedad(int idPropiedad) throws SQLException {
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
-            try {
-                java.sql.Statement st = miConexion.createStatement();
-                String sql = "delete from propiedad where propiedad.id="+idPropiedad+"";
-                st.executeUpdate(sql);
+            boolean verificarPropiedad = VerificarPropiedad(miConexion, idPropiedad);
+            if (verificarPropiedad == false) {
+                try {
 
-                st.close();
-                return true;
-            } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: eliminar cliente (desde la tabla de usuario)" + e);
-                return false;
-            } finally {
-                this.conexion.cerrarBaseDeDatos(miConexion);
+                    java.sql.Statement st = miConexion.createStatement();
+                    String sql = "update propiedad set activa='false' where propiedad.id=" + idPropiedad + "";
+                    st.executeUpdate(sql);
+
+                    st.close();
+                    return true;
+                } catch (SQLException e) {
+                    //System.out.println("ERROR DE CONEXION: eliminar propiedad (desde la tabla de usuario)" + e);
+                    return false;
+                } finally {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                }
+            }
+            else{
+                try {
+
+                    java.sql.Statement st = miConexion.createStatement();
+                    String sql = "delete from propiedad where propiedad.id="+ idPropiedad + "";
+                    st.executeUpdate(sql);
+
+                    st.close();
+                    return true;
+                } catch (SQLException e) {
+                    //System.out.println("ERROR DE CONEXION: eliminar propiedad (desde la tabla de usuario)" + e);
+                    return false;
+                } finally {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                }
+            
             }
 
         }
         return false;
     }
-    
-    
-    
-    
+
     /**
      * Registra un sector en la base de datos, anexo a una propiedad.
      *
@@ -270,7 +295,7 @@ public class ControladorBDDePropiedades {
      */
     public boolean registrarSector(String nombreSector, int capacidad, int idPropiedad) throws SQLException {
 
-         this.conexion.crearConexion();
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
@@ -304,7 +329,7 @@ public class ControladorBDDePropiedades {
      * @throws SQLException
      */
     public boolean eliminarSector(String nombreSector, int idPropiedad) throws SQLException {
-         this.conexion.crearConexion();
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
@@ -325,18 +350,20 @@ public class ControladorBDDePropiedades {
         }
         return false;
     }
+
     /**
      * Modifca la informacion de un sector.
+     *
      * @param nombreSector
      * @param idPropiedad
      * @param nuevoNombre
      * @param nuevaCapacidad
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public boolean modificarSector(String nombreSector, int idPropiedad, String nuevoNombre, int nuevaCapacidad) throws SQLException {
 
-         this.conexion.crearConexion();
+        this.conexion.crearConexion();
         boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -368,11 +395,11 @@ public class ControladorBDDePropiedades {
      *
      * @param nombreSector: nombre del sector.
      * @param idPropiedad: identificador de una propidad.
-     * @return 
+     * @return
      * @throws SQLException
      */
     public Sector obtenerInformacionDeUnSector(String nombreSector, int idPropiedad) throws SQLException {
-         this.conexion.crearConexion();
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<String> informacion = new ArrayList<>();
@@ -405,18 +432,18 @@ public class ControladorBDDePropiedades {
 
         }
         return null;
-        
+
     }
 
     /**
      * Obtiene todos los sectores anexos a una propiedad.
      *
      * @param idPropiedad: identificador de una propiedad.
-     * @return 
+     * @return
      * @throws SQLException
      */
     public ArrayList<Sector> obtenerInformacionDeSectores(int idPropiedad) throws SQLException {
-         this.conexion.crearConexion();
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         ArrayList<Sector> sectores = new ArrayList<>();
@@ -451,9 +478,41 @@ public class ControladorBDDePropiedades {
         return sectores;
     }
 
-    
-    
-    
-    
-    
+    private boolean VerificarPropiedad(Connection miConexion, int idPropiedad) {
+        if (miConexion != null)// si hay conexion.
+        {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+
+                String sql = "select evento.nombre,evento.publicado\n"
+                        + "from celebra\n"
+                        + "inner join evento on celebra.refevento = evento.id\n"
+                        + "where celebra.refpropiedad=" + idPropiedad + " and evento.publicado='true'";
+
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    // obtengo la informacion del cliente.
+                    boolean publicado = resultado.getBoolean("publicado");
+                    if (publicado == true) {
+                        resultado.close();
+                        st.close();
+                        return false;
+                    }
+
+                }
+                resultado.close();
+                st.close();
+                //Collections.sort(eventos);
+                return true;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                return true;
+            }
+
+        }
+        return true;
+    }
+
 }
