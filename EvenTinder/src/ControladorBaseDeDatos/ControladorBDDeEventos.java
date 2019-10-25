@@ -101,7 +101,7 @@ public class ControladorBDDeEventos {
 
                 }
             }
-
+            return -1;
         }
         return 0;
     }

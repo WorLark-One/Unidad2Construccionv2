@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * clase que se encarga de interactuar con la base de datos. 1.
@@ -14,7 +16,6 @@ import java.util.ArrayList;
 public class ControladorBDDeUsuario {
 
     ConexionBD conexion;
-    
 
     /**
      * Default constructor
@@ -23,24 +24,25 @@ public class ControladorBDDeUsuario {
         this.conexion = new ConexionBD();
         inicializarBD();
     }
-    
-    
-    public void inicializarBD(){
+
+    public void inicializarBD() {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         this.conexion.crearTablas(miConexion);
     }
 
     /**
-     * Sirve para saber si un usuario esta logeado.
+     * Indica si un usuario se encuentra registrado en el sistema..
      *
      * @param tipoUsuario: cliente, organizador u propietario
      * @param rut: rut del usuario a validar
      * @param clave: contraseña del usuario a logear.
-     * @return true si el usuario esta logeado, false de lo contrario.
+     * @return 1 si el usuario esta registrado y su cuenta esta activa. -1 si
+     * esta registrado pero su cuenta esta inactiva. 0 si no esta registrado en
+     * el sistema.
      * @throws java.sql.SQLException
      */
-    public boolean preguntarPorUsuario(String tipoUsuario, String rut, String clave) throws SQLException {
+    public int preguntarPorUsuario(String tipoUsuario, String rut, String clave) {
         // se establece la conexion.
         this.conexion.crearConexion();
         boolean aceptado;
@@ -49,16 +51,21 @@ public class ControladorBDDeUsuario {
         if (miConexion != null) {
             try {
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = " select  count(" + tipoUsuario + ".rut) as repetido "
-                        + "from " + tipoUsuario + " where " + tipoUsuario + ".rut='" + rut + "' and " + tipoUsuario + ".contraseña='" + clave + "'"
+                String sql = "select " + tipoUsuario + ".activo, count(" + tipoUsuario + ".rut) as repetido \n"
+                        + "from  " + tipoUsuario + " where " + tipoUsuario + ".rut='" + rut + "' and  " + tipoUsuario + ".contraseña='" + clave + "'\n"
                         + "group by " + tipoUsuario + ".rut\n"
                         + "having count(" + tipoUsuario + ".rut)>=0 ";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     String cadena = resultado.getString("repetido");
                     int valor = Integer.parseInt(cadena);
-                    if (valor == 1) {
-                        return true;
+                    boolean activo = resultado.getBoolean("activo");
+                    //si esta registrado en la base de datos y esta como activo.
+                    if (valor == 1 && activo == true) {
+                        return 1;
+                    }//el usuario esta registrado pero no esta activo.
+                    else if (valor == 1 && activo == false) {
+                        return -1;
                     }
                 }
 
@@ -66,20 +73,28 @@ public class ControladorBDDeUsuario {
 
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: ValidarInicioSecion" + e);
-                return false;
+                //error en la sentencia sql.
+                return 0;
             } finally {
-                this.conexion.cerrarBaseDeDatos(miConexion);
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        return false;
+        // el usuario no esta registrado
+        return 0;
     }
+
     /**
-     * obtiene la informacion de un cliente a traves de su rut
+     * Obtiene la informacion de un cliente a traves de su rut
+     *
      * @param rut
      * @return cliente.
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public Cliente obtenerInformacionCliente(String rut) throws SQLException {
+    public Cliente obtenerInformacionCliente(String rut){
         Cliente cliente = null;
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
@@ -102,7 +117,9 @@ public class ControladorBDDeUsuario {
                     String contraseña = resultado.getString("contraseña");
                     String telefono = resultado.getString("telefono");
                     String tarjetaCredito = resultado.getString("tarjetacredito");
-                    cliente = new Cliente(nombreCompleto, rutCliente,contraseña,telefono, correo, tarjetaCredito);
+                    boolean activo = resultado.getBoolean("activo");
+                    cliente = new Cliente(nombreCompleto, rutCliente, contraseña, telefono, correo, tarjetaCredito);
+                    cliente.setActivo(activo);
                     return cliente;
 
                 }
@@ -113,32 +130,33 @@ public class ControladorBDDeUsuario {
                 //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return cliente;
             } finally {
-                this.conexion.cerrarBaseDeDatos(miConexion);
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         }
         return null;
     }
+
     /**
-     * obtiene la informacion de un organizador a traves de su rut
+     * Obtiene la informacion de un organizador a traves de su rut
+     *
      * @param rut
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public Organizador obtenerInformacionOrganizador(String rut) throws SQLException {
+    public Organizador obtenerInformacionOrganizador(String rut) {
         Organizador organizador = null;
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
-
-        ArrayList<String> informacion = new ArrayList<>();
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
                 String sql = "select * from organizador where rut='" + rut + "'";
-
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // obtengo la informacion del cliente.
@@ -148,30 +166,34 @@ public class ControladorBDDeUsuario {
                     String contraseña = resultado.getString("contraseña");
                     String telefono = resultado.getString("telefono");
                     String tarjetaCredito = resultado.getString("tarjetacredito");
-                    organizador = new Organizador(nombreCompleto, rutCliente,contraseña,telefono,  correo,  tarjetaCredito);
+                    boolean activo = resultado.getBoolean("activo");
+                    organizador = new Organizador(nombreCompleto, rutCliente, contraseña, telefono, correo, tarjetaCredito);
+                    organizador.setActivo(activo);
                     return organizador;
-
                 }
                 resultado.close();
                 st.close();
-
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return organizador;
             } finally {
-                this.conexion.cerrarBaseDeDatos(miConexion);
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-
         }
         return null;
     }
+
     /**
-     * obtiene la informacion de un Propietario a traves de su rut
+     * Obtiene la informacion de un Propietario a traves de su rut
+     *
      * @param rut
      * @return
-     * @throws SQLException 
      */
-    public Propietario obtenerInformacionPropietario(String rut) throws SQLException {
+    public Propietario obtenerInformacionPropietario(String rut) {
         Propietario propietario = null;
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
@@ -194,7 +216,9 @@ public class ControladorBDDeUsuario {
                     String contraseña = resultado.getString("contraseña");
                     String telefono = resultado.getString("telefono");
                     String cuentaCorriente = resultado.getString("cuentacorriente");
-                    propietario = new Propietario(nombreCompleto, rutCliente,contraseña,telefono,  correo,  cuentaCorriente);
+                    boolean activo = resultado.getBoolean("activo");
+                    propietario = new Propietario(nombreCompleto, rutCliente, contraseña, telefono, correo, cuentaCorriente);
+                    propietario.setActivo(activo);
                     return propietario;
 
                 }
@@ -205,7 +229,11 @@ public class ControladorBDDeUsuario {
                 //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return propietario;
             } finally {
-                this.conexion.cerrarBaseDeDatos(miConexion);
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         }
@@ -213,7 +241,7 @@ public class ControladorBDDeUsuario {
     }
 
     /**
-     * añade a un usuario a la base de datos
+     * Registra un usuario en la base de datos.
      *
      * @param tipoUsuario:cliente, organizador u propietario
      * @param nombre:nombre del usuario
@@ -222,13 +250,10 @@ public class ControladorBDDeUsuario {
      * @param correo: correo electronico del usuario
      * @param telefono: telefono del usuario
      * @param tarjeta: esta puede ser cuenta corriente o tarjeta de credito.
-     * @return
-     * @throws java.sql.SQLException
+     * @return true si realizo la operacion con exito, false de lo contrario.
      */
-    public boolean añadirUsuario(String tipoUsuario, String nombre, String rut, String correo, String clave, String telefono, String tarjeta) throws SQLException {
-        
-       this.conexion.crearConexion();
-        boolean aceptado;
+    public boolean añadirUsuario(String tipoUsuario, String nombre, String rut, String correo, String clave, String telefono, String tarjeta){
+        this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
             System.out.println("añadir usuario");
@@ -238,34 +263,32 @@ public class ControladorBDDeUsuario {
             // a la tabla cliente.
             if (numero == -1) {// el cliente no esta registrado, por lo tanto hay que registrarlo.
                 try {
-                    System.out.println("tarjeta:"+tarjeta);
                     java.sql.Statement st = miConexion.createStatement();
                     String sql = "insert into " + tipoUsuario + " values('" + nombre + "','" + rut + "','" + clave + "','" + correo + "','" + telefono + "','" + tarjeta + "')";
-                    System.out.println(sql);
                     st.executeUpdate(sql);
-
                     st.close();
-
                 } catch (SQLException e) {
-                    System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                    //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
                     return false;
                 } finally {
-                    this.conexion.cerrarBaseDeDatos(miConexion);
-
+                    try {
+                        this.conexion.cerrarBaseDeDatos(miConexion);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 return true;
-
             }
             // retornamos false debido a que el cliente ya esta registrado.
             return false;
 
         }
-        //System.out.println("hola");
         return false;
     }
 
     /**
-     * modifica la informacion de un usuario.
+     * Modifica la informacion de un usuario. Solo puede modificar la
+     * informacion de usuarios activos.
      *
      * @param tipoUsuario: cliente, organizador u propietario
      * @param rutUsuarioModificar: rut del usuario al que se le modificara la
@@ -277,61 +300,78 @@ public class ControladorBDDeUsuario {
      * @param tarjeta: tarjeta de credito o cuenta corriete del usuario que se
      * que se desea modificar.
      * @return true si el usuario fue modificado, false de lo contrario.
-     * @throws java.sql.SQLException
      */
-    public boolean modificarUsuario(String tipoUsuario, String rutUsuarioModificar, String nombre, String correo, String clave, String telefono, String tarjeta) throws SQLException {
-
+    public boolean modificarUsuario(String tipoUsuario, String rutUsuarioModificar, String nombre, String correo, String clave, String telefono, String tarjeta)  {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
-        System.out.println(tipoUsuario);
-
         if (miConexion != null) {
+            boolean clienteActivo = VerificarSiLaCuentaDeUnUsuarioEstaActivo(miConexion, tipoUsuario, rutUsuarioModificar);
             if (tipoUsuario.equalsIgnoreCase("cliente") == true) {
+                if (clienteActivo == true) {
+                    try {
+                        java.sql.Statement st = miConexion.createStatement();
+                        String sql = "UPDATE cliente SET nombrecompleto='" + nombre + "', correo='" + correo + "', contraseña='" + clave + "', telefono='" + telefono + "', tarjetacredito='" + tarjeta + "' where rut='" + rutUsuarioModificar + "'";
+                        st.executeUpdate(sql);
+                        st.close();
+                        return true;
 
-                try {
-                    java.sql.Statement st = miConexion.createStatement();
-                    String sql = "UPDATE cliente SET nombrecompleto='"+nombre+"', correo='"+correo+"', contraseña='"+clave+"', telefono='"+telefono+"', tarjetacredito='"+tarjeta+"' where rut='"+rutUsuarioModificar+"'";
-                    st.executeUpdate(sql);
-                    st.close();
-                    return true;
-
-                } catch (SQLException e) {
-                    //System.out.println("ERROR DE CONEXION: ValidarInicioSecion" + e);
-                    return false;
-                } finally {
-                    this.conexion.cerrarBaseDeDatos(miConexion);
+                    } catch (SQLException e) {
+                        //System.out.println("ERROR DE CONEXION: ValidarInicioSecion" + e);
+                        return false;
+                    } finally {
+                        try {
+                            this.conexion.cerrarBaseDeDatos(miConexion);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
+                return false;
             } else if (tipoUsuario.equalsIgnoreCase("organizador") == true) {
-                try {
-                    java.sql.Statement st = miConexion.createStatement();
-                    String sql = "UPDATE organizador SET nombrecompleto='"+nombre+"', correo='"+correo+"', contraseña='"+clave+"', telefono='"+telefono+"', tarjetacredito='"+tarjeta+"' where rut='"+rutUsuarioModificar+"'";
-                    st.executeUpdate(sql);
+                if (clienteActivo == true) {
+                    try {
+                        java.sql.Statement st = miConexion.createStatement();
+                        String sql = "UPDATE organizador SET nombrecompleto='" + nombre + "', correo='" + correo + "', contraseña='" + clave + "', telefono='" + telefono + "', tarjetacredito='" + tarjeta + "' where rut='" + rutUsuarioModificar + "'";
+                        st.executeUpdate(sql);
 
-                    st.close();
-                    return true;
+                        st.close();
+                        return true;
 
-                } catch (SQLException e) {
-                    //System.out.println("ERROR DE CONEXION: ValidarInicioSecion" + e); 
-                    return false;
-                } finally {
-                    this.conexion.cerrarBaseDeDatos(miConexion);
+                    } catch (SQLException e) {
+                        //System.out.println("ERROR DE CONEXION: ValidarInicioSecion" + e); 
+                        return false;
+                    } finally {
+                        try {
+                            this.conexion.cerrarBaseDeDatos(miConexion);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
-            } else if(tipoUsuario.equalsIgnoreCase("propietario") == true){
+                return false;
 
-                try {
-                    java.sql.Statement st = miConexion.createStatement();
-                    String sql = "UPDATE propietario SET nombrecompleto='"+nombre+"', correo='"+correo+"', contraseña='"+clave+"', telefono='"+telefono+"', cuentacorriente='"+tarjeta+"' where rut='"+rutUsuarioModificar+"'";
-                    st.executeUpdate(sql);
+            } else if (tipoUsuario.equalsIgnoreCase("propietario") == true) {
+                if (clienteActivo == true) {
+                    try {
+                        java.sql.Statement st = miConexion.createStatement();
+                        String sql = "UPDATE propietario SET nombrecompleto='" + nombre + "', correo='" + correo + "', contraseña='" + clave + "', telefono='" + telefono + "', cuentacorriente='" + tarjeta + "' where rut='" + rutUsuarioModificar + "'";
+                        st.executeUpdate(sql);
 
-                    st.close();
-                    return true;
+                        st.close();
+                        return true;
 
-                } catch (SQLException e) {
-                    //System.out.println("ERROR DE CONEXION: ValidarInicioSecion" + e);
-                    return false;
-                } finally {
-                    this.conexion.cerrarBaseDeDatos(miConexion);
+                    } catch (SQLException e) {
+                        //System.out.println("ERROR DE CONEXION: ValidarInicioSecion" + e);
+                        return false;
+                    } finally {
+                        try {
+                            this.conexion.cerrarBaseDeDatos(miConexion);
+                        } catch (SQLException ex) {
+                           //Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
+                return false;
             }
         }
         return false;
@@ -339,41 +379,45 @@ public class ControladorBDDeUsuario {
     }
 
     /**
-     * elimina un usuario de tipo cliente, organizador o propietario de la base
-     * de datos.
+     * Este metodo deja inactiva una cuenta de un usuario.
      *
      * @param tipoUsuario:cliente,organizador u propietario
      * @param rut: rut del usuario que se desea eliminar.
      * @return true si se elimino el usuario, false de lo contrario.
-     * @throws java.sql.SQLException
      */
-    public boolean eliminarUsuario(String tipoUsuario, String rut) throws SQLException {
+    public boolean eliminarUsuario(String tipoUsuario, String rut) {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
 
         if (miConexion != null) {
             // verificamos si el usuario existe
             int numero = contarTiposDeUsuario(miConexion, tipoUsuario, rut);
-
-            // si el rut del usuario esta en la tabla cliente, y el rut no esta en las
-            // tablas de organizador y propietario, esto implica que puedo borrar 
-            // desde la tabla usuario, lo que permite la eliminacion en cascada.
             if (numero == 1) {
-                try {
-                    java.sql.Statement st = miConexion.createStatement();
-                    String sql = "delete from " + tipoUsuario + " where " + tipoUsuario + ".rut='" + rut + "'";
-                    st.executeUpdate(sql);
+                if (tipoUsuario.equalsIgnoreCase("cliente") == true) {
+                    boolean tieneCompras = tieneComprasAsociadas(miConexion, rut);
+                    if (tieneCompras == true) {
+                        cambiarEstadoCuentaUsuario(miConexion, tipoUsuario, rut,"false");
+                    } else {//puedo eliminar la cuenta de la base de datos.
+                        borrarRegistroUsuario(miConexion,tipoUsuario,rut);
+                    }
+                } else if (tipoUsuario.equalsIgnoreCase("organizador") == true) {
+                    boolean eventosActivos = VerificarEventosActivos(miConexion, rut);
+                    if (eventosActivos == false) {
 
-                    st.close();
-
-                } catch (SQLException e) {
-                    //System.out.println("ERROR DE CONEXION: eliminar cliente (desde la tabla de usuario)" + e);
-                    return false;
-                } finally {
-                    this.conexion.cerrarBaseDeDatos(miConexion);
+                        cambiarEstadoCuentaUsuario(miConexion, tipoUsuario, rut,"false");
+                    } else {//puedo eliminar la cuenta de la base de datos.
+                        borrarRegistroUsuario(miConexion,tipoUsuario,rut);
+                    }
+                } else if (tipoUsuario.equalsIgnoreCase("propietario") == true) {
+                    boolean eventosAsociadosPropiedad = VerificarEventosAsociadosPropiedad(miConexion, rut);
+                    if (eventosAsociadosPropiedad == false) {
+                        cambiarEstadoCuentaUsuario(miConexion, tipoUsuario, rut,"false");
+                    } else {//puedo eliminar la cuenta de la base de datos.
+                        borrarRegistroUsuario(miConexion,tipoUsuario,rut);
+                    }
                 }
-                return true;
             }
+
         }
         return false;
     }
@@ -384,7 +428,7 @@ public class ControladorBDDeUsuario {
      * -1 de lo contrario. metodo de uso interno
      *
      * @param conexionAux: conexion con la base de datos.
-     * @param tipoUsuario: tipo de usuario, el 
+     * @param tipoUsuario: tipo de usuario, el
      * @param rut
      * @return
      */
@@ -413,7 +457,180 @@ public class ControladorBDDeUsuario {
         }
         return -1;
     }
+    /**
+     * Metodo privado.
+     * Verifica si un usuario tiene  su cuenta activa.
+     * @param tipoUsuario: tipo de usuario.
+     * @param rut:rut del organizador
+     * @return 
+     */
+    private boolean VerificarSiLaCuentaDeUnUsuarioEstaActivo(Connection miConexion, String tipoUsuario, String rut) {
+        if (miConexion != null) {
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+                String sql = "select " + tipoUsuario + ".activo from " + tipoUsuario + " where " + tipoUsuario + ".rut='" + rut + "'";
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    boolean activo = resultado.getBoolean("activo");
+                    return activo;
+                }
 
-    
-   
+                st.close();
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: contar usuario :" + e);
+                // error sentencia  sql
+                return false;
+            }
+        }
+        //error al establecer la conexion con la base de datos.
+        return false;
+    }
+    /**
+     * verifica si un organizador tiene eventos activos.
+     * @param miConexion:conexion con la base de datos.
+     * @param rut:rut del organizador.
+     * @return 
+     */
+    private boolean VerificarEventosActivos(Connection miConexion, String rut) {
+        if (miConexion != null) {
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+                String sql = "select DISTINCT organizador.nombrecompleto,evento.nombre \n"
+                        + "from organizador\n"
+                        + "inner join evento on organizador.rut=evento.reforganizador\n"
+                        + "where evento.publicado='true' and organizador.rut='" + rut + "'";
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    // si entra en el ciclo significa que hay datos.
+                    return true;
+                }
+                st.close();
+                return false;
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: contar usuario :" + e);
+                return false;
+            }
+        }
+        return false;
+    }
+    /**
+     * verifica si hay eventos asociados a una propiedad.
+     * @param miConexion:conexion con la base de datos.
+     * @param rut: rut de un propietario.
+     * @return 
+     */
+    private boolean VerificarEventosAsociadosPropiedad(Connection miConexion, String rut) {
+        if (miConexion != null) {
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+                String sql = "select DISTINCT organizador.nombrecompleto,evento.nombre \n"
+                        + "from organizador\n"
+                        + "inner join evento on organizador.rut=evento.reforganizador\n"
+                        + "where evento.publicado='true' and organizador.rut='" + rut + "'";
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    // si entra en el ciclo significa que hay datos.
+                    return true;
+                }
+                st.close();
+                return false;
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: contar usuario :" + e);
+                return false;
+            }
+        }
+        return false;
+    }
+    /**
+     * verifica si hay compras asociadas a un cliente.
+     * @param miConexion:conexion con la base de datos.
+     * @param rut: rut del cliente.
+     * @return 
+     */
+    private boolean tieneComprasAsociadas(Connection miConexion, String rut) {
+        if (miConexion != null) {
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+                String sql = "select DISTINCT cliente.rut\n"
+                        + "from compra\n"
+                        + "inner join realizacompra on compra.id=realizacompra.refcompra\n"
+                        + "inner join cliente on realizacompra.refcliente=cliente.rut\n"
+                        + "where cliente.rut='"+rut+"'";
+                ResultSet resultado = st.executeQuery(sql);
+                while (resultado.next()) {
+                    // si entra en el ciclo significa que hay datos.
+                    return true;
+                }
+                st.close();
+                return false;
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: contar usuario :" + e);
+                return false;
+            }
+        }
+        return false;
+    }
+    /**
+     * Cambia el estado de una cuenta,la puede habilitar o desabilirar
+     * @param miConexion: conexion con la base de datos
+     * @param tipoUsuario:tipo de usuario.
+     * @param rut:rut del usuario.
+     * @return 
+     */
+    private boolean cambiarEstadoCuentaUsuario(Connection miConexion, String tipoUsuario, String rut,String estado) {
+        if (miConexion != null) {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+                String sql = "update  " + tipoUsuario + " set activo='"+estado+"' where cliente.rut='" + rut + "'";
+                st.executeUpdate(sql);
+                st.close();
+                return true;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: eliminar cliente (desde la tabla de usuario)" + e);
+                return false;
+            } finally {
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //error al establecer la conexion con la base de datos.
+        return false;
+    }
+    /**
+     * borra los registros de un usuario.
+     * @param miConexion: conexion con la base de datos.
+     * @param tipoUsuario:tipo de usuario.
+     * @param rut:rut del usuario.
+     */
+    private void borrarRegistroUsuario(Connection miConexion,String tipoUsuario, String rut) {
+        if (miConexion != null) {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+                String sql = "delete from "+tipoUsuario+" where "+tipoUsuario+".rut='" + rut + "'";
+                st.executeUpdate(sql);
+                st.close();
+                //return true;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: eliminar cliente (desde la tabla de usuario)" + e);
+                //return false;
+            } finally {
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //error al establecer la conexion con la base de datos.
+        //return false;
+    }
+
 }

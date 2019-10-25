@@ -10,6 +10,7 @@ public abstract class Usuario {
     private String contraseña;
     private String telefono;
     private String correoElectronico;
+    private boolean activo;
     
     /**
      * Constructor de la clase Usuario.
@@ -67,6 +68,14 @@ public abstract class Usuario {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
     
     

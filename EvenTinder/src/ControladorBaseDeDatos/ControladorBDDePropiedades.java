@@ -364,7 +364,6 @@ public class ControladorBDDePropiedades {
     public boolean modificarSector(String nombreSector, int idPropiedad, String nuevoNombre, int nuevaCapacidad) throws SQLException {
 
         this.conexion.crearConexion();
-        boolean aceptado;
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
 
