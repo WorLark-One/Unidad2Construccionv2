@@ -235,7 +235,7 @@ public class PanelModificarSector extends javax.swing.JPanel {
                 return;
             }
             for (int i = 0; i < this.propiedades.get(this.id).getListaSectores().size(); i++) {
-                if(listaSectores.getSelectedIndex()!=i){
+                if(listaSectores.getSelectedIndex()-1!=i){
                     if(this.propiedades.get(this.id).getListaSectores().get(i).getNombre().equals(this.nombre.getText())){
                         JOptionPane.showMessageDialog(null, "El nombre del sector ya se encuentra registrado", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
                         return;
