@@ -31,7 +31,6 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
     public PanelModificarOrganizador(VentanaPrincipalOrganizador papa) throws SQLException {
         this.papa=papa;
         initComponents();
-        eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosPublicadosDeUnOrganizador();
         this.actualizarInfomacion();
     }
 
@@ -198,19 +197,8 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         errores[0] = this.validarNombre(this.nombre.getText());
         errores[2] = this.validarNumeroTelefonico(this.numeroTelefonico.getText());
         errores[1] = this.validarClave(this.clave.getText());
-        if(!eventos.isEmpty()){
-            errores[3] = 0;
-            errores[4] = 0;
-            
-        }else{
-            
-            errores[3] = this.validarCorreoElectronico(this.correoElectronico.getText());
-            if(this.tarjetaDeCredito.getText().length()==this.usuario.getTarjetaDeCredito().length()){
-                errores[4] = 0;
-            }else{
-                errores[4] = this.validarTarjetaDeCredito(this.tarjetaDeCredito.getText());
-            }
-        }
+        errores[3] = this.validarCorreoElectronico(this.correoElectronico.getText());
+        errores[4] = this.validarTarjetaDeCredito(this.tarjetaDeCredito.getText());
         for(int i = 0; i<5; i++){
             String aux = "";
             switch(errores[i]){
@@ -244,11 +232,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         if(resp==0){
             boolean respuesta = false;
             try {
-                if(!eventos.isEmpty()){
-                    respuesta = this.papa.getControladorPrincipal().modificarUsuario(this.nombre.getText(),this.usuario.getContraseña(),this.usuario.getCorreoElectronico(),this.numeroTelefonico.getText(),this.usuario.getTarjetaDeCredito());
-                }else{
-                    respuesta = this.papa.getControladorPrincipal().modificarUsuario(this.nombre.getText(),this.clave.getText(),this.usuario.getCorreoElectronico(),this.numeroTelefonico.getText(),this.tarjetaDeCredito.getText());
-                }
+                respuesta = this.papa.getControladorPrincipal().modificarUsuario(this.nombre.getText(),this.clave.getText(),this.correoElectronico.getText(),this.numeroTelefonico.getText(),this.tarjetaDeCredito.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(PanelModificarPropietario.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -476,6 +460,7 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
 
     public void actualizarInfomacion() throws SQLException{
         usuario =(Organizador) this.papa.getControladorPrincipal().obtenerInformacionUsuario();
+        eventos = eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosPublicadosDeUnOrganizador();
         if(usuario==null){
             return;
         }

@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaPropietario;
 
+import ModuloGestionEventos.Evento;
 import ModuloGestionUsuario.Propietario;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
      */
     
     private VentanaPrincipalPropietario papa;
+    private ArrayList<Evento> eventos;
     
     public PanelModificarPropietario(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
@@ -127,7 +129,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(numeroTelefonico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                                     .addComponent(clave, javax.swing.GroupLayout.Alignment.LEADING))))))
-                .addContainerGap(427, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +165,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                     .addComponent(cuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(botonRegistrar)
-                .addContainerGap(376, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -182,7 +184,6 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
         errores[2] = this.validarNumeroTelefonico(this.numeroTelefonico.getText());
         errores[3] = this.validarCorreoElectronico(this.correoElectronico.getText());
         errores[4] = this.validarCuentaBancaria(this.cuentaBancaria.getText());
-        
         for(int i = 0; i<5; i++){
             String aux = "";
             switch(errores[i]){
@@ -436,12 +437,19 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     }    
     
     public void actualizarInfomacion() throws SQLException{
+        eventos =this.papa.getControladorPropietario().obtenerInformacionDeEventosActuales();
         Propietario usuario =(Propietario) this.papa.getControladorPrincipal().obtenerInformacionUsuario();
         if(usuario==null){
             return;
         }
-        this.clave.setText("");
-        this.cuentaBancaria.setText("");
+        if(!eventos.isEmpty()){
+            this.correoElectronico.setEditable(false);
+            this.correoElectronico.setEnabled(false);
+            this.cuentaBancaria.setEditable(false);
+            this.cuentaBancaria.setEnabled(false);
+        }
+        this.clave.setText(usuario.getContraseña());
+        this.cuentaBancaria.setText(usuario.getCuentaCorriente());
         this.nombre.setText(usuario.getNombreCompleto());
         this.numeroTelefonico.setText(usuario.getTelefono());
         this.correoElectronico.setText(usuario.getCorreoElectronico());
