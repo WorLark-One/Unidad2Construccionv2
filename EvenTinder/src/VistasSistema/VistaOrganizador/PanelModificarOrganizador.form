@@ -124,6 +124,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="correoElectronico">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="correoElectronicoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="nombre">
     </Component>
@@ -191,6 +194,10 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tarjetaDeCredito">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tarjetaDeCreditoMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tarjetaDeCreditoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonRegistrar">
       <Properties>
