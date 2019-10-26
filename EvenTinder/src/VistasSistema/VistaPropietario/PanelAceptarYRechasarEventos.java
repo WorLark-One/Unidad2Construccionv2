@@ -129,7 +129,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         );
 
         jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel19.setText("1. Elija una propiedad");
+        jLabel19.setText("Elija una propiedad");
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú lista de solicitudes de eventos");
@@ -238,15 +238,15 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel18)
                     .addComponent(jLabel19)
-                    .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(aceptar)
                         .addGap(18, 18, 18)
                         .addComponent(rechazar))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(123, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(listaPropiedades, 0, 420, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,9 +259,9 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                         .addGap(100, 100, 100)
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel19)
-                        .addGap(18, 18, 18)
-                        .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel19)))
+                .addGap(18, 18, 18)
+                .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)

@@ -38,9 +38,9 @@
                       <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel19" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="listaPropiedades" min="-2" pref="295" max="-2" attributes="0"/>
+                  <Component id="listaPropiedades" alignment="0" min="-2" pref="420" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="194" max="32767" attributes="0"/>
+              <EmptySpace pref="47" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
