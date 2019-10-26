@@ -279,7 +279,7 @@ public class PanelModificarPropiedad extends javax.swing.JPanel {
         errores[2] = this.validarUbicacionPropiedad(this.ubicacion.getText());
         errores[3] = this.validarValorArriendo(this.valorArriendo.getText());
         
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             String aux = "";
             switch(errores[i]){
                 case 1:
