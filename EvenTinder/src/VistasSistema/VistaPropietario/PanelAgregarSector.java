@@ -8,7 +8,6 @@ package VistasSistema.VistaPropietario;
 import ModuloGestionPropiedades.Propiedad;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -66,15 +65,19 @@ public class PanelAgregarSector extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menú Agregar sectores");
+        jLabel18.setText("Menú agregar sectores");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
+        jPanel2.setBackground(new java.awt.Color(232, 232, 232));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Nombre");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Ingrese los siguientes datos");
 
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("Capacidad");
 
         nombre.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +86,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             }
         });
 
+        guardarCambios.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         guardarCambios.setText("Guardar Cambios");
         guardarCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +94,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             }
         });
 
+        volver.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,13 +116,14 @@ public class PanelAgregarSector extends javax.swing.JPanel {
                             .addComponent(jLabel5))
                         .addGap(65, 65, 65)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(capacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(guardarCambios)
                                 .addGap(18, 18, 18)
-                                .addComponent(volver)))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                                .addComponent(volver)
+                                .addGap(0, 41, Short.MAX_VALUE))
+                            .addComponent(capacidad)
+                            .addComponent(nombre))))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,8 +145,12 @@ public class PanelAgregarSector extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPanel3.setBackground(new java.awt.Color(232, 232, 232));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Lista de sectores actuales en el sistema");
+
+        jPanel1.setBackground(new java.awt.Color(226, 226, 226));
 
         jScrollPane1.setViewportView(listaSectores);
 
@@ -150,7 +160,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -168,9 +178,11 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,11 +202,11 @@ public class PanelAgregarSector extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel18)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(408, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(347, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +227,22 @@ public class PanelAgregarSector extends javax.swing.JPanel {
 
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
         // TODO add your handling code here:
-        int resp = validarEntrada(this.nombre.getText(), this.capacidad.getText());
+        int resp = 0;
+        String mensajes="";
+        int[] errores = new int[2];
+        errores[0] = this.validarNombreSector(this.nombre.getText());
+        errores[1] = this.validarCapacidadSector(this.capacidad.getText());
+        String aux = "";
+        if(errores[0] != 0){
+            aux = "- Se espera que el Nombre del Sector contenga solo Letras y Numeros.\n";
+            mensajes = mensajes+aux;
+            resp = 1;
+        }
+        if(errores[1] != 0){
+            aux = "- Se espera que la Capacidad sea un numero entre 1 y la capacidad maxima disponible.\n";
+            mensajes = mensajes+aux;
+            resp = 1;
+        }                
         if(resp==0){
             boolean bandera = false;
             for (int i = 0; i < this.propiedades.get(this.id).getListaSectores().size(); i++) {
@@ -249,15 +276,9 @@ public class PanelAgregarSector extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se a podido añadir el sector a la base de datos", "Error al guardar sector", JOptionPane.WARNING_MESSAGE);
             }
         }
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre del sector tenga letras y/o numero \n"
-                    + "Ej: Platea", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;        
-        }
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que la capacidad del sector sea mayor que 0 \n" + 
-                    "Ej: 10", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
+        else{
+            JOptionPane.showMessageDialog(null, "Errores encontrados: \n" +
+                mensajes, "Error al Añadir Sector", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
@@ -307,14 +328,7 @@ public class PanelAgregarSector extends javax.swing.JPanel {
             this.listaSectores.setModel(this.modeloLista);
     }
     
-    
-     /**
-      * Metodo que verifica los datos ingresados al crear un sector. 
-      * @param nombre nombre del sector ingresado.
-      * @param capacidad capacidad del sector ingresado.
-      * @return un numero que indica el campo que se ingreso de manera erronea.
-      */
-    public int validarEntrada(String nombre, String capacidad) {
+    public int validarNombreSector(String nombre){
         ArrayList<Integer> caracteres = new ArrayList();
         caracteres.add(193);
         caracteres.add(201);
@@ -345,6 +359,10 @@ public class PanelAgregarSector extends javax.swing.JPanel {
         else{
             return 1;
         }
+        return 0;
+    }
+    
+    public int validarCapacidadSector(String capacidad){
         // capacidad que puede ser cualquier numero aceptado por una variable tipo int  (2,147,483,647)
         if(!capacidad.equals("") && isNumero(capacidad)){
             try{

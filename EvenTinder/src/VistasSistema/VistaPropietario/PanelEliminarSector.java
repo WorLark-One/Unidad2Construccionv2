@@ -52,6 +52,7 @@ public class PanelEliminarSector extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
+        eliminarSector.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         eliminarSector.setText("Eliminar");
         eliminarSector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +60,7 @@ public class PanelEliminarSector extends javax.swing.JPanel {
             }
         });
 
+        volver.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,11 +71,12 @@ public class PanelEliminarSector extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú Eliminar sector");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Seleccione un sector");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
+        listaSectores.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         listaSectores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaSectoresActionPerformed(evt);
@@ -97,7 +100,7 @@ public class PanelEliminarSector extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(volver))
                     .addComponent(listaSectores, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +120,7 @@ public class PanelEliminarSector extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(eliminarSector)
                             .addComponent(volver))))
-                .addGap(56, 298, Short.MAX_VALUE))
+                .addGap(56, 145, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -83,7 +83,7 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText("Menú Creación de usuario");
+        jLabel18.setText("Menú crear cuenta");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
@@ -91,9 +91,10 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(234, 234, 234));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("1. Seleccione el tipo de usuario que quiere crear");
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setText("1. Seleccione el tipo de usuario");
 
+        listaTipoUsuario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         listaTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listaTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,9 +109,11 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(listaTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 134, Short.MAX_VALUE))
+                    .addComponent(listaTipoUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,22 +133,37 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Nombre completo");
 
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("Rut");
 
+        jLabel17.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel17.setText("Cuenta bancaria");
 
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText("Clave");
 
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel14.setText("N° Telefónico");
 
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel15.setText("Correo Electrónico");
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel19.setText("2. Ingrese los siguientes datos");
 
+        jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel16.setText("Tarjeta de crédito");
+
+        botonRegistrar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        botonRegistrar.setText("Registrar");
+        botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegistrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -166,21 +184,23 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                             .addComponent(jLabel17))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(correoElectronico, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(CuentaBancaria)
+                                    .addComponent(tarjetaDeCredito)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(19, 19, 19)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rut, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(CuentaBancaria)
-                                    .addComponent(tarjetaDeCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(nombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(rut, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(clave))))))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonRegistrar)
+                .addGap(136, 136, 136))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,15 +235,10 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(CuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(botonRegistrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        botonRegistrar.setText("Registrar");
-        botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRegistrarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -235,14 +250,12 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel18)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(botonRegistrar)
-                            .addComponent(labelTipoUsuario))))
-                .addContainerGap(773, Short.MAX_VALUE))
+                        .addGap(227, 227, 227)
+                        .addComponent(labelTipoUsuario))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(755, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,18 +270,72 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonRegistrar)
                         .addGap(61, 61, 61)
                         .addComponent(labelTipoUsuario)))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         // TODO add your handling code here:
-        int resp = this.validarResgistro(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(),this.tarjetaDeCredito.getText() , this.CuentaBancaria.getText());
+        //int resp = this.validarResgistro(this.tipoUsuario, this.nombre.getText(), this.rut.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(),this.tarjetaDeCredito.getText() , this.CuentaBancaria.getText());
+        int resp = 0;
+        String mensajes="";
+        int[] errores = new int[7];
+        if(this.tipoUsuario.equals("")){
+           errores[0] = 1;
+           resp = 1;
+        }
+        errores[1] = this.validarNombre(this.nombre.getText());
+        errores[2] = this.validarRUT(this.rut.getText());
+        errores[3] = this.validarClave(this.clave.getText());
+        errores[4] = this.validarNumeroTelefonico(this.numeroTelefonico.getText());
+        errores[5] = this.validarCorreo(this.correoElectronico.getText());
+        errores[6] = this.validarCuenta(this.tipoUsuario, this.tarjetaDeCredito.getText(), this.CuentaBancaria.getText());
+        
+        for(int i = 0; i<7;i++){
+            String aux = "";
+            switch (errores[i]){
+                case 1:
+                    aux = "- Debe seleccionar un Tipo de Usuario.\n";
+                    resp = 1;
+                   break;
+                case 2: 
+                    aux = "- Se espera que el Nombre solo contenga Letras y Numeros.\n";
+                    resp = 1;
+                    break;
+                case 3:
+                    aux = "- Se espera que el RUT tenga un formato valido (Ejemplo: 12.345.678-9).\n";
+                    resp = 1;
+                    break;
+                case 4:
+                    aux = "- La Contraseña debe tener por lo menos 8 caracteres (Solo Letras o Numeros).\n";
+                    resp = 1;
+                    break;
+                case 5:
+                    aux = "- El Numero Telefonico debe tener 9 digitos (Solo Numeros Chilenos Por El Momento).\n";
+                    resp = 1;
+                    break;                    
+                case 6:
+                    aux = "- El Correo Electronico debe tener un formato valido (Ejemplo: usuario@correo.cl, Solo Correos .cl o .com).\n";
+                    resp = 1;
+                    break; 
+                case 7:
+                    aux = "- El numero de Tarjeta de Credito debe tener 16 digitos (Ejemplo: 1234 5678 9012 3456).\n";
+                    resp = 1;
+                    break;
+                case 8:
+                    aux = "- El numero de Cuenta Bancaria debe tener 20 digitos (Ejemplo: 1234 5678 9012 3456 7890).\n";
+                    resp = 1;
+                    break;
+                default:
+                    break;
+            }
+            mensajes = mensajes+aux;
+        }
+
+        
         if(resp==0){
             boolean respuesta = false;
             try {
@@ -295,45 +362,11 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se pudo registrado en el sistema");
             }
         }
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de usuario", "Error al seleccionar el tipo de usuario", JOptionPane.WARNING_MESSAGE);
-            return;
+        else{
+            JOptionPane.showMessageDialog(null, "Los errores al ingresar datos son: \n" +
+                mensajes, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre sea solo letras \n"
-                    + "Ej: Daniel Moreno", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==3){
-            JOptionPane.showMessageDialog(null, "Se espera que el rut tenga entre entre sea: nnn nnn nnn - nok \n" + 
-                    "Ej: 11.111.111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==4){
-            JOptionPane.showMessageDialog(null, "Se espera que la clave tenga minimo 8 digitos \n" + 
-                    "Ej: 12345678", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==5){
-            JOptionPane.showMessageDialog(null, "Se espera que el numero telefonico tenga 9 digitos \n" + 
-                    "Ej: 987654321", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==6){
-            JOptionPane.showMessageDialog(null, "Se espera que el correo electronico sea algo@gmail.com o sea algo@gmail.cl \n" + 
-                    "Ej: elmejorproyectodelmundo@gmail.cl", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==7){
-            JOptionPane.showMessageDialog(null, "Se espera que la tarjeta de credito tenga 16 digitos \n" + 
-                    "Ej: 12345678901234", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==8){
-            JOptionPane.showMessageDialog(null, "Se espera que la cuenta bancaria tenga 20 digitos \n" + 
-                    "Ej: 12345678901234567890", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveActionPerformed
@@ -427,19 +460,8 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
     7 falta tarjetaDeCredito
     8 falta CuentaBancaria 
     */
-    
-    /**
-     * Metodo que verifica la correctitud de los datos ingresados en el sistema por el usuario para crear una cuenta.
-     * @param tipoUsuario El tipo de usuario que se desea crear.
-     * @param rut El rut ingresado.
-     * @param clave La clave ingresada.
-     * @param numeroTelefonico El numero telefonico ingresado.
-     * @param correoElectronico El correo electronico ingresado.
-     * @param tarjetaDeCredito La tarjetra de credito ingresada.
-     * @param CuentaBancaria La cuenta bancaria ingresada.
-     * @return Un numero que indica cual de los datos ingresados esta erroneo.
-     */
-    public int validarResgistro(String tipoUsuario, String nombre, String rut, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito, String CuentaBancaria) {                                               
+                
+    public int validarNombre(String nombre){
         ArrayList<Integer> caracteres = new ArrayList();
         caracteres.add(193);
         caracteres.add(201);
@@ -471,8 +493,11 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         else{
             return 2;
         }
-        //rut con el formato 12.345.678-9, acepta k y 0 en el digito verificador.
-        if(!"".equals(rut)){
+        return 0;
+    }
+    
+    public int validarRUT(String rut){
+         if(!"".equals(rut)){
             String[] guion = rut.split("-");
             if(guion.length == 2){
                 char[] digVerificador = guion[1].toCharArray();
@@ -524,7 +549,10 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             System.out.println("rut vacio");
             return 3;
         }
-        //clave con letras y numeros, minimo 8 caracteres
+        return 0;
+    }
+    
+    public int validarClave(String clave){
         if(!"".equals(clave)){
             char[] aux = clave.toCharArray();
             for(char c : aux){
@@ -540,7 +568,10 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         else{
             return 4;
         }
-        //numero telefonico con 9 numeros.
+        return 0;
+    }
+    
+    public int validarNumeroTelefonico(String numeroTelefonico){
         if(!"".equals(numeroTelefonico)){
             char[] aux = numeroTelefonico.toCharArray();
             for(char c : aux){
@@ -556,7 +587,24 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         else{
             return 5;
         }
-        //correo electronico. prefijo con letras, numeros. acepta 2 dominio, que pueden ser letras y numeros de cualquier largo, tambien acepta solo ".cl" y ".com"
+        return 0;
+    }
+    
+    public int validarCorreo(String correoElectronico){
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32); 
         if(!"".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
                 
@@ -603,6 +651,12 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         else{
             return 6;
         }
+        return 0;
+    }
+    
+    
+    
+    public int validarCuenta(String tipoUsuario, String tarjetaDeCredito, String cuentaBancaria){
         // tarjeta de credito de 16 numero
         if("organizador".equals(tipoUsuario) || "cliente".equals(tipoUsuario)){
             if(!"".equals(tarjetaDeCredito)){
@@ -624,9 +678,9 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         }
         //cuenta bancaria de 20 digitos.
         if("propietario".equals(tipoUsuario)){            
-            if(!"".equals(CuentaBancaria)){
-                CuentaBancaria = CuentaBancaria.replace(" ", "");
-                char[] aux = CuentaBancaria.toCharArray();
+            if(!"".equals(cuentaBancaria)){
+                cuentaBancaria = cuentaBancaria.replace(" ", "");
+                char[] aux = cuentaBancaria.toCharArray();
                 for(char c : aux){
                     int ascii = (int) c;
                     if( !((ascii >=48 && ascii <=57) )){
@@ -644,6 +698,8 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
         }
         return 0;
     }
+    
+    
     
     /**
      * Este va a ser el formato de las consultas para ser luego testeadas en el junit

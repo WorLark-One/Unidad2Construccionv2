@@ -93,12 +93,17 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú Registrar propiedad");
 
+        jPanel1.setBackground(new java.awt.Color(232, 232, 232));
+
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel15.setText("Valor de arriendo");
 
         capacidadTotal.setText("0");
 
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel14.setText("Capacidad total");
 
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText("Ubicación");
 
         ubicacion.addActionListener(new java.awt.event.ActionListener() {
@@ -111,13 +116,16 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         descripcion.setRows(5);
         jScrollPane2.setViewportView(descripcion);
 
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("Descripción");
 
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Nombre");
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel19.setText("1. Ingrese los siguientes datos");
 
+        botonRegistrar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         botonRegistrar.setText("Registrar Propiedad");
         botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,13 +151,12 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(botonRegistrar)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                .addComponent(ubicacion)
-                                .addComponent(capacidadTotal)
-                                .addComponent(nombre)
-                                .addComponent(valorArriendo, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                            .addComponent(ubicacion)
+                            .addComponent(capacidadTotal)
+                            .addComponent(valorArriendo, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nombre))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,6 +188,11 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(232, 232, 232));
+
+        jPanel3.setBackground(new java.awt.Color(226, 226, 226));
+
+        listaSectores1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jScrollPane4.setViewportView(listaSectores1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -189,7 +201,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                .addComponent(jScrollPane4)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -200,7 +212,7 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Sectores actuales en el sistema");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -226,6 +238,9 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel4.setBackground(new java.awt.Color(232, 232, 232));
+
+        botonAñadirSector.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         botonAñadirSector.setText("Añadir Sector");
         botonAñadirSector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,11 +248,13 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Nombre");
 
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel3.setText("Capacidad");
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("2. Añadir un sector");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -252,12 +269,13 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addGap(68, 68, 68)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonAñadirSector)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(nombreSector, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                .addComponent(capacidad)))))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(botonAñadirSector)
+                                .addGap(0, 167, Short.MAX_VALUE))
+                            .addComponent(nombreSector)
+                            .addComponent(capacidad))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -290,14 +308,13 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addComponent(jLabel18)
-                        .addGap(574, 591, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 118, Short.MAX_VALUE))))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,13 +325,13 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             .addGroup(panelLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addComponent(jLabel18)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 26, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(50, 50, 50))
         );
 
         jScrollPane1.setViewportView(panel);
@@ -328,7 +345,44 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         // TODO add your handling code here:
-        int resp = validarEntradaPropiedad(this.nombre.getText(), this.descripcion.getText(), this.ubicacion.getText(), this.capacidadTotal.getText(), this.valorArriendo.getText(), this.finalizar);
+        int resp=0;
+        String mensajes="";
+        int[] errores = new int[5];
+        errores[0] = this.validarNombrePropiedad(this.nombre.getText());
+        errores[1] = this.validarDescripcionPropiedad(this.descripcion.getText());        
+        errores[2] = this.validarUbicacionPropiedad(this.ubicacion.getText());
+        errores[3] = this.validarValorArriendo(this.valorArriendo.getText());
+        errores[4] = this.validarExistenciaSector(this.finalizar);
+        
+        for (int i = 0; i < 5; i++) {
+            String aux = "";
+            switch(errores[i]){
+                case 1:
+                    aux = "- Se espera que el Nombre contenga solo Letras y Numeros.\n";
+                    resp = 1;
+                    break;
+                case 2:
+                    aux = "- La descripcion debe contener entre 1 y 500 caracteres.\n";
+                    resp = 1;
+                    break;
+                case 3:
+                    aux = "- La Ubicacion debe contener entre 1 y 100 caracteres.\n";
+                    resp = 1;
+                    break;
+                case 5:
+                    aux = "- El Valor de Arriendo debe ser un numero mayor que 0.\n";
+                    resp = 1;
+                    break;
+                case 6:
+                    aux = "- Para registrar la propiedad por lo menos debe haber creado un sector.\n";
+                    resp = 1;
+                    break;
+                default:
+                    break;
+            }
+            mensajes = mensajes+aux;
+        }
+        
         System.out.println("respuesta:" + resp);
         if(resp==0){
             //realizar operacion
@@ -339,6 +393,9 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 propiedades = this.papa.getControladorPropietario().mostrarInformacionDePropiedadesDeUnPropietario();
             } catch (SQLException ex) {
                 Logger.getLogger(PanelCrearPropiedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(propiedades==null){
+                return;
             }
             for (int i = 0; i < propiedades.size(); i++) {
                 if (propiedades.get(i).getNombre().equals(this.nombre.getText())){
@@ -378,41 +435,31 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos", "Error BD", JOptionPane.WARNING_MESSAGE);
             }
         }
-        //nombre
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre tenga letras y/o numero: \n"
-                    + "Ej: Grado 6", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;   
-        }
-        //descripcion
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que la descripcion tenga letras y/o numero: \n"
-                    + "Ej: Grado 6", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;   
-        }
-        //ubicacion
-        if(resp==3){
-            JOptionPane.showMessageDialog(null, "Se espera que la ubicacion tenga letras y/o numero: \n"
-                    + "Ej: Aguas negras calle 14 pasaje 2", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;   
-        }
-        //valor de arriendo
-        if(resp==5){
-            JOptionPane.showMessageDialog(null, "Se espera que el valor del arriendo sea un numero mayor que 0 \n"
-                    + "Ej: 1000000", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        //Finalizado
-        if(resp==6){
-            JOptionPane.showMessageDialog(null, "Para registrar la propiedad por lo menos debe haber creado un sector", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        else{
+            JOptionPane.showMessageDialog(null, "Los errores al ingresar datos son: \n" +
+                mensajes, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+        }        
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void botonAñadirSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirSectorActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
-        int resp = validarEntradaSector(this.nombreSector.getText(), this.capacidad.getText());
+        int resp = 0;
+        String mensajes="";
+        int[] errores = new int[2];
+        errores[0] = this.validarNombreSector(this.nombreSector.getText());
+        errores[1] = this.validarCapacidadSector(this.capacidad.getText());
+        String aux = "";
+        if(errores[0] != 0){
+            aux = "- Se espera que el Nombre del Sector contenga solo Letras y Numeros.\n";
+            mensajes = mensajes+aux;
+            resp = 1;
+        }
+        if(errores[1] != 0){
+            aux = "- Se espera que la Capacidad sea un numero entre 1 y la capacidad maxima disponible.\n";
+            mensajes = mensajes+aux;
+            resp = 1;
+        }                
         System.out.println("respuesta de sector:" + resp);
         if(resp==0){
             for (int i = 0; i < this.nombresSectores.size(); i++) {
@@ -430,12 +477,10 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             this.nombreSector.setText("");
             this.capacidad.setText("");
             actualizarListaDeSectores();
-        }
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Nombre", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-        }
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Le falto rellenar el campo: Capacidad", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+        }  
+        else{
+            JOptionPane.showMessageDialog(null, "Errores encontrados: \n" +
+                mensajes, "Error al Añadir Sector", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonAñadirSectorActionPerformed
 
@@ -481,12 +526,8 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
      * numeros mayores que 0 son errores
      */
     
-
-     /**
-      * 
-      * @return 
-      */
-    public int validarEntradaSector(String nombre, String capacidad) {
+    
+    public int validarNombreSector(String nombre){
         ArrayList<Integer> caracteres = new ArrayList();
         caracteres.add(193);
         caracteres.add(201);
@@ -517,6 +558,10 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 1;
         }
+        return 0;
+    }
+    
+    public int validarCapacidadSector(String capacidad){
         // capacidad que puede ser cualquier numero aceptado por una variable tipo int  (2,147,483,647)
         if(!capacidad.equals("") && isNumero(capacidad)){
             try{
@@ -530,20 +575,9 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         }
         return 0;
     }
-
-
-    /**
-     * Metodo que valida los datos ingresados al registrar una propiedad.
-     * @param nombre el nombre ingresado.
-     * @param descripcion la descripcion ingresada.
-     * @param ubicacion la ubicacion ingresada.
-     * @param capacidadTotal La capacidad total calculada.
-     * @param valorArriendo el valor de arriendo ingresado.
-     * @param finalizar si el evento esta finalizado o no (siempre false).
-     * @return Un numero que indica el campo que se ingreso de manera incorrecta.
-     */
+                 
     
-    public int validarEntradaPropiedad(String nombre, String descripcion, String ubicacion, String capacidadTotal, String valorArriendo, boolean finalizar) {
+    public int validarNombrePropiedad(String nombre){
         //nombre con letras mayusculas, minusculas, numeros, tildes.
         ArrayList<Integer> caracteres = new ArrayList();
         caracteres.add(193);
@@ -574,6 +608,9 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 1;
         }
+        return 0;
+    }
+    public int validarDescripcionPropiedad(String descripcion){
         //descripcion que acepta cualquier caracter. no puede superar los 500 caracteres.
         if(!descripcion.equals("")){
             char[] aux = descripcion.toCharArray();
@@ -584,6 +621,9 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 2;
         }
+        return 0;
+    }
+    public int validarUbicacionPropiedad(String ubicacion){
         //ubicacion que acepta cualquier caracter. no puede superar los 500 caracteres.
         if(!ubicacion.equals("")){
             char[] aux = ubicacion.toCharArray();
@@ -593,8 +633,12 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         }
         else{
             return 3;
-        }           
-        //valor de arriendo, que acepta cualquier valor que acepte una variable de tipo int (2,147,483,647).
+        } 
+        return 0;
+    }
+    
+    public int validarValorArriendo(String valorArriendo){
+         //valor de arriendo, que acepta cualquier valor que acepte una variable de tipo int (2,147,483,647).
         if(!valorArriendo.equals("") ){
             try{
                 if (!isNumero(valorArriendo)) {
@@ -608,11 +652,17 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
         else{
             return 5;
         }
+        return 0;
+    }
+    
+    
+    public int validarExistenciaSector(boolean finalizar){                                                 
         if(!finalizar){
             return 6;
         }
         return 0;
     }
+    
         /**
      * Método que se encarga de verificar que los numeros ingresados son numeros validos
      */

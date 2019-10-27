@@ -5,8 +5,8 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import ModuloGestionEventos.Evento;
 import ModuloGestionUsuario.Organizador;
-import ModuloGestionUsuario.Usuario;
 import VistasSistema.VistaPropietario.PanelModificarPropietario;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,7 +25,9 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
      */
     
     private VentanaPrincipalOrganizador papa;
-    
+    private ArrayList<Evento> eventos; 
+    private Organizador usuario;
+
     public PanelModificarOrganizador(VentanaPrincipalOrganizador papa) throws SQLException {
         this.papa=papa;
         initComponents();
@@ -61,18 +63,28 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
+        correoElectronico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                correoElectronicoActionPerformed(evt);
+            }
+        });
+
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú Modificar cuenta de organizador");
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel19.setText("1. Ingrese los datos que desee modificar");
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel19.setText("Ingrese los datos que desee modificar");
 
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Nombre completo");
 
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText("Clave");
 
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel14.setText("N° Telefónico");
 
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel15.setText("Correo Electrónico");
 
         clave.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +93,19 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
             }
         });
 
+        jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel16.setText("Tarjeta de crédito");
+
+        tarjetaDeCredito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tarjetaDeCreditoMouseClicked(evt);
+            }
+        });
+        tarjetaDeCredito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tarjetaDeCreditoActionPerformed(evt);
+            }
+        });
 
         botonRegistrar.setText("Modificar");
         botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +122,13 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(24, 24, 24)
+                        .addComponent(nombre))
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel18)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
@@ -107,28 +137,16 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
                             .addComponent(jLabel16))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(28, 28, 28)
+                                .addComponent(botonRegistrar))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(correoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(botonRegistrar)
-                                    .addComponent(tarjetaDeCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(24, 24, 24)
-                                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel19)
-                            .addComponent(jLabel18))
-                        .addContainerGap(121, Short.MAX_VALUE))))
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                                    .addComponent(tarjetaDeCredito, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(correoElectronico, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(clave))))))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,12 +187,48 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveActionPerformed
-        // TODO add your handling code here:
-        
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
-        int resp = validarModificarOrganizador(this.nombre.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.tarjetaDeCredito.getText());
+        //int resp = validarModificarOrganizador(this.nombre.getText(), this.clave.getText(), this.numeroTelefonico.getText(), this.correoElectronico.getText(), this.tarjetaDeCredito.getText());
+        int resp = 0;
+        String mensajes="";
+        int[] errores = new int[5];
+        errores[0] = this.validarNombre(this.nombre.getText());
+        errores[2] = this.validarNumeroTelefonico(this.numeroTelefonico.getText());
+        errores[1] = this.validarClave(this.clave.getText());
+        errores[3] = this.validarCorreoElectronico(this.correoElectronico.getText());
+        errores[4] = this.validarTarjetaDeCredito(this.tarjetaDeCredito.getText());
+        for(int i = 0; i<5; i++){
+            String aux = "";
+            switch(errores[i]){
+                case 1:
+                    aux = "- Se espera que el Nombre solo contenga Letras y Numeros.\n";
+                    resp = 1;
+                    break;
+                case 3:
+                    aux = "- La Contraseña debe tener por lo menos 8 caracteres (Solo Letras o Numeros).\n";
+                    resp = 1;
+                    break;
+                case 4:
+                    aux = "- El Numero Telefonico debe tener 9 digitos (Solo Numeros Chilenos Por El Momento).\n";
+                    resp = 1;
+                    break;
+                case 5:
+                    aux = "- El Correo Electronico debe tener un formato valido (Ejemplo: usuario@correo.cl, Solo Correos .cl o .com).\n";
+                    resp = 1;
+                    break;
+                case 6:
+                    aux = "- El numero de Tarjeta de Credito debe tener 16 digitos (Ejemplo: 1234 5678 9012 3456).\n";
+                    resp = 1;
+                    break;
+                default:
+                    break;
+            }
+            mensajes = mensajes+aux;
+        }
+        
+        
         if(resp==0){
             boolean respuesta = false;
             try {
@@ -193,38 +247,23 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No se a podido modificar su cuenta de usuario");
             }
         }
-
-        
-        if(resp==1){
-            JOptionPane.showMessageDialog(null, "Se espera que el nombre sea solo letras \n"
-                    + "Ej: Daniel Moreno", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==2){
-            JOptionPane.showMessageDialog(null, "Se espera que el rut tenga entre entre sea: nnn nnn nnn - nok \n" + 
-                    "Ej: 11111111-1", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==3){
-            JOptionPane.showMessageDialog(null, "Se espera que la clave tenga minimo 8 digitos \n" + 
-                    "Ej: 12345678", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==4){
-            JOptionPane.showMessageDialog(null, "Se espera que el numero telefonico tenga 9 digitos \n" + 
-                    "Ej: 987654321", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==5){
-            JOptionPane.showMessageDialog(null, "Se espera que el correo electronico sea algo@gmail.com o sea algo@gmail.cl \n" + 
-                    "Ej: elmejorproyectodelmundo@gmail.cl", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if(resp==6){
-            JOptionPane.showMessageDialog(null, "Se espera que la tarjeta de credigo tenga 16 numeros \n" + 
-                    "Ej: 12345678901234", "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
+        else{
+            JOptionPane.showMessageDialog(null, "Los errores al ingresar datos son: \n" +
+                mensajes, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
+
+    private void correoElectronicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoElectronicoActionPerformed
+
+    }//GEN-LAST:event_correoElectronicoActionPerformed
+
+    private void tarjetaDeCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarjetaDeCreditoActionPerformed
+
+    }//GEN-LAST:event_tarjetaDeCreditoActionPerformed
+
+    private void tarjetaDeCreditoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tarjetaDeCreditoMouseClicked
+
+    }//GEN-LAST:event_tarjetaDeCreditoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -262,17 +301,8 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
     7 falta tarjetaDeCredito
     8 falta CuentaBancaria 
     */
-    
-    /**
-     * Metodo que verifica la correctitud de los datos ingresados en el sistema por el usuario para modificar una cuenta organizador.
-     * @param nombre el nombre ingresado.
-     * @param clave La clave ingresada.
-     * @param numeroTelefonico El numero telefonico ingresado.
-     * @param correoElectronico El correo electronico ingresado.
-     * @param tarjetaDeCredito La tarjetra de credito ingresada.
-     * @return Un numero que indica cual de los datos ingresados esta erroneo.
-     */
-    public int validarModificarOrganizador (String nombre, String clave, String numeroTelefonico, String correoElectronico, String tarjetaDeCredito){                                               
+            
+    public int validarNombre(String nombre){
         ArrayList<Integer> caracteres = new ArrayList();
         caracteres.add(193);
         caracteres.add(201);
@@ -300,6 +330,10 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 1;
         }
+        return 0;
+    }
+    
+    public int validarClave(String clave){
         //clave con letras y numeros, minimo 8 caracteres
         if(!"".equals(clave)){
             char[] aux = clave.toCharArray();
@@ -316,6 +350,10 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 3;
         }
+        return 0;
+    }
+    
+    public int validarNumeroTelefonico(String numeroTelefonico){
         //numero telefonico con 9 numeros.
         if(!"".equals(numeroTelefonico)){
             char[] aux = numeroTelefonico.toCharArray();
@@ -332,6 +370,24 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 4;
         }
+        return 0;
+    }
+    
+    public int validarCorreoElectronico(String correoElectronico){
+        ArrayList<Integer> caracteres = new ArrayList();
+        caracteres.add(193);
+        caracteres.add(201);
+        caracteres.add(205);
+        caracteres.add(211);
+        caracteres.add(218);
+        caracteres.add(225);
+        caracteres.add(233);
+        caracteres.add(237);
+        caracteres.add(243);
+        caracteres.add(250);
+        caracteres.add(209);
+        caracteres.add(241);
+        caracteres.add(32);
         //correo electronico. prefijo con letras, numeros. acepta 2 dominio, que pueden ser letras y numeros de cualquier largo, tambien acepta solo ".cl" y ".com"
         if(!"".equals(correoElectronico)){
             if(correoElectronico.contains("@")){
@@ -378,6 +434,10 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 5;
         }
+        return 0;
+    }
+    
+    public int validarTarjetaDeCredito(String tarjetaDeCredito){
         // tarjeta de credito de 16 numero
         if(!"".equals(tarjetaDeCredito)){
             tarjetaDeCredito = tarjetaDeCredito.replace(" ", "");
@@ -395,16 +455,23 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         else{
             return 6;
         }
-        return 0;
+        return 0;        
     }
 
     public void actualizarInfomacion() throws SQLException{
-        Organizador usuario =(Organizador) this.papa.getControladorPrincipal().obtenerInformacionUsuario();
+        usuario =(Organizador) this.papa.getControladorPrincipal().obtenerInformacionUsuario();
+        eventos = eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosPublicadosDeUnOrganizador();
         if(usuario==null){
             return;
         }
-        this.clave.setText("");
-        this.tarjetaDeCredito.setText("");
+        if(!eventos.isEmpty()){
+            this.correoElectronico.setEditable(false);
+            this.correoElectronico.setEnabled(false);
+            this.tarjetaDeCredito.setEditable(false);
+            this.tarjetaDeCredito.setEnabled(false);
+        }
+        this.clave.setText(this.usuario.getContraseña());
+        this.tarjetaDeCredito.setText(this.usuario.getTarjetaDeCredito());
         this.nombre.setText(usuario.getNombreCompleto());
         this.numeroTelefonico.setText(usuario.getTelefono());
         this.correoElectronico.setText(usuario.getCorreoElectronico());
