@@ -24,7 +24,9 @@ public class ControladorBDDeUsuario {
         this.conexion = new ConexionBD();
         inicializarBD();
     }
-
+    /**
+     * Inicializa las tablas de la base de datos.
+     */
     public void inicializarBD() {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
@@ -592,7 +594,7 @@ public class ControladorBDDeUsuario {
      *
      * @param miConexion:conexion con la base de datos.
      * @param rut: rut del cliente.
-     * @return
+     * @return true si hay compras asociadas, false de lo contrario
      */
     private boolean tieneComprasAsociadas(Connection miConexion, String rut) {
         if (miConexion != null) {
@@ -624,7 +626,7 @@ public class ControladorBDDeUsuario {
      * @param miConexion: conexion con la base de datos
      * @param tipoUsuario:tipo de usuario.
      * @param rut:rut del usuario.
-     * @return
+     * @return  true sicambia el estado de la cuenta de un usuario, false de lo contrario.
      */
     private boolean cambiarEstadoCuentaUsuario(Connection miConexion, String tipoUsuario, String rut, String estado) {
         if (miConexion != null) {
