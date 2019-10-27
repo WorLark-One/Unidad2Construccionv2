@@ -54,10 +54,10 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         jList1 = new javax.swing.JList<>();
         jLabel4 = new javax.swing.JLabel();
         listaPropiedades = new javax.swing.JComboBox<>();
-        jLabel20 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lista = new javax.swing.JList<>();
+        jLabel21 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         aceptar = new javax.swing.JButton();
@@ -65,11 +65,12 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
-        descripcion = new javax.swing.JLabel();
         capacidad = new javax.swing.JLabel();
         fechaDeInicio = new javax.swing.JLabel();
         fechaDeTermino = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        descripcion = new javax.swing.JTextArea();
+        jLabel20 = new javax.swing.JLabel();
 
         popupMenu1.setLabel("popupMenu1");
 
@@ -92,9 +93,6 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
             }
         });
 
-        jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel20.setText("Descripcion del evento");
-
         jPanel1.setBackground(new java.awt.Color(234, 234, 234));
 
         lista.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -105,25 +103,34 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(lista);
 
+        jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel21.setText("Lista de eventos");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel21)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel19.setText("1. Elija una propiedad");
+        jLabel19.setText("Elija una propiedad");
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú lista de solicitudes de eventos");
@@ -151,9 +158,6 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         nombre.setText("Nombre: ");
 
-        descripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        descripcion.setText("Descripcion: ");
-
         capacidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         capacidad.setText("Capacidad: ");
 
@@ -163,6 +167,13 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
         fechaDeTermino.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         fechaDeTermino.setText("Fecha de termino:");
 
+        descripcion.setColumns(20);
+        descripcion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        descripcion.setRows(5);
+        descripcion.setText("Descripcion:");
+        descripcion.setBorder(null);
+        jScrollPane3.setViewportView(descripcion);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -170,13 +181,13 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(capacidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fechaDeInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(fechaDeTermino)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 280, Short.MAX_VALUE))
+                    .addComponent(capacidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -185,15 +196,18 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(nombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(descripcion)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(capacidad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fechaDeInicio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fechaDeTermino)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel20.setText("Descripcion del evento");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -201,19 +215,22 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-
-        jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel21.setText("Lista de eventos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -224,19 +241,17 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel21)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel18)
                     .addComponent(jLabel19)
-                    .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(aceptar)
                         .addGap(18, 18, 18)
                         .addComponent(rechazar))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(listaPropiedades, 0, 420, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,19 +264,15 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
                         .addGap(100, 100, 100)
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel19)
-                        .addGap(18, 18, 18)
-                        .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel19)))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel21)
+                .addComponent(listaPropiedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aceptar)
                     .addComponent(rechazar))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel20)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(134, Short.MAX_VALUE))
@@ -327,7 +338,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
             return;
         }
         this.nombre.setText("Nombre: " + this.eventos.get(lista.getSelectedIndex()).getNombre());
-        this.descripcion.setText("Descripcion: " + this.eventos.get(lista.getSelectedIndex()).getDescripcion());
+        this.editarlabal(this.eventos.get(lista.getSelectedIndex()).getDescripcion());
         this.capacidad.setText("Capacidad: " +Integer.toString(this.eventos.get(lista.getSelectedIndex()).getCapacidadMaximaDelEvento()));
         this.fechaDeInicio.setText("Fecha de inicio: " + convertirFechaString(this.eventos.get(lista.getSelectedIndex()).getFechaDeInicio()));
         this.fechaDeTermino.setText("Fecha de termino: " + convertirFechaString(this.eventos.get(lista.getSelectedIndex()).getFechaDeTermino()));
@@ -337,7 +348,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptar;
     private javax.swing.JLabel capacidad;
-    private javax.swing.JLabel descripcion;
+    private javax.swing.JTextArea descripcion;
     private javax.swing.JLabel fechaDeInicio;
     private javax.swing.JLabel fechaDeTermino;
     private javax.swing.JLabel jLabel18;
@@ -351,6 +362,7 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> lista;
     private javax.swing.JComboBox<String> listaPropiedades;
     private javax.swing.JLabel nombre;
@@ -417,5 +429,21 @@ public class PanelAceptarYRechasarEventos extends javax.swing.JPanel {
 
        Format formatter = new SimpleDateFormat("dd-MM-yyyy");
        return formatter.format(date);
+    }
+    
+    private void editarlabal(String texto) {
+        int contador =0;
+        String nuevo="Descripcion:";
+        String[] separado = texto.split("");
+        for (int i = 0; i < separado.length; i++) {
+            nuevo+=separado[i];
+            contador+=1;
+            if(contador==100){
+                nuevo+="\n";
+                contador=0;
+            }
+        }
+        this.descripcion.setEditable(false);
+        this.descripcion.setText(nuevo);
     }
 }

@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaOrganizador;
 
+import ModuloGestionEventos.Evento;
 import ModuloGestionUsuario.Organizador;
 import VistasSistema.VistaPropietario.PanelModificarPropietario;
 import java.sql.SQLException;
@@ -24,7 +25,9 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
      */
     
     private VentanaPrincipalOrganizador papa;
-    
+    private ArrayList<Evento> eventos; 
+    private Organizador usuario;
+
     public PanelModificarOrganizador(VentanaPrincipalOrganizador papa) throws SQLException {
         this.papa=papa;
         initComponents();
@@ -60,6 +63,12 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VistasSistema/Imagenes/IconoEvenTinder.png"))); // NOI18N
 
+        correoElectronico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                correoElectronicoActionPerformed(evt);
+            }
+        });
+
         jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Menú Modificar cuenta de organizador");
 
@@ -86,6 +95,17 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
 
         jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel16.setText("Tarjeta de crédito");
+
+        tarjetaDeCredito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tarjetaDeCreditoMouseClicked(evt);
+            }
+        });
+        tarjetaDeCredito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tarjetaDeCreditoActionPerformed(evt);
+            }
+        });
 
         botonRegistrar.setText("Modificar");
         botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -167,8 +187,6 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveActionPerformed
-        // TODO add your handling code here:
-        
     }//GEN-LAST:event_claveActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
@@ -177,11 +195,10 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
         String mensajes="";
         int[] errores = new int[5];
         errores[0] = this.validarNombre(this.nombre.getText());
-        errores[1] = this.validarClave(this.clave.getText());
         errores[2] = this.validarNumeroTelefonico(this.numeroTelefonico.getText());
+        errores[1] = this.validarClave(this.clave.getText());
         errores[3] = this.validarCorreoElectronico(this.correoElectronico.getText());
         errores[4] = this.validarTarjetaDeCredito(this.tarjetaDeCredito.getText());
-        
         for(int i = 0; i<5; i++){
             String aux = "";
             switch(errores[i]){
@@ -235,6 +252,18 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
                 mensajes, "Error al llenado de datos", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
+
+    private void correoElectronicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoElectronicoActionPerformed
+
+    }//GEN-LAST:event_correoElectronicoActionPerformed
+
+    private void tarjetaDeCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarjetaDeCreditoActionPerformed
+
+    }//GEN-LAST:event_tarjetaDeCreditoActionPerformed
+
+    private void tarjetaDeCreditoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tarjetaDeCreditoMouseClicked
+
+    }//GEN-LAST:event_tarjetaDeCreditoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -430,12 +459,19 @@ public class PanelModificarOrganizador extends javax.swing.JPanel {
     }
 
     public void actualizarInfomacion() throws SQLException{
-        Organizador usuario =(Organizador) this.papa.getControladorPrincipal().obtenerInformacionUsuario();
+        usuario =(Organizador) this.papa.getControladorPrincipal().obtenerInformacionUsuario();
+        eventos = eventos = this.papa.getControladorOrganizador().obtenerInformacionDeEventosPublicadosDeUnOrganizador();
         if(usuario==null){
             return;
         }
-        this.clave.setText("");
-        this.tarjetaDeCredito.setText("");
+        if(!eventos.isEmpty()){
+            this.correoElectronico.setEditable(false);
+            this.correoElectronico.setEnabled(false);
+            this.tarjetaDeCredito.setEditable(false);
+            this.tarjetaDeCredito.setEnabled(false);
+        }
+        this.clave.setText(this.usuario.getContraseña());
+        this.tarjetaDeCredito.setText(this.usuario.getTarjetaDeCredito());
         this.nombre.setText(usuario.getNombreCompleto());
         this.numeroTelefonico.setText(usuario.getTelefono());
         this.correoElectronico.setText(usuario.getCorreoElectronico());

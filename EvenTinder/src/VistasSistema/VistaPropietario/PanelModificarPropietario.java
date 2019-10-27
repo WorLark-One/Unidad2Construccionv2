@@ -5,6 +5,7 @@
  */
 package VistasSistema.VistaPropietario;
 
+import ModuloGestionEventos.Evento;
 import ModuloGestionUsuario.Propietario;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
      */
     
     private VentanaPrincipalPropietario papa;
+    private ArrayList<Evento> eventos;
     
     public PanelModificarPropietario(VentanaPrincipalPropietario papa) throws SQLException {
         this.papa=papa;
@@ -101,11 +103,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4)
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(24, 24, 24)
-                        .addComponent(nombre))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
                     .addComponent(jLabel18)
                     .addGroup(layout.createSequentialGroup()
@@ -113,21 +111,25 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                             .addComponent(jLabel15)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
-                            .addComponent(jLabel16))
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel5))
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(numeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombre)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(correoElectronico, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(botonRegistrar)
-                                            .addGap(121, 121, 121))))
-                                .addGap(1, 1, 1)))))
-                .addContainerGap(427, Short.MAX_VALUE))
+                                        .addComponent(cuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(correoElectronico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(botonRegistrar)
+                                                .addGap(121, 121, 121))))
+                                    .addGap(1, 1, 1))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(numeroTelefonico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                                    .addComponent(clave, javax.swing.GroupLayout.Alignment.LEADING))))))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +165,7 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
                     .addComponent(cuentaBancaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(botonRegistrar)
-                .addContainerGap(376, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -182,7 +184,6 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
         errores[2] = this.validarNumeroTelefonico(this.numeroTelefonico.getText());
         errores[3] = this.validarCorreoElectronico(this.correoElectronico.getText());
         errores[4] = this.validarCuentaBancaria(this.cuentaBancaria.getText());
-        
         for(int i = 0; i<5; i++){
             String aux = "";
             switch(errores[i]){
@@ -436,12 +437,19 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
     }    
     
     public void actualizarInfomacion() throws SQLException{
+        eventos =this.papa.getControladorPropietario().obtenerInformacionDeEventosActuales();
         Propietario usuario =(Propietario) this.papa.getControladorPrincipal().obtenerInformacionUsuario();
         if(usuario==null){
             return;
         }
-        this.clave.setText("");
-        this.cuentaBancaria.setText("");
+        if(!eventos.isEmpty()){
+            this.correoElectronico.setEditable(false);
+            this.correoElectronico.setEnabled(false);
+            this.cuentaBancaria.setEditable(false);
+            this.cuentaBancaria.setEnabled(false);
+        }
+        this.clave.setText(usuario.getContraseña());
+        this.cuentaBancaria.setText(usuario.getCuentaCorriente());
         this.nombre.setText(usuario.getNombreCompleto());
         this.numeroTelefonico.setText(usuario.getTelefono());
         this.correoElectronico.setText(usuario.getCorreoElectronico());
