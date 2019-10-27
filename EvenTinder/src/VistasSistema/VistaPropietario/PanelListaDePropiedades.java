@@ -30,7 +30,6 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         this.papa=papa;
         initComponents();
         this.nombre.setFont(new java.awt.Font("Arial", 0, 12));
-        this.descripcion.setFont(new java.awt.Font("Arial", 0, 12));
         this.ubicacion.setFont(new java.awt.Font("Arial", 0, 12));
         this.capacidadTotal.setFont(new java.awt.Font("Arial", 0, 12));
         this.cantidadDeSectores.setFont(new java.awt.Font("Arial", 0, 12));
@@ -63,8 +62,6 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        descripcion = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         ubicacion = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -74,6 +71,8 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         cantidadDeSectores = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        descripcion = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.GridLayout(1, 0));
@@ -148,25 +147,6 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(nombre)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(descripcion)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(descripcion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -249,22 +229,27 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Descripcion de la propiedad");
 
+        descripcion.setColumns(20);
+        descripcion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        descripcion.setRows(5);
+        jScrollPane3.setViewportView(descripcion);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 202, Short.MAX_VALUE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -275,7 +260,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -284,7 +269,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -317,10 +302,10 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(opciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         jScrollPane1.setViewportView(jPanel10);
@@ -336,6 +321,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         if(opciones.getSelectedIndex()==0){
             this.nombre.setText("Nombre: " );
             this.descripcion.setText("descripcion: ");
+            
             this.ubicacion.setText("ubicacion: ");
             this.capacidadTotal.setText("capacidadTotal: ");
             this.cantidadDeSectores.setText("cantidadDeSectores: ");
@@ -347,7 +333,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
             this.listaSectores.removeAll();
             this.modeloLista=new DefaultListModel();
             this.nombre.setText("Nombre: " + this.propiedades.get(opciones.getSelectedIndex()-1).getNombre());
-            this.descripcion.setText("descripcion: " + this.propiedades.get(opciones.getSelectedIndex()-1).getDescripcion());
+            this.editarlabal(this.propiedades.get(opciones.getSelectedIndex()-1).getDescripcion());
             this.ubicacion.setText("ubicacion: "+ this.propiedades.get(opciones.getSelectedIndex()-1).getUbicacion());
             this.capacidadTotal.setText("capacidadTotal: "+ this.propiedades.get(opciones.getSelectedIndex()-1).getCapacidadTotal());
             this.cantidadDeSectores.setText("cantidadDeSectores: "+ this.propiedades.get(opciones.getSelectedIndex()-1).getListaSectores().size());
@@ -363,7 +349,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cantidadDeSectores;
     private javax.swing.JLabel capacidadTotal;
-    private javax.swing.JLabel descripcion;
+    private javax.swing.JTextArea descripcion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel4;
@@ -373,7 +359,6 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -381,6 +366,7 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> listaSectores;
     private javax.swing.JLabel nombre;
     private javax.swing.JComboBox<String> opciones;
@@ -413,4 +399,19 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
         }
     }
 
+        private void editarlabal(String texto) {
+            int contador =0;
+            String nuevo="Descripcion:";
+            String[] separado = texto.split("");
+            for (int i = 0; i < separado.length; i++) {
+                nuevo+=separado[i];
+                contador+=1;
+                if(contador==100){
+                    nuevo+="\n";
+                    contador=0;
+                }
+            }
+            this.descripcion.setEditable(false);
+            this.descripcion.setText(nuevo);
+        }
 }

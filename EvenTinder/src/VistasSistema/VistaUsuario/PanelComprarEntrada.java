@@ -7,6 +7,7 @@ package VistasSistema.VistaUsuario;
 
 import ModuloGestionEventos.Evento;
 import ModuloGestionPropiedades.Propiedad;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -60,10 +61,11 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         fechaDeInicio = new javax.swing.JLabel();
         fechaDeTermino = new javax.swing.JLabel();
-        descripcion = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         dias = new javax.swing.JLabel();
         nombre = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -165,9 +167,6 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
         fechaDeTermino.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         fechaDeTermino.setText("Fecha de termino");
 
-        descripcion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        descripcion.setText("Descripcion");
-
         jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel19.setText("Datos del evento");
 
@@ -177,6 +176,14 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
         nombre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nombre.setText("Nombre");
 
+        jTextArea1.setBackground(new java.awt.Color(232, 232, 232));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Descripcion:");
+        jTextArea1.setBorder(null);
+        jScrollPane3.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -184,13 +191,15 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nombre)
-                    .addComponent(fechaDeTermino)
-                    .addComponent(descripcion)
-                    .addComponent(fechaDeInicio)
-                    .addComponent(dias)
-                    .addComponent(jLabel19))
-                .addContainerGap(239, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fechaDeInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fechaDeTermino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,15 +208,15 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
                 .addComponent(jLabel19)
                 .addGap(18, 18, 18)
                 .addComponent(nombre)
-                .addGap(18, 18, 18)
-                .addComponent(descripcion)
-                .addGap(21, 21, 21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fechaDeInicio)
                 .addGap(18, 18, 18)
                 .addComponent(fechaDeTermino)
                 .addGap(18, 18, 18)
                 .addComponent(dias)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel5.setBackground(new java.awt.Color(232, 232, 232));
@@ -292,12 +301,11 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
                             .addComponent(botonVolverAtras)
                             .addComponent(jLabel18))
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(84, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -364,7 +372,6 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
     private javax.swing.JButton botonVolverAtras;
     private javax.swing.JTextField cantidadDeEntradas;
     private javax.swing.JLabel capacidadDisponioble;
-    private javax.swing.JLabel descripcion;
     private javax.swing.JLabel dias;
     private javax.swing.JLabel fechaDeInicio;
     private javax.swing.JLabel fechaDeTermino;
@@ -381,6 +388,8 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JList<String> listaDeSectores;
     private javax.swing.JLabel nombre;
     private javax.swing.JLabel nombreSector;
@@ -423,7 +432,7 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
 
     private void actualizarDatosDelEvento() {
         this.nombre.setText("Nombre: " + this.evento.getNombre());
-        this.descripcion.setText("Descripcion: " + this.evento.getDescripcion());
+        this.editarlabal(this.evento.getDescripcion());
         this.fechaDeInicio.setText("Fecha De Inicio: " + this.evento.getFechaDeInicio());
         this.fechaDeTermino.setText("Fecha De Termino: " + this.evento.getFechaDeTermino());
         this.dias.setText("Dias maximos de devolucion: " + this.evento.getPlazoDevolucionEntrada());
@@ -443,5 +452,21 @@ public class PanelComprarEntrada extends javax.swing.JPanel {
                 return;
             }
         }
+    }
+    
+    private void editarlabal(String texto) {
+        int contador =0;
+        String nuevo="Descripcion:";
+        String[] separado = texto.split("");
+        for (int i = 0; i < separado.length; i++) {
+            nuevo+=separado[i];
+            contador+=1;
+            if(contador==100){
+                nuevo+="\n";
+                contador=0;
+            }
+        }
+        this.jTextArea1.setEditable(false);
+        this.jTextArea1.setText(nuevo);
     }
 }
