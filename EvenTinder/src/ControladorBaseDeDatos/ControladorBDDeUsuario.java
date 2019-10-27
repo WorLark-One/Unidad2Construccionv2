@@ -538,7 +538,8 @@ public class ControladorBDDeUsuario {
                 String sql = "select DISTINCT organizador.nombrecompleto,evento.nombre \n"
                         + "from organizador\n"
                         + "inner join evento on organizador.rut=evento.reforganizador\n"
-                        + "where evento.publicado='true' and organizador.rut='" + rut + "'";
+                        + "where evento.publicado='true' and organizador.rut='" + rut + "'"
+                        + "and evento.activo='true'";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // si entra en el ciclo significa que hay datos.
@@ -569,7 +570,8 @@ public class ControladorBDDeUsuario {
                         + "from propietario\n"
                         + "inner join propiedad on propietario.rut = propiedad.refpropietario\n"
                         + "inner join celebra ON celebra.refpropiedad = propiedad.id\n"
-                        + "where propietario.rut='" + rut + "'";
+                        + "where propietario.rut='" + rut + "'"
+                        + "and propiedad.activa='true'";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // si entra en el ciclo significa que hay datos.
