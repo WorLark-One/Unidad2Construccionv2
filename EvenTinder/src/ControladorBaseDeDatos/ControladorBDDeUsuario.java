@@ -30,6 +30,40 @@ public class ControladorBDDeUsuario {
         Connection miConexion = this.conexion.getConexion();
         this.conexion.crearTablas(miConexion);
     }
+    /**
+     * Activa la cuenta de un usuario.
+     * @param tipoUsuario:puede ser cliente,organizador.
+     * @param rut: rut del usuario.
+     * @return 
+     */
+    public boolean activarCuentaUsuario(String tipoUsuario,String rut){
+         // se establece la conexion.
+        this.conexion.crearConexion();
+        Connection miConexion = this.conexion.getConexion();
+        if (miConexion != null) {
+
+            try {
+                java.sql.Statement st = miConexion.createStatement();
+                String sql = "update "+tipoUsuario+" set activo='true' where "+tipoUsuario+".rut='"+rut+"'";
+                st.executeUpdate(sql);
+                st.close();
+                return true;
+
+            } catch (SQLException e) {
+                //System.out.println("ERROR DE CONEXION: eliminar cliente (desde la tabla de usuario)" + e);
+                return false;
+            } finally {
+                try {
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //error al establecer la conexion con la base de datos.
+        return false;
+    }
+    
 
     /**
      * Indica si un usuario se encuentra registrado en el sistema..
