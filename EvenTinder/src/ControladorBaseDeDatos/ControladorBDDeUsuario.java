@@ -62,9 +62,11 @@ public class ControladorBDDeUsuario {
                     boolean activo = resultado.getBoolean("activo");
                     //si esta registrado en la base de datos y esta como activo.
                     if (valor == 1 && activo == true) {
+                        System.out.println("usuario activo");
                         return 1;
                     }//el usuario esta registrado pero no esta activo.
                     else if (valor == 1 && activo == false) {
+                        System.out.println("usuario inactivo");
                         return -1;
                     }
                 }
@@ -94,7 +96,7 @@ public class ControladorBDDeUsuario {
      * @return cliente.
      * @throws SQLException
      */
-    public Cliente obtenerInformacionCliente(String rut){
+    public Cliente obtenerInformacionCliente(String rut) {
         Cliente cliente = null;
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
@@ -252,7 +254,7 @@ public class ControladorBDDeUsuario {
      * @param tarjeta: esta puede ser cuenta corriente o tarjeta de credito.
      * @return true si realizo la operacion con exito, false de lo contrario.
      */
-    public boolean añadirUsuario(String tipoUsuario, String nombre, String rut, String correo, String clave, String telefono, String tarjeta){
+    public boolean añadirUsuario(String tipoUsuario, String nombre, String rut, String correo, String clave, String telefono, String tarjeta) {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -301,7 +303,7 @@ public class ControladorBDDeUsuario {
      * que se desea modificar.
      * @return true si el usuario fue modificado, false de lo contrario.
      */
-    public boolean modificarUsuario(String tipoUsuario, String rutUsuarioModificar, String nombre, String correo, String clave, String telefono, String tarjeta)  {
+    public boolean modificarUsuario(String tipoUsuario, String rutUsuarioModificar, String nombre, String correo, String clave, String telefono, String tarjeta) {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
@@ -367,7 +369,7 @@ public class ControladorBDDeUsuario {
                         try {
                             this.conexion.cerrarBaseDeDatos(miConexion);
                         } catch (SQLException ex) {
-                           //Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                            //Logger.getLogger(ControladorBDDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }
@@ -396,24 +398,24 @@ public class ControladorBDDeUsuario {
                 if (tipoUsuario.equalsIgnoreCase("cliente") == true) {
                     boolean tieneCompras = tieneComprasAsociadas(miConexion, rut);
                     if (tieneCompras == true) {
-                        cambiarEstadoCuentaUsuario(miConexion, tipoUsuario, rut,"false");
+                        cambiarEstadoCuentaUsuario(miConexion, tipoUsuario, rut, "false");
                     } else {//puedo eliminar la cuenta de la base de datos.
-                        borrarRegistroUsuario(miConexion,tipoUsuario,rut);
+                        borrarRegistroUsuario(miConexion, tipoUsuario, rut);
                     }
                 } else if (tipoUsuario.equalsIgnoreCase("organizador") == true) {
                     boolean eventosActivos = VerificarEventosActivos(miConexion, rut);
                     if (eventosActivos == false) {
 
-                        cambiarEstadoCuentaUsuario(miConexion, tipoUsuario, rut,"false");
+                        cambiarEstadoCuentaUsuario(miConexion, tipoUsuario, rut, "false");
                     } else {//puedo eliminar la cuenta de la base de datos.
-                        borrarRegistroUsuario(miConexion,tipoUsuario,rut);
+                        borrarRegistroUsuario(miConexion, tipoUsuario, rut);
                     }
                 } else if (tipoUsuario.equalsIgnoreCase("propietario") == true) {
                     boolean eventosAsociadosPropiedad = VerificarEventosAsociadosPropiedad(miConexion, rut);
                     if (eventosAsociadosPropiedad == false) {
-                        cambiarEstadoCuentaUsuario(miConexion, tipoUsuario, rut,"false");
+                        cambiarEstadoCuentaUsuario(miConexion, tipoUsuario, rut, "false");
                     } else {//puedo eliminar la cuenta de la base de datos.
-                        borrarRegistroUsuario(miConexion,tipoUsuario,rut);
+                        borrarRegistroUsuario(miConexion, tipoUsuario, rut);
                     }
                 }
             }
@@ -457,12 +459,13 @@ public class ControladorBDDeUsuario {
         }
         return -1;
     }
+
     /**
-     * Metodo privado.
-     * Verifica si un usuario tiene  su cuenta activa.
+     * Metodo privado. Verifica si un usuario tiene su cuenta activa.
+     *
      * @param tipoUsuario: tipo de usuario.
      * @param rut:rut del organizador
-     * @return 
+     * @return
      */
     private boolean VerificarSiLaCuentaDeUnUsuarioEstaActivo(Connection miConexion, String tipoUsuario, String rut) {
         if (miConexion != null) {
@@ -486,11 +489,13 @@ public class ControladorBDDeUsuario {
         //error al establecer la conexion con la base de datos.
         return false;
     }
+
     /**
      * verifica si un organizador tiene eventos activos.
+     *
      * @param miConexion:conexion con la base de datos.
      * @param rut:rut del organizador.
-     * @return 
+     * @return
      */
     private boolean VerificarEventosActivos(Connection miConexion, String rut) {
         if (miConexion != null) {
@@ -514,20 +519,23 @@ public class ControladorBDDeUsuario {
         }
         return false;
     }
+
     /**
      * verifica si hay eventos asociados a una propiedad.
+     *
      * @param miConexion:conexion con la base de datos.
      * @param rut: rut de un propietario.
-     * @return 
+     * @return
      */
     private boolean VerificarEventosAsociadosPropiedad(Connection miConexion, String rut) {
         if (miConexion != null) {
             try {
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = "select DISTINCT organizador.nombrecompleto,evento.nombre \n"
-                        + "from organizador\n"
-                        + "inner join evento on organizador.rut=evento.reforganizador\n"
-                        + "where evento.publicado='true' and organizador.rut='" + rut + "'";
+                String sql = "select DISTINCT propietario.rut\n"
+                        + "from propietario\n"
+                        + "inner join propiedad on propietario.rut = propiedad.refpropietario\n"
+                        + "inner join celebra ON celebra.refpropiedad = propiedad.id\n"
+                        + "where propietario.rut='" + rut + "'";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // si entra en el ciclo significa que hay datos.
@@ -542,11 +550,13 @@ public class ControladorBDDeUsuario {
         }
         return false;
     }
+
     /**
      * verifica si hay compras asociadas a un cliente.
+     *
      * @param miConexion:conexion con la base de datos.
      * @param rut: rut del cliente.
-     * @return 
+     * @return
      */
     private boolean tieneComprasAsociadas(Connection miConexion, String rut) {
         if (miConexion != null) {
@@ -556,7 +566,7 @@ public class ControladorBDDeUsuario {
                         + "from compra\n"
                         + "inner join realizacompra on compra.id=realizacompra.refcompra\n"
                         + "inner join cliente on realizacompra.refcliente=cliente.rut\n"
-                        + "where cliente.rut='"+rut+"'";
+                        + "where cliente.rut='" + rut + "'";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // si entra en el ciclo significa que hay datos.
@@ -571,19 +581,21 @@ public class ControladorBDDeUsuario {
         }
         return false;
     }
+
     /**
      * Cambia el estado de una cuenta,la puede habilitar o desabilirar
+     *
      * @param miConexion: conexion con la base de datos
      * @param tipoUsuario:tipo de usuario.
      * @param rut:rut del usuario.
-     * @return 
+     * @return
      */
-    private boolean cambiarEstadoCuentaUsuario(Connection miConexion, String tipoUsuario, String rut,String estado) {
+    private boolean cambiarEstadoCuentaUsuario(Connection miConexion, String tipoUsuario, String rut, String estado) {
         if (miConexion != null) {
 
             try {
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = "update  " + tipoUsuario + " set activo='"+estado+"' where cliente.rut='" + rut + "'";
+                String sql = "update  " + tipoUsuario + " set activo='" + estado + "' where cliente.rut='" + rut + "'";
                 st.executeUpdate(sql);
                 st.close();
                 return true;
@@ -602,18 +614,20 @@ public class ControladorBDDeUsuario {
         //error al establecer la conexion con la base de datos.
         return false;
     }
+
     /**
      * borra los registros de un usuario.
+     *
      * @param miConexion: conexion con la base de datos.
      * @param tipoUsuario:tipo de usuario.
      * @param rut:rut del usuario.
      */
-    private void borrarRegistroUsuario(Connection miConexion,String tipoUsuario, String rut) {
+    private void borrarRegistroUsuario(Connection miConexion, String tipoUsuario, String rut) {
         if (miConexion != null) {
 
             try {
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = "delete from "+tipoUsuario+" where "+tipoUsuario+".rut='" + rut + "'";
+                String sql = "delete from " + tipoUsuario + " where " + tipoUsuario + ".rut='" + rut + "'";
                 st.executeUpdate(sql);
                 st.close();
                 //return true;

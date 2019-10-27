@@ -208,7 +208,7 @@ public class ConexionBD {
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE crear tabla organizador");
+                //System.out.println("ERROR DE crear tabla organizador" + e);
                 return false;
             }
         }
@@ -235,7 +235,7 @@ public class ConexionBD {
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE crear tabla propietario");
+                //System.out.println("ERROR DE crear tabla propietario" + e);
                 return false;
             }
         }
@@ -258,7 +258,7 @@ public class ConexionBD {
                         + "	PlazoDevolucionEntradas integer not null,\n"
                         + "	publicado boolean not null,\n"
                         + "	refOrganizador varchar(12) not null,\n"
-                        + "	activo boolean NOT null default 'true'\n"
+                        + "	activo boolean NOT null default 'true',\n"
                         + "	PRIMARY KEY(id),\n"
                         + "	FOREIGN KEY (refOrganizador) references Organizador(rut) ON DELETE CASCADE \n"
                         + ");";
@@ -266,7 +266,7 @@ public class ConexionBD {
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE crear tabla evento");
+                //System.out.println("ERROR DE crear tabla evento" + e);
                 return false;
             }
         }
@@ -287,7 +287,6 @@ public class ConexionBD {
                         + "	capacidadTotal integer not null,\n"
                         + "	valorArriendo integer not null,\n"
                         + "	descripcion varchar(100) not null,\n"
-                        + "	numeroDeSectores integer not null,\n"
                         + "	refPropietario varchar(12) not null,\n"
                         + "	activa boolean not NULL default 'true',\n"
                         + "	PRIMARY KEY(id),\n"
@@ -297,7 +296,7 @@ public class ConexionBD {
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE crear tabla propiedad");
+                //System.out.println("ERROR DE crear tabla propiedad" + e);
                 return false;
             }
         }
@@ -313,6 +312,7 @@ public class ConexionBD {
                         + "	nombre varchar(100) not null,\n"
                         + "	capacidad integer not NULL,\n"
                         + "	refPropiedad integer not null,\n"
+                        + "	activa boolean not NULL default 'true',\n"
                         + "	PRIMARY KEY(nombre,refPropiedad),\n"
                         + "	FOREIGN KEY (refPropiedad) references Propiedad(id)ON DELETE CASCADE\n"
                         + ");";
@@ -320,7 +320,7 @@ public class ConexionBD {
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE crear tabla sector");
+                //System.out.println("ERROR DE crear tabla sector" + e);
                 return false;
             }
         }
@@ -340,7 +340,7 @@ public class ConexionBD {
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE crear tabla entrada");
+                //System.out.println("ERROR DE crear tabla entrada" + e);
                 return false;
             }
         }
@@ -355,6 +355,7 @@ public class ConexionBD {
                 String sql = "CREATE TABLE Celebra(\n"
                         + "	refEvento integer not NULL,\n"
                         + "	refPropiedad integer NOT NULL,\n"
+                        + "	activa boolean not NULL default 'true',\n"
                         + "	PRIMARY KEY(refEvento,refPropiedad),\n"
                         + "	FOREIGN KEY (refEvento) references Evento(id)ON DELETE CASCADE,\n"
                         + "	FOREIGN KEY (refPropiedad) references Propiedad(id)ON DELETE CASCADE\n"
@@ -363,7 +364,7 @@ public class ConexionBD {
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE crear tabla celebra");
+                //System.out.println("ERROR DE crear tabla celebra" + e);
                 return false;
             }
         }
@@ -387,7 +388,7 @@ public class ConexionBD {
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE crear tabla celebra");
+                //System.out.println("ERROR DE crear tabla instancia entrada" + e);
                 return false;
             }
         }
@@ -410,7 +411,7 @@ public class ConexionBD {
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE crear tabla celebra");
+                //System.out.println("ERROR DE crear tabla compra" + e);
                 return false;
             }
         }
@@ -428,6 +429,7 @@ public class ConexionBD {
                         + "	refSector varchar(100) not NULL,\n"
                         + "	refPropiedad integer not NULL,\n"
                         + "	precio integer not NULL,\n"
+                        + "	activa boolean not NULL default 'true',\n"
                         + "	PRIMARY KEY(refEntrada,refEvento,refSector),\n"
                         + "	FOREIGN KEY(refEntrada)references entrada(id),\n"
                         + "	FOREIGN KEY(refEvento)references evento(id),\n"
@@ -437,7 +439,7 @@ public class ConexionBD {
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE crear tabla celebra");
+                //System.out.println("ERROR DE crear crearTablaAsociarEventoEntradaSector " + e);
                 return false;
             }
         }
@@ -451,14 +453,14 @@ public class ConexionBD {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "CREATE TABLE realizaCompra(\n"
                         + "	refcliente varchar(12)not NULL,\n"
-                        + "	refcompra integer not NULL\n"
+                        + "	refcompra integer not NULL,\n"
                         + "	PRIMARY KEY(refcliente,refcompra)\n"
                         + ");";
                 st.executeUpdate(sql);
                 st.close();
                 return true;
             } catch (SQLException e) {
-                //System.out.println("ERROR DE crear tabla celebra");
+                //System.out.println("ERROR DE crear crearTablaRealizaCompra " + e);
                 return false;
             }
         }
