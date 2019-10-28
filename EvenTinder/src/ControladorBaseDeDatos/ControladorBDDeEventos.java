@@ -832,39 +832,7 @@ public class ControladorBDDeEventos {
         return false;
     }
 
-    private ArrayList<Entrada> obtenerListaEntradasDeUnaCompra(Connection miConexion, int idCompra) {
-
-        ArrayList<Entrada> entradas = new ArrayList<>();
-        if (miConexion != null)// si hay conexion.
-        {
-
-            try {
-                java.sql.Statement st = miConexion.createStatement();
-
-                String sql = "select entrada.id, asociacioneventoentradasector.precio\n"
-                        + "from instanciaentrada\n"
-                        + "inner join entrada on instanciaentrada.refentrada=entrada.id\n"
-                        + "inner join asociacioneventoentradasector on entrada.id=asociacioneventoentradasector.refentrada";
-                ResultSet resultado = st.executeQuery(sql);
-                while (resultado.next()) {
-                    // obtengo la informacion del cliente.
-                    int idEntrada = Integer.parseInt(resultado.getString("id"));
-                    int precio = resultado.getInt("precio");
-                    Entrada entrada = new Entrada(idEntrada, precio);
-                    entradas.add(entrada);
-                }
-                resultado.close();
-                st.close();
-                //Collections.sort(compras);
-                return entradas;
-
-            } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
-                return null;
-            }
-        }
-        return null;
-    }
+  
 
     /**
      * borra la relacion entre un evento y una propiedad.
@@ -897,7 +865,12 @@ public class ControladorBDDeEventos {
         return false;
 
     }
-
+    /**
+     * Elimina los registros de entradas.
+     * @param conexion: conexión con la BD
+     * @param entradas: lista de entradas.
+     * @return true si logra borrar los registros de las entradas, false de lo contrario.
+     */
     private boolean eliminarEntrada(Connection conexion, ArrayList<Integer> entradas) {
         Connection miConexion = conexion;
 
@@ -924,7 +897,12 @@ public class ControladorBDDeEventos {
         return false;
 
     }
-
+    /**
+     * Obtiene una lista de entradas asociadas a un evento.
+     * @param miConexion: conexion con la BD.
+     * @param idEvento: identificador del evento.
+     * @return lista de entradas o null en caso que el evento no tenga entradas asociadas.
+     */
     private ArrayList<Integer> obtenerListaEntradas(Connection miConexion, int idEvento) {
         ArrayList<Integer> entradas = new ArrayList<>();
         if (miConexion != null)// si hay conexion.
@@ -1194,7 +1172,13 @@ public class ControladorBDDeEventos {
         return null;
 
     }
-
+    /**
+     * Metodo privado
+     * Crea una entrada, para asignarle un precia a un sector
+     * Crea una entrada.
+     * @param conexion
+     * @return 
+     */
     private int crearEntrada(Connection conexion) {
         this.conexion.crearConexion();
         boolean aceptado;
@@ -1298,7 +1282,13 @@ public class ControladorBDDeEventos {
         return false;
 
     }
-
+    /**
+     * Obtiene el precio de entrada de un evento por sector.
+     * @param idEvento:identificador de un evento.
+     * @param nombreSector:nombre del sector.
+     * @param idPropiedad:identificador de una propiedad.
+     * @return 
+     */
     public int obtenerPrecioEventoPorSector(int idEvento, String nombreSector, int idPropiedad) {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
@@ -1336,7 +1326,11 @@ public class ControladorBDDeEventos {
         return 0;
 
     }
-
+    /**
+     * Obtiene una lista con todos los eventos activos 
+     * registrados en la base de datos.
+     * @return lista de eventos o null en caso de que no existan eventos registrados
+     */
     public ArrayList<Evento> obtenerTodosLosEventos() {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
@@ -1388,7 +1382,13 @@ public class ControladorBDDeEventos {
         }
         return null;
     }
-
+    /**
+     * Metodo privado.
+     * Se envia un correo a un propietario y organizador de la aceptacion
+     * de un evento.
+     * @param miConexion
+     * @param idEvento 
+     */
     private void CorreoArriendoPropiedad(Connection miConexion, int idEvento) {
         if (miConexion != null)// si hay conexion.
         {
@@ -1463,7 +1463,11 @@ public class ControladorBDDeEventos {
         return false;
 
     }
-
+    /**
+     * Metodo privado
+     * Obtiene una lista de los eventos finalizados registrados en la BD.
+     * @return lista de eventos finalizados o null en caso de que no existan eventos finalizados.
+     */
     private ArrayList<Evento> listaEventosFinalizados() {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
@@ -1512,7 +1516,13 @@ public class ControladorBDDeEventos {
         }
         return null;
     }
-
+    /**
+     * Valida las fecha de inicio de un evento, para la solicitud de arriendo.
+     * @param miConexion:conexión con la BD.
+     * @param fechaDeInicio: fecha de inicio del evento.
+     * @param idPropiedad:identificador de la propiedad.
+     * @return 
+     */
     private boolean validarFechaDeArriendo(Connection miConexion, Date fechaDeInicio, int idPropiedad) {
         if (miConexion != null)// si hay conexion.
         {
@@ -1545,7 +1555,12 @@ public class ControladorBDDeEventos {
         //return null;
         return false;
     }
-
+    /**
+     * Obtiene los identidicadores de compra relizacionados a un evento.
+     * @param miConexion:conexión con la BD.
+     * @param idEvento:identificador del evento.
+     * @return 
+     */
     private ArrayList<Integer> obtenerIdentificadoresDeCompra(Connection miConexion, int idEvento) {
         ArrayList<Integer> identificadorCompras = new ArrayList<>();
         if (miConexion != null)// si hay conexion.
@@ -1581,7 +1596,11 @@ public class ControladorBDDeEventos {
         }
         return null;
     }
-
+    /**
+     * Genera el reembolso de una compra.
+     * @param miConexion:conexión con la BD.
+     * @param listaCompra:lista de compras a la que se le realizara reembolso.
+     */
     private void generarRembolsoDeCompra(Connection miConexion, ArrayList<Integer> listaCompra) {
         if (miConexion != null)// si hay conexion.
         {
@@ -1628,7 +1647,12 @@ public class ControladorBDDeEventos {
 
         }
     }
-
+    /**
+     * Metodo privado.
+     * Desabila la relacion entre un evento y una propiedad.
+     * @param miConexion:conexión con la BD.
+     * @param idEvento :identificador de un evento.
+     */
     private void desabilitarCelebra(Connection miConexion, int idEvento) {
         if (miConexion != null) {
 
@@ -1650,7 +1674,12 @@ public class ControladorBDDeEventos {
         }
         //return false;
     }
-
+    /**
+     * Metodo privado.
+     * Desabilita la relacion entre entrada, evento, sector y propiedad.
+     * @param miConexion:conexióon con la base  de datos.
+     * @param idEvento :identificador de un evento.
+     */
     private void desabilitarAsociacionEventoEntradaSector(Connection miConexion, int idEvento) {
         if (miConexion != null) {
 
@@ -1673,7 +1702,12 @@ public class ControladorBDDeEventos {
         }
         //return false;
     }
-
+    /**
+     * Metodo privado.
+     * Desabilita un evento.
+     * @param miConexion: conexión con la BD.
+     * @param idEvento 
+     */
     private void desabilitarEvento(Connection miConexion, int idEvento) {
         if (miConexion != null) {
 
@@ -1696,7 +1730,13 @@ public class ControladorBDDeEventos {
         }
         //return false;
     }
-
+    /**
+     *  Verifica si que la fecha de termino de un evento publicado sea menos a 
+     * la fecha actual.
+     * @param miConexion
+     * @param idEvento
+     * @return 
+     */
     private boolean VerificarEventosPublicados(Connection miConexion, int idEvento) {
         if (miConexion != null)// si hay conexion.
         {

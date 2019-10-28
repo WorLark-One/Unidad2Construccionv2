@@ -107,7 +107,11 @@ public class ConexionBD {
         return false;
 
     }
-
+    /**
+     * Obtiene todas las tablas en la BD.
+     * @param conexion
+     * @return 
+     */
     public ArrayList<String> obtenerListaTablas(Connection conexion) {
         Connection miConexion = conexion;
 
@@ -172,8 +176,8 @@ public class ConexionBD {
                         + "	rut  varchar(12) not null,\n"
                         + "	correo varchar(50)not NULL,\n"
                         + "	contraseña varchar(25)not null,\n"
-                        + "	telefono varchar(20)not NULL,\n"
-                        + "	tarjetaCredito varchar(30) not null,\n"
+                        + "	telefono varchar(10)not NULL,\n"
+                        + "	tarjetaCredito varchar(20) not null,\n"
                         + "	activo boolean NOT null default 'true',\n"
                         + "	PRIMARY KEY(rut)\n"
                         + ");";
@@ -199,8 +203,8 @@ public class ConexionBD {
                         + "	rut  varchar(12) not null,\n"
                         + "	correo varchar(50)not null,\n"
                         + "	contraseña varchar(25)not null,\n"
-                        + "	telefono varchar(20)not null,\n"
-                        + "	tarjetaCredito varchar(30) not null,\n"
+                        + "	telefono varchar(10)not null,\n"
+                        + "	tarjetaCredito varchar(20) not null,\n"
                         + "	activo boolean NOT null default 'true',\n"
                         + "	PRIMARY KEY(rut)\n"
                         + ");";
@@ -226,8 +230,8 @@ public class ConexionBD {
                         + "	rut  varchar(12) not null,\n"
                         + "	correo varchar(50)not null,\n"
                         + "	contraseña varchar(25)not null,\n"
-                        + "	telefono varchar(20)not null,\n"
-                        + "	cuentaCorriente varchar(30) not null,\n"
+                        + "	telefono varchar(10)not null,\n"
+                        + "	cuentaCorriente varchar(25) not null,\n"
                         + "	activo boolean NOT NULL default 'true',\n"
                         + "	PRIMARY KEY(rut)\n"
                         + ");";
@@ -286,7 +290,7 @@ public class ConexionBD {
                         + "	fechaPublicacion date not null,\n"
                         + "	capacidadTotal integer not null,\n"
                         + "	valorArriendo integer not null,\n"
-                        + "	descripcion varchar(100) not null,\n"
+                        + "	descripcion varchar(500) not null,\n"
                         + "	refPropietario varchar(12) not null,\n"
                         + "	activa boolean not NULL default 'true',\n"
                         + "	PRIMARY KEY(id),\n"
