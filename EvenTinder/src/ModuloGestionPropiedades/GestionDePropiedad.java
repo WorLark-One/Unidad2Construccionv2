@@ -108,8 +108,8 @@ public class GestionDePropiedad {
      * @return True si se modifico la propiedad con exito. False si la modificacion fallo.
      * @throws java.sql.SQLException
      */
-    public boolean modifcarPropiedad( int id,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo) throws SQLException {
-        boolean result = this.controlador.modifcarPropiedad(id, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion);
+    public boolean modifcarPropiedad( int id,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo,String rutPropietario) throws SQLException {
+        boolean result = this.controlador.modifcarPropiedad(id, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion,rutPropietario);
         if(result){
             for(Propiedad p:this.listaPropiedades){
                 if(p.getId() == id){
@@ -227,8 +227,8 @@ public class GestionDePropiedad {
      * @param idEvento El id del evento que se desea aceptar.
      * @return True si se acepto la solicitud con exito. False si no se pudo aceptar la solicitud.
      */
-    public boolean aceptarSolicitud(int idEvento) {
-        return this.gestorEventos.aceptarSolicitud(idEvento);
+    public boolean aceptarSolicitud(int idEvento, String rutPropietario) {
+        return this.gestorEventos.aceptarSolicitud(idEvento,rutPropietario);
 
         
     }

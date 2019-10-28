@@ -196,7 +196,7 @@ public class ControladorBDDeVentas {
                         String tarjeta = obtenerTarjetaCreditoCliente(miConexion, rutCliente);
                         String nombreEvento = obtenerNombreEvento(miConexion, idEvento);
                         String correo = obtenerCorreoCliente(miConexion, rutCliente);
-                        this.guardian.correoClienteCompraDeEntradas(correo, idCompra, idEntrada, fechaComoCadena, precioCompra, listaEntrada, tarjeta, nombreEvento);
+                        //this.guardian.correoClienteCompraDeEntradas(correo, idCompra, idEntrada, fechaComoCadena, precioCompra, listaEntrada, tarjeta, nombreEvento);
                     }
                     st.close();
                     return true;

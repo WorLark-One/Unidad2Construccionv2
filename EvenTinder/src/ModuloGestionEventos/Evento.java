@@ -20,8 +20,9 @@ public class Evento implements Comparable<Evento>{
     private int capacidadMaximaDelEvento;
     private int plazoDevolucionEntrada;
     private boolean publicado;
-    int idPropiedad;
+    private int idPropiedad;
     private ArrayList<Entrada>listaEntradas;
+    private boolean activo;
 
     public Evento(int idEvento, String nombre, String descripcion, Date fechaDeInicio, Date fechaDeTermino, int capacidad, int plazoDevolucionEntrada, boolean publicado) {
         this.idEvento = idEvento;
@@ -202,6 +203,15 @@ public class Evento implements Comparable<Evento>{
     public void setListaEntradas(ArrayList<Entrada> listaEntradas) {
         this.listaEntradas = listaEntradas;
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
 
     @Override
     public int compareTo(Evento o) {
