@@ -1792,14 +1792,14 @@ public class ControladorBDDeEventos {
                         + "inner join evento on evento.id= celebra.refevento\n"
                         + "where propietario.rut='"+rutPropietario+"' and evento.publicado='false'\n"
                         + "and propiedad.activa='true'\n"
-                        + "and evento.fechainicio>='"+fechaDeInicio+"' and evento.fechatermino<='"+fechaDeTermino+"'";
+                        + "and evento.fechainicio>='"+fechaDeInicio+"' and evento.fechainicio<='"+fechaDeTermino+"'";
 
-                //System.out.println(sql);
+                System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // obtengo la informacion del cliente.
                     int idEvento = Integer.parseInt(resultado.getString("id"));
-                    
+                    System.out.println("rechazar solicitud de evento con id: "+idEvento);
                     rechazarSolicitudPropietario(idEvento);
   
 
