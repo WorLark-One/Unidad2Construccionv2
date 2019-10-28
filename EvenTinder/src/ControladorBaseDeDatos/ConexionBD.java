@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public class ConexionBD {
 
     private Connection conexion;
-    String contraseñaBD;
-    String nombreBD;
+    private final String contraseñaBD;
+    private final String nombreBD;
 
     public ConexionBD() {
         conexion = null;
@@ -106,41 +106,6 @@ public class ConexionBD {
         }
         return false;
 
-    }
-    /**
-     * Obtiene todas las tablas en la BD.
-     * @param conexion
-     * @return 
-     */
-    public ArrayList<String> obtenerListaTablas(Connection conexion) {
-        Connection miConexion = conexion;
-
-        ArrayList<String> listaTablas = new ArrayList<>();
-        if (miConexion != null)// si hay conexion.
-        {
-
-            try {
-                java.sql.Statement st = miConexion.createStatement();
-
-                String sql = "SELECT t.table_name FROM information_schema.tables t WHERE t.table_schema = 'public' ORDER BY t.table_name";
-
-                ResultSet resultado = st.executeQuery(sql);
-                while (resultado.next()) {
-                    String nombre = resultado.getString("table_name");
-                    listaTablas.add(nombre);
-
-                }
-                resultado.close();
-                st.close();
-                return listaTablas;
-
-            } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
-                return null;
-            }
-
-        }
-        return null;
     }
 
     /**

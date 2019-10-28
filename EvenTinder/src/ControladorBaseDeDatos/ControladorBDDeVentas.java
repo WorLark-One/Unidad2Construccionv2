@@ -8,13 +8,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ControladorBDDeVentas {
 
-    ConexionBD conexion;
-    SimpleDateFormat sdf;
-    Guardian guardian;
+    private final ConexionBD conexion;
+    private final SimpleDateFormat sdf;
+    private final Guardian guardian;
 
     public ControladorBDDeVentas() {
         this.conexion = new ConexionBD();
@@ -26,7 +29,7 @@ public class ControladorBDDeVentas {
     /**
      * Inicializa las tablas de la base de datos.
      */
-    public void inicializarBD() {
+    private void inicializarBD() {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
         this.conexion.crearTablas(miConexion);
@@ -41,14 +44,11 @@ public class ControladorBDDeVentas {
     public ArrayList<Compra> obtenerInformacionDeHistorialDeCompraDeUnUsuario(String rutUsuario) {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
-
         ArrayList<Compra> compras = new ArrayList<>();
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
                 String sql = "select DISTINCT compra.id,compra.numeroentradas,compra.fechacompra,compra.preciototal,\n"
                         + "asociacioneventoentradasector.refevento,evento.nombre,asociacioneventoentradasector.refsector\n"
                         + "from compra\n"
@@ -70,24 +70,16 @@ public class ControladorBDDeVentas {
                     ArrayList<Entrada> lista = obtenerListaEntradas(miConexion, idCompra);
                     Compra compra = new Compra(idCompra, numeroEntradas, fecha, precioTotal, refEvento, nombreEvento, nombreSector, idCompra, lista);
                     compras.add(compra);
-
                 }
                 resultado.close();
                 st.close();
-                //Collections.sort(compras);
+                Collections.sort(compras);
+                cerrarConexionBD(miConexion);
                 return compras;
-
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                cerrarConexionBD(miConexion);
                 return null;
-            } finally {
-                try {
-                    this.conexion.cerrarBaseDeDatos(miConexion);
-                } catch (SQLException ex) {
-                    //System.out.println("No se cerro la base de datos satisfactoriamente");
-                }
             }
-
         }
         return null;
     }
@@ -102,14 +94,11 @@ public class ControladorBDDeVentas {
     public ArrayList<Compra> obtenerInformacionDeHistorrialDeCompraDeUnEvento(int idEvento) {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
-
         ArrayList<Compra> compras = new ArrayList<>();
-        if (miConexion != null)// si hay conexion.
+        if (miConexion != null)
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
                 String sql = "select DISTINCT compra.id,compra.numeroentradas,compra.fechacompra,compra.preciototal,\n"
                         + "asociacioneventoentradasector.refevento,evento.nombre,asociacioneventoentradasector.refsector\n"
                         + "from compra\n"
@@ -118,7 +107,6 @@ public class ControladorBDDeVentas {
                         + "inner join asociacioneventoentradasector ON asociacioneventoentradasector.refentrada = entrada.id\n"
                         + "inner join evento ON evento.id = asociacioneventoentradasector.refevento\n"
                         + "where evento.id=" + idEvento + "";
-                // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idCompra = Integer.parseInt(resultado.getString("id"));
@@ -131,30 +119,22 @@ public class ControladorBDDeVentas {
                     ArrayList<Entrada> lista = obtenerListaEntradas(miConexion, idCompra);
                     Compra compra = new Compra(idCompra, numeroEntradas, fecha, precioTotal, refEvento, nombreEvento, nombreSector, idCompra, lista);
                     compras.add(compra);
-
                 }
                 resultado.close();
                 st.close();
-                //Collections.sort(compras);
+                Collections.sort(compras);
+                cerrarConexionBD(miConexion);
                 return compras;
-
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                cerrarConexionBD(miConexion);
                 return null;
-            } finally {
-                try {
-                    this.conexion.cerrarBaseDeDatos(miConexion);
-                } catch (SQLException ex) {
-                    //System.out.println("No se cerro la base de datos satisfactoriamente");
-                }
             }
-
         }
         return null;
     }
 
     /**
-     * registra una compra en la base de datos.
+     * Registra una compra en la base de datos.
      *
      * @param rutCliente: rut del cliente
      * @param idEvento: identificador del evento donde se realiza el evento
@@ -166,10 +146,8 @@ public class ControladorBDDeVentas {
      * @return
      */
     public boolean registrarCompra(String rutCliente, int idEvento, String nombreSector, int cantidadDeEntradas, int idPropiedad) {
-
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
-
         if (miConexion != null) {
             int capacidadMaximaEvento = obtenerCapacidMaximaEvento(miConexion, idEvento);
             int numeroEntradasVendidas = obtenerNumeroDeEntradasVendidasDeEvento(miConexion, idEvento);
@@ -187,11 +165,8 @@ public class ControladorBDDeVentas {
                         int idCompra = Integer.parseInt(resultado.getString("id"));
                         int idEntrada = obtenerIdentificadorDeEntrada(miConexion, idEvento, nombreSector, idPropiedad);
                         boolean relacionarCompraCliente = relacionCompraCliente(miConexion, rutCliente, idCompra);
-                        // genero la instancia de entrada
                         generarInstanciaEntrada(miConexion, idCompra, idEntrada, cantidadDeEntradas);
-                        
                         ArrayList<String> listaEntrada = obtenerListaEntradasCorreo(miConexion, idCompra);
-                        
                         String fechaComoCadena = this.sdf.format(fecha);
                         String tarjeta = obtenerTarjetaCreditoCliente(miConexion, rutCliente);
                         String nombreEvento = obtenerNombreEvento(miConexion, idEvento);
@@ -199,35 +174,32 @@ public class ControladorBDDeVentas {
                         this.guardian.correoClienteCompraDeEntradas(correo, idCompra, idEntrada, fechaComoCadena, precioCompra, listaEntrada, tarjeta, nombreEvento);
                     }
                     st.close();
+                    cerrarConexionBD(miConexion);
                     return true;
-
                 } catch (SQLException e) {
-                    //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
+                    cerrarConexionBD(miConexion);
                     return false;
-                } finally {
-                    try {
-                        this.conexion.cerrarBaseDeDatos(miConexion);
-                    } catch (SQLException ex) {
-                        //System.out.println("error al cerrar la base de datos.");
-                    }
-
                 }
             }
-
         }
         return false;
 
     }
-
+    /**
+     * Metodo privado.
+     * Obtiene una lista de las instancias de entradas asociadas a una
+     * compra.
+     * @param miConexion:conexion con la BD
+     * @param idCompra: identidicador de una compra.
+     * @return lista de instancias de entradas.
+     */
     private ArrayList<String> obtenerListaEntradasCorreo(Connection miConexion, int idCompra) {
 
-        ArrayList<String> entradas = new ArrayList<>();
+        ArrayList<String> entradas;
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
                 String sql = "select instanciaentrada.id,asociacioneventoentradasector.precio,\n"
                         + "asociacioneventoentradasector.refSector\n"
                         + "from compra\n"
@@ -236,6 +208,7 @@ public class ControladorBDDeVentas {
                         + "inner join asociacioneventoentradasector on entrada.id = asociacioneventoentradasector.refentrada\n"
                         + "where compra.id = "+idCompra+"";
                 ResultSet resultado = st.executeQuery(sql);
+                entradas = new ArrayList<>();
                 while (resultado.next()) {
                     // obtengo la informacion del cliente.
                     int idEntrada = Integer.parseInt(resultado.getString("id"));
@@ -247,16 +220,16 @@ public class ControladorBDDeVentas {
                 }
                 resultado.close();
                 st.close();
-                //Collections.sort(compras);
+                Collections.sort(entradas);
+                cerrarConexionBD(miConexion);
                 return entradas;
 
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
+                cerrarConexionBD(miConexion);
                 return null;
             }
         }
         return null;
-
     }
 
     /**
@@ -269,22 +242,19 @@ public class ControladorBDDeVentas {
     public boolean cancelarCompra(int idCompra) {
         this.conexion.crearConexion();
         Connection miConexion = this.conexion.getConexion();
-
         if (miConexion != null) {
-
             try {
-                //generar reembolso de la compra.
                 generarReembolsoCompra(miConexion, idCompra);
-
-                borrarInstanciasEntradas(miConexion, idCompra);
+                borrarRegistroDeInstanciasEntradas(miConexion, idCompra);
                 borrarRealizaCompra(miConexion, idCompra);
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "delete from compra where compra.id=" + idCompra + "";
-                //System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
+                cerrarConexionBD(miConexion);
                 return true;
             } catch (SQLException e) {
+                cerrarConexionBD(miConexion);
                 return false;
             }
 
@@ -301,8 +271,8 @@ public class ControladorBDDeVentas {
      * @param idPropiedad: identificador de la propiedad.
      * @return
      */
-    private int obtenerPrecioEventoPorSector(Connection conexion, int idEvento, String nombreSector, int idPropiedad) {
-
+    private int obtenerPrecioEventoPorSector(Connection conexion, int idEvento,
+            String nombreSector, int idPropiedad) {
         Connection miConexion = conexion;
         if (miConexion != null)// si hay conexion.
         {
@@ -311,19 +281,15 @@ public class ControladorBDDeVentas {
                 String sql = "select asociacioneventoentradasector.precio from asociacioneventoentradasector \n"
                         + "where asociacioneventoentradasector.refevento=" + idEvento + " and asociacioneventoentradasector.refsector='" + nombreSector + "'\n"
                         + "and asociacioneventoentradasector.refpropiedad=" + idPropiedad + "";
-                //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
-
                     int precio = resultado.getInt("precio");
-                    //System.out.println("precio:" + precio);
                     resultado.close();
                     st.close();
                     return precio;
                 }
 
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return 0;
             }
 
@@ -341,7 +307,6 @@ public class ControladorBDDeVentas {
      * @return true si realiza la relacion correctamente, false de lo contrario.
      */
     private boolean relacionCompraCliente(Connection conexion, String rutCliente, int idCompra) {
-
         Connection miConexion = conexion;
         if (miConexion != null) {
             try {
@@ -350,12 +315,9 @@ public class ControladorBDDeVentas {
                 st.executeUpdate(sql);
                 st.close();
                 return true;
-
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: añadirCliente" + e);
                 return false;
             }
-
         }
         return false;
     }
@@ -371,7 +333,6 @@ public class ControladorBDDeVentas {
         Connection miConexion = conexion;
         if (miConexion != null) {
             try {
-
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "select * from evento where evento.id=" + idEvento + "";
                 ResultSet resultado = st.executeQuery(sql);
@@ -382,11 +343,8 @@ public class ControladorBDDeVentas {
                 st.close();
 
             } catch (SQLException e) {
-                //System.out.println("error conexion");
-
                 return -1;
             }
-
         }
         return -1;
     }
@@ -402,31 +360,26 @@ public class ControladorBDDeVentas {
         Connection miConexion = conexion;
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
                 String sql = "select count(instanciaentrada.id)as numeroentrada\n"
                         + "from instanciaentrada\n"
                         + "inner join entrada on instanciaentrada.refentrada = entrada.id\n"
                         + "inner join asociacioneventoentradasector on entrada.id = asociacioneventoentradasector.refentrada\n"
                         + "inner join evento on asociacioneventoentradasector.refevento = evento.id\n"
                         + "where evento.id=" + idEvento + "";
-                //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int numeroEntradas = resultado.getInt("numeroentrada");
+                    st.close();
                     return numeroEntradas;
                 }
                 resultado.close();
                 st.close();
                 return -1;
-
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return -1;
             }
-
         }
         return -1;
     }
@@ -446,25 +399,21 @@ public class ControladorBDDeVentas {
         {
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
                 String sql = "select asociacioneventoentradasector.refentrada from asociacioneventoentradasector \n"
                         + "where asociacioneventoentradasector.refevento=" + idEvento + " and asociacioneventoentradasector.refsector='" + nombreSector + "'\n"
                         + "and asociacioneventoentradasector.refpropiedad=" + idPropiedad + "";
-                //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int numeroEntrada = resultado.getInt("refentrada");
+                    st.close();
                     return numeroEntrada;
                 }
                 resultado.close();
                 st.close();
                 return 0;
-
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return 0;
             }
-
         }
         return 0;
     }
@@ -479,7 +428,6 @@ public class ControladorBDDeVentas {
      * @return true si se generan las instancias, false de lo contrario.
      */
     private boolean generarInstanciaEntrada(Connection miConexion, int idCompra, int idEntrada, int cantidad) {
-
         if (miConexion != null) {
             for (int i = 0; i < cantidad; i++) {
                 try {
@@ -487,13 +435,11 @@ public class ControladorBDDeVentas {
                     String sql = "insert into instanciaentrada values(default," + idCompra + "," + idEntrada + ")";
                     st.executeUpdate(sql);
                     st.close();
-
                 } catch (SQLException e) {
                     return false;
                 }
             }
             return true;
-
         }
         return false;
     }
@@ -506,21 +452,18 @@ public class ControladorBDDeVentas {
      * @return true si se borran los registros de instancias, false de lo
      * contrario.
      */
-    private boolean borrarInstanciasEntradas(Connection miConexion, int idCompra) {
+    private boolean borrarRegistroDeInstanciasEntradas(Connection miConexion, int idCompra) {
         if (miConexion != null) {
-
             try {
                 borrarRealizaCompra(miConexion, idCompra);
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "delete from instanciaentrada where instanciaentrada.refcompra=" + idCompra + "";
-                //System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
                 return true;
             } catch (SQLException e) {
                 return false;
             }
-
         }
         return false;
     }
@@ -535,18 +478,15 @@ public class ControladorBDDeVentas {
      */
     private boolean borrarRealizaCompra(Connection miConexion, int idCompra) {
         if (miConexion != null) {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "delete from realizacompra where realizacompra.refcompra=" + idCompra + "";
-                //System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
                 return true;
             } catch (SQLException e) {
                 return false;
             }
-
         }
         return false;
     }
@@ -560,8 +500,7 @@ public class ControladorBDDeVentas {
      * referentes a esa compra.
      */
     private ArrayList<Entrada> obtenerListaEntradas(Connection miConexion, int idCompra) {
-
-        ArrayList<Entrada> entradas = new ArrayList<>();
+        ArrayList<Entrada> entradas ;
         if (miConexion != null)// si hay conexion.
         {
 
@@ -573,8 +512,8 @@ public class ControladorBDDeVentas {
                         + "inner join entrada on instanciaentrada.refentrada=entrada.id\n"
                         + "inner join asociacioneventoentradasector on entrada.id=asociacioneventoentradasector.refentrada";
                 ResultSet resultado = st.executeQuery(sql);
+                entradas = new ArrayList<>();
                 while (resultado.next()) {
-                    // obtengo la informacion del cliente.
                     int idEntrada = Integer.parseInt(resultado.getString("id"));
                     int precio = resultado.getInt("precio");
                     Entrada entrada = new Entrada(idEntrada, precio);
@@ -582,11 +521,9 @@ public class ControladorBDDeVentas {
                 }
                 resultado.close();
                 st.close();
-                //Collections.sort(compras);
+                Collections.sort(entradas);
                 return entradas;
-
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return null;
             }
         }
@@ -608,16 +545,10 @@ public class ControladorBDDeVentas {
             int capacidaEvento = obtenerCapacidMaximaEvento(miConexion, idEvento);
             int entradasVendidas = obtenerNumeroDeEntradasVendidasDeEvento(miConexion, idEvento);
             entradas = capacidaEvento - entradasVendidas;
-            try {
-                this.conexion.cerrarBaseDeDatos(miConexion);
-            } catch (SQLException ex) {
-                //Logger.getLogger(ControladorBDDeVentas.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            cerrarConexionBD(miConexion);
             return entradas;
-
         }
         return entradas;
-
     }
 
     /**
@@ -631,10 +562,8 @@ public class ControladorBDDeVentas {
     private String obtenerTarjetaCreditoCliente(Connection miConexion, String rutCliente) {
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
                 String sql = "select* from cliente where cliente.rut='" + rutCliente + "'";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -642,13 +571,10 @@ public class ControladorBDDeVentas {
                     resultado.close();
                     st.close();
                     return tarjeta;
-
                 }
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return null;
             }
-
         }
         return null;
     }
@@ -663,10 +589,8 @@ public class ControladorBDDeVentas {
     private String obtenerNombreEvento(Connection miConexion, int idEvento) {
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
                 String sql = "select* from evento where evento.id=" + idEvento + "";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -674,13 +598,10 @@ public class ControladorBDDeVentas {
                     resultado.close();
                     st.close();
                     return nombre;
-
                 }
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return null;
             }
-
         }
         return null;
     }
@@ -692,14 +613,11 @@ public class ControladorBDDeVentas {
      * @param idCompra : identificador de una compra.
      */
     private void generarReembolsoCompra(Connection miConexion, int idCompra) {
-
         if (miConexion != null) {
-
             try {
                 java.util.Date fechaActual = new Date();
                 int plazoEvento = obtenerPlazoMaximoDevolucionEntradaEvento(miConexion, idCompra);
                 Date fechaCompra = obtenerFechaCompra(miConexion, idCompra);
-
                 Date fechaproyectada = proyectarFecha(miConexion, fechaCompra, plazoEvento);
                 boolean comparacion = fechaActual.before(fechaproyectada);
                 if (comparacion == true) {
@@ -717,8 +635,6 @@ public class ControladorBDDeVentas {
                             + "where compra.id=" + idCompra + " ";
                     ResultSet resultado = st.executeQuery(sql);
                     while (resultado.next()) {
-                        // obtengo la informacion del cliente.
-                        String nombreCliente = resultado.getString("nombrecompleto");
                         int idComp = resultado.getInt("idcompra");
                         String correo = resultado.getString("correo");
                         int numeroEntradas = resultado.getInt("numeroentradas");
@@ -727,20 +643,16 @@ public class ControladorBDDeVentas {
                         String tarjeta = resultado.getString("tarjetacredito");
                         String nombreEvento = resultado.getString("nombreevento");
                         String fechaComoCadena = this.sdf.format(fechaCom);
-
                         this.guardian.correoClienteReembolsoDeCompra(correo, idComp, numeroEntradas, fechaComoCadena, precioT, tarjeta, nombreEvento);
                     }
                     resultado.close();
                     st.close();
                 }
 
-                //return true;
             } catch (SQLException e) {
-                //return false;
             }
 
         }
-        //return false;
     }
 
     /**
@@ -753,10 +665,8 @@ public class ControladorBDDeVentas {
     public int obtenerPlazoMaximoDevolucionEntradaEvento(Connection miConexion, int idCompra) {
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
                 String sql = "select DISTINCT evento.plazodevolucionentradas\n"
                         + "from compra\n"
                         + "inner join instanciaentrada ON instanciaentrada.refcompra = compra.id\n"
@@ -770,13 +680,11 @@ public class ControladorBDDeVentas {
                     resultado.close();
                     st.close();
                     return plazo;
-
                 }
             } catch (SQLException e) {
                 //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return -1;
             }
-
         }
         return -1;
     }
@@ -794,7 +702,6 @@ public class ControladorBDDeVentas {
         {
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
                 String sql = "SELECT CAST('" + fechaActual + "' AS DATE) + CAST('" + dias + " days' AS INTERVAL) as fecha;";
                 // System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
@@ -804,12 +711,8 @@ public class ControladorBDDeVentas {
                 }
                 resultado.close();
                 st.close();
-                //Collections.sort(eventos);
-                //return eventos;
 
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
-                //return null;
             }
         }
         return null;
@@ -825,10 +728,8 @@ public class ControladorBDDeVentas {
     private Date obtenerFechaCompra(Connection miConexion, int idCompra) {
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
                 String sql = "select compra.fechacompra from compra where compra.id=" + idCompra + "";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -839,10 +740,8 @@ public class ControladorBDDeVentas {
 
                 }
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return null;
             }
-
         }
         return null;
     }
@@ -850,10 +749,8 @@ public class ControladorBDDeVentas {
     private String obtenerCorreoCliente(Connection miConexion, String rutCliente) {
         if (miConexion != null)// si hay conexion.
         {
-
             try {
                 java.sql.Statement st = miConexion.createStatement();
-
                 String sql = "select cliente.correo\n"
                         + "from cliente\n"
                         + "where cliente.rut='" + rutCliente + "'";
@@ -866,12 +763,24 @@ public class ControladorBDDeVentas {
 
                 }
             } catch (SQLException e) {
-                //System.out.println("ERROR DE CONEXION: mostrarIndormacionCliente()");
                 return null;
             }
 
         }
         return null;
+    }
+    
+    /**
+     * cierra la conexion con la base de datos.
+     *
+     * @param conexion: conexion con la base de datos.
+     */
+    private void cerrarConexionBD(Connection conexion) {
+        try {
+            this.conexion.cerrarBaseDeDatos(conexion);
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorBDDeEventos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

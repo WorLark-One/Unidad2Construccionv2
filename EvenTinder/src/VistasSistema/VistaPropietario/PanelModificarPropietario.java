@@ -442,12 +442,15 @@ public class PanelModificarPropietario extends javax.swing.JPanel {
         if(usuario==null){
             return;
         }
-        if(!eventos.isEmpty()){
+        if(eventos != null){
+           if(!eventos.isEmpty()){
             this.correoElectronico.setEditable(false);
             this.correoElectronico.setEnabled(false);
             this.cuentaBancaria.setEditable(false);
             this.cuentaBancaria.setEnabled(false);
+        } 
         }
+        
         this.clave.setText(usuario.getContraseña());
         this.cuentaBancaria.setText(usuario.getCuentaCorriente());
         this.nombre.setText(usuario.getNombreCompleto());
