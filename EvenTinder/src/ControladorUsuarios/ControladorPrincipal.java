@@ -30,7 +30,7 @@ public class ControladorPrincipal {
      *          False si el Usuario no existe o los datos son erroneos.
      * @throws java.sql.SQLException
      */
-    public boolean solicitudDeAcceso(String tipoUsuario,String rut, String clave) throws SQLException {
+    public int solicitudDeAcceso(String tipoUsuario,String rut, String clave) throws SQLException {
         return this.controlAcceso.obtencioDeCredencial(tipoUsuario, rut, clave);
     }
 

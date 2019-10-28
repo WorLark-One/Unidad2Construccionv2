@@ -382,8 +382,6 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             }
             mensajes = mensajes+aux;
         }
-        
-        System.out.println("respuesta:" + resp);
         if(resp==0){
             //realizar operacion
             java.util.Date fechaDePublicacion = new Date();
@@ -413,7 +411,6 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
                 //agregando sectores
                 for(int i=0; i<this.nombresSectores.size(); i++){
                     try {
-                        System.out.println("agrego: " + this.capacidades.get(i) + "  " + this.nombresSectores.get(i));
                         this.papa.getControladorPropietario().añadirSector(resultado, this.capacidades.get(i),this.nombresSectores.get(i));
                     } catch (SQLException ex) {
                         Logger.getLogger(PanelCrearPropiedad.class.getName()).log(Level.SEVERE, null, ex);
@@ -460,7 +457,6 @@ public class PanelCrearPropiedad extends javax.swing.JPanel {
             mensajes = mensajes+aux;
             resp = 1;
         }                
-        System.out.println("respuesta de sector:" + resp);
         if(resp==0){
             for (int i = 0; i < this.nombresSectores.size(); i++) {
                 if(this.nombresSectores.get(i).equals(this.nombreSector.getText())){
