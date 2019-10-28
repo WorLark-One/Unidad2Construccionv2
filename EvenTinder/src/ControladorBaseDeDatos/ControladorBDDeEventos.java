@@ -316,11 +316,11 @@ public class ControladorBDDeEventos {
             //verificar si un evento es finalizado.
             boolean verificarEventosFinalizados = VerificarEventoFinalizado(miConexion, idEvento);
             boolean verificarEventosPublicados = VerificarEventosPublicados(miConexion, idEvento);
-            System.out.println("Verificar eliminar evento finalizado:" + verificarEventosFinalizados);
-            System.out.println("Verificar eventos publicados:" + verificarEventosPublicados);
+            //System.out.println("Verificar eliminar evento finalizado:" + verificarEventosFinalizados);
+            //System.out.println("Verificar eventos publicados:" + verificarEventosPublicados);
             if (verificarEventosFinalizados == false) {
                 try {
-                    System.out.println("ELIMINAR EVENTO.");
+                    //System.out.println("ELIMINAR EVENTO.");
                     ArrayList<Integer> listaCompra = obtenerIdentificadoresDeCompra(miConexion, idEvento);
                     generarRembolsoDeCompra(miConexion, listaCompra);
                     eliminarAsociacionEventoPropiedad(miConexion, idEvento);
@@ -331,11 +331,11 @@ public class ControladorBDDeEventos {
                     st.close();
                     return true;
                 } catch (SQLException e) {
-                    System.out.println("ERROR  eliminar evento (desde la tabla de usuario)" + e);
+                    //System.out.println("ERROR  eliminar evento (desde la tabla de usuario)" + e);
                     return false;
                 } finally {
                     try {
-                        System.out.println("Igual se cierra la base de datos.");
+                        //System.out.println("Igual se cierra la base de datos.");
                         this.conexion.cerrarBaseDeDatos(miConexion);
                     } catch (SQLException ex) {
                         //        System.out.println("No se cerro satisfactoriamente la base de datos.");
@@ -345,7 +345,7 @@ public class ControladorBDDeEventos {
                 try {
                     // si tiene eventos finalizados no se puede
                     //borrar el evento, en cambio se deja desabilitado.
-                    System.out.println("DESABILITAR EVENTO.");
+                    //System.out.println("DESABILITAR EVENTO.");
                     desabilitarCelebra(miConexion, idEvento);
                     desabilitarAsociacionEventoEntradaSector(miConexion, idEvento);
                     desabilitarEvento(miConexion, idEvento);
@@ -745,7 +745,7 @@ public class ControladorBDDeEventos {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = " UPDATE evento set publicado=true where evento.id=" + idEvento + "";
                 //se envia correo
-                //CorreoArriendoPropiedad(miConexion, idEvento);
+                CorreoArriendoPropiedad(miConexion, idEvento);
                 //System.out.println(sql);
                 st.executeUpdate(sql);
                 st.close();
@@ -792,7 +792,7 @@ public class ControladorBDDeEventos {
                         + "inner join propietario on propiedad.refpropietario=propietario.rut\n"
                         + "inner join organizador on evento.reforganizador = organizador.rut\n"
                         + "where evento.id=" + idEvento + " and propiedad.activa='true'";
-                System.out.println(sql);
+                //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     String correoPropietario = resultado.getString("correopropietario");
@@ -809,15 +809,15 @@ public class ControladorBDDeEventos {
                     String fechaInic = this.sdf.format(fechaIni);
                     String fechaTerm = this.sdf.format(fechaTer);
                     // correo de rechazo de evento para el propietario
-                    //this.guardian.correoPropietarioCancelacionEvento(correoPropietario, idEvento, nombreEvento, fechaInic, fechaTerm);
+                    this.guardian.correoPropietarioCancelacionEvento(correoPropietario, idEvento, nombreEvento, fechaInic, fechaTerm);
                     //correo de rechazo de evento para organizador.
-                    //this.guardian.correoOrganizadorEventoRechazado(correoOrganizador, idEvento, nombreEvento, fechaInic, fechaTerm, tarjetaOrganizador, idPropiedad, nombrePropiedad);
+                    this.guardian.correoOrganizadorEventoRechazado(correoOrganizador, idEvento, nombreEvento, fechaInic, fechaTerm, tarjetaOrganizador, idPropiedad, nombrePropiedad);
                     eliminarEvento(idEvento);
                     return true;
                 }
 
             } catch (SQLException e) {
-                System.out.println("ERROR DE CONEXION: rechazarSolicitudPropietario()");
+                //System.out.println("ERROR DE CONEXION: rechazarSolicitudPropietario()");
                 return false;
             } finally {
                 try {
@@ -1794,12 +1794,12 @@ public class ControladorBDDeEventos {
                         + "and propiedad.activa='true'\n"
                         + "and evento.fechainicio>='"+fechaDeInicio+"' and evento.fechainicio<='"+fechaDeTermino+"'";
 
-                System.out.println(sql);
+                //System.out.println(sql);
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     // obtengo la informacion del cliente.
                     int idEvento = Integer.parseInt(resultado.getString("id"));
-                    System.out.println("rechazar solicitud de evento con id: "+idEvento);
+                    //System.out.println("rechazar solicitud de evento con id: "+idEvento);
                     rechazarSolicitudPropietario(idEvento);
   
 
