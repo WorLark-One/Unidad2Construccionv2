@@ -49,20 +49,20 @@ public class ControlDeAcceso {
      * @return true o false, dependiendo de si esta registrado el usuario o no.
      * @throws java.sql.SQLException
      */
-    public boolean obtencioDeCredencial(String tipoUsuario, String rut,  String clave) throws SQLException {
+    public int obtencioDeCredencial(String tipoUsuario, String rut,  String clave) throws SQLException {
        int conectado=this.controladorUsuario.preguntarPorUsuario(tipoUsuario, rut, clave);
        if(conectado==1)// el usuario esta registrado
        {
            setTipoUsuario(tipoUsuario);
            setRut(rut);
            setContraseña(clave);
-           return true;
+           return 1;
        }
        else if(conectado==-1){// el usuario esta registrado, pero tiene su cuenta inactiva.
-           return false;
+           return -1;
        }
         
-        return false;
+        return 0;// el usuario no esta registrado.
     }
     /**
      * retorna el rut del usuario logeado
