@@ -317,7 +317,6 @@ public class PanelListaDePropiedades extends javax.swing.JPanel {
 
     private void opcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionesActionPerformed
         // TODO add your handling code here:
-        System.out.println(opciones.getSelectedIndex());
         if(opciones.getSelectedIndex()==0){
             this.nombre.setText("Nombre: " );
             this.descripcion.setText("descripcion: ");

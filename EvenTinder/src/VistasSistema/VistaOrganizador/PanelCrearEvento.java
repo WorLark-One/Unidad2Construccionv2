@@ -433,7 +433,6 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     private void listaPropiedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaPropiedadesActionPerformed
         this.go=false;
         this.contador=0;
-        System.out.println(listaPropiedades.getSelectedIndex());
         if(listaPropiedades.getSelectedIndex()==0){
             this.detalles.removeAll();
         }
