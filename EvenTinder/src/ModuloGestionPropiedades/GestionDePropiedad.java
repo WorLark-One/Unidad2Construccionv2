@@ -227,8 +227,8 @@ public class GestionDePropiedad {
      * @param idEvento El id del evento que se desea aceptar.
      * @return True si se acepto la solicitud con exito. False si no se pudo aceptar la solicitud.
      */
-    public boolean aceptarSolicitud(int idEvento) {
-        return this.gestorEventos.aceptarSolicitud(idEvento);
+    public boolean aceptarSolicitud(int idEvento, String rutPropietario) {
+        return this.gestorEventos.aceptarSolicitud(idEvento,rutPropietario);
 
         
     }

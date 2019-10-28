@@ -136,7 +136,7 @@ public class ControladorPropietario {
      * @return True si se acepto la solicitud con exito. False si no se pudo aceptar la solicitud.
      */
     public boolean aceptarSolicitud(int idEvento) {
-        return this.gestorPropiedades.aceptarSolicitud(idEvento);
+        return this.gestorPropiedades.aceptarSolicitud(idEvento, this.controlAcceso.getRut());
     }
 
     /**
