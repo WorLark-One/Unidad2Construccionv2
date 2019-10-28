@@ -108,8 +108,8 @@ public class GestionDePropiedad {
      * @return True si se modifico la propiedad con exito. False si la modificacion fallo.
      * @throws java.sql.SQLException
      */
-    public boolean modifcarPropiedad( int id,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo) throws SQLException {
-        boolean result = this.controlador.modifcarPropiedad(id, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion);
+    public boolean modifcarPropiedad( int id,  String nombre,  String descripcion,  Date fechaDePublicacion, String ubicacion,  int capacidadTotal,  int valorDeArriendo,String rutPropietario) throws SQLException {
+        boolean result = this.controlador.modifcarPropiedad(id, nombre, ubicacion, fechaDePublicacion, capacidadTotal, valorDeArriendo, descripcion,rutPropietario);
         if(result){
             for(Propiedad p:this.listaPropiedades){
                 if(p.getId() == id){
