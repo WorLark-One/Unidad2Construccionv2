@@ -433,7 +433,6 @@ public class PanelCrearEvento extends javax.swing.JPanel {
     private void listaPropiedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaPropiedadesActionPerformed
         this.go=false;
         this.contador=0;
-        System.out.println(listaPropiedades.getSelectedIndex());
         if(listaPropiedades.getSelectedIndex()==0){
             this.detalles.removeAll();
         }
@@ -531,7 +530,7 @@ public class PanelCrearEvento extends javax.swing.JPanel {
                     resp = 1;
                     break;                    
                 case 6:
-                    aux = "Se espera que los Dias de Devolucion sean Validos.\n";
+                    aux = "Se espera que los Dias de Devolucion esten contenidos entre el dia actual y el dia de inicio del Evento.\n";
                     resp = 1;
                     break; 
                 case 7:

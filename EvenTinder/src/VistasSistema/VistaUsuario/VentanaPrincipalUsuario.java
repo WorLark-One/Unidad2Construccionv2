@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author xebae
  */
-public class VentanaPrincipalUsuario extends javax.swing.JFrame {
+public class VentanaPrincipalUsuario extends javax.swing.JFrame{
 
     /**
      * Creates new form VentanaPrincipalUsuario

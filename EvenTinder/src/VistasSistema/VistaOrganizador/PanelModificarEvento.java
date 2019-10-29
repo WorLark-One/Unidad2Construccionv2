@@ -499,7 +499,6 @@ public class PanelModificarEvento extends javax.swing.JPanel {
             return;
         }
         for(int i=0; i< this.propiedades.size(); i++){
-            System.out.println("this.listaEventos.getSelectedIndex():" + this.listaEventos.getSelectedIndex());
             if(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad()==this.propiedades.get(i).getId()){
                 this.papa.getControladorOrganizador().modificarPrecioSector(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento(), Integer.parseInt(this.precio.getText()),this.propiedades.get(i).getListaSectores().get(this.listaSectores.getSelectedIndex()-1).getNombre(), this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdPropiedad());
                 int nuevoTotal=0;

@@ -481,7 +481,6 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
             char[] aux = nombre.toCharArray();
             for(char c : aux){                
                 int ascii = (int) c;
-                System.out.println(ascii);
                 if( !((ascii >= 65 && ascii <=90) || (ascii >= 97 && ascii <= 122) || caracteres.contains(ascii)  )   ){
                     return 2;
                 }
@@ -503,12 +502,10 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                 char[] digVerificador = guion[1].toCharArray();
                 if(digVerificador.length == 1){
                     if(!(( digVerificador[0] >=48 && digVerificador[0]<=57)  || digVerificador[0]==   107 || digVerificador[0] == 75 )){
-                        System.out.println("digito verificador invalido");
                         return 3;
                     }                                         
                 }
                 else{
-                    System.out.println("largo digito verificador invalido");
                     return 3;
                 }                
                 if( (guion[0].charAt(guion[0].length()-4 ) == '.')  && (guion[0].charAt(guion[0].length()-8 ) == '.') ){
@@ -526,27 +523,22 @@ public class PanelCreacionUsuario extends javax.swing.JPanel {
                             }
                         }
                         else{
-                            System.out.println("numeros muy grandes");
                             return 3;
                         }
                     }
                     else{
-                        System.out.println("error de puntuacion");
                         return 3;
                     } 
                 }   
                 else{
-                    System.out.println("puntos mal ubicados");
                     return 3;
                 }
             }
             else{
-                System.out.println("formato invalido");
                 return 3;
             }                
         }
         else{
-            System.out.println("rut vacio");
             return 3;
         }
         return 0;

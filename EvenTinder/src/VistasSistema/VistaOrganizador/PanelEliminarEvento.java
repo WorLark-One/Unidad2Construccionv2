@@ -187,7 +187,6 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
             return;
         }
         boolean resultado = false;
-        System.out.println("this.eventos.get(this.listaEventos.getSelectedIndex()-1" + this.eventos.get(this.listaEventos.getSelectedIndex()-1));
         if(this.listaOpciones.getSelectedIndex()==1){
             int numero = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere eliminar este evento publicado? \n" + "Nota: no se le rembolsara el dinero del arriendo", "Confirmar eliminar evento", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(numero==1){
@@ -198,7 +197,6 @@ public class PanelEliminarEvento extends javax.swing.JPanel {
         }else{
             resultado = this.papa.getControladorOrganizador().eliminarEvento(this.eventos.get(this.listaEventos.getSelectedIndex()-1).getIdEvento());
         }
-        System.out.println("resultado:" + resultado);
         if(resultado){
             //agregando sectores
             JOptionPane.showMessageDialog(null, "Se a eliminado correctamente");

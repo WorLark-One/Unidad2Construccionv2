@@ -78,8 +78,8 @@ public class GestionDeEvento {
      * @param idEvento 
      * @return
      */
-    public boolean aceptarSolicitud(int idEvento){
-        return this.controlador.aceptarSolicitudPropietario(idEvento);
+    public boolean aceptarSolicitud(int idEvento, String rutPropietario){
+        return this.controlador.aceptarSolicitudPropietario(idEvento, rutPropietario);
     }
 
     /**

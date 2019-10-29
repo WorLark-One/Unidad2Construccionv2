@@ -216,13 +216,13 @@ public class PanelInicioSesion extends javax.swing.JPanel {
         int resp = validarDatosIniciarSesion(this.tipoUsuario, this.rut.getText(),this.clave.getText());
         // TODO add your handling code here:
         if(resp==0){
-            boolean respuesta = false;
+            int respuesta = 0;
             try {
                 respuesta = this.papa.getControlador().solicitudDeAcceso(tipoUsuario, this.rut.getText(), this.clave.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(PanelInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(respuesta){
+            if(respuesta==1){
                 if("cliente".equals(this.tipoUsuario)){
                     try {
                         this.papa.derivarAVentanaPrincipalUsuario();
