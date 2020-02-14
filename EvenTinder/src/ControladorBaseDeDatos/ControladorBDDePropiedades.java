@@ -173,6 +173,7 @@ public class ControladorBDDePropiedades {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "insert into propiedad values(DEFAULT,'" + nombre + "','" + ubicacion + "','" + fechaDePublicacion + "','" + capacidadTotal + "','" + valorDeArriendo + "','" + descripcion + "','" + rut + "')"
                         + " RETURNING id";
+
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idPropiedad = Integer.parseInt(resultado.getString("id"));
@@ -234,7 +235,7 @@ public class ControladorBDDePropiedades {
                         if (verificaEventosFinalizadosAsociados == true && crearNuevaInstancia == true) {
                             System.out.println("CREAR UNA NUEVA INSTANCIA DE LA PROPIEDAD");
                             int nuevoIdPropiedad = crearUnaNuevaInstanciaDePropiedad(nuevoNombre, NuevaUbicacion, fechaDePublicacion, nuevaCapacidadTotal, nuevoValorDeArriendo, nuevaDescripcion, rutPropietario);
-                            crearNuevosSectoresAnexosPropiedad(miConexion, id, nuevoIdPropiedad);
+                            crearNuevosSectoresAnexosPropiedad(id, nuevoIdPropiedad);
                             desabilitarPropiedad(miConexion, id);
                             this.conexion.cerrarBaseDeDatos(miConexion);
                             return true;
@@ -284,15 +285,15 @@ public class ControladorBDDePropiedades {
             boolean propiedadActiva = verificarSiLaPropiedadEstaActiva(miConexion, idPropiedad);
             boolean verificarEventosPublicadosAsociados = verificarEventosPublicadosAsociadoPropiedad(miConexion, idPropiedad);
             boolean verificaEventosFinalizadosAsociados = verificarEventosFinalizadossAsociadoPropiedad(miConexion, idPropiedad);
-            System.out.println("propiedad activa:"+propiedadActiva);
-            System.out.println("verificar eventos publicados:"+verificarEventosPublicadosAsociados);
-            System.out.println("verificar eventos finalizados:"+verificaEventosFinalizadosAsociados);
+            System.out.println("propiedad activa:" + propiedadActiva);
+            System.out.println("verificar eventos publicados:" + verificarEventosPublicadosAsociados);
+            System.out.println("verificar eventos finalizados:" + verificaEventosFinalizadosAsociados);
             if (propiedadActiva == true) {
                 try {
                     if (verificarEventosPublicadosAsociados == false) {
                         if (verificaEventosFinalizadosAsociados == true) {
                             System.out.println("desabilitar propiedad");
-                            desabilitarSectoresAnexosPropiedad(miConexion, idPropiedad);
+                            deshabilitarSectoresAnexosPropiedad(miConexion, idPropiedad);
                             desabilitarPropiedad(miConexion, idPropiedad);
                             this.conexion.cerrarBaseDeDatos(miConexion);
                             return true;
@@ -381,24 +382,31 @@ public class ControladorBDDePropiedades {
             boolean propiedadActiva = verificarSiLaPropiedadEstaActiva(miConexion, idPropiedad);
             //entradas son aquellas compradas por algun cliente, no las que se generar
             //para ponerle precio a un sector.
+            boolean verificarEventosPublicadosAsociados = verificarEventosPublicadosAsociadoPropiedad(miConexion, idPropiedad);
             boolean verificarEntradasAsociado = verificarEntradasAsociadoSector(miConexion, nombreSector, idPropiedad);
             System.out.println("propiedad activa:" + propiedadActiva);
-            System.out.println("tiene entradas asociadas al sector:" + verificarEntradasAsociado);
+            System.out.println("tiene ENTRADAS asociadas al sector:" + verificarEntradasAsociado);
             try {
                 if (propiedadActiva == true) {
-                    //no hay entradas asociadas al sector, por lo tanto se puede eliminar. .
-                    if (verificarEntradasAsociado == false) {
-                        System.out.println("ELIMINAR REGISTRO DEL SECTOR.");
-                        EliminarRegistroSector(miConexion, idPropiedad, nombreSector);
-                        this.conexion.cerrarBaseDeDatos(miConexion);
-                        return true;
-                    } else {// hay entradas asociadas al sector, se desactiva el sector..
-                        System.out.println("DESABILITAR SECTOR");
-                        boolean des = desabilitarSector(miConexion, idPropiedad, nombreSector);
-                        this.conexion.cerrarBaseDeDatos(miConexion);
-                        return des;
+                    if (verificarEventosPublicadosAsociados == false) {
+                        //no hay entradas asociadas al sector, por lo tanto se puede eliminar. .
+                        if (verificarEntradasAsociado == false) {
+                            System.out.println("ELIMINAR REGISTRO DEL SECTOR.");
+                            EliminarRegistroSector(miConexion, idPropiedad, nombreSector);
+                            this.conexion.cerrarBaseDeDatos(miConexion);
+                            return true;
+                        } else {// hay entradas asociadas al sector, se desactiva el sector..
+                            System.out.println("DESABILITAR SECTOR");
+                            boolean des = desabilitarSector(miConexion, idPropiedad, nombreSector);
+                            this.conexion.cerrarBaseDeDatos(miConexion);
+                            return des;
+                        }
+                        //no se pueden modificar las propiedades que tienen eventos publicados.
                     }
-                    //no se pueden modificar las propiedades que tienen eventos publicados.
+                    this.conexion.cerrarBaseDeDatos(miConexion);
+                    System.out.println("HAY EVENTOS PUBLICADOS EN LA PROPIEDAD.");
+                    return false;
+
                 }
                 this.conexion.cerrarBaseDeDatos(miConexion);
                 return false;
@@ -595,6 +603,13 @@ public class ControladorBDDePropiedades {
         return false;
     }
 
+    /**
+     * Metodo privado. Verifica si una propiedad esta activa.
+     *
+     * @param miConexion: conexión con la BD
+     * @param idPropiedad: identificador de la propeidad.
+     * @return
+     */
     private boolean verificarSiLaPropiedadEstaActiva(Connection miConexion, int idPropiedad) {
         if (miConexion != null) {
             try {
@@ -689,7 +704,7 @@ public class ControladorBDDePropiedades {
     }
 
     /**
-     * desabilita una propiedad.
+     * Metodo privado Desabilita una propiedad.
      *
      * @param miConexion:conexion BD
      * @param id : identificador de una propiedad.
@@ -698,7 +713,7 @@ public class ControladorBDDePropiedades {
         if (miConexion != null) {
 
             try {
-                desabilitarSectoresAnexosPropiedad(miConexion, id);
+                deshabilitarSectoresAnexosPropiedad(miConexion, id);
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = " update propiedad set activa='false' where propiedad.id=" + id + " and propiedad.activa='true'";
                 System.out.println(sql);
@@ -717,6 +732,19 @@ public class ControladorBDDePropiedades {
         //return false;
     }
 
+    /**
+     * Actualiza los registros de uns propiedad.
+     *
+     * @param miConexion: conexión con la BD
+     * @param id: identificador de la propiedad.
+     * @param nuevoNombre: nombre de la propiedad.
+     * @param NuevaUbicacion: ubicación de la propiedad.
+     * @param fechaDePublicacion :fecha de publicación de la propiedad.
+     * @param nuevaCapacidadTotal: capacidad total de la propiedad.
+     * @param nuevoValorDeArriendo: valor de arriendo de la propiedad.
+     * @param nuevaDescripcion: descripcion de la propiedad.
+     * @return
+     */
     private boolean actualizarRegistroPropiedad(Connection miConexion, int id, String nuevoNombre, String NuevaUbicacion, Date fechaDePublicacion, int nuevaCapacidadTotal, int nuevoValorDeArriendo, String nuevaDescripcion) {
         if (miConexion != null) {
 
@@ -739,6 +767,12 @@ public class ControladorBDDePropiedades {
         return false;
     }
 
+    /**
+     * Metodo privado. Elimina Los datos de una propiedad de la BD
+     *
+     * @param miConexion
+     * @param idPropiedad
+     */
     private void eliminarRegistroDePropiedad(Connection miConexion, int idPropiedad) {
         if (miConexion != null) {
             try {
@@ -758,6 +792,14 @@ public class ControladorBDDePropiedades {
         }
     }
 
+    /**
+     * Desabilita un Sector.
+     *
+     * @param miConexion: conexión con la BD
+     * @param idPropiedad: identificador de la propiedad.
+     * @param nombreSector: nombre del sector.
+     * @return true si realiza la accion con exito, false de lo contrario.
+     */
     private boolean desabilitarSector(Connection miConexion, int idPropiedad, String nombreSector) {
         if (miConexion != null) {
             try {
@@ -775,16 +817,24 @@ public class ControladorBDDePropiedades {
         return false;
     }
 
+    /**
+     * Metodo privado. Verifica si un sector tiene entradas asociadas.
+     *
+     * @param miConexion: conexión con la BD
+     * @param nombreSector: nombre del sector.
+     * @param idPropiedad: identificador de la propiedad.
+     * @return true si tiene entradas asociadas, false de lo contrario.
+     */
     private boolean verificarEntradasAsociadoSector(Connection miConexion, String nombreSector, int idPropiedad) {
         if (miConexion != null) {
             try {
                 java.util.Date fecha = new Date();
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = "select DISTINCT evento.nombre\n"
-                        + "from evento\n"
-                        + "inner join celebra on evento.id = celebra.refevento\n"
-                        + "inner join propiedad on celebra.refpropiedad = propiedad.id\n"
-                        + "where propiedad.id=" + idPropiedad + " and evento.fechatermino <= '" + fecha + "'::date\n"
+                String sql = "select asociacioneventoentradasector.refsector\n"
+                        + "from asociacioneventoentradasector \n"
+                        + "inner join propiedad on asociacioneventoentradasector.refpropiedad=propiedad.id\n"
+                        + "where asociacioneventoentradasector.refpropiedad=" + idPropiedad + "\n"
+                        + "and asociacioneventoentradasector.refsector='" + nombreSector + "'\n"
                         + "and propiedad.activa='true'";
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
@@ -801,6 +851,14 @@ public class ControladorBDDePropiedades {
         return false;
     }
 
+    /**
+     * Elimina los registros de un sector de la BD
+     *
+     * @param miConexion: conexion con la BD
+     * @param idPropiedad: identificador de la propiedad.
+     * @param nombreSector:nombre del sector.
+     * @return true si realiza la operacion, false de lo contrario.
+     */
     private boolean EliminarRegistroSector(Connection miConexion, int idPropiedad, String nombreSector) {
         if (miConexion != null) {
 
@@ -822,6 +880,17 @@ public class ControladorBDDePropiedades {
         return false;
     }
 
+    /**
+     * Verifica si los datos de un sector, cambian respecto a los ya registrados
+     * en la base de datos.
+     *
+     * @param miConexion: conexión con la BD.
+     * @param idPropiedad:identificador de la propiedad.
+     * @param nombreSector: nombre del sector.
+     * @param nuevaCapacidad: capacidad del sector.
+     * @return true si los datos no son iguales a los ya registrados,false de lo
+     * contrario.
+     */
     private boolean verificarDatosDeSector(Connection miConexion, int idPropiedad, String nombreSector, int nuevaCapacidad) {
         if (miConexion != null) {
             try {
@@ -850,17 +919,36 @@ public class ControladorBDDePropiedades {
         return false;
     }
 
+    /**
+     * Metodo privado. Crea un nuevo sector, con los mismos datos, aunque cambia
+     * el identificador de este.
+     *
+     * @param nombreSector:: nombre del sector.
+     * @param idPropiedad:identificador de la propiedad a la que esta asociado
+     * el sector..
+     * @param nuevoNombre: nuevo nombre del sector..
+     * @param nuevaCapacidad : nueva capacidad del sector.
+     */
     private void crearNuevaInstanciaSector(String nombreSector, int idPropiedad, String nuevoNombre, int nuevaCapacidad) {
         registrarSector(nombreSector, nuevaCapacidad, idPropiedad);
     }
 
+    /**
+     * Metodo privado. Modifica los datos de un sector.
+     *
+     * @param miConexion: conexión con la BD.
+     * @param nombreSector: nombre del sector.
+     * @param idPropiedad:identificador de la propiedad a la cual esta asociado.
+     * @param nuevoNombre: nuevo nombre del sector.
+     * @param nuevaCapacidad: nueva capacidad del sector.
+     */
     private void modificarDatosSector(Connection miConexion, String nombreSector, int idPropiedad, String nuevoNombre, int nuevaCapacidad) {
         if (miConexion != null) {
 
             try {
 
                 java.sql.Statement st = miConexion.createStatement();
-                String sql = "update  sector set capacidad=" + nuevaCapacidad + " , nombre='" + nombreSector + "' where sector.nombre='" + nombreSector + "'\n"
+                String sql = "update  sector set capacidad=" + nuevaCapacidad + " , nombre='" + nuevoNombre + "' where sector.nombre='" + nombreSector + "'\n"
                         + "and sector.refpropiedad=" + idPropiedad + "\n"
                         + "and sector.activa='true'";
                 st.executeUpdate(sql);
@@ -877,7 +965,13 @@ public class ControladorBDDePropiedades {
         //return false;
     }
 
-    private void desabilitarSectoresAnexosPropiedad(Connection miConexion, int idPropiedad) {
+    /**
+     * Metodo privado. Desabilita todos los sectores anexos a una propiedad.
+     *
+     * @param miConexion: conexion con la BD.
+     * @param idPropiedad :identificador de una propiedad.
+     */
+    private void deshabilitarSectoresAnexosPropiedad(Connection miConexion, int idPropiedad) {
         if (miConexion != null) {
             ArrayList<Sector> lista = obtenerInformacionDeSectores(idPropiedad);
             if (lista != null) {
@@ -891,23 +985,27 @@ public class ControladorBDDePropiedades {
                         String sql = "update  sector set activa='false' where sector.nombre='" + nombre + "' \n"
                                 + "and sector.refpropiedad=" + idPro + "";
                         st.executeUpdate(sql);
-                        System.out.println(sql);
                         st.close();
                         //return true;
 
                     } catch (SQLException e) {
-                        System.out.println("ERROR AL MODIFICAR LA INFORMACION DE UNA PROPIEDAD" + e);
+                        //System.out.println("ERROR AL MODIFICAR LA INFORMACION DE UNA PROPIEDAD" + e);
                         //return false;
                     }
                 }
-                System.out.println("no hay sectores anexos a la propiedad:" + idPropiedad);
+                //System.out.println("no hay sectores anexos a la propiedad:" + idPropiedad);
             }
-
         }
         //return false;
     }
 
-    private void crearNuevosSectoresAnexosPropiedad(Connection miConexion, int idPropiedad, int nuevoIdPropiedad) {
+    /**
+     * Crea una copiea de los sectores anexos de una propiedad a otra propiedad.
+     *
+     * @param idPropiedad: identificador de una propiedad.
+     * @param nuevoIdPropiedad : nuevo identificador de la propiedad.
+     */
+    private void crearNuevosSectoresAnexosPropiedad(int idPropiedad, int nuevoIdPropiedad) {
         ArrayList<Sector> listaSectores = obtenerInformacionDeSectores(idPropiedad);
         if (listaSectores != null) {
             for (int i = 0; i < listaSectores.size(); i++) {
