@@ -85,7 +85,7 @@ public class GestionDeUsuario {
     public boolean eliminarUsuario(String tipoUsuario, 
             String rutUsuario) throws SQLException {
         
-        return this.controlador.eliminarUsuario(tipoUsuario,rutUsuario);
+        return this.controlador.BorrarRegistroDeUsuarioEnBD(tipoUsuario,rutUsuario);
     }
     
     /**
