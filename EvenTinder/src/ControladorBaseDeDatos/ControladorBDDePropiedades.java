@@ -144,7 +144,6 @@ public class ControladorBDDePropiedades {
                 java.sql.Statement st = miConexion.createStatement();
                 String sql = "insert into propiedad values(DEFAULT,'" + nombre + "','" + ubicacion + "','" + fechaDePublicacion + "','" + capacidadTotal + "','" + valorDeArriendo + "','" + descripcion + "','" + rut + "')"
                         + " RETURNING id";
-
                 ResultSet resultado = st.executeQuery(sql);
                 while (resultado.next()) {
                     int idPropiedad = Integer.parseInt(resultado.getString("id"));
@@ -222,27 +221,8 @@ public class ControladorBDDePropiedades {
             boolean propiedadActiva = verificarSiLaPropiedadEstaActiva(miConexion, idPropiedad);
             boolean verificarEventosPublicadosAsociados = verificarEventosPublicadosAsociadoPropiedad(miConexion, idPropiedad);
             boolean verificaEventosFinalizadosAsociados = verificarEventosFinalizadossAsociadoPropiedad(miConexion, idPropiedad);
-            System.out.println("propiedad activa:" + propiedadActiva);
-            System.out.println("verificar eventos publicados:" + verificarEventosPublicadosAsociados);
             System.out.println("verificar eventos finalizados:" + verificaEventosFinalizadosAsociados);
             if (propiedadActiva == true) {
-                try {
-                    if (verificarEventosPublicadosAsociados == false) {
-                        if (verificaEventosFinalizadosAsociados == true) {
-                            System.out.println("desabilitar propiedad");
-                            deshabilitarSectoresAnexosPropiedad(miConexion, idPropiedad);
-                            desabilitarPropiedad(miConexion, idPropiedad);
-                            this.conexion.cerrarBaseDeDatos(miConexion);
-                            return true;
-                        } else {// se puede eliminar directamente la propiedad
-                            System.out.println("Eliminar propiedad");
-                            eliminarRegistroDePropiedad(miConexion, idPropiedad);
-                            this.conexion.cerrarBaseDeDatos(miConexion);
-                            return true;
-                        }
-                    }
-                    System.out.println("HAY EVENTOS PUBLICADOS EN LA PROPIEDAD.");
-                    return false;
 
                 if (verificarEventosPublicadosAsociados == false) {
                     if (verificaEventosFinalizadosAsociados == true) {
@@ -312,33 +292,20 @@ public class ControladorBDDePropiedades {
         Connection miConexion = this.conexion.getConexion();
         if (miConexion != null) {
             boolean propiedadActiva = verificarSiLaPropiedadEstaActiva(miConexion, idPropiedad);
-            //entradas son aquellas compradas por algun cliente, no las que se generar
-            //para ponerle precio a un sector.
             boolean verificarEventosPublicadosAsociados = verificarEventosPublicadosAsociadoPropiedad(miConexion, idPropiedad);
             boolean verificarEntradasAsociado = verificarEntradasAsociadoSector(miConexion, nombreSector, idPropiedad);
-            System.out.println("propiedad activa:" + propiedadActiva);
-            System.out.println("tiene ENTRADAS asociadas al sector:" + verificarEntradasAsociado);
-            try {
-                if (propiedadActiva == true) {
-                    if (verificarEventosPublicadosAsociados == false) {
-                        //no hay entradas asociadas al sector, por lo tanto se puede eliminar. .
-                        if (verificarEntradasAsociado == false) {
-                            System.out.println("ELIMINAR REGISTRO DEL SECTOR.");
-                            EliminarRegistroSector(miConexion, idPropiedad, nombreSector);
-                            this.conexion.cerrarBaseDeDatos(miConexion);
-                            return true;
-                        } else {// hay entradas asociadas al sector, se desactiva el sector..
-                            System.out.println("DESABILITAR SECTOR");
-                            boolean des = desabilitarSector(miConexion, idPropiedad, nombreSector);
-                            this.conexion.cerrarBaseDeDatos(miConexion);
-                            return des;
-                        }
-                        //no se pueden modificar las propiedades que tienen eventos publicados.
-                    }
-                    this.conexion.cerrarBaseDeDatos(miConexion);
-                    System.out.println("HAY EVENTOS PUBLICADOS EN LA PROPIEDAD.");
-                    return false;
 
+            if (propiedadActiva == true) {
+                if (verificarEventosPublicadosAsociados == false) {
+                    if (verificarEntradasAsociado == false) {
+                        EliminarRegistroSector(miConexion, idPropiedad, nombreSector);
+                        cerrarConexionBD(miConexion);
+                        return true;
+                    } else {
+                        boolean des = desabilitarSector(miConexion, idPropiedad, nombreSector);
+                        cerrarConexionBD(miConexion);
+                        return des;
+                    }
                 }
                 cerrarConexionBD(miConexion);
                 return false;
